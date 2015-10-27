@@ -1,0 +1,30 @@
+{
+  "name": "Pixpie-iOS",
+  "version": "0.1.0",
+  "summary": "A short description of Pixpie-iOS.",
+  "description": "",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/Pixpie-iOS",
+  "license": "MIT",
+  "authors": {
+    "Dmitry Osipa": "dima.osipa@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/Pixpie-iOS.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "Pixpie-iOS": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "dependencies": {
+    "AFNetworking": [
+      ">= 3.0.0-beta.1"
+    ]
+  }
+}
