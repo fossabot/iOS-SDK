@@ -3,16 +3,17 @@
 //  Pixpie-iOS
 //
 //  Created by Dmitry Osipa on 10/17/2015.
-//  Copyright (c) 2015 Dmitry Osipa. All rights reserved.
+//  Copyright (c) 2015 Pixpie. All rights reserved.
 //
 
-#import "PXPAppDelegate.h"
+#import "AppDelegate.h"
+@import Pixpie_iOS;
 
-@implementation PXPAppDelegate
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [[PXP sharedSDK] authWithApiKey:@"6948fb8726a998d78532adf9c9fefb290da6e8a61e860c39b76c342c2e58bace"];
     return YES;
 }
 
