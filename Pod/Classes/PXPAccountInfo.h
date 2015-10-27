@@ -13,6 +13,6 @@
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithDict:(NSDictionary*)dict NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, strong, readonly) NSString* token;
+@property (nonatomic, strong, readonly) NSString* authToken;
 
 @end

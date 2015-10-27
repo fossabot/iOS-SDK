@@ -9,6 +9,7 @@
 #import "PXP.h"
 #import "PXPAuthManager.h"
 #import "PXPAuthPrincipal.h"
+#import "PXPAccountInfo.h"
 
 @interface PXP ()
 
@@ -36,7 +37,7 @@
         self.authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
         [self.authManager authorizeWithCompletionBlock:^(PXPAccountInfo *accountInfo, NSError *error) {
             if (accountInfo != nil) {
-                NSLog(@"%@", accountInfo);
+                NSLog(@"%@", [accountInfo debugDescription]);
             }
             else {
                 NSLog(@"%@", error);

@@ -11,7 +11,7 @@
 
 @interface PXPAccountInfo ()
 
-@property (nonatomic, readwrite, strong) NSString* token;
+@property (nonatomic, readwrite, strong) NSString* authToken;
 
 @end
 
@@ -23,6 +23,10 @@
         [self setIfExistsValuesForKeysWithDictionary:dict];
     }
     return self;
+}
+
+- (NSString*)debugDescription {
+    return [NSString stringWithFormat:@"%@ : %@", [super debugDescription], self.authToken];
 }
 
 @end
