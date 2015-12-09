@@ -12,6 +12,7 @@
 @interface PXPAccountInfo ()
 
 @property (nonatomic, readwrite, strong) NSString* authToken;
+@property (nonatomic, readwrite, strong) NSString* cdnUrl;
 
 @end
 
@@ -23,10 +24,6 @@
         [self setIfExistsValuesForKeysWithDictionary:dict];
     }
     return self;
-}
-
-- (NSString*)debugDescription {
-    return [NSString stringWithFormat:@"%@ : %@", [super debugDescription], self.authToken];
 }
 
 @end
