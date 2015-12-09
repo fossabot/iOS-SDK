@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+@import Pixpie_iOS;
 
 @interface ViewController ()
 
@@ -18,6 +19,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    [self.imageView pxp_requestImageNamed:@"lena"];
 }
 
 - (void)didReceiveMemoryWarning

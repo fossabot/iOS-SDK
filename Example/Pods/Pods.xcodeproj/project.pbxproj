@@ -12,9 +12,8 @@
 		0AA4C65D1C182514000359FD /* PXPTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AA4C65B1C182514000359FD /* PXPTransform.h */; };
 		0AA4C65E1C182514000359FD /* PXPTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C65C1C182514000359FD /* PXPTransform.m */; };
 		0AA4C65F1C182514000359FD /* PXPTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C65C1C182514000359FD /* PXPTransform.m */; };
-		0AA4C6631C182763000359FD /* UIImageView+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AA4C6611C182763000359FD /* UIImageView+PXPExtensions.h */; };
+		0AA4C6631C182763000359FD /* UIImageView+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AA4C6611C182763000359FD /* UIImageView+PXPExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0AA4C6641C182763000359FD /* UIImageView+PXPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C6621C182763000359FD /* UIImageView+PXPExtensions.m */; };
-		0AA4C6651C182763000359FD /* UIImageView+PXPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C6621C182763000359FD /* UIImageView+PXPExtensions.m */; };
 		0AA4C6681C182BA7000359FD /* PXPUrl.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AA4C6661C182BA7000359FD /* PXPUrl.h */; };
 		0AA4C6691C182BA7000359FD /* PXPUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C6671C182BA7000359FD /* PXPUrl.m */; };
 		0AA4C66A1C182BA7000359FD /* PXPUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C6671C182BA7000359FD /* PXPUrl.m */; };
@@ -1376,7 +1375,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA4C65F1C182514000359FD /* PXPTransform.m in Sources */,
-				0AA4C6651C182763000359FD /* UIImageView+PXPExtensions.m in Sources */,
 				0AA4C66A1C182BA7000359FD /* PXPUrl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

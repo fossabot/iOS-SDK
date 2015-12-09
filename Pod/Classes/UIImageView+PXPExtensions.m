@@ -30,4 +30,8 @@
     return transform;
 }
 
+- (void)pxp_requestImageNamed:(NSString*)name {
+    self.class
+}
+
 @end
