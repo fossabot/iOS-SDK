@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 
+#import "PXPAuthInfo.h"
 #import "NSObject+SafeKVC.h"
 #import "NSString+PXPSecurity.h"
 #import "PXP.h"

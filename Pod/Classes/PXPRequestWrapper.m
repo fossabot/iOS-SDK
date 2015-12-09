@@ -38,11 +38,17 @@ static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
     self = [super init];
     if (self != nil) {
 #warning to think how to implement this properly
-        _backendUrl = @"http://159.203.120.198:9000";
+        _backendUrl = @"https://159.203.120.198:9443";
         NSURLSessionConfiguration* configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:_backendUrl] sessionConfiguration:configuration];
         self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
         self.sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        NSBundle* mainBundle = [NSBundle mainBundle];
+        NSArray* certs = [AFSecurityPolicy certificatesInBundle:mainBundle];
+        AFSecurityPolicy* policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate withPinnedCertificates:certs];
+        policy.validatesDomainName = NO;
+        policy.allowInvalidCertificates = YES;
+        self.sessionManager.securityPolicy = policy;
     }
     return self;
 }
@@ -56,8 +62,7 @@ static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
     NSString *stringTimestamp = [NSString stringWithFormat:@"%ld", timestamp];
     NSString *toHash = [NSString stringWithFormat:@"%@%@%@", apiKey, kPXPSalt, stringTimestamp];
     NSString *hash = [toHash sha256];
-#warning App Id should be used here
-    NSDictionary *params = @{@"applicationId" : @"1",//appId,
+    NSDictionary *params = @{@"reverseUrlId" : appId,
                              @"timestamp" : stringTimestamp,
                              @"hash" : hash};
 
