@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		056CB84F990AD5CDC90517DC0A2FFA6A /* PXPRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C34D698406CAF9C34A8F04FC3E5D5C2 /* PXPRequestWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		084BA3F9D84C7220EC671E7E360B8B63 /* NSObject+SafeKVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 65749466067502903F672686E9CF8844 /* NSObject+SafeKVC.m */; };
+		0AA4C65D1C182514000359FD /* PXPTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AA4C65B1C182514000359FD /* PXPTransform.h */; };
+		0AA4C65E1C182514000359FD /* PXPTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C65C1C182514000359FD /* PXPTransform.m */; };
+		0AA4C65F1C182514000359FD /* PXPTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C65C1C182514000359FD /* PXPTransform.m */; };
+		0AA4C6631C182763000359FD /* UIImageView+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AA4C6611C182763000359FD /* UIImageView+PXPExtensions.h */; };
+		0AA4C6641C182763000359FD /* UIImageView+PXPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C6621C182763000359FD /* UIImageView+PXPExtensions.m */; };
+		0AA4C6651C182763000359FD /* UIImageView+PXPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C6621C182763000359FD /* UIImageView+PXPExtensions.m */; };
+		0AA4C6681C182BA7000359FD /* PXPUrl.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AA4C6661C182BA7000359FD /* PXPUrl.h */; };
+		0AA4C6691C182BA7000359FD /* PXPUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C6671C182BA7000359FD /* PXPUrl.m */; };
+		0AA4C66A1C182BA7000359FD /* PXPUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4C6671C182BA7000359FD /* PXPUrl.m */; };
 		0C6FF91EB1F0391ED75DC72D31D159EF /* EXPMatchers+beTruthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 918E11B0497602487EE1F0D7D99E3D94 /* EXPMatchers+beTruthy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0D16B556212D317A0D4FEB71E102E207 /* EXPMatchers+beLessThan.h in Headers */ = {isa = PBXBuildFile; fileRef = B78446747536C08786E049DB8BBEEC66 /* EXPMatchers+beLessThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DEA4A8CCF3367DE5317E3A3EE7A5673 /* NSObject+SafeKVC.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F5E7B4B5E12683B7A7628C76E9CD04 /* NSObject+SafeKVC.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -260,6 +269,12 @@
 		0930FA4437A0FB82A6F02DD73B0D9422 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		0940E08667043665207A4BB9EBE76295 /* AFImageDownloader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFImageDownloader.h; path = "UIKit+AFNetworking/AFImageDownloader.h"; sourceTree = "<group>"; };
 		0A17A0CE32DC2A6DE38D390385D40716 /* EXPMatchers+beKindOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beKindOf.h"; path = "Expecta/Matchers/EXPMatchers+beKindOf.h"; sourceTree = "<group>"; };
+		0AA4C65B1C182514000359FD /* PXPTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXPTransform.h; path = ../PXPTransform.h; sourceTree = "<group>"; };
+		0AA4C65C1C182514000359FD /* PXPTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXPTransform.m; path = ../PXPTransform.m; sourceTree = "<group>"; };
+		0AA4C6611C182763000359FD /* UIImageView+PXPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+PXPExtensions.h"; sourceTree = "<group>"; };
+		0AA4C6621C182763000359FD /* UIImageView+PXPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+PXPExtensions.m"; sourceTree = "<group>"; };
+		0AA4C6661C182BA7000359FD /* PXPUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXPUrl.h; path = ../PXPUrl.h; sourceTree = "<group>"; };
+		0AA4C6671C182BA7000359FD /* PXPUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXPUrl.m; path = ../PXPUrl.m; sourceTree = "<group>"; };
 		0B5AD4570AAE783A7430552F45F6345D /* EXPMatchers+beLessThan.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beLessThan.m"; path = "Expecta/Matchers/EXPMatchers+beLessThan.m"; sourceTree = "<group>"; };
 		0BA53BCE55457DFCE1606A8AC7D82085 /* SPTExampleGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SPTExampleGroup.m; path = Specta/Specta/SPTExampleGroup.m; sourceTree = "<group>"; };
 		0D1D439463646EA2DCD1AD52B5DE2F78 /* Expecta.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Expecta.h; path = Expecta/Expecta.h; sourceTree = "<group>"; };
@@ -276,7 +291,7 @@
 		1C2F584292BABFC525632FC6956B3279 /* NSString+PXPSecurity.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+PXPSecurity.h"; sourceTree = "<group>"; };
 		1D581265F7B7B8601087B7F62B682319 /* EXPMatchers+raise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+raise.m"; path = "Expecta/Matchers/EXPMatchers+raise.m"; sourceTree = "<group>"; };
 		1DE3365FCC1C162D4FA2C940A3513FCA /* EXPMatchers+respondTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+respondTo.h"; path = "Expecta/Matchers/EXPMatchers+respondTo.h"; sourceTree = "<group>"; };
-		1F7969D4C45824C2FDA39D2268D386F0 /* PXPAuthPrincipal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PXPAuthPrincipal.m; sourceTree = "<group>"; };
+		1F7969D4C45824C2FDA39D2268D386F0 /* PXPAuthPrincipal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PXPAuthPrincipal.m; path = ../PXPAuthPrincipal.m; sourceTree = "<group>"; };
 		1FC3FF0614FA3B049E596181127A6463 /* SPTCompiledExample.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SPTCompiledExample.h; path = Specta/Specta/SPTCompiledExample.h; sourceTree = "<group>"; };
 		1FC842987CFE33420135EC0CD990B8D8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		218A665D47813D90E50288A8DF252B49 /* EXPMatchers+haveCountOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+haveCountOf.h"; path = "Expecta/Matchers/EXPMatchers+haveCountOf.h"; sourceTree = "<group>"; };
@@ -360,7 +375,7 @@
 		9554EE7D5A3D54267BEFDDBD1B1F2EF7 /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AFNetworking.h"; path = "UIKit+AFNetworking/UIImage+AFNetworking.h"; sourceTree = "<group>"; };
 		97387C08BD6F0D87E357C2BD64916F8E /* EXPMatchers+contain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+contain.h"; path = "Expecta/Matchers/EXPMatchers+contain.h"; sourceTree = "<group>"; };
 		97D53DE1DB0F3DB46DE523679E133431 /* EXPMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPMatcher.h; path = Expecta/EXPMatcher.h; sourceTree = "<group>"; };
-		97D99E0807AF68A2AD94E8A78E5137C7 /* PXPAuthPrincipal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PXPAuthPrincipal.h; sourceTree = "<group>"; };
+		97D99E0807AF68A2AD94E8A78E5137C7 /* PXPAuthPrincipal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PXPAuthPrincipal.h; path = ../PXPAuthPrincipal.h; sourceTree = "<group>"; };
 		98581A8EC40F955597B7A529528949D8 /* XCTest+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "XCTest+Private.h"; path = "Specta/Specta/XCTest+Private.h"; sourceTree = "<group>"; };
 		9882E2AE52EF7EF35F96A77829B59F49 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		9A0DE3C6407CCB38D2B696F4F47FD36B /* EXPUnsupportedObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPUnsupportedObject.h; path = Expecta/EXPUnsupportedObject.h; sourceTree = "<group>"; };
@@ -516,6 +531,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AA4C6601C182747000359FD /* UIKitExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				0AA4C6611C182763000359FD /* UIImageView+PXPExtensions.h */,
+				0AA4C6621C182763000359FD /* UIImageView+PXPExtensions.m */,
+			);
+			name = UIKitExtensions;
+			sourceTree = "<group>";
+		};
 		0D9BB3E43787C8479C282E18F432B757 /* Pixpie-iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,6 +610,7 @@
 		542281134EC9A3C10B706CB342153551 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0AA4C6601C182747000359FD /* UIKitExtensions */,
 				B0F5E7B4B5E12683B7A7628C76E9CD04 /* NSObject+SafeKVC.h */,
 				65749466067502903F672686E9CF8844 /* NSObject+SafeKVC.m */,
 				1C2F584292BABFC525632FC6956B3279 /* NSString+PXPSecurity.h */,
@@ -596,8 +621,6 @@
 				7F8F08A37649F87856E9010F55DBCBBE /* PXPAccountInfo.m */,
 				9453FD587495FA2A6FFAB08EB069938B /* PXPAuthManager.h */,
 				9F4AB859DAE28A6C078EA4F67E78D559 /* PXPAuthManager.m */,
-				97D99E0807AF68A2AD94E8A78E5137C7 /* PXPAuthPrincipal.h */,
-				1F7969D4C45824C2FDA39D2268D386F0 /* PXPAuthPrincipal.m */,
 				5C34D698406CAF9C34A8F04FC3E5D5C2 /* PXPRequestWrapper.h */,
 				E0FBF94C1263C4FD9D30CAFEEF0352CD /* PXPRequestWrapper.m */,
 				C1EFCF615F25D54082F4760E13233809 /* Model */,
@@ -793,6 +816,12 @@
 		C1EFCF615F25D54082F4760E13233809 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0AA4C65B1C182514000359FD /* PXPTransform.h */,
+				0AA4C65C1C182514000359FD /* PXPTransform.m */,
+				0AA4C6661C182BA7000359FD /* PXPUrl.h */,
+				0AA4C6671C182BA7000359FD /* PXPUrl.m */,
+				97D99E0807AF68A2AD94E8A78E5137C7 /* PXPAuthPrincipal.h */,
+				1F7969D4C45824C2FDA39D2268D386F0 /* PXPAuthPrincipal.m */,
 				009C4FB766CB088AF7DC005E675703BF /* PXPAuthInfo.h */,
 				87114E0FE5AEB13E49B16806B718CD6C /* PXPAuthInfo.m */,
 			);
@@ -943,9 +972,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DEA4A8CCF3367DE5317E3A3EE7A5673 /* NSObject+SafeKVC.h in Headers */,
+				0AA4C6681C182BA7000359FD /* PXPUrl.h in Headers */,
 				112E698505B8EBE226E0FA73850AD775 /* NSString+PXPSecurity.h in Headers */,
 				F7201584DFE7CAE3CE6352159612A064 /* Pixpie-iOS-umbrella.h in Headers */,
 				AE9DAD68DFD7F2C6AF5F4E4412A67F4B /* PXP.h in Headers */,
+				0AA4C6631C182763000359FD /* UIImageView+PXPExtensions.h in Headers */,
+				0AA4C65D1C182514000359FD /* PXPTransform.h in Headers */,
 				56BBDC239EE33B9E83D6AF18DD3D79DD /* PXPAccountInfo.h in Headers */,
 				D059825E3B5DB720F0257A96A5C1D858 /* PXPAuthInfo.h in Headers */,
 				BD4E92CCB77ED7545ACA9E05B769CA23 /* PXPAuthManager.h in Headers */,
@@ -1343,6 +1375,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA4C65F1C182514000359FD /* PXPTransform.m in Sources */,
+				0AA4C6651C182763000359FD /* UIImageView+PXPExtensions.m in Sources */,
+				0AA4C66A1C182BA7000359FD /* PXPUrl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1350,7 +1385,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA4C6641C182763000359FD /* UIImageView+PXPExtensions.m in Sources */,
 				084BA3F9D84C7220EC671E7E360B8B63 /* NSObject+SafeKVC.m in Sources */,
+				0AA4C6691C182BA7000359FD /* PXPUrl.m in Sources */,
 				C3885BAA3009929C8A0FA173DE3F9F91 /* NSString+PXPSecurity.m in Sources */,
 				A9A115E41003EA69F9B96412D5757CE6 /* Pixpie-iOS-dummy.m in Sources */,
 				41B95652F4FEC86B552B5D3D5C2E21F0 /* PXP.m in Sources */,
@@ -1359,6 +1396,7 @@
 				FA0D1F90B3903294D1D62AF21B780CAC /* PXPAuthManager.m in Sources */,
 				DB0DA56C3BF189B7C51DA2798DB82D4B /* PXPAuthPrincipal.m in Sources */,
 				B574FFE407E64BDD7B1130A061E4EEA5 /* PXPRequestWrapper.m in Sources */,
+				0AA4C65E1C182514000359FD /* PXPTransform.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
