@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'DA578DB67DD8C310E261B965'
+               BlueprintIdentifier = '296EF7BCA9D516F04DBEB9F1'
                BlueprintName = 'Pixpie-iOS'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pixpie_iOS.framework'>
