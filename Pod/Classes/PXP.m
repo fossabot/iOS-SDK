@@ -14,6 +14,8 @@
 @interface PXP ()
 
 @property (nonatomic, strong) PXPAuthManager* authManager;
+@property (nonatomic, readwrite, assign) PXPState state;
+
 
 @end
 
@@ -29,6 +31,15 @@
     return _sharedPXP;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _state = PXPStateNotInitialized;
+    }
+    return self;
+}
+
 - (void)authWithApiKey:(NSString*)apiKey {
     if (self.authManager == nil) {
         PXPAuthPrincipal* principal = [PXPAuthPrincipal new];
@@ -37,10 +48,10 @@
         self.authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
         [self.authManager authorizeWithCompletionBlock:^(PXPAccountInfo *accountInfo, NSError *error) {
             if (accountInfo != nil) {
-                NSLog(@"%@", [accountInfo debugDescription]);
+                self.state = PXPStateReady;
             }
             else {
-                NSLog(@"%@", error);
+                self.state = PXPStateFailed;
             }
         }];
     }
