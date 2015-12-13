@@ -7,7 +7,9 @@
 #import "PXPAccountInfo.h"
 #import "PXPAuthManager.h"
 #import "PXPAuthPrincipal.h"
+#import "PXPImageRequestWrapper.h"
 #import "PXPRequestWrapper.h"
+#import "PXPTransform.h"
 #import "UIImageView+PXPExtensions.h"
 
 FOUNDATION_EXPORT double Pixpie_iOSVersionNumber;

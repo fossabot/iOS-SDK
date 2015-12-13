@@ -86,8 +86,12 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Pixpie-iOS_Example/AFNetworking.framework"
   install_framework "Pods-Pixpie-iOS_Example/Pixpie_iOS.framework"
+  install_framework "Pods-Pixpie-iOS_Example/iOS_WebP.framework"
+  install_framework "Pods-Pixpie-iOS_Example/libwebp.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Pixpie-iOS_Example/AFNetworking.framework"
   install_framework "Pods-Pixpie-iOS_Example/Pixpie_iOS.framework"
+  install_framework "Pods-Pixpie-iOS_Example/iOS_WebP.framework"
+  install_framework "Pods-Pixpie-iOS_Example/libwebp.framework"
 fi
