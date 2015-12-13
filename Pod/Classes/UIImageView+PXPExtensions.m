@@ -9,18 +9,19 @@
 #import "UIImageView+PXPExtensions.h"
 #import "PXPTransform.h"
 #import <objc/runtime.h>
+#import "PXPImageDownloader.h"
 
 @implementation UIImageView (PXPExtensions)
 
-@dynamic transfrom;
+@dynamic pxp_transfrom;
 
-- (void)setTransfrom:(PXPTransform *)transform {
-    NSString* key = NSStringFromSelector(@selector(transfrom));
+- (void)setPxp_transfrom:(PXPTransform *)transform {
+    NSString* key = NSStringFromSelector(@selector(pxp_transfrom));
     objc_setAssociatedObject(self, (__bridge const void *)(key), transform, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (PXPTransform*)transfrom {
-    NSString* key = NSStringFromSelector(@selector(transfrom));
+- (PXPTransform*)pxp_transfrom {
+    NSString* key = NSStringFromSelector(@selector(pxp_transfrom));
     PXPTransform* transform = objc_getAssociatedObject(self, (__bridge const void *)(key));
     if (transform == nil) {
         transform = [PXPTransform new];
@@ -30,8 +31,12 @@
     return transform;
 }
 
-- (void)pxp_requestImageNamed:(NSString*)name {
-    self.class
+- (void)pxp_requestImage:(NSURL*)url {
+    [[PXPImageDownloader sharedDownloader] imageTaskWithUrl:url transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.image = responseObject;
+        });
+    }];
 }
 
 @end

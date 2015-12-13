@@ -8,6 +8,14 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-@interface PXPWebPResponseSerializer : AFHTTPResponseSerializer
+NS_ASSUME_NONNULL_BEGIN
+
+@interface PXPWebPResponseSerializer : AFHTTPResponseSerializer <AFURLResponseSerialization>
+
+- (nullable id)responseObjectForResponse:(nullable NSURLResponse *)response
+                                    data:(nullable NSData *)data
+                                   error:(NSError * _Nullable __autoreleasing *)error NS_SWIFT_NOTHROW;
 
 @end
+
+NS_ASSUME_NONNULL_END

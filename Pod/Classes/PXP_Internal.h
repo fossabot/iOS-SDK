@@ -6,8 +6,12 @@
 //
 //
 
-#import <Pixpie_iOS/Pixpie_iOS.h>
+#import "PXP.h"
+
+@class PXPAccountInfo;
 
 @interface PXP ()
+
+@property (nonatomic, strong) PXPAccountInfo* accountInfo;
 
 @end
