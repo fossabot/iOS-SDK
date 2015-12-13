@@ -14,5 +14,6 @@
 - (instancetype)initWithDict:(NSDictionary*)dict NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, strong, readonly) NSString* authToken;
+@property (nonatomic, strong, readonly) NSString* cdnUrl;
 
 @end

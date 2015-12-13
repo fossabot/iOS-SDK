@@ -10,12 +10,12 @@
 #import "PXPAuthManager.h"
 #import "PXPAuthPrincipal.h"
 #import "PXPAccountInfo.h"
+#import "PXP_Internal.h"
 
 @interface PXP ()
 
 @property (nonatomic, strong) PXPAuthManager* authManager;
 @property (nonatomic, readwrite, assign) PXPState state;
-
 
 @end
 
@@ -41,7 +41,7 @@
 }
 
 - (void)authWithApiKey:(NSString*)apiKey {
-    if (self.authManager == nil) {
+   if (self.authManager == nil) {
         PXPAuthPrincipal* principal = [PXPAuthPrincipal new];
         principal.appId = [[NSBundle mainBundle] bundleIdentifier];
         principal.appKey = apiKey;
@@ -49,6 +49,7 @@
         [self.authManager authorizeWithCompletionBlock:^(PXPAccountInfo *accountInfo, NSError *error) {
             if (accountInfo != nil) {
                 self.state = PXPStateReady;
+                self.accountInfo = accountInfo;
             }
             else {
                 self.state = PXPStateFailed;

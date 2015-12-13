@@ -67,11 +67,19 @@ static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
                              @"hash" : hash};
 
     NSString* url = [NSString stringWithFormat:@"%@%@", self.backendUrl, kPXPAuthMethod];
-    [self.sessionManager GET:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    [self.sessionManager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         failtureBlock(error);
     }];
+}
+
+- (void)createImageForPath:(NSString*)path
+                resolution:(NSString*)resolution
+                  bundleId:(NSString*)bundleId
+              successBlock:(PXPRequestSuccessBlock)successBlock
+             failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+
 }
 
 @end
