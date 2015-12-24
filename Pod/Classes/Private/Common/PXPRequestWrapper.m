@@ -38,7 +38,7 @@ static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
     self = [super init];
     if (self != nil) {
 #warning to think how to implement this properly
-        _backendUrl = @"https://159.203.120.198:9443";
+        _backendUrl = @"https://api.pixpie.co:9444";
         NSURLSessionConfiguration* configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:_backendUrl] sessionConfiguration:configuration];
         self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -74,11 +74,12 @@ static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
     }];
 }
 
-- (void)createImageForPath:(NSString*)path
-                resolution:(NSString*)resolution
-                  bundleId:(NSString*)bundleId
-              successBlock:(PXPRequestSuccessBlock)successBlock
-             failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+- (void)updateImageWithBundleId:(NSString*)bundleId
+                          width:(NSInteger)width
+                        quality:(NSInteger)quality
+                           path:(NSString*)path
+                   successBlock:(PXPRequestSuccessBlock)successBlock
+                  failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
 }
 

@@ -39,4 +39,8 @@
     }];
 }
 
+- (void)pxp_requestImageNamed:(NSString*)name {
+    
+}
+
 @end
