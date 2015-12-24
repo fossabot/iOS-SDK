@@ -11,6 +11,8 @@
 #import "PXPAuthPrincipal.h"
 #import "PXPAccountInfo.h"
 #import "PXP_Internal.h"
+#import "PXPImageDownloader.h"
+#import "PXPSDKRequestWrapper.h"
 
 @interface PXP ()
 
@@ -50,6 +52,8 @@
             if (accountInfo != nil) {
                 self.state = PXPStateReady;
                 self.accountInfo = accountInfo;
+                PXPSDKRequestWrapper* wrapper = [[PXPSDKRequestWrapper alloc] initWithAuthToken:accountInfo.authToken];
+                self.imageDownloader = [[PXPImageDownloader alloc] initWithSDKRequestWrapper:wrapper];
             }
             else {
                 self.state = PXPStateFailed;

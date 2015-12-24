@@ -7,7 +7,7 @@
 //
 
 #import "PXPImageDownloader.h"
-#import "PXPRequestWrapper.h"
+#import "PXPSDKRequestWrapper.h"
 #import "PXPTransform.h"
 #import "PXPImageRequestWrapper.h"
 #import "PXP.h"
@@ -95,22 +95,12 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 
 @implementation PXPImageDownloader
 
-+ (instancetype)sharedDownloader {
-    static PXPImageDownloader *_sharedDownloader = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedDownloader = [PXPImageDownloader new];
-    });
-
-    return _sharedDownloader;
-}
-
-- (instancetype)init
+- (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper*)wrapper
 {
     self = [super init];
     if (self != nil) {
         _imageRequestWrapper = [PXPImageRequestWrapper new];
-        _sdkRequestWrapper = [PXPRequestWrapper sharedWrapper];
+        _sdkRequestWrapper = wrapper;
     }
     return self;
 }

@@ -33,12 +33,16 @@
 		0A997D461C2C71CB00A61297 /* PXPRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D2B1C2C71CB00A61297 /* PXPRequestWrapper.h */; };
 		0A997D471C2C71CB00A61297 /* PXPRequestWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D2C1C2C71CB00A61297 /* PXPRequestWrapper.m */; };
 		0A997D481C2C71CB00A61297 /* PXP_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D2D1C2C71CB00A61297 /* PXP_Internal.h */; };
-		0A997D491C2C71CB00A61297 /* PXP.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D2F1C2C71CB00A61297 /* PXP.h */; };
+		0A997D491C2C71CB00A61297 /* PXP.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D2F1C2C71CB00A61297 /* PXP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A997D4A1C2C71CB00A61297 /* PXP.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D301C2C71CB00A61297 /* PXP.m */; };
-		0A997D4B1C2C71CB00A61297 /* PXPTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D311C2C71CB00A61297 /* PXPTransform.h */; };
+		0A997D4B1C2C71CB00A61297 /* PXPTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D311C2C71CB00A61297 /* PXPTransform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A997D4C1C2C71CB00A61297 /* PXPTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D321C2C71CB00A61297 /* PXPTransform.m */; };
-		0A997D4D1C2C71CB00A61297 /* UIImageView+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D341C2C71CB00A61297 /* UIImageView+PXPExtensions.h */; };
+		0A997D4D1C2C71CB00A61297 /* UIImageView+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D341C2C71CB00A61297 /* UIImageView+PXPExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A997D4E1C2C71CB00A61297 /* UIImageView+PXPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D351C2C71CB00A61297 /* UIImageView+PXPExtensions.m */; };
+		0A997D511C2C724200A61297 /* PXPAuthRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D4F1C2C724200A61297 /* PXPAuthRequestWrapper.h */; };
+		0A997D521C2C724200A61297 /* PXPAuthRequestWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D501C2C724200A61297 /* PXPAuthRequestWrapper.m */; };
+		0A997D561C2C741000A61297 /* PXPSDKRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D541C2C741000A61297 /* PXPSDKRequestWrapper.h */; };
+		0A997D571C2C741000A61297 /* PXPSDKRequestWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D551C2C741000A61297 /* PXPSDKRequestWrapper.m */; };
 		0B02FA315B23310DBB16A8E80902E9AF /* upsampling_sse2.c in Sources */ = {isa = PBXBuildFile; fileRef = B5B9B1E14761658F8C9B7AFD4C4AD81A /* upsampling_sse2.c */; settings = {COMPILER_FLAGS = "-D_THREAD_SAFE -fno-objc-arc"; }; };
 		0C6FF91EB1F0391ED75DC72D31D159EF /* EXPMatchers+beTruthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C36CA4846BF4C0DA0FA92696394743 /* EXPMatchers+beTruthy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0C7963A4A73712D1CF600CB5062AB561 /* bit_reader_inl.h in Headers */ = {isa = PBXBuildFile; fileRef = 360322039FA90403346C3F53D446ADB3 /* bit_reader_inl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -449,6 +453,10 @@
 		0A997D321C2C71CB00A61297 /* PXPTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPTransform.m; sourceTree = "<group>"; };
 		0A997D341C2C71CB00A61297 /* UIImageView+PXPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+PXPExtensions.h"; sourceTree = "<group>"; };
 		0A997D351C2C71CB00A61297 /* UIImageView+PXPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+PXPExtensions.m"; sourceTree = "<group>"; };
+		0A997D4F1C2C724200A61297 /* PXPAuthRequestWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAuthRequestWrapper.h; sourceTree = "<group>"; };
+		0A997D501C2C724200A61297 /* PXPAuthRequestWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAuthRequestWrapper.m; sourceTree = "<group>"; };
+		0A997D541C2C741000A61297 /* PXPSDKRequestWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPSDKRequestWrapper.h; sourceTree = "<group>"; };
+		0A997D551C2C741000A61297 /* PXPSDKRequestWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPSDKRequestWrapper.m; sourceTree = "<group>"; };
 		0C87501BB746807ACD244EDF5A9C3E67 /* EXPMatchers+beSupersetOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beSupersetOf.h"; path = "Expecta/Matchers/EXPMatchers+beSupersetOf.h"; sourceTree = "<group>"; };
 		0D39AE8A03BF6522D84D551B1BD43765 /* UIImage+WebP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+WebP.h"; path = "iOS-WebP/UIImage+WebP.h"; sourceTree = "<group>"; };
 		0D4676F62DE18160A9D8925DB19E74CA /* EXPMatchers+endWith.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+endWith.h"; path = "Expecta/Matchers/EXPMatchers+endWith.h"; sourceTree = "<group>"; };
@@ -949,6 +957,7 @@
 		0A997D161C2C71CB00A61297 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				0A997D531C2C73FF00A61297 /* ServerApi */,
 				0A997D171C2C71CB00A61297 /* Auth */,
 				0A997D1E1C2C71CB00A61297 /* CDN */,
 				0A997D251C2C71CB00A61297 /* Common */,
@@ -966,6 +975,8 @@
 				0A997D1B1C2C71CB00A61297 /* PXPAuthManager.m */,
 				0A997D1C1C2C71CB00A61297 /* PXPAuthPrincipal.h */,
 				0A997D1D1C2C71CB00A61297 /* PXPAuthPrincipal.m */,
+				0A997D4F1C2C724200A61297 /* PXPAuthRequestWrapper.h */,
+				0A997D501C2C724200A61297 /* PXPAuthRequestWrapper.m */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1023,6 +1034,15 @@
 				0A997D351C2C71CB00A61297 /* UIImageView+PXPExtensions.m */,
 			);
 			path = UIKitExtensions;
+			sourceTree = "<group>";
+		};
+		0A997D531C2C73FF00A61297 /* ServerApi */ = {
+			isa = PBXGroup;
+			children = (
+				0A997D541C2C741000A61297 /* PXPSDKRequestWrapper.h */,
+				0A997D551C2C741000A61297 /* PXPSDKRequestWrapper.m */,
+			);
+			path = ServerApi;
 			sourceTree = "<group>";
 		};
 		0D9BB3E43787C8479C282E18F432B757 /* Pixpie-iOS */ = {
@@ -1657,6 +1677,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A997D561C2C741000A61297 /* PXPSDKRequestWrapper.h in Headers */,
 				0A997D3A1C2C71CB00A61297 /* PXPAuthPrincipal.h in Headers */,
 				0A997D3E1C2C71CB00A61297 /* PXPImageRequestWrapper.h in Headers */,
 				0A997D3C1C2C71CB00A61297 /* PXPImageDownloader.h in Headers */,
@@ -1665,6 +1686,7 @@
 				0A997D481C2C71CB00A61297 /* PXP_Internal.h in Headers */,
 				0A997D361C2C71CB00A61297 /* PXPAccountInfo.h in Headers */,
 				0A997D381C2C71CB00A61297 /* PXPAuthManager.h in Headers */,
+				0A997D511C2C724200A61297 /* PXPAuthRequestWrapper.h in Headers */,
 				0A997D421C2C71CB00A61297 /* NSObject+SafeKVC.h in Headers */,
 				0A997D4B1C2C71CB00A61297 /* PXPTransform.h in Headers */,
 				0A997D441C2C71CB00A61297 /* NSString+PXPSecurity.h in Headers */,
@@ -2104,9 +2126,11 @@
 			files = (
 				0A997D4A1C2C71CB00A61297 /* PXP.m in Sources */,
 				0A997D4C1C2C71CB00A61297 /* PXPTransform.m in Sources */,
+				0A997D521C2C724200A61297 /* PXPAuthRequestWrapper.m in Sources */,
 				0A997D391C2C71CB00A61297 /* PXPAuthManager.m in Sources */,
 				0A997D3D1C2C71CB00A61297 /* PXPImageDownloader.m in Sources */,
 				0A997D451C2C71CB00A61297 /* NSString+PXPSecurity.m in Sources */,
+				0A997D571C2C741000A61297 /* PXPSDKRequestWrapper.m in Sources */,
 				0A997D411C2C71CB00A61297 /* PXPWebPResponseSerializer.m in Sources */,
 				0A997D471C2C71CB00A61297 /* PXPRequestWrapper.m in Sources */,
 				0A997D431C2C71CB00A61297 /* NSObject+SafeKVC.m in Sources */,

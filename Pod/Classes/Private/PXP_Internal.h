@@ -9,9 +9,11 @@
 #import "PXP.h"
 
 @class PXPAccountInfo;
+@class PXPImageDownloader;
 
 @interface PXP ()
 
 @property (nonatomic, strong) PXPAccountInfo* accountInfo;
+@property (nonatomic, strong) PXPImageDownloader* imageDownloader;
 
 @end

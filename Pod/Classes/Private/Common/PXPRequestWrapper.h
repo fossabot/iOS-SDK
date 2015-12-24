@@ -8,16 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-
 typedef void (^PXPRequestSuccessBlock)(id responseObject);
 typedef void (^PXPRequestFailureBlock)(NSError* error);
 
+@class AFHTTPSessionManager;
+
 @interface PXPRequestWrapper : NSObject
 
-+ (instancetype)sharedWrapper;
-- (void)authWithAppId:(NSString*)appId
-               apiKey:(NSString*)apiKey
-         successBlock:(PXPRequestSuccessBlock)successBlock
-        failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+@property (nonatomic, strong, readonly) NSString* backendUrl;
+@property (nonatomic, strong, readonly) AFHTTPSessionManager* sessionManager;
 
 @end

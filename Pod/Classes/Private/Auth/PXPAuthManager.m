@@ -7,13 +7,13 @@
 //
 
 #import "PXPAuthManager.h"
-#import "PXPRequestWrapper.h"
+#import "PXPAuthRequestWrapper.h"
 #import "PXPAuthPrincipal.h"
 #import "PXPAccountInfo.h"
 
 @interface PXPAuthManager ()
 
-@property (nonatomic, strong) PXPRequestWrapper *requestWrapper;
+@property (nonatomic, strong) PXPAuthRequestWrapper *requestWrapper;
 @property (nonatomic, strong) PXPAuthPrincipal *principal;
 
 @end
@@ -24,7 +24,7 @@
 {
     self = [super init];
     if (self != nil) {
-        _requestWrapper = [PXPRequestWrapper sharedWrapper];
+        _requestWrapper = [PXPAuthRequestWrapper sharedWrapper];
         _principal = principal;
     }
     return self;
