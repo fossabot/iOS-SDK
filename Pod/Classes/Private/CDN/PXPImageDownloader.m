@@ -82,10 +82,12 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 
 - (NSString *)pxp_urlStringForTransform:( PXPTransform* _Nonnull )transform {
 
+    NSString* scheme = [self.scheme stringByAppendingString:@":/"];
+
     NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;
     assert(host != nil);
 
-    NSString* name = [[self.path lastPathComponent] stringByDeletingPathExtension];
+    NSString* name = [self.path lastPathComponent];
     assert(name != nil);
 
     NSString *url = nil;
@@ -98,17 +100,21 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
     NSMutableArray *fileNameArray = [NSMutableArray new];
     SAFE_ADD_OBJECT(fileNameArray, size);
     SAFE_ADD_OBJECT(fileNameArray, quality);
-    SAFE_ADD_OBJECT(fileNameArray, extension);
     fileName = [fileNameArray componentsJoinedByString:@"_"];
+    if (extension.length > 0) {
+        fileName = [fileName stringByAppendingPathExtension:extension];
+    }
 
     NSMutableArray *pathArray = [NSMutableArray new];
     SAFE_ADD_OBJECT(pathArray, name);
-    SAFE_ADD_OBJECT(pathArray, @".resource");
+    SAFE_ADD_OBJECT(pathArray, @".pixpie.resource");
     path = [pathArray componentsJoinedByString:@""];
 
     NSMutableArray *urlArray = [NSMutableArray new];
+    SAFE_ADD_OBJECT(urlArray, scheme);
     SAFE_ADD_OBJECT(urlArray, host);
     SAFE_ADD_OBJECT(urlArray, path);
+    SAFE_ADD_OBJECT(urlArray, fileName);
     url = [urlArray componentsJoinedByString:@"/"];
     return url;
 }
