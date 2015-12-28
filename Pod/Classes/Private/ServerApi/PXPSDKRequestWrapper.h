@@ -13,13 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PXPSDKRequestWrapper : PXPRequestWrapper
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithAuthToken:(NSString*)token;
-- (void)updateImageWithBundleId:(NSString*)bundleId
-                          width:(NSInteger)width
-                        quality:(NSInteger)quality
-                           path:(NSString*)path
-                   successBlock:(PXPRequestSuccessBlock)successBlock
-                  failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (instancetype)initWithAuthToken:(NSString*)token appId:(NSString*)appId NS_DESIGNATED_INITIALIZER;
+- (void)updateImageWithWidth:(NSString*)width
+                     quality:(NSString*)quality
+                        path:(NSString*)path
+                successBlock:(PXPRequestSuccessBlock)successBlock
+               failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 
 @end
 
