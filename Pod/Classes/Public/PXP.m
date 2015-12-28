@@ -52,7 +52,7 @@
             if (accountInfo != nil) {
                 self.state = PXPStateReady;
                 self.accountInfo = accountInfo;
-                PXPSDKRequestWrapper* wrapper = [[PXPSDKRequestWrapper alloc] initWithAuthToken:accountInfo.authToken];
+                PXPSDKRequestWrapper* wrapper = [[PXPSDKRequestWrapper alloc] initWithAuthToken:accountInfo.authToken appId:accountInfo.principal.appId];
                 self.imageDownloader = [[PXPImageDownloader alloc] initWithSDKRequestWrapper:wrapper];
             }
             else {

@@ -36,7 +36,7 @@
     [self.requestWrapper authWithAppId:self.principal.appId
                                 apiKey:self.principal.appKey
                           successBlock:^(id responseObject) {
-                              PXPAccountInfo* info = [[PXPAccountInfo alloc] initWithDict:responseObject];
+                              PXPAccountInfo* info = [[PXPAccountInfo alloc] initWithDict:responseObject principal:self.principal];
                               block(info, nil);
                           } failtureBlock:^(NSError *error) {
                               block(nil, error);
