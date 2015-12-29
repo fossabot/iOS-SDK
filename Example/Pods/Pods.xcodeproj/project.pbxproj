@@ -14,6 +14,17 @@
 		065FA0FBA6588142CC6CF695680CDF46 /* vp8li.h in Headers */ = {isa = PBXBuildFile; fileRef = F66EF5C6B41182DE664D7766616F5822 /* vp8li.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06AEA4262241CFB8F5772D7FFCEF003E /* mux_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 94B294F8D5FD77070E4718EB845528A0 /* mux_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06F7ECB5E1FC7BBEB745C739CA30FB1A /* huffman_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = 524FC11C93152744A336FA727E8B7EA1 /* huffman_encode.c */; settings = {COMPILER_FLAGS = "-D_THREAD_SAFE -fno-objc-arc"; }; };
+		0A7442931C329732007B9C3E /* PXPCellMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A74428C1C329732007B9C3E /* PXPCellMonitor.h */; };
+		0A7442941C329732007B9C3E /* PXPCellMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74428D1C329732007B9C3E /* PXPCellMonitor.m */; };
+		0A7442951C329732007B9C3E /* PXPMonitoring.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A74428E1C329732007B9C3E /* PXPMonitoring.h */; };
+		0A7442961C329732007B9C3E /* PXPNetworkMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A74428F1C329732007B9C3E /* PXPNetworkMonitor.h */; };
+		0A7442971C329732007B9C3E /* PXPNetworkMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7442901C329732007B9C3E /* PXPNetworkMonitor.m */; };
+		0A7442981C329732007B9C3E /* PXPWifiMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A7442911C329732007B9C3E /* PXPWifiMonitor.h */; };
+		0A7442991C329732007B9C3E /* PXPWifiMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7442921C329732007B9C3E /* PXPWifiMonitor.m */; };
+		0A74429C1C329793007B9C3E /* PXPNetworkTechnologies.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A74429A1C329793007B9C3E /* PXPNetworkTechnologies.h */; };
+		0A74429D1C329793007B9C3E /* PXPNetworkTechnologies.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74429B1C329793007B9C3E /* PXPNetworkTechnologies.m */; };
+		0A7442A01C3298FB007B9C3E /* PXPNetInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A74429E1C3298FB007B9C3E /* PXPNetInfo.h */; };
+		0A7442A11C3298FB007B9C3E /* PXPNetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74429F1C3298FB007B9C3E /* PXPNetInfo.m */; };
 		0A997D361C2C71CB00A61297 /* PXPAccountInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D181C2C71CB00A61297 /* PXPAccountInfo.h */; };
 		0A997D371C2C71CB00A61297 /* PXPAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D191C2C71CB00A61297 /* PXPAccountInfo.m */; };
 		0A997D381C2C71CB00A61297 /* PXPAuthManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D1A1C2C71CB00A61297 /* PXPAuthManager.h */; };
@@ -428,6 +439,18 @@
 		08550169B0FB4A80E69D057B55A92BD5 /* AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.xcconfig; sourceTree = "<group>"; };
 		097E7EAB069C8B99B882782484840013 /* libwebp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libwebp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		099F79FAE2F6D72A53F008C2779DF64A /* huffman.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = huffman.c; path = src/utils/huffman.c; sourceTree = "<group>"; };
+		0A74428C1C329732007B9C3E /* PXPCellMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPCellMonitor.h; sourceTree = "<group>"; };
+		0A74428D1C329732007B9C3E /* PXPCellMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPCellMonitor.m; sourceTree = "<group>"; };
+		0A74428E1C329732007B9C3E /* PXPMonitoring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPMonitoring.h; sourceTree = "<group>"; };
+		0A74428F1C329732007B9C3E /* PXPNetworkMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPNetworkMonitor.h; sourceTree = "<group>"; };
+		0A7442901C329732007B9C3E /* PXPNetworkMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPNetworkMonitor.m; sourceTree = "<group>"; };
+		0A7442911C329732007B9C3E /* PXPWifiMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPWifiMonitor.h; sourceTree = "<group>"; };
+		0A7442921C329732007B9C3E /* PXPWifiMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPWifiMonitor.m; sourceTree = "<group>"; };
+		0A74429A1C329793007B9C3E /* PXPNetworkTechnologies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPNetworkTechnologies.h; sourceTree = "<group>"; };
+		0A74429B1C329793007B9C3E /* PXPNetworkTechnologies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPNetworkTechnologies.m; sourceTree = "<group>"; };
+		0A74429E1C3298FB007B9C3E /* PXPNetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPNetInfo.h; sourceTree = "<group>"; };
+		0A74429F1C3298FB007B9C3E /* PXPNetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPNetInfo.m; sourceTree = "<group>"; };
+		0A7442A21C329DB4007B9C3E /* PXPDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXPDefines.h; sourceTree = "<group>"; };
 		0A997D181C2C71CB00A61297 /* PXPAccountInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAccountInfo.h; sourceTree = "<group>"; };
 		0A997D191C2C71CB00A61297 /* PXPAccountInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAccountInfo.m; sourceTree = "<group>"; };
 		0A997D1A1C2C71CB00A61297 /* PXPAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAuthManager.h; sourceTree = "<group>"; };
@@ -954,9 +977,28 @@
 			name = core;
 			sourceTree = "<group>";
 		};
+		0A74428A1C329286007B9C3E /* ConnectionMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				0A74429E1C3298FB007B9C3E /* PXPNetInfo.h */,
+				0A74429F1C3298FB007B9C3E /* PXPNetInfo.m */,
+				0A74429A1C329793007B9C3E /* PXPNetworkTechnologies.h */,
+				0A74429B1C329793007B9C3E /* PXPNetworkTechnologies.m */,
+				0A74428C1C329732007B9C3E /* PXPCellMonitor.h */,
+				0A74428D1C329732007B9C3E /* PXPCellMonitor.m */,
+				0A74428E1C329732007B9C3E /* PXPMonitoring.h */,
+				0A74428F1C329732007B9C3E /* PXPNetworkMonitor.h */,
+				0A7442901C329732007B9C3E /* PXPNetworkMonitor.m */,
+				0A7442911C329732007B9C3E /* PXPWifiMonitor.h */,
+				0A7442921C329732007B9C3E /* PXPWifiMonitor.m */,
+			);
+			path = ConnectionMonitor;
+			sourceTree = "<group>";
+		};
 		0A997D161C2C71CB00A61297 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				0A74428A1C329286007B9C3E /* ConnectionMonitor */,
 				0A997D531C2C73FF00A61297 /* ServerApi */,
 				0A997D171C2C71CB00A61297 /* Auth */,
 				0A997D1E1C2C71CB00A61297 /* CDN */,
@@ -1000,6 +1042,7 @@
 				0A997D261C2C71CB00A61297 /* Helpers */,
 				0A997D2B1C2C71CB00A61297 /* PXPRequestWrapper.h */,
 				0A997D2C1C2C71CB00A61297 /* PXPRequestWrapper.m */,
+				0A7442A21C329DB4007B9C3E /* PXPDefines.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1678,6 +1721,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A997D561C2C741000A61297 /* PXPSDKRequestWrapper.h in Headers */,
+				0A74429C1C329793007B9C3E /* PXPNetworkTechnologies.h in Headers */,
+				0A7442981C329732007B9C3E /* PXPWifiMonitor.h in Headers */,
+				0A7442961C329732007B9C3E /* PXPNetworkMonitor.h in Headers */,
 				0A997D3A1C2C71CB00A61297 /* PXPAuthPrincipal.h in Headers */,
 				0A997D3E1C2C71CB00A61297 /* PXPImageRequestWrapper.h in Headers */,
 				0A997D3C1C2C71CB00A61297 /* PXPImageDownloader.h in Headers */,
@@ -1691,8 +1737,11 @@
 				0A997D4B1C2C71CB00A61297 /* PXPTransform.h in Headers */,
 				0A997D441C2C71CB00A61297 /* NSString+PXPSecurity.h in Headers */,
 				0A997D401C2C71CB00A61297 /* PXPWebPResponseSerializer.h in Headers */,
+				0A7442A01C3298FB007B9C3E /* PXPNetInfo.h in Headers */,
 				0A997D4D1C2C71CB00A61297 /* UIImageView+PXPExtensions.h in Headers */,
+				0A7442931C329732007B9C3E /* PXPCellMonitor.h in Headers */,
 				0A997D461C2C71CB00A61297 /* PXPRequestWrapper.h in Headers */,
+				0A7442951C329732007B9C3E /* PXPMonitoring.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2131,12 +2180,17 @@
 				0A997D3D1C2C71CB00A61297 /* PXPImageDownloader.m in Sources */,
 				0A997D451C2C71CB00A61297 /* NSString+PXPSecurity.m in Sources */,
 				0A997D571C2C741000A61297 /* PXPSDKRequestWrapper.m in Sources */,
+				0A7442971C329732007B9C3E /* PXPNetworkMonitor.m in Sources */,
+				0A7442941C329732007B9C3E /* PXPCellMonitor.m in Sources */,
 				0A997D411C2C71CB00A61297 /* PXPWebPResponseSerializer.m in Sources */,
+				0A7442991C329732007B9C3E /* PXPWifiMonitor.m in Sources */,
 				0A997D471C2C71CB00A61297 /* PXPRequestWrapper.m in Sources */,
 				0A997D431C2C71CB00A61297 /* NSObject+SafeKVC.m in Sources */,
 				0A997D4E1C2C71CB00A61297 /* UIImageView+PXPExtensions.m in Sources */,
+				0A7442A11C3298FB007B9C3E /* PXPNetInfo.m in Sources */,
 				0A997D3F1C2C71CB00A61297 /* PXPImageRequestWrapper.m in Sources */,
 				0A997D3B1C2C71CB00A61297 /* PXPAuthPrincipal.m in Sources */,
+				0A74429D1C329793007B9C3E /* PXPNetworkTechnologies.m in Sources */,
 				0A997D371C2C71CB00A61297 /* PXPAccountInfo.m in Sources */,
 				C72B689F40D168EE0BC3902C63675DE7 /* Pixpie-iOS-dummy.m in Sources */,
 			);
