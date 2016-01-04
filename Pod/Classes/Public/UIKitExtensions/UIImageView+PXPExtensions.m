@@ -32,16 +32,20 @@
     return transform;
 }
 
-- (void)pxp_requestImage:(NSURL*)url {
-    [[PXP sharedSDK].imageDownloader imageTaskWithUrl:url transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
+- (void)pxp_requestImageForPath:(NSString*)path {
+    [[PXP sharedSDK].imageDownloader imageTaskWithPath:path transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.image = responseObject;
         });
     }];
 }
 
-- (void)pxp_requestImageNamed:(NSString*)name {
-    
+- (void)pxp_requestImage:(NSURL*)url {
+    [[PXP sharedSDK].imageDownloader imageTaskWithUrl:url transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.image = responseObject;
+        });
+    }];
 }
 
 @end

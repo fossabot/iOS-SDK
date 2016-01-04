@@ -13,7 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[PXP sharedSDK] authWithApiKey:@"35966bfe2d0caee3264693006a976b48471b19a97794d824bced06fad8e93e49"];
+    [[PXP sharedSDK] authWithApiKey:@"5e451ae39c44cbe6085fd51e7f1b443abc49ffe150334fe0cc0902b6df23da95"];
     return YES;
 }
 

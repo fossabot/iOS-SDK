@@ -13,6 +13,9 @@
 #import "PXP.h"
 #import "PXP_Internal.h"
 #import "PXPAccountInfo.h"
+#import "PXPNetworkMonitor.h"
+#import "PXPNetInfo.h"
+#import "PXPNetworkTechnologies.h"
 
 #define SAFE_ADD_OBJECT(mutableArray, value) if (nil != value) [mutableArray addObject:value]
 
@@ -26,6 +29,32 @@ NSInteger PXPFirstClosest(const NSInteger *values, NSUInteger len, NSInteger val
         }
     }
     return values[closest];
+}
+
+
+NSString* PXPTransformQualityForNetInfo(PXPNetInfo* netInfo) {
+    static NSDictionary *sPXPQualities = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sPXPQualities = @{PXPNetworkUnknown : @"75",
+                          PXPNetworkWiFi : @"90",
+                          PXPNetworkCDMAEVDORevB : @"80",
+                          PXPNetworkCDMAEVDORevA : @"80",
+                          PXPNetworkCDMAEVDORev0 : @"80",
+                          PXPNetworkCDMA1x : @"70",
+                          PXPNetworkWCDMA : @"80",
+                          PXPNetworkHSUPA : @"80",
+                          PXPNetworkHSDPA : @"80",
+                          PXPNetworkeHRPD : @"80",
+                          PXPNetworkGPRS : @"30",
+                          PXPNetworkEdge : @"50",
+                          PXPNetworkLTE : @"90"};
+    });
+    NSString* result = sPXPQualities[netInfo.technology];
+    if (result == nil) {
+        result = @"75";
+    };
+    return result;
 }
 
 static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048};
@@ -48,7 +77,8 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 - (NSString *)qualityString {
     NSString *quality = nil;
     if (self.imageQuality == PXPTransformQualityAutomatic) {
-        quality = @"90";
+        PXPNetInfo* netInfo = [PXPNetworkMonitor sharedMonitor].currentNetworkTechnology;
+        quality = PXPTransformQualityForNetInfo(netInfo);
     }
     return quality;
 }
@@ -71,52 +101,20 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 
 @end
 
-@interface NSURL (PXPImageTransform)
+@interface NSString (PXPImageTransform)
 
-- (NSString *)pxp_urlStringForTransform:( PXPTransform* _Nonnull )transform;
++ (NSString *)pxp_cdnUrl;
 - (NSString *)pxp_imagePath;
+- (NSString *)pxp_urlStringForTransform:( PXPTransform* _Nullable )transform;
 
 @end
 
-@implementation NSURL (PXPImageTransform)
+@implementation NSString (PXPImageTransform)
 
-- (NSString *)pxp_urlStringForTransform:( PXPTransform* _Nonnull )transform {
-
-    NSString* scheme = [self.scheme stringByAppendingString:@":/"];
-
++ (NSString *)pxp_cdnUrl {
+    NSString* scheme = @"http://";
     NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;
-    assert(host != nil);
-
-    NSString* name = [self.path lastPathComponent];
-    assert(name != nil);
-
-    NSString *url = nil;
-    NSString *path = nil;
-    NSString *fileName = nil;
-    NSString *extension = [transform formatString];
-    NSString *quality = [transform qualityString];
-    NSString *size = [transform sizeString];
-
-    NSMutableArray *fileNameArray = [NSMutableArray new];
-    SAFE_ADD_OBJECT(fileNameArray, size);
-    SAFE_ADD_OBJECT(fileNameArray, quality);
-    fileName = [fileNameArray componentsJoinedByString:@"_"];
-    if (extension.length > 0) {
-        fileName = [fileName stringByAppendingPathExtension:extension];
-    }
-
-    NSMutableArray *pathArray = [NSMutableArray new];
-    SAFE_ADD_OBJECT(pathArray, name);
-    SAFE_ADD_OBJECT(pathArray, @".pixpie.resource");
-    path = [pathArray componentsJoinedByString:@""];
-
-    NSMutableArray *urlArray = [NSMutableArray new];
-    SAFE_ADD_OBJECT(urlArray, scheme);
-    SAFE_ADD_OBJECT(urlArray, host);
-    SAFE_ADD_OBJECT(urlArray, path);
-    SAFE_ADD_OBJECT(urlArray, fileName);
-    url = [urlArray componentsJoinedByString:@"/"];
-    return url;
+    return [NSString stringWithFormat:@"%@%@", scheme, host];
 }
 
 - (NSString *)pxp_imagePath {
@@ -128,6 +126,58 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
         imagePath = [pathComponents componentsJoinedByString:@"/"];
     }
     return imagePath;
+}
+
+- (NSString *)pxp_urlStringForTransform:( PXPTransform* _Nullable )transform {
+
+    NSString *cdnUrl = [NSString pxp_cdnUrl];
+    NSString *name = [self lastPathComponent];
+    assert(name != nil);
+
+    NSString *url = nil;
+    NSString *path = nil;
+    NSString *fileName = nil;
+    if (transform != nil) {
+        NSString *extension = [transform formatString];
+        NSString *quality = [transform qualityString];
+        NSString *size = [transform sizeString];
+
+        NSMutableArray *fileNameArray = [NSMutableArray new];
+        SAFE_ADD_OBJECT(fileNameArray, size);
+        SAFE_ADD_OBJECT(fileNameArray, quality);
+        fileName = [fileNameArray componentsJoinedByString:@"_"];
+        if (extension.length > 0) {
+            fileName = [fileName stringByAppendingPathExtension:extension];
+        }
+    }
+
+    NSMutableArray *pathArray = [NSMutableArray new];
+    SAFE_ADD_OBJECT(pathArray, name);
+    if (transform != nil) {
+        SAFE_ADD_OBJECT(pathArray, @".pixpie.resource");
+    }
+    path = [pathArray componentsJoinedByString:@""];
+
+    NSMutableArray *urlArray = [NSMutableArray new];
+    SAFE_ADD_OBJECT(urlArray, cdnUrl);
+    SAFE_ADD_OBJECT(urlArray, path);
+    SAFE_ADD_OBJECT(urlArray, fileName);
+    url = [urlArray componentsJoinedByString:@"/"];
+    return url;
+}
+
+@end
+
+@interface NSURL (PXPUrl)
+
+- (BOOL)pxp_isCDNUrl;
+
+@end
+
+@implementation NSURL (PXPUrl)
+
+- (BOOL)pxp_isCDNUrl {
+    return ([self.host isEqualToString:[NSString pxp_cdnUrl]]);
 }
 
 @end
@@ -152,28 +202,38 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 }
 
 - (NSURLSessionDataTask*)imageTaskWithUrl:(NSURL*)url transform:(PXPTransform*)transform completion:(PXPImageRequestCompletionBlock)completionBlock {
-    NSString* urlString = [url pxp_urlStringForTransform:transform];
+    if ([url pxp_isCDNUrl]) {
+        return [self imageTaskWithPath:url.path.pxp_imagePath transform:transform completion:completionBlock];
+    }
+    else {
+        return [self imageTaskWithUrl:url completion:completionBlock];
+    }
+    return nil;
+}
+
+- (NSURLSessionDataTask*)imageTaskWithPath:(NSString*)path transform:(PXPTransform*)transform completion:(PXPImageRequestCompletionBlock)completionBlock {
+    NSString* urlString = [path pxp_urlStringForTransform:transform];
 
     PXPImageRequestCompletionBlock block = ^(id responseObject, NSError* error) {
         if (error == nil) {
             completionBlock(responseObject, nil);
         }
         else {
+            NSURL* url = [NSURL URLWithString:[path pxp_urlStringForTransform:nil]];
             [self imageTaskWithUrl:url completion:completionBlock];
-            [self.sdkRequestWrapper updateImageWithWidth:transform.sizeString quality:transform.qualityString path:url.pxp_imagePath successBlock:^(id responseObject) {
+            [self.sdkRequestWrapper updateImageWithWidth:transform.sizeString quality:transform.qualityString path:url.path.pxp_imagePath successBlock:^(id responseObject) {
                 NSLog(@"OK: %@", responseObject);
             } failtureBlock:^(NSError *error) {
                 NSLog(@"Error: %@", error);
             }];
         }
     };
-    //NSURLSessionTask* task =
     [self imageTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
     return nil;
 }
 
-- (void)imageTaskWithUrl:(NSURL*)url completion:(PXPImageRequestCompletionBlock)completionBlock {
-    [self.imageRequestWrapper imageTaskForUrl:url completion:completionBlock];
+- (NSURLSessionDataTask*)imageTaskWithUrl:(NSURL*)url completion:(PXPImageRequestCompletionBlock)completionBlock {
+    return [self.imageRequestWrapper imageTaskForUrl:url completion:completionBlock];
 }
 
 @end

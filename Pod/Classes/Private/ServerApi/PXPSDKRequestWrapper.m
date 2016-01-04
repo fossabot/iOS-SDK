@@ -9,7 +9,7 @@
 #import "PXPSDKRequestWrapper.h"
 #import "AFNetworking.h"
 
-static NSString* const kPXPUpdateImageRequestPath = @"/sdk/images/newResolution/%@/%@/%@/%@";
+static NSString* const kPXPUpdateImageRequestPath = @"/images/newResolution/%@/%@/%@/%@";
 
 @interface PXPSDKRequestWrapper ()
 

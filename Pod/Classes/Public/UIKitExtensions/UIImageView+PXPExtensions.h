@@ -16,6 +16,6 @@
 @property (nonatomic, strong) PXPTransform* pxp_transfrom;
 
 - (void)pxp_requestImage:(NSURL*)url;
-- (void)pxp_requestImageNamed:(NSString*)name;
+- (void)pxp_requestImageForPath:(NSString*)path;
 
 @end

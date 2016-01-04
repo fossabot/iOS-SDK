@@ -13,6 +13,7 @@
 #import "PXP_Internal.h"
 #import "PXPImageDownloader.h"
 #import "PXPSDKRequestWrapper.h"
+#import "PXPNetworkMonitor.h"
 
 @interface PXP ()
 
@@ -38,8 +39,13 @@
     self = [super init];
     if (self) {
         _state = PXPStateNotInitialized;
+        [[PXPNetworkMonitor sharedMonitor] startMonitoring];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[PXPNetworkMonitor sharedMonitor] stopMonitoring];
 }
 
 - (void)authWithApiKey:(NSString*)apiKey {
