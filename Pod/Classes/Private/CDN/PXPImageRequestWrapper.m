@@ -20,23 +20,20 @@
 
 @implementation PXPImageRequestWrapper
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self != nil) {
         _sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[PXPImageRequestWrapper defaultImageSessionConfiguration]];
         _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-
         NSArray <id<AFURLResponseSerialization>> *responseSerializers = @[[AFImageResponseSerializer serializer], [PXPWebPResponseSerializer serializer]];
         AFCompoundResponseSerializer *serializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:responseSerializers];
-
         _sessionManager.responseSerializer = serializer;
     }
     return self;
 }
 
-- (NSURLSessionDataTask *)imageTaskForUrl:(NSURL *)url
-                               completion:(PXPImageRequestCompletionBlock)completionBlock {
+- (NSURLSessionDataTask *)imageDownloadTaskForUrl:(NSURL *)url
+                                       completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
     NSURLSessionDataTask *task = [self.sessionManager GET:url.absoluteString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
 
@@ -48,6 +45,21 @@
     return task;
 }
 
+- (NSURLSessionDataTask *)imageUploadTaskForStream:(NSInputStream *)stream
+                                          mimeType:(NSString *)mimeType
+                                            length:(int64_t)length
+                                             toURL:(NSURL *)url
+                                        completion:(PXPImageUploadRequestCompletionBlock)completionBlock {
+
+    NSURLSessionDataTask *task = [self.sessionManager POST:url.absoluteString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithInputStream:stream name:@"image" fileName:@"image" length:length mimeType:mimeType];
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        completionBlock(responseObject, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completionBlock(nil, error);
+    }];
+    return task;
+}
 
 #pragma mark - Helpers
 

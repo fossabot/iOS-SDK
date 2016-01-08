@@ -8,11 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^PXPImageRequestCompletionBlock)(UIImage* responseObject, NSError* error);
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^PXPImageDownloadRequestCompletionBlock)(UIImage  * _Nullable responseObject, NSError * _Nullable error);
+typedef void (^PXPImageUploadRequestCompletionBlock)(id _Nullable responseObject, NSError * _Nullable error);
 
 @interface PXPImageRequestWrapper : NSObject
 
-- (NSURLSessionDataTask *)imageTaskForUrl:(NSURL *)url
-                               completion:(PXPImageRequestCompletionBlock)completionBlock;
+- (NSURLSessionDataTask *)imageDownloadTaskForUrl:(NSURL *)url
+                                       completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
+- (NSURLSessionDataTask *)imageUploadTaskForStream:(NSInputStream *)stream
+                                          mimeType:(NSString *)mimeType
+                                            length:(int64_t)length
+                                             toURL:(NSURL *)url
+                                        completion:(PXPImageUploadRequestCompletionBlock)completionBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

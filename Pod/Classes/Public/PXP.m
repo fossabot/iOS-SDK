@@ -11,7 +11,7 @@
 #import "PXPAuthPrincipal.h"
 #import "PXPAccountInfo.h"
 #import "PXP_Internal.h"
-#import "PXPImageDownloader.h"
+#import "PXPImageTaskManager.h"
 #import "PXPSDKRequestWrapper.h"
 #import "PXPNetworkMonitor.h"
 
@@ -59,7 +59,7 @@
                 self.state = PXPStateReady;
                 self.accountInfo = accountInfo;
                 PXPSDKRequestWrapper* wrapper = [[PXPSDKRequestWrapper alloc] initWithAuthToken:accountInfo.authToken appId:accountInfo.principal.appId];
-                self.imageDownloader = [[PXPImageDownloader alloc] initWithSDKRequestWrapper:wrapper];
+                self.imageTaskManager = [[PXPImageTaskManager alloc] initWithSDKRequestWrapper:wrapper];
             }
             else {
                 self.state = PXPStateFailed;

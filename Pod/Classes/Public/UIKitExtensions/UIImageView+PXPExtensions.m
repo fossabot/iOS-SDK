@@ -9,7 +9,7 @@
 #import "UIImageView+PXPExtensions.h"
 #import "PXPTransform.h"
 #import <objc/runtime.h>
-#import "PXPImageDownloader.h"
+#import "PXPImageTaskManager.h"
 #import "PXP_Internal.h"
 
 @implementation UIImageView (PXPExtensions)
@@ -33,7 +33,7 @@
 }
 
 - (void)pxp_requestImageForPath:(NSString*)path {
-    [[PXP sharedSDK].imageDownloader imageTaskWithPath:path transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
+    [[PXP sharedSDK].imageTaskManager imageTaskWithPath:path transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.image = responseObject;
         });
@@ -41,7 +41,7 @@
 }
 
 - (void)pxp_requestImage:(NSURL*)url {
-    [[PXP sharedSDK].imageDownloader imageTaskWithUrl:url transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
+    [[PXP sharedSDK].imageTaskManager imageTaskWithUrl:url transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.image = responseObject;
         });
