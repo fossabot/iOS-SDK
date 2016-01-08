@@ -31,8 +31,6 @@
 		0A997D391C2C71CB00A61297 /* PXPAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D1B1C2C71CB00A61297 /* PXPAuthManager.m */; };
 		0A997D3A1C2C71CB00A61297 /* PXPAuthPrincipal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D1C1C2C71CB00A61297 /* PXPAuthPrincipal.h */; };
 		0A997D3B1C2C71CB00A61297 /* PXPAuthPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D1D1C2C71CB00A61297 /* PXPAuthPrincipal.m */; };
-		0A997D3C1C2C71CB00A61297 /* PXPImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D1F1C2C71CB00A61297 /* PXPImageDownloader.h */; };
-		0A997D3D1C2C71CB00A61297 /* PXPImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D201C2C71CB00A61297 /* PXPImageDownloader.m */; };
 		0A997D3E1C2C71CB00A61297 /* PXPImageRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D211C2C71CB00A61297 /* PXPImageRequestWrapper.h */; };
 		0A997D3F1C2C71CB00A61297 /* PXPImageRequestWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D221C2C71CB00A61297 /* PXPImageRequestWrapper.m */; };
 		0A997D401C2C71CB00A61297 /* PXPWebPResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D231C2C71CB00A61297 /* PXPWebPResponseSerializer.h */; };
@@ -54,6 +52,8 @@
 		0A997D521C2C724200A61297 /* PXPAuthRequestWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D501C2C724200A61297 /* PXPAuthRequestWrapper.m */; };
 		0A997D561C2C741000A61297 /* PXPSDKRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A997D541C2C741000A61297 /* PXPSDKRequestWrapper.h */; };
 		0A997D571C2C741000A61297 /* PXPSDKRequestWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A997D551C2C741000A61297 /* PXPSDKRequestWrapper.m */; };
+		0A9C26401C3FCF8D00CE4663 /* PXPImageTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A9C263E1C3FCF8D00CE4663 /* PXPImageTaskManager.h */; };
+		0A9C26411C3FCF8D00CE4663 /* PXPImageTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9C263F1C3FCF8D00CE4663 /* PXPImageTaskManager.m */; };
 		0B02FA315B23310DBB16A8E80902E9AF /* upsampling_sse2.c in Sources */ = {isa = PBXBuildFile; fileRef = B5B9B1E14761658F8C9B7AFD4C4AD81A /* upsampling_sse2.c */; settings = {COMPILER_FLAGS = "-D_THREAD_SAFE -fno-objc-arc"; }; };
 		0C6FF91EB1F0391ED75DC72D31D159EF /* EXPMatchers+beTruthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C36CA4846BF4C0DA0FA92696394743 /* EXPMatchers+beTruthy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0C7963A4A73712D1CF600CB5062AB561 /* bit_reader_inl.h in Headers */ = {isa = PBXBuildFile; fileRef = 360322039FA90403346C3F53D446ADB3 /* bit_reader_inl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -457,8 +457,6 @@
 		0A997D1B1C2C71CB00A61297 /* PXPAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAuthManager.m; sourceTree = "<group>"; };
 		0A997D1C1C2C71CB00A61297 /* PXPAuthPrincipal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAuthPrincipal.h; sourceTree = "<group>"; };
 		0A997D1D1C2C71CB00A61297 /* PXPAuthPrincipal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAuthPrincipal.m; sourceTree = "<group>"; };
-		0A997D1F1C2C71CB00A61297 /* PXPImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPImageDownloader.h; sourceTree = "<group>"; };
-		0A997D201C2C71CB00A61297 /* PXPImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPImageDownloader.m; sourceTree = "<group>"; };
 		0A997D211C2C71CB00A61297 /* PXPImageRequestWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPImageRequestWrapper.h; sourceTree = "<group>"; };
 		0A997D221C2C71CB00A61297 /* PXPImageRequestWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPImageRequestWrapper.m; sourceTree = "<group>"; };
 		0A997D231C2C71CB00A61297 /* PXPWebPResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPWebPResponseSerializer.h; sourceTree = "<group>"; };
@@ -480,6 +478,8 @@
 		0A997D501C2C724200A61297 /* PXPAuthRequestWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAuthRequestWrapper.m; sourceTree = "<group>"; };
 		0A997D541C2C741000A61297 /* PXPSDKRequestWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPSDKRequestWrapper.h; sourceTree = "<group>"; };
 		0A997D551C2C741000A61297 /* PXPSDKRequestWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPSDKRequestWrapper.m; sourceTree = "<group>"; };
+		0A9C263E1C3FCF8D00CE4663 /* PXPImageTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPImageTaskManager.h; sourceTree = "<group>"; };
+		0A9C263F1C3FCF8D00CE4663 /* PXPImageTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPImageTaskManager.m; sourceTree = "<group>"; };
 		0C87501BB746807ACD244EDF5A9C3E67 /* EXPMatchers+beSupersetOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beSupersetOf.h"; path = "Expecta/Matchers/EXPMatchers+beSupersetOf.h"; sourceTree = "<group>"; };
 		0D39AE8A03BF6522D84D551B1BD43765 /* UIImage+WebP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+WebP.h"; path = "iOS-WebP/UIImage+WebP.h"; sourceTree = "<group>"; };
 		0D4676F62DE18160A9D8925DB19E74CA /* EXPMatchers+endWith.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+endWith.h"; path = "Expecta/Matchers/EXPMatchers+endWith.h"; sourceTree = "<group>"; };
@@ -1026,8 +1026,6 @@
 		0A997D1E1C2C71CB00A61297 /* CDN */ = {
 			isa = PBXGroup;
 			children = (
-				0A997D1F1C2C71CB00A61297 /* PXPImageDownloader.h */,
-				0A997D201C2C71CB00A61297 /* PXPImageDownloader.m */,
 				0A997D211C2C71CB00A61297 /* PXPImageRequestWrapper.h */,
 				0A997D221C2C71CB00A61297 /* PXPImageRequestWrapper.m */,
 				0A997D231C2C71CB00A61297 /* PXPWebPResponseSerializer.h */,
@@ -1063,6 +1061,8 @@
 			children = (
 				0A997D2F1C2C71CB00A61297 /* PXP.h */,
 				0A997D301C2C71CB00A61297 /* PXP.m */,
+				0A9C263E1C3FCF8D00CE4663 /* PXPImageTaskManager.h */,
+				0A9C263F1C3FCF8D00CE4663 /* PXPImageTaskManager.m */,
 				0A997D311C2C71CB00A61297 /* PXPTransform.h */,
 				0A997D321C2C71CB00A61297 /* PXPTransform.m */,
 				0A997D331C2C71CB00A61297 /* UIKitExtensions */,
@@ -1726,11 +1726,11 @@
 				0A7442961C329732007B9C3E /* PXPNetworkMonitor.h in Headers */,
 				0A997D3A1C2C71CB00A61297 /* PXPAuthPrincipal.h in Headers */,
 				0A997D3E1C2C71CB00A61297 /* PXPImageRequestWrapper.h in Headers */,
-				0A997D3C1C2C71CB00A61297 /* PXPImageDownloader.h in Headers */,
 				0A997D491C2C71CB00A61297 /* PXP.h in Headers */,
 				5E1AA807772F720FED44135F7E62258B /* Pixpie-iOS-umbrella.h in Headers */,
 				0A997D481C2C71CB00A61297 /* PXP_Internal.h in Headers */,
 				0A997D361C2C71CB00A61297 /* PXPAccountInfo.h in Headers */,
+				0A9C26401C3FCF8D00CE4663 /* PXPImageTaskManager.h in Headers */,
 				0A997D381C2C71CB00A61297 /* PXPAuthManager.h in Headers */,
 				0A997D511C2C724200A61297 /* PXPAuthRequestWrapper.h in Headers */,
 				0A997D421C2C71CB00A61297 /* NSObject+SafeKVC.h in Headers */,
@@ -2174,10 +2174,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A997D4A1C2C71CB00A61297 /* PXP.m in Sources */,
+				0A9C26411C3FCF8D00CE4663 /* PXPImageTaskManager.m in Sources */,
 				0A997D4C1C2C71CB00A61297 /* PXPTransform.m in Sources */,
 				0A997D521C2C724200A61297 /* PXPAuthRequestWrapper.m in Sources */,
 				0A997D391C2C71CB00A61297 /* PXPAuthManager.m in Sources */,
-				0A997D3D1C2C71CB00A61297 /* PXPImageDownloader.m in Sources */,
 				0A997D451C2C71CB00A61297 /* NSString+PXPSecurity.m in Sources */,
 				0A997D571C2C741000A61297 /* PXPSDKRequestWrapper.m in Sources */,
 				0A7442971C329732007B9C3E /* PXPNetworkMonitor.m in Sources */,
