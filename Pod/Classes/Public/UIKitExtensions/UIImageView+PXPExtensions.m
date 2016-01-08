@@ -33,7 +33,7 @@
 }
 
 - (void)pxp_requestImageForPath:(NSString*)path {
-    [[PXP sharedSDK].imageTaskManager imageTaskWithPath:path transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
+    [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithPath:path transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.image = responseObject;
         });
@@ -41,7 +41,7 @@
 }
 
 - (void)pxp_requestImage:(NSURL*)url {
-    [[PXP sharedSDK].imageTaskManager imageTaskWithUrl:url transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
+    [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithUrl:url transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.image = responseObject;
         });

@@ -45,22 +45,6 @@
     return task;
 }
 
-- (NSURLSessionDataTask *)imageUploadTaskForStream:(NSInputStream *)stream
-                                          mimeType:(NSString *)mimeType
-                                            length:(int64_t)length
-                                             toURL:(NSURL *)url
-                                        completion:(PXPImageUploadRequestCompletionBlock)completionBlock {
-
-    NSURLSessionDataTask *task = [self.sessionManager POST:url.absoluteString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithInputStream:stream name:@"image" fileName:@"image" length:length mimeType:mimeType];
-    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        completionBlock(responseObject, nil);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        completionBlock(nil, error);
-    }];
-    return task;
-}
-
 #pragma mark - Helpers
 
 + (NSURLSessionConfiguration *)defaultImageSessionConfiguration {

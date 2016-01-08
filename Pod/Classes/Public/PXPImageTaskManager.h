@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper *)wrapper;
-- (NSURLSessionDataTask*)imageTaskWithUrl:(NSURL*)url transform:(PXPTransform *)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
-- (NSURLSessionDataTask*)imageTaskWithPath:(NSString*)path transform:(PXPTransform *)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
+- (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url transform:(PXPTransform *)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
+- (NSURLSessionDataTask*)imageDownloadTaskWithPath:(NSString*)path transform:(PXPTransform *)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
 
 @end
 

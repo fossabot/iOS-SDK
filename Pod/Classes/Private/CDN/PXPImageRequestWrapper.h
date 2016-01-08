@@ -17,11 +17,6 @@ typedef void (^PXPImageUploadRequestCompletionBlock)(id _Nullable responseObject
 
 - (NSURLSessionDataTask *)imageDownloadTaskForUrl:(NSURL *)url
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
-- (NSURLSessionDataTask *)imageUploadTaskForStream:(NSInputStream *)stream
-                                          mimeType:(NSString *)mimeType
-                                            length:(int64_t)length
-                                             toURL:(NSURL *)url
-                                        completion:(PXPImageUploadRequestCompletionBlock)completionBlock;
 
 @end
 

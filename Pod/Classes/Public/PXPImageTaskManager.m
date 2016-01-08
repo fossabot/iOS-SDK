@@ -203,17 +203,17 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
     return self;
 }
 
-- (NSURLSessionDataTask*)imageTaskWithUrl:(NSURL*)url transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+- (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
     if ([url pxp_isCDNUrl]) {
-        return [self imageTaskWithPath:url.path.pxp_imagePath transform:transform completion:completionBlock];
+        return [self imageDownloadTaskWithPath:url.path.pxp_imagePath transform:transform completion:completionBlock];
     }
     else {
-        return [self imageTaskWithUrl:url completion:completionBlock];
+        return [self imageDownloadTaskWithUrl:url completion:completionBlock];
     }
     return nil;
 }
 
-- (NSURLSessionDataTask*)imageTaskWithPath:(NSString*)path transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+- (NSURLSessionDataTask*)imageDownloadTaskWithPath:(NSString*)path transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
     NSString* urlString = [path pxp_urlStringForTransform:transform];
 
     PXPImageDownloadRequestCompletionBlock block = ^(id responseObject, NSError* error) {
@@ -222,7 +222,7 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
         }
         else {
             NSURL* url = [NSURL URLWithString:[path pxp_urlStringForTransform:nil]];
-            [self imageTaskWithUrl:url completion:completionBlock];
+            [self imageDownloadTaskWithUrl:url completion:completionBlock];
             [self.sdkRequestWrapper updateImageWithWidth:transform.sizeString quality:transform.qualityString path:url.path.pxp_imagePath successBlock:^(id responseObject) {
                 NSLog(@"OK: %@", responseObject);
             } failtureBlock:^(NSError *error) {
@@ -230,13 +230,13 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
             }];
         }
     };
-    [self imageTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
+    [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
     return nil;
 }
 
 #pragma mark - Private Interface
 
-- (NSURLSessionDataTask*)imageTaskWithUrl:(NSURL*)url completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+- (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
     return [self.imageRequestWrapper imageDownloadTaskForUrl:url completion:completionBlock];
 }
 

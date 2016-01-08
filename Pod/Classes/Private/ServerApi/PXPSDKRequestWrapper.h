@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
                         path:(NSString*)path
                 successBlock:(PXPRequestSuccessBlock)successBlock
                failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (NSURLSessionDataTask *)uploadImageTaskForStream:(NSInputStream *)stream
+                                          mimeType:(NSString *)mimeType
+                                            length:(int64_t)length
+                                            toPath:(NSString *)path
+                                      successBlock:(PXPRequestSuccessBlock)successBlock
+                                     failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 
 @end
 
