@@ -8,7 +8,6 @@
 #import "PXPWebPResponseSerializer.h"
 #import "NSObject+SafeKVC.h"
 #import "NSString+PXPSecurity.h"
-#import "UIImage+WebP.h"
 #import "PXPDefines.h"
 #import "PXPRequestWrapper.h"
 #import "PXPCellMonitor.h"
