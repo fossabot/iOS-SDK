@@ -10,6 +10,7 @@
 #import "PXPNetworkTechnologies.h"
 #import "PXPNetInfo.h"
 #import "TargetConditionals.h"
+#import "PXPDefines.h"
 
 @import UIKit.UIDevice;
 @import SystemConfiguration.CaptiveNetwork;

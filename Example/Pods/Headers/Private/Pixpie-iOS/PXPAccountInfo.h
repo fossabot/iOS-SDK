@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/PXPAccountInfo.h
+../../../../../Pod/Classes/Private/Auth/PXPAccountInfo.h

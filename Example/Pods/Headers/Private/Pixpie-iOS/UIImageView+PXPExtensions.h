@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/UIImageView+PXPExtensions.h
+../../../../../Pod/Classes/Public/UIKitExtensions/UIImageView+PXPExtensions.h

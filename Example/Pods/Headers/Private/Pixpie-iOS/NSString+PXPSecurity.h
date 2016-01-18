@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/NSString+PXPSecurity.h
+../../../../../Pod/Classes/Private/Common/Helpers/NSString+PXPSecurity.h

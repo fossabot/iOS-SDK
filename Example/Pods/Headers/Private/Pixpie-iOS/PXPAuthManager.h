@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/PXPAuthManager.h
+../../../../../Pod/Classes/Private/Auth/PXPAuthManager.h

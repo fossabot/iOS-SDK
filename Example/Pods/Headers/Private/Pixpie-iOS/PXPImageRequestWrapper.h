@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/PXPImageRequestWrapper.h
+../../../../../Pod/Classes/Private/CDN/PXPImageRequestWrapper.h

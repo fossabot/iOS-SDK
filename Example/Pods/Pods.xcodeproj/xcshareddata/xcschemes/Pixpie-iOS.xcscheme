@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9F8FB4FB5756730052B370264787014B"
+               BlueprintIdentifier = "B4052DCEE1A52EAF215C3F85EE8384DD"
                BuildableName = "Pixpie_iOS.framework"
                BlueprintName = "Pixpie-iOS"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,18 +45,13 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9F8FB4FB5756730052B370264787014B"
+            BlueprintIdentifier = "B4052DCEE1A52EAF215C3F85EE8384DD"
             BuildableName = "Pixpie_iOS.framework"
             BlueprintName = "Pixpie-iOS"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction

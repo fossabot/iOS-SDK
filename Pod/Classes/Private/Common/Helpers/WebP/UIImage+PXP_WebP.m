@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Sean Ooi. All rights reserved.
 //
 
-#import "UIImage+WebP.h"
+#import "UIImage+PXP_WebP.h"
 
 // This gets called when the UIImage gets collected and frees the underlying image.
 static void free_image_data(void *info, const void *data, size_t size)

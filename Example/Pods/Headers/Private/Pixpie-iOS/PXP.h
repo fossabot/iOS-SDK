@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/PXP.h
+../../../../../Pod/Classes/Public/PXP.h

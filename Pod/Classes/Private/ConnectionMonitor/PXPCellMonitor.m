@@ -9,6 +9,7 @@
 #import "PXPCellMonitor.h"
 #import "PXPNetworkTechnologies.h"
 #import "PXPNetInfo.h"
+#import "PXPDefines.h"
 @import CoreTelephony.CTTelephonyNetworkInfo;
 @import CoreTelephony.CTCarrier;
 

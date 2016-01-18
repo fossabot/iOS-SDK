@@ -1,6 +1,0 @@
-framework module iOS_WebP {
-  umbrella header "iOS-WebP-umbrella.h"
-
-  export *
-  module * { export * }
-}

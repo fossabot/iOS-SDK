@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/NSObject+SafeKVC.h
+../../../../../Pod/Classes/Private/Common/Helpers/NSObject+SafeKVC.h

@@ -16,6 +16,7 @@
 #import "PXPNetworkMonitor.h"
 #import "PXPNetInfo.h"
 #import "PXPNetworkTechnologies.h"
+#import "PXPDefines.h"
 
 #define SAFE_ADD_OBJECT(mutableArray, value) if (nil != value) [mutableArray addObject:value]
 
