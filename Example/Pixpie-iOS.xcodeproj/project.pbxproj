@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0AEEFA4D1BF8C9B5009DE083 /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0AEEFA4C1BF8C9B5009DE083 /* server.cer */; };
+		37D2341E2037404093A54D73 /* Pods_Pixpie_iOS_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4619FAB9C3A5E03415B6F12 /* Pods_Pixpie_iOS_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -21,9 +22,8 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		7BDF24455A4499E357DB8E79 /* Pods_Pixpie_iOS_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0DC6C9145E7C57D6796EB0 /* Pods_Pixpie_iOS_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		93BED31C75D1409FD8C72FAB /* Pods_Pixpie_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DD1444E957B266C1C93A3A /* Pods_Pixpie_iOS_Tests.framework */; };
+		A200C176ECEB92D69CFAE064 /* Pods_Pixpie_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F094C31E5DF0F03A2DB104B /* Pods_Pixpie_iOS_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03E72C5E6466A75D46C5EA3F /* Pods-Pixpie-iOS_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		0AEEFA4C1BF8C9B5009DE083 /* server.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cer; sourceTree = "<group>"; };
 		2C438C694483E34A3EEC148E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		2EF25F1A47604F703D2BB9AA /* Pods-Pixpie-iOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* Pixpie-iOS_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pixpie-iOS_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,14 +59,14 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		65309581D9031D0F18BA8B04 /* Pods-Pixpie-iOS_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		6F0DC6C9145E7C57D6796EB0 /* Pods_Pixpie_iOS_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixpie_iOS_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7207A32477A2D959187DF189 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		7F094C31E5DF0F03A2DB104B /* Pods_Pixpie_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixpie_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9A356B237B900CD86D5429DA /* Pixpie-iOS.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "Pixpie-iOS.podspec"; path = "../Pixpie-iOS.podspec"; sourceTree = "<group>"; };
-		ADA71D97ACD329AA7169454A /* Pods-Pixpie-iOS_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B9A5716F625079A9204DACA9 /* Pods-Pixpie-iOS_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		D6DD1444E957B266C1C93A3A /* Pods_Pixpie_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixpie_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8108404F05E699F923B4DD6 /* Pods-Pixpie-iOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		C4619FAB9C3A5E03415B6F12 /* Pods_Pixpie_iOS_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixpie_iOS_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C566673F18297D6BDC98928A /* Pods-Pixpie-iOS_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		C8134272DD42E0E791EDDD27 /* Pods-Pixpie-iOS_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				7BDF24455A4499E357DB8E79 /* Pods_Pixpie_iOS_Example.framework in Frameworks */,
+				37D2341E2037404093A54D73 /* Pods_Pixpie_iOS_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +88,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				93BED31C75D1409FD8C72FAB /* Pods_Pixpie_iOS_Tests.framework in Frameworks */,
+				A200C176ECEB92D69CFAE064 /* Pods_Pixpie_iOS_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +103,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				61D1478F97FC22DDAE3DBFA3 /* Pods */,
+				FD85C43C29E7D6FBE337769D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,8 +123,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				6F0DC6C9145E7C57D6796EB0 /* Pods_Pixpie_iOS_Example.framework */,
-				D6DD1444E957B266C1C93A3A /* Pods_Pixpie_iOS_Tests.framework */,
+				C4619FAB9C3A5E03415B6F12 /* Pods_Pixpie_iOS_Example.framework */,
+				7F094C31E5DF0F03A2DB104B /* Pods_Pixpie_iOS_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,13 +185,13 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		61D1478F97FC22DDAE3DBFA3 /* Pods */ = {
+		FD85C43C29E7D6FBE337769D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B9A5716F625079A9204DACA9 /* Pods-Pixpie-iOS_Example.debug.xcconfig */,
-				ADA71D97ACD329AA7169454A /* Pods-Pixpie-iOS_Example.release.xcconfig */,
-				2EF25F1A47604F703D2BB9AA /* Pods-Pixpie-iOS_Tests.debug.xcconfig */,
-				65309581D9031D0F18BA8B04 /* Pods-Pixpie-iOS_Tests.release.xcconfig */,
+				03E72C5E6466A75D46C5EA3F /* Pods-Pixpie-iOS_Example.debug.xcconfig */,
+				C8134272DD42E0E791EDDD27 /* Pods-Pixpie-iOS_Example.release.xcconfig */,
+				A8108404F05E699F923B4DD6 /* Pods-Pixpie-iOS_Tests.debug.xcconfig */,
+				C566673F18297D6BDC98928A /* Pods-Pixpie-iOS_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -203,12 +203,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Pixpie-iOS_Example" */;
 			buildPhases = (
-				8EDF7F79B689A694AE933BAF /* Check Pods Manifest.lock */,
+				F4474D28BE6312CC422D5F37 /* Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				0994D391AFBC347DE174D0AB /* Embed Pods Frameworks */,
-				1110E2573030FCDD9CAE0F12 /* Copy Pods Resources */,
+				61EC025B48E23A12B2667251 /* Embed Pods Frameworks */,
+				6F6FB6C8057556DCF72C3185 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,12 +223,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Pixpie-iOS_Tests" */;
 			buildPhases = (
-				75F420128BE0C12A787EFE72 /* Check Pods Manifest.lock */,
+				816F811E2E9E006502D46DDE /* Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				C4099D8038797D3516DB5186 /* Embed Pods Frameworks */,
-				E304EBE85C7AE46E1AA36346 /* Copy Pods Resources */,
+				93A3E80F4DA51ED4A383E808 /* Embed Pods Frameworks */,
+				3CE2E313B4854291370EF83D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -297,7 +297,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0994D391AFBC347DE174D0AB /* Embed Pods Frameworks */ = {
+		3CE2E313B4854291370EF83D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61EC025B48E23A12B2667251 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -312,7 +327,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1110E2573030FCDD9CAE0F12 /* Copy Pods Resources */ = {
+		6F6FB6C8057556DCF72C3185 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -327,7 +342,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		75F420128BE0C12A787EFE72 /* Check Pods Manifest.lock */ = {
+		816F811E2E9E006502D46DDE /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -342,22 +357,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		8EDF7F79B689A694AE933BAF /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C4099D8038797D3516DB5186 /* Embed Pods Frameworks */ = {
+		93A3E80F4DA51ED4A383E808 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -372,19 +372,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E304EBE85C7AE46E1AA36346 /* Copy Pods Resources */ = {
+		F4474D28BE6312CC422D5F37 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -513,7 +513,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9A5716F625079A9204DACA9 /* Pods-Pixpie-iOS_Example.debug.xcconfig */;
+			baseConfigurationReference = 03E72C5E6466A75D46C5EA3F /* Pods-Pixpie-iOS_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -529,7 +529,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADA71D97ACD329AA7169454A /* Pods-Pixpie-iOS_Example.release.xcconfig */;
+			baseConfigurationReference = C8134272DD42E0E791EDDD27 /* Pods-Pixpie-iOS_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -545,7 +545,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EF25F1A47604F703D2BB9AA /* Pods-Pixpie-iOS_Tests.debug.xcconfig */;
+			baseConfigurationReference = A8108404F05E699F923B4DD6 /* Pods-Pixpie-iOS_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -569,7 +569,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65309581D9031D0F18BA8B04 /* Pods-Pixpie-iOS_Tests.release.xcconfig */;
+			baseConfigurationReference = C566673F18297D6BDC98928A /* Pods-Pixpie-iOS_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

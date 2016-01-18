@@ -86,14 +86,12 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Pixpie-iOS_Tests/AFNetworking.framework"
   install_framework "Pods-Pixpie-iOS_Tests/Pixpie_iOS.framework"
-  install_framework "Pods-Pixpie-iOS_Tests/libwebp.framework"
   install_framework "Pods-Pixpie-iOS_Tests/Expecta.framework"
   install_framework "Pods-Pixpie-iOS_Tests/Specta.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Pixpie-iOS_Tests/AFNetworking.framework"
   install_framework "Pods-Pixpie-iOS_Tests/Pixpie_iOS.framework"
-  install_framework "Pods-Pixpie-iOS_Tests/libwebp.framework"
   install_framework "Pods-Pixpie-iOS_Tests/Expecta.framework"
   install_framework "Pods-Pixpie-iOS_Tests/Specta.framework"
 fi
