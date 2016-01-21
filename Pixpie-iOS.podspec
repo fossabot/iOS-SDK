@@ -17,8 +17,6 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description      = "Pixpie is a media content optimization service for mobile applications. Built for mobile developers."
-
-
   s.homepage         = "http://pixpie.co"
   s.screenshots      = "http://pixpie.co/img/pixpie_full_logo.png"
   s.license          = 'MIT'
@@ -37,4 +35,5 @@ Pod::Spec.new do |s|
   s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'Security'
   s.dependency 'AFNetworking', '~> 3.0'
+  s.dependency      'libwebp', '~> 0.4.2'
 end
