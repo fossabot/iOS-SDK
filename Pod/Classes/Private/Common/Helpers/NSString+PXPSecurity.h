@@ -11,5 +11,6 @@
 @interface NSString (PXPSecurity)
 
 - (NSString *)sha256;
+- (NSString *)MD5;
 
 @end

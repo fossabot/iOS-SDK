@@ -70,11 +70,11 @@ static NSString* const kPXPUploadImageAtUrlRequestPath = @"/storage/upload/remot
     return task;
 }
 
-- (void)uploadImageAtUrl:(NSString*)url
-                   width:(NSString*)width
-                 quality:(NSString*)quality
-            successBlock:(PXPRequestSuccessBlock)successBlock
-           failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+- (NSURLSessionDataTask *)uploadImageTaskAtUrl:(NSString*)url
+                                         width:(NSString*)width
+                                       quality:(NSString*)quality
+                                  successBlock:(PXPRequestSuccessBlock)successBlock
+                                 failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     assert(url != nil);
     NSString* apiPath = [NSString stringWithFormat:kPXPUploadImageAtUrlRequestPath, self.appId];
@@ -88,11 +88,12 @@ static NSString* const kPXPUploadImageAtUrlRequestPath = @"/storage/upload/remot
         SAFE_SET_OBJECT(derivedImageSpecs, @"quality", quality);
     }
     SAFE_SET_OBJECT(params, derivedImageSpecs, derivedImageSpecs);
-    [self.sessionManager POST:requestUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *task = [self.sessionManager POST:requestUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failtureBlock(error);
     }];
+    return task;
 }
 
 @end

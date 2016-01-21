@@ -17,6 +17,7 @@
 #import "PXPNetInfo.h"
 #import "PXPNetworkTechnologies.h"
 #import "PXPDefines.h"
+#import "NSString+PXPSecurity.h"
 
 #define SAFE_ADD_OBJECT(mutableArray, value) if (nil != value) [mutableArray addObject:value]
 
@@ -112,10 +113,28 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 
 @implementation NSString (PXPImageTransform)
 
+- (BOOL)pxp_isCDNUrl {
+    return ([self hasPrefix:[NSString pxp_cdnUrl]]);
+}
+
 + (NSString *)pxp_cdnUrl {
     NSString* scheme = @"http://";
     NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;
     return [NSString stringWithFormat:@"%@%@", scheme, host];
+}
+
++ (NSString *)pxp_cdnPathForUrl:(NSString *)remoteUrl {
+
+    NSString* result = nil;
+    if ([remoteUrl pxp_isCDNUrl]) {
+        result = [NSString pxp_cdnUrl];
+    } else {
+        NSString* host = [NSString pxp_cdnUrl];
+        NSString* folder = @"remote.resources/";
+        NSString* remoteUrlMD5 = [remoteUrl MD5];
+        result = [NSString stringWithFormat:@"%@%@%@/", host, folder, remoteUrlMD5];
+    }
+    return result;
 }
 
 - (NSString *)pxp_imagePath {
@@ -131,7 +150,7 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 
 - (NSString *)pxp_urlStringForTransform:( PXPTransform* _Nullable )transform {
 
-    NSString *cdnUrl = [NSString pxp_cdnUrl];
+    NSString *cdnUrl = [NSString pxp_cdnPathForUrl:self];
     NSString *name = [self lastPathComponent];
     assert(name != nil);
 
@@ -214,9 +233,10 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
     return nil;
 }
 
-- (NSURLSessionDataTask*)imageDownloadTaskWithPath:(NSString*)path transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
-    NSString* urlString = [path pxp_urlStringForTransform:transform];
+- (NSURLSessionDataTask*)imageDownloadTaskWithPath:(NSString*)path
+                                         transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
+    NSString* urlString = [path pxp_urlStringForTransform:transform];
     PXPImageDownloadRequestCompletionBlock block = ^(id responseObject, NSError* error) {
         if (error == nil) {
             completionBlock(responseObject, nil);
@@ -237,7 +257,29 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 
 #pragma mark - Private Interface
 
+- (NSURLSessionDataTask*)imageDownloadWithRemoteUrl:(NSURL*)url
+                                          transform:(PXPTransform*)transform
+                                         completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+    NSString* urlString = [url.absoluteString pxp_urlStringForTransform:transform];
+    PXPImageDownloadRequestCompletionBlock block = ^(id responseObject, NSError* error) {
+        if (error == nil) {
+            completionBlock(responseObject, nil);
+        }
+        else {
+            [self imageDownloadTaskWithUrl:url completion:completionBlock];
+            [self.sdkRequestWrapper uploadImageTaskAtUrl:url.absoluteString width:transform.sizeString quality:transform.qualityString successBlock:^(id responseObject) {
+                NSLog(@"OK: %@", responseObject);
+            } failtureBlock:^(NSError *error) {
+                NSLog(@"Error: %@", error);
+            }];
+        }
+    };
+    [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
+    return nil;
+}
+
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+
     return [self.imageRequestWrapper imageDownloadTaskForUrl:url completion:completionBlock];
 }
 
