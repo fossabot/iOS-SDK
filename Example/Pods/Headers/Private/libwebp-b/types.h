@@ -1,1 +1,0 @@
-../../../libwebp-b/Classes/types.h

@@ -15,16 +15,37 @@ PODS:
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
   - Expecta (1.0.5)
-  - GoogleMaps (1.11.1)
-  - libwebp-b (0.4.3)
+  - libwebp (0.5.0):
+    - libwebp/core (= 0.5.0)
+    - libwebp/dec (= 0.5.0)
+    - libwebp/demux (= 0.5.0)
+    - libwebp/dsp (= 0.5.0)
+    - libwebp/enc (= 0.5.0)
+    - libwebp/mux (= 0.5.0)
+    - libwebp/utils (= 0.5.0)
+    - libwebp/webp (= 0.5.0)
+  - libwebp/core (0.5.0):
+    - libwebp/webp
+  - libwebp/dec (0.5.0):
+    - libwebp/core
+  - libwebp/demux (0.5.0):
+    - libwebp/core
+  - libwebp/dsp (0.5.0):
+    - libwebp/core
+  - libwebp/enc (0.5.0):
+    - libwebp/core
+  - libwebp/mux (0.5.0):
+    - libwebp/core
+  - libwebp/utils (0.5.0):
+    - libwebp/core
+  - libwebp/webp (0.5.0)
   - Pixpie-iOS (0.1.0):
     - AFNetworking (~> 3.0)
-    - libwebp-b
+    - libwebp
   - Specta (1.0.5)
 
 DEPENDENCIES:
   - Expecta
-  - GoogleMaps
   - Pixpie-iOS (from `../`)
   - Specta
 
@@ -35,11 +56,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
-  GoogleMaps: c947160008f414c66707a5ea60f35e92055c7670
-  libwebp-b: 9ff94a3363c4618e0c8a1d3b1bffc288721c86a3
-  Pixpie-iOS: b315b73e8a3e6719af2815524903b814a53ffbb4
+  libwebp: 68ba2001ba6806ee52837ebd77a551a0b6567e4e
+  Pixpie-iOS: 012445236489826ffcca320b95ae51b61850f7a1
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
 
-PODFILE CHECKSUM: 6cf9df390913207fb5dfd7f04264e737ca77744a
+PODFILE CHECKSUM: 6851724a32b36842ea5f68eac236d61f20818396
 
 COCOAPODS: 1.0.0.beta.2
