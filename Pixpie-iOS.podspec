@@ -36,5 +36,5 @@ Pod::Spec.new do |s|
   # s.frameworks = 'Security'
   s.dependency 'AFNetworking', '~> 3.0'
 #  s.dependency 'WebP'
-  s.dependency 'libwebp-b'
+  s.dependency 'libwebp'
 end

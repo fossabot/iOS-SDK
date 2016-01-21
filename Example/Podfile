@@ -3,7 +3,6 @@ source 'https://github.com/bomjkolyadun/PixpieCocoapods.git'
 
 target 'Pixpie-iOS_Example' do
   pod "Pixpie-iOS", :path => "../"
-  pod "GoogleMaps"
 end
 
 target 'Pixpie-iOS_Tests' do
