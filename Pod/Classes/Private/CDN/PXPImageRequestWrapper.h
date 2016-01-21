@@ -7,11 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PXPImageTaskManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef void (^PXPImageDownloadRequestCompletionBlock)(UIImage  * _Nullable responseObject, NSError * _Nullable error);
-typedef void (^PXPImageUploadRequestCompletionBlock)(id _Nullable responseObject, NSError * _Nullable error);
 
 @interface PXPImageRequestWrapper : NSObject
 

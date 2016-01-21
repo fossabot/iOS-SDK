@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		00871F1797D693C45564441251265430 /* PXP.h in Headers */ = {isa = PBXBuildFile; fileRef = 02B9BCCFD75EACC2C8B1CEE0C00E2073 /* PXP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		01C630A4DAE095F4A15C9CDFEAC0B67D /* PXPNetworkTechnologies.h in Headers */ = {isa = PBXBuildFile; fileRef = 362102A03304F3660E67D5DFC58E4D8B /* PXPNetworkTechnologies.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01C98587C1D1D6D5803815E599804373 /* PXPAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D65159145A50578AFAF6CE0B8A405DA /* PXPAuthManager.m */; };
 		06C48627C0A34F267CF21A49EEA5B83B /* PXPWifiMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = A37E32CAAC0B67ADC7BAE603794AA42D /* PXPWifiMonitor.m */; };
-		0704D396BDE9D7F74E8EB94FCB8DBC86 /* NSString+PXPSecurity.h in Headers */ = {isa = PBXBuildFile; fileRef = FBC5505E383DFA85FD6B1E1A9719D297 /* NSString+PXPSecurity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A73520D2142C580AD046E9D13407A08 /* PXPImageRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = E1B7B4F6BA2F88AA6B5F1D3ECC9C1781 /* PXPImageRequestWrapper.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0C6FF91EB1F0391ED75DC72D31D159EF /* EXPMatchers+beTruthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8475E963BDD68DA57EAB6F668CA41700 /* EXPMatchers+beTruthy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0D16B556212D317A0D4FEB71E102E207 /* EXPMatchers+beLessThan.h in Headers */ = {isa = PBXBuildFile; fileRef = 157765AC409C3E690BA26A2EAD47F909 /* EXPMatchers+beLessThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0EBFA5FBE4953A83B677CE2A75746761 /* EXPMatchers+beLessThan.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B130D452E892920514EDD185AB8A67 /* EXPMatchers+beLessThan.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -23,13 +22,14 @@
 		1480F4923DBBF217F60572EEECB4027C /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B9BCFD39EC6E1F5CA1EFE773708ACBB1 /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		174202BD6AE0E4A41F5CE66E975EAE52 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 346919E5C098DEA4ADBF321C97F2B624 /* UIRefreshControl+AFNetworking.m */; };
 		17572374B2AE183C6347C41E8DF8E579 /* EXPMatchers+beFalsy.m in Sources */ = {isa = PBXBuildFile; fileRef = A468AD3F6EE1D89C7A39B9CB3D2EB60F /* EXPMatchers+beFalsy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		17BC64EDFE2F69D07F14F6622842E9DD /* PXPNetworkTechnologies.h in Headers */ = {isa = PBXBuildFile; fileRef = 362102A03304F3660E67D5DFC58E4D8B /* PXPNetworkTechnologies.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		18ED789EB2F670BF085700734591ABAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4ADA38F3FF07C1CCF94970E8792BEE /* Foundation.framework */; };
 		1A1AB2EC52323C5EA28DAA99F1E1A90D /* EXPMatchers+endWith.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F7470CD6248518C0417C33EE36E6610 /* EXPMatchers+endWith.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A7F03488D22BEBB56D2A063123A76C0 /* SPTTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAD586E702ACF7D43F4A9097AE1A5FA /* SPTTestSuite.m */; };
 		1AA62E70BC439095B9219CD933EB4455 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4ADA38F3FF07C1CCF94970E8792BEE /* Foundation.framework */; };
 		1AB3304B6884F626BC54150AC7565E18 /* EXPMatchers+equal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1811978302F78B3089D6D84824A6667 /* EXPMatchers+equal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B0389CD88AA949B34DC7269030FEC6F /* EXPMatchers+beGreaterThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F8ECA17D40541EC9202C971146D093 /* EXPMatchers+beGreaterThanOrEqualTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1C49D47BC8A807CC40A5CC59B91C193C /* PXPCellMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 396FAA97842D9CB6A91DE52D263D06E4 /* PXPCellMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CF0710D86EBC68B1DB085770808E2B1 /* PXPDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3995BB4C2269EB09712BD7B8330EF7AF /* PXPDefines.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1E5B8F12ED7CC40ECDB9B1F755F387E5 /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C2BE58829AE67EDD6E080B587FD12B78 /* UIActivityIndicatorView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		201BF9C605852822CA5A65ADE282A310 /* EXPMatcherHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A7598004093456027D1CEF3D4D971E /* EXPMatcherHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		204D694B03BFF3B244A6AB73FACFFC43 /* Expecta-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF7655AD5B95500E8C2DE9C087B276 /* Expecta-dummy.m */; };
@@ -54,7 +54,6 @@
 		38D48A486C94444AC4F834325B1A51DE /* SPTExample.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA784E4479ABD21693CA71EED8D8943 /* SPTExample.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		390E2A202EAFD04814D6BB1803E075C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4ADA38F3FF07C1CCF94970E8792BEE /* Foundation.framework */; };
 		397B320B7C59C168CC5B62E18ED8DEA0 /* EXPMatchers+beSubclassOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EF747792733AFBBC849B14C8C37C85D /* EXPMatchers+beSubclassOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		39905738D65A40B869AD5D685B20411C /* PXPSDKRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AC7FD0F485448734E73271468326FEE /* PXPSDKRequestWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3B5B7495707BF7133B9FB3F834045611 /* EXPBlockDefinedMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 735F743E965D9C5374E286E1612E4DD0 /* EXPBlockDefinedMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3BE5FEFA5786BE90FDDF962B5508D9DA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43887B819B0F82C746DBBC465132C158 /* XCTest.framework */; };
 		3C2700C7DAA15C6AF84A595865C42F4D /* EXPMatchers+contain.h in Headers */ = {isa = PBXBuildFile; fileRef = 739DC570C043F9FEC8B7470E5E827417 /* EXPMatchers+contain.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -68,13 +67,13 @@
 		49E99E74844305C2DF92151D6E35FB1E /* PXPNetworkTechnologies.m in Sources */ = {isa = PBXBuildFile; fileRef = D7353A883E19BA4D22D5EB96FAE2CDC8 /* PXPNetworkTechnologies.m */; };
 		4B70CE7C99F9BB7FD72A673B2A13326A /* SpectaDSL.h in Headers */ = {isa = PBXBuildFile; fileRef = DF8F8F2A834A53178F87E5AA550CC7A5 /* SpectaDSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BBCBB9D8EF0B241A4A4FE4982985481 /* ExpectaSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 1394F3A11679F86AA3F0F26AA7B2C3A0 /* ExpectaSupport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4BFD5FB1ECFE95BF2C19F1E3CFBE8935 /* PXPNetInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF21524B7DBA21467F43F012ED7748F /* PXPNetInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4DD450A5678EA5407EE8D2DCB383C16E /* SpectaTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 99B98C62C68219ED211681C46FA6AB1B /* SpectaTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		51DDDB0FB4899757CF6A826B531B940D /* EXPUnsupportedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 2643CE508359A8EA36907937A2D1803B /* EXPUnsupportedObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		54AF62ACF67074BA98574325C3093D1F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8C7678DE15F9B8B2A0397095FC60B6D /* Security.framework */; };
+		54E7E19B9F368F3456CFF16FC50BB11E /* NSObject+SafeKVC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9699AF3E2583EFAFDF6842D502CB61AC /* NSObject+SafeKVC.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		560698A4D707DCBCC1C8F98BC9B89B23 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D394480120D6D527E0897AA445957175 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5726BE1989A96F9E03257A3695A1C8D3 /* PXPAuthRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C72FC57FFACEEED493E4C9C5BC31E451 /* PXPAuthRequestWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5808B477EFF509D810B5CDCFDC944F80 /* AFImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = F57408281E7C1DBD2B0C40B1A8E69F55 /* AFImageDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5923180319DEEA4B9AFA3F0637C4C78B /* PXPAccountInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 78827A6DFC22042E1561D6A04361A536 /* PXPAccountInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B2D4A621D3DA971A474776AF36BB073 /* EXPBlockDefinedMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D125E913AE427A57A89B1A1B1507A /* EXPBlockDefinedMatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5EA7043FE10E75D02F3C3052AF8B8318 /* EXPDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB800A183E16E4825BEFBBB16E96466 /* EXPDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5F670F63E93ADB9510CADCCD053530DC /* SPTSharedExampleGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D6D456A40C75EDA0AD53F2988514D9 /* SPTSharedExampleGroups.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -83,15 +82,13 @@
 		60E3009342BEE96D32C546BE2DB60052 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 46A874CA978E3CAA888A6404CE1B40FE /* UIImageView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		634152AD71CFECBCA1A161AE502C43B1 /* Pods-Pixpie-iOS_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196114EE9EB5D3CF561047CC097F00C /* Pods-Pixpie-iOS_Example-dummy.m */; };
 		65551B70EA3B244E097905ADACD29A69 /* PXPCellMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB7627742CF6CDBAA00ED707140736F /* PXPCellMonitor.m */; };
-		65577A75770D7D116C0DF0021AEDA889 /* NSObject+SafeKVC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9699AF3E2583EFAFDF6842D502CB61AC /* NSObject+SafeKVC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		659960F7E28E993E08CCC1E8A383E710 /* UIKit+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FAD5A437C529B1B9618D805728B5D74 /* UIKit+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65BC31095CCDFC80CBF6BBA843751F23 /* EXPMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 0830EE520222BD8BD4BE03038690CE60 /* EXPMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		66A27898E989A3FA5C15AA671C4536F0 /* EXPMatchers+beIdenticalTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A7381E473830993318742A27B33FE /* EXPMatchers+beIdenticalTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		66F9CE26CBD4E329DA9CEEC896A0AFDC /* PXPDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3995BB4C2269EB09712BD7B8330EF7AF /* PXPDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67459AD239EF669A365519E06B45DCFE /* EXPExpect.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E975F507EDCF0138940E4966359C2AD /* EXPExpect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		68152D921ABF6A423C192C04FDF94F0F /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 91E59486FB4E2D150821B7169C62E599 /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68734A928FC8D5011CA39D8D5937B876 /* PXPSDKRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AC7FD0F485448734E73271468326FEE /* PXPSDKRequestWrapper.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		68A38977EBAE334DC3C22386D00D2622 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7D67583432D34E756076ABF29D19C4 /* AFNetworkReachabilityManager.m */; };
-		68F1E5A6DF426A99A3D4CCECE7E6F754 /* PXPNetworkMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 39FDE60622E2CF6B466D5375FBB1AB3B /* PXPNetworkMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D1706AA03B368FFDDB283CFDA171982 /* Pixpie-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C1956150E6013ED6EEA2F5A5D66296 /* Pixpie-iOS-dummy.m */; };
 		6DCCB654DD8D3787A0A6A16FBC33A52C /* PXPTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = C95874EF76093476AA2544D002D567DE /* PXPTransform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E1D978790705E137FDE439AA68DD3AA /* EXPFloatTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = 15040EA59CCFE694374ED9824EFFD37D /* EXPFloatTuple.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -104,9 +101,12 @@
 		75D58FC5FBDFE685E716815E58572AC5 /* UIImageView+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 493281439403DBCA716364FAC3399EB5 /* UIImageView+PXPExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		76CCABE79C04444450153424D7CE1DC1 /* EXPMatchers+beSupersetOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 448525D4EB7FBC92764A19218F3D09EF /* EXPMatchers+beSupersetOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		76D337327C10A7555447B69AA1562647 /* EXPMatchers+beInstanceOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B180DFE099E0F4A0B2CF107F46722BB /* EXPMatchers+beInstanceOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		76FD9A88E79AAB56D8CEA1644D84F98F /* PXPAuthRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C72FC57FFACEEED493E4C9C5BC31E451 /* PXPAuthRequestWrapper.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		781D2E1011160111C68DF1FDD45E5107 /* PXPMonitoring.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5D6BCAF4FDBC791D5E09EF969C96C7 /* PXPMonitoring.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		79558B1F97ABE4AB8942DC18BEBD4B82 /* EXPMatchers+beKindOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5506FF1C16F921303CA8FC92568FBAD1 /* EXPMatchers+beKindOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B223B4E6EF14BA12DA113F7EE10B96C /* NSObject+Expecta.h in Headers */ = {isa = PBXBuildFile; fileRef = 7507F2AF03600A042DAF1DC637097416 /* NSObject+Expecta.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B51F0BDF18D9CD151DA3E45643E305C /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF897B188B0B0760CFD3DFFDD6B5337 /* WebP.framework */; };
+		7B87FC1328713F712078BC3143F51F8C /* UIImage+PXP_WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B50AFBF5FB816EFCCCC6CC07A927BAA /* UIImage+PXP_WebP.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7D84EF560FF2B28C1E8D9B76144DA00A /* PXPImageTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C17EE6E8084D3C25641A9ECF0A62ECFB /* PXPImageTaskManager.m */; };
 		7EE6B04B0347762E16F2B37B30ACF051 /* PXPTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 72437E33218ABCE6525D0E8FACA49BCB /* PXPTransform.m */; };
 		805E425BBEF7A6133E32E1D30A073010 /* EXPExpect.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA633752B49FC5EAE13D99694253D3D /* EXPExpect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -128,16 +128,15 @@
 		985F24CD91D6E00B19B9C51F3ABB7818 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4ADA38F3FF07C1CCF94970E8792BEE /* Foundation.framework */; };
 		9B2E761A064459F77EA9870BEF03ACC3 /* EXPMatchers+postNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = B497109F88ECFB96BDAD2EFB8F1DB56A /* EXPMatchers+postNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BB9159FBA757600D3D4C0FF645F3911 /* EXPMatchers+beInTheRangeOf.m in Sources */ = {isa = PBXBuildFile; fileRef = A18ED4C65C1F3F2CD9A8C155CDA75EA7 /* EXPMatchers+beInTheRangeOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9DE3CA20929828D3EBA9FE3E6617C8D9 /* PXPRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F20D4DFB5D144C55F927A61351DB1C9 /* PXPRequestWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9E1723E2FE89DC9BD907271B23B585F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4ADA38F3FF07C1CCF94970E8792BEE /* Foundation.framework */; };
 		9E1E90DED74B73ECE53C9AD76DE53E2D /* UIImage+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 301AA4675AD026D114614DCBCB8FFBD0 /* UIImage+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F3777F659DB5D68327944377F2F6053 /* SPTCompiledExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 18454FF19D43088DE4C132779B218C94 /* SPTCompiledExample.m */; };
 		A462945883F7729B185B64B679A6BFBE /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AB53057A518412CDE3FCC46763143049 /* UIWebView+AFNetworking.m */; };
 		A6C6019D45BE62C61210A9CC619368EF /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6950B7C59D5BB7432D760A60424A1BAE /* AFNetworkActivityIndicatorManager.m */; };
 		A9623169669C62B315AAC2BADBFBBADF /* SPTTestSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = F442679E75A4E9458AEA0B1B9764157B /* SPTTestSuite.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9C8CFD2E7C7ACE2B131CBA9E4FC340A /* PXPAuthManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D57F2797C8C07782CF0B7BA33973977 /* PXPAuthManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		AB39AC9746E7575D7449700475E41B0B /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CE3A0306214BAB3C246468A933F91DF7 /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE2A07407FB50BA249984DC0620E84C0 /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 812A89D3492B5FA68DA8B63E7BF983E5 /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE8CB719C5CE9E1FB0F022F87E3BED90 /* PXPAuthManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D57F2797C8C07782CF0B7BA33973977 /* PXPAuthManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF03C11A1FAC8132AD3749D8F541701A /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FFA98C1F32A0F4D9A59AB48FDC427 /* UIButton+AFNetworking.m */; };
 		AF1F46668D4591602887998C6E9C10AD /* EXPMatchers+beCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = 76D2DF8161AE94CC044BC1D2EF2C859F /* EXPMatchers+beCloseTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFFC8900E52BBEC72059334132F3A8F3 /* ExpectaSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 99DF7CA396EDF70518B21BDA4FEDD933 /* ExpectaSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -154,60 +153,61 @@
 		BCC8C3C17B24214F1228F4F62DFE5B7A /* Pixpie-iOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 82609E7AEA2A32B48CB978BE52E2A740 /* Pixpie-iOS.bundle */; };
 		BEFFE9FFE52E9A0833A7D2D8FB67EB4D /* EXPMatchers+beSubclassOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F90090CB17C11A8ED1299331A7F2E3B /* EXPMatchers+beSubclassOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C07E03F77E80CEC0C8A435126B733954 /* Specta-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F1C83C38F767E01F2649C23D3551AA /* Specta-dummy.m */; };
-		C0D49988BFC7027C5A494E710D6DD83F /* UIImage+PXP_WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B50AFBF5FB816EFCCCC6CC07A927BAA /* UIImage+PXP_WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1B3CC2C8444915E109DE8B224B83C5B /* SPTExampleGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CF52882705856F4F914A2B168B2DBB69 /* SPTExampleGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C2DD28375E1F0B1D0D1D2E4E607C499F /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 73FAF268F65D6A60F9E4C3835C2ED0D0 /* AFSecurityPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3B1F3EF942E3A49728873E2FD3292BA /* PXPWebPResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8328B1FFB2CFF1768988128D96CF979C /* PXPWebPResponseSerializer.m */; };
+		C408CFBAD40C5FCA5987F4DE4C772777 /* PXPWifiMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = E59D337542F32ED82D7477BAD1F13B25 /* PXPWifiMonitor.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C4856FA12F8DA5D8A18219547F81EA21 /* NSString+PXPSecurity.h in Headers */ = {isa = PBXBuildFile; fileRef = FBC5505E383DFA85FD6B1E1A9719D297 /* NSString+PXPSecurity.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		C6354FEC7728A4C86DAD8092509BA7D4 /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAF8866D97D467370E3068E14DD217F /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C647D648275FC675AEB84D888CF97A7C /* SPTExampleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C005104DEEC69B3F707B1D5AF4E43703 /* SPTExampleGroup.m */; };
-		C6E4B6A4D490CAD9D0E567D8455FA826 /* PXPImageRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = E1B7B4F6BA2F88AA6B5F1D3ECC9C1781 /* PXPImageRequestWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAC483EF637FB4A2C2E2FC75BA631B87 /* AFAutoPurgingImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA3502DADE692E7C3D09C6E82B2D173 /* AFAutoPurgingImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAFC3C32489F649C95EE392438D4DBD5 /* PXPAuthPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = E669452EE23A09138A897E7646AD7A6D /* PXPAuthPrincipal.m */; };
 		CCDFC36F129C2F03EA410DB6317E7330 /* PXPAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEE7A0CE141681576CE1D3C2138B928 /* PXPAccountInfo.m */; };
-		CD248176FE776250ED812394F9212E26 /* PXPMonitoring.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5D6BCAF4FDBC791D5E09EF969C96C7 /* PXPMonitoring.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDD92F37735E6E9EF35BC88995FD7189 /* SPTCompiledExample.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CC5FDF3E90114914DB5EAEC8AB27385 /* SPTCompiledExample.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE3F4ECBB0BC095577D66AE50C8E604C /* EXPFloatTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = DE34E90B3662008CCD034DB674B62867 /* EXPFloatTuple.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CF026960298F5A3A319AA36C6C55771F /* SPTExcludeGlobalBeforeAfterEach.h in Headers */ = {isa = PBXBuildFile; fileRef = BC9E777B927CF1F0F3A17EAC9C6BA732 /* SPTExcludeGlobalBeforeAfterEach.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CFA8D6B529A0EBFF0316F2629AB2556E /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 164EA09CEF63A984C306A3D39C27A030 /* AFImageDownloader.m */; };
+		D093C4B938F8DFB833291460CB31C83E /* PXPAuthPrincipal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8136259732C9B9AAA79F7E935CEC80EB /* PXPAuthPrincipal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		D0DE3F39BC8711C32D77B297C70BDFD2 /* Pods-Pixpie-iOS_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 70E8E8A052AA7AB24A2C44A5F99B8BBD /* Pods-Pixpie-iOS_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D105E779F1BF4E30E05E8F66F0C3F7E2 /* PXP_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 85978EDA7FC4AEDCE4BF29946A0EEC49 /* PXP_Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		D3DABC2CE64C4E8503428DEED9A6BF6A /* SPTCallSite.m in Sources */ = {isa = PBXBuildFile; fileRef = FC168F3E57399AC56721D292260945F6 /* SPTCallSite.m */; };
 		D3E2EF85571AEE6E94C11A9266C2FBED /* XCTestCase+Specta.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A54E3708A459414AD228B8263E0AED /* XCTestCase+Specta.m */; };
+		D4C3CC054E8D15174EC8A8BCB44A5540 /* PXPNetworkMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 39FDE60622E2CF6B466D5375FBB1AB3B /* PXPNetworkMonitor.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		D83677C54D2226C67886A525B0B46FBE /* EXPMatchers+beLessThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09AD4FB701722A4652B7199DF287D17F /* EXPMatchers+beLessThanOrEqualTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D8D45C0CC1E3CDD0DD49B66B55A059FF /* PXPWifiMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = E59D337542F32ED82D7477BAD1F13B25 /* PXPWifiMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9F4E833E37B611B432F6B5D7072DDA2 /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CB606D4253028A5BDCBD6C6E59F436 /* UIProgressView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB30F82FB1BE083D9471B965FB500CA2 /* EXPMatchers+conformTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC8E383C17450B45E37C126B2529753 /* EXPMatchers+conformTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DC9E8D6293E4560C252E1899BA8C21F3 /* PXPCellMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 396FAA97842D9CB6A91DE52D263D06E4 /* PXPCellMonitor.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		DFFA215EEAA8DDBD540076927535275C /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D781260E87B15AF842EA2EE44B3688 /* AFURLRequestSerialization.m */; };
 		E07B7279AF362269F9C517F5EC04BECD /* Specta.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EA14E7B84358C629F461E4910AE68FD /* Specta.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E0A077DFB064B79685B810CCEFB2F1EF /* EXPMatchers+respondTo.m in Sources */ = {isa = PBXBuildFile; fileRef = B60ABBD77D5F670876D284C30661C4A2 /* EXPMatchers+respondTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E0AAF49134A0505DF00E20E7B62087E1 /* EXPMatchers+beIdenticalTo.h in Headers */ = {isa = PBXBuildFile; fileRef = 7702DFAAD3A23320D663AB16970338AF /* EXPMatchers+beIdenticalTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E0D4045AC4C1B41917FCA23A042D18B2 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7250493DC7575F77D3CA4B47FA5F /* AFHTTPSessionManager.m */; };
 		E1EC4532663CA75DE5BD00CB0A56814D /* Expecta.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBB15A30F075633D5D16E5C4B678B9E /* Expecta.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E4E73613EFF0711046C6C857590B0F2F /* PXPWebPResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 26461C2FB2F88CA5414527670C7061DD /* PXPWebPResponseSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E4EC16570D46F25B3BD2830D65C06AE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4ADA38F3FF07C1CCF94970E8792BEE /* Foundation.framework */; };
-		E62A4548EACD3383248151C1A588722E /* PXP_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 85978EDA7FC4AEDCE4BF29946A0EEC49 /* PXP_Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E735386085CE344F6A01178CF4763852 /* EXPMatchers+beNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BE2D7F17FBF5B013A5FCFA374639594 /* EXPMatchers+beNil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E7988678C81F7CCB95D239375FC6986D /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD6A005C5C2E732608B902998B833F4 /* AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA353EE4B5EDEB92ADFD27869EE2FEC6 /* Pixpie-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FC7332AB17A89E979512BB8402C143 /* Pixpie-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC7CADE416A78A1CD6936018A6695126 /* AFNetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DB328A240889087802C93E5CAE148E08 /* AFNetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EDC2E8F03DE42556A845A790550CD05A /* PXPWebPResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 26461C2FB2F88CA5414527670C7061DD /* PXPWebPResponseSerializer.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		EF6497EE123F6BC0C1B09717437C5908 /* EXPUnsupportedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FC82B39035F7E5CA756DAA1843831E /* EXPUnsupportedObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F05BDA78D0A426200F4E1F4EB02E0F1F /* SpectaUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 661E424530F01226A4322F8784348C0E /* SpectaUtility.m */; };
 		F0DDF02A078B917997FF025BB33BB842 /* EXPMatchers+conformTo.h in Headers */ = {isa = PBXBuildFile; fileRef = E45D84B39380F0A55EDDC43EE1556996 /* EXPMatchers+conformTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F12D57414A73406831CC032A7170DBFF /* EXPMatchers+beginWith.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D76C768CD4637AF931B5D93EBDE915 /* EXPMatchers+beginWith.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F1867C99D4A92FC191093E4901E463B5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43887B819B0F82C746DBBC465132C158 /* XCTest.framework */; };
-		F2F0212B90F8188F075AA2BE13DD8B57 /* PXPNetInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF21524B7DBA21467F43F012ED7748F /* PXPNetInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3509A8A5CCF5F55C9FDC8C6D731CB34 /* SPTSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = A0F430AAE07D69CC68FBA2DCABC07176 /* SPTSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F41209A94070904A00BDF24ACB6336B6 /* EXPMatchers+beFalsy.h in Headers */ = {isa = PBXBuildFile; fileRef = 412600A59021259F20BFC90524CF68FC /* EXPMatchers+beFalsy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F65411E9EF00A9BB39D6BD1521A4F3FD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F977BB895F55E8BA3DB06E07C29831DD /* MobileCoreServices.framework */; };
 		F6843D2157C32C99D2CECB1862497715 /* SpectaUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = DEF21A16A24563FE6DEE1EF8823AA486 /* SpectaUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F75CB2A727F678C9A848A3A11EA7979B /* EXPMatchers+haveCountOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AB63D08578CD7389F9A015FAD0F6125 /* EXPMatchers+haveCountOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F795BBB82A2288F97F04BC203DC75917 /* PXPRequestWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F20D4DFB5D144C55F927A61351DB1C9 /* PXPRequestWrapper.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		F94DB5DEB120830751FB83C656518031 /* PXPNetworkMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9B350692C2A17117A94B054A47F4EC /* PXPNetworkMonitor.m */; };
 		FC20596ABFE14A61F171A29FD03275E7 /* EXPMatchers+contain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B95AFD2C6DDCE7843C72EF716E8AFA9 /* EXPMatchers+contain.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC42122F6E49F4C6DA88E3B0E40BFBD8 /* SpectaDSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D2B2B440505C9A673918EC106E054A /* SpectaDSL.m */; };
 		FC45858927D3B6A0F922C4B697B04A38 /* EXPMatchers+match.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A8809FFA333FB6EC1F23AD0853DBC2 /* EXPMatchers+match.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FD2D4497BC41412128C2D87C1BDE7398 /* EXPMatchers+beginWith.h in Headers */ = {isa = PBXBuildFile; fileRef = 98E416C16AD5D40141E47E67A4F98BD4 /* EXPMatchers+beginWith.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FD3825D80B689D436CA1CDDF2B6D4180 /* SPTCallSite.h in Headers */ = {isa = PBXBuildFile; fileRef = B287CC26D0C51746A36C8845903B54CB /* SPTCallSite.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FDD3545D861FE0AB8181FDA81A053D78 /* PXPAuthPrincipal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8136259732C9B9AAA79F7E935CEC80EB /* PXPAuthPrincipal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FE8E34356D24F6759A8B010ED2F5707B /* EXPMatchers+raiseWithReason.m in Sources */ = {isa = PBXBuildFile; fileRef = B561AF0C5E318630635093A08935BF25 /* EXPMatchers+raiseWithReason.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FEF7C83DC480400557BEEB55283E2543 /* PXPAccountInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 78827A6DFC22042E1561D6A04361A536 /* PXPAccountInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1111,29 +1111,29 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65577A75770D7D116C0DF0021AEDA889 /* NSObject+SafeKVC.h in Headers */,
-				0704D396BDE9D7F74E8EB94FCB8DBC86 /* NSString+PXPSecurity.h in Headers */,
+				54E7E19B9F368F3456CFF16FC50BB11E /* NSObject+SafeKVC.h in Headers */,
+				C4856FA12F8DA5D8A18219547F81EA21 /* NSString+PXPSecurity.h in Headers */,
 				EA353EE4B5EDEB92ADFD27869EE2FEC6 /* Pixpie-iOS-umbrella.h in Headers */,
 				00871F1797D693C45564441251265430 /* PXP.h in Headers */,
-				E62A4548EACD3383248151C1A588722E /* PXP_Internal.h in Headers */,
-				5923180319DEEA4B9AFA3F0637C4C78B /* PXPAccountInfo.h in Headers */,
-				AE8CB719C5CE9E1FB0F022F87E3BED90 /* PXPAuthManager.h in Headers */,
-				FDD3545D861FE0AB8181FDA81A053D78 /* PXPAuthPrincipal.h in Headers */,
-				5726BE1989A96F9E03257A3695A1C8D3 /* PXPAuthRequestWrapper.h in Headers */,
-				1C49D47BC8A807CC40A5CC59B91C193C /* PXPCellMonitor.h in Headers */,
-				66F9CE26CBD4E329DA9CEEC896A0AFDC /* PXPDefines.h in Headers */,
-				C6E4B6A4D490CAD9D0E567D8455FA826 /* PXPImageRequestWrapper.h in Headers */,
+				D105E779F1BF4E30E05E8F66F0C3F7E2 /* PXP_Internal.h in Headers */,
+				FEF7C83DC480400557BEEB55283E2543 /* PXPAccountInfo.h in Headers */,
+				A9C8CFD2E7C7ACE2B131CBA9E4FC340A /* PXPAuthManager.h in Headers */,
+				D093C4B938F8DFB833291460CB31C83E /* PXPAuthPrincipal.h in Headers */,
+				76FD9A88E79AAB56D8CEA1644D84F98F /* PXPAuthRequestWrapper.h in Headers */,
+				DC9E8D6293E4560C252E1899BA8C21F3 /* PXPCellMonitor.h in Headers */,
+				1CF0710D86EBC68B1DB085770808E2B1 /* PXPDefines.h in Headers */,
+				0A73520D2142C580AD046E9D13407A08 /* PXPImageRequestWrapper.h in Headers */,
 				B011457A2279671C3EFED8E966161C94 /* PXPImageTaskManager.h in Headers */,
-				CD248176FE776250ED812394F9212E26 /* PXPMonitoring.h in Headers */,
-				F2F0212B90F8188F075AA2BE13DD8B57 /* PXPNetInfo.h in Headers */,
-				68F1E5A6DF426A99A3D4CCECE7E6F754 /* PXPNetworkMonitor.h in Headers */,
-				01C630A4DAE095F4A15C9CDFEAC0B67D /* PXPNetworkTechnologies.h in Headers */,
-				9DE3CA20929828D3EBA9FE3E6617C8D9 /* PXPRequestWrapper.h in Headers */,
-				39905738D65A40B869AD5D685B20411C /* PXPSDKRequestWrapper.h in Headers */,
+				781D2E1011160111C68DF1FDD45E5107 /* PXPMonitoring.h in Headers */,
+				4BFD5FB1ECFE95BF2C19F1E3CFBE8935 /* PXPNetInfo.h in Headers */,
+				D4C3CC054E8D15174EC8A8BCB44A5540 /* PXPNetworkMonitor.h in Headers */,
+				17BC64EDFE2F69D07F14F6622842E9DD /* PXPNetworkTechnologies.h in Headers */,
+				F795BBB82A2288F97F04BC203DC75917 /* PXPRequestWrapper.h in Headers */,
+				68734A928FC8D5011CA39D8D5937B876 /* PXPSDKRequestWrapper.h in Headers */,
 				6DCCB654DD8D3787A0A6A16FBC33A52C /* PXPTransform.h in Headers */,
-				E4E73613EFF0711046C6C857590B0F2F /* PXPWebPResponseSerializer.h in Headers */,
-				D8D45C0CC1E3CDD0DD49B66B55A059FF /* PXPWifiMonitor.h in Headers */,
-				C0D49988BFC7027C5A494E710D6DD83F /* UIImage+PXP_WebP.h in Headers */,
+				EDC2E8F03DE42556A845A790550CD05A /* PXPWebPResponseSerializer.h in Headers */,
+				C408CFBAD40C5FCA5987F4DE4C772777 /* PXPWifiMonitor.h in Headers */,
+				7B87FC1328713F712078BC3143F51F8C /* UIImage+PXP_WebP.h in Headers */,
 				75D58FC5FBDFE685E716815E58572AC5 /* UIImageView+PXPExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

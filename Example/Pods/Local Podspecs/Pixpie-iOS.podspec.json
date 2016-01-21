@@ -1,6 +1,6 @@
 {
   "name": "Pixpie-iOS",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "summary": "Pixpie SDK for iOS",
   "description": "Pixpie is a media content optimization service for mobile applications. Built for mobile developers.",
   "homepage": "http://pixpie.co",
@@ -11,7 +11,7 @@
   },
   "source": {
     "git": "https://github.com/PixpieCo/Pixpie-iOS.git",
-    "tag": "0.1.1"
+    "tag": "0.1.2"
   },
   "social_media_url": "https://www.facebook.com/PixpieCo",
   "platforms": {
@@ -24,7 +24,7 @@
       "Pod/Assets/*.png"
     ]
   },
-  "public_header_files": "Pod/Classes/**/*.h",
+  "public_header_files": "Pod/Classes/Public/**/*.h",
   "dependencies": {
     "AFNetworking": [
       "~> 3.0"

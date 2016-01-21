@@ -15,7 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
   - Expecta (1.0.5)
-  - Pixpie-iOS (0.1.1):
+  - Pixpie-iOS (0.1.2):
     - AFNetworking (~> 3.0)
     - WebP
   - Specta (1.0.5)
@@ -33,7 +33,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
-  Pixpie-iOS: 41d383d5af01cbfc7535d1c448a1c60214ee5d68
+  Pixpie-iOS: dbb43a88f4ae447432e02f71e3d97cd2dc88d194
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
   WebP: 4d0106eb43687801c01a9bc97d6b68bf4e4cf308
 
