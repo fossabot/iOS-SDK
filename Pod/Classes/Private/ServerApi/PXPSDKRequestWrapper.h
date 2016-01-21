@@ -25,6 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
                                             toPath:(NSString *)path
                                       successBlock:(PXPRequestSuccessBlock)successBlock
                                      failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (void)uploadImageAtUrl:(NSString*)url
+                   width:(NSString*)width
+                 quality:(NSString*)quality
+            successBlock:(PXPRequestSuccessBlock)successBlock
+           failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 
 @end
 

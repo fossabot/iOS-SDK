@@ -194,7 +194,7 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 
 #pragma mark - Public Interface
 
-- (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper*)wrapper
+- (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper * _Nullable)wrapper
 {
     self = [super init];
     if (self != nil) {
@@ -205,7 +205,7 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
 }
 
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
-    if ([url pxp_isCDNUrl]) {
+    if ([url pxp_isCDNUrl] && self.sdkRequestWrapper != nil) {
         return [self imageDownloadTaskWithPath:url.path.pxp_imagePath transform:transform completion:completionBlock];
     }
     else {
