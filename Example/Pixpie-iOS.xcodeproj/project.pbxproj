@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0AEEFA4D1BF8C9B5009DE083 /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0AEEFA4C1BF8C9B5009DE083 /* server.cer */; };
-		48D06EDFD55472A2ADB4D355 /* libPods-Pixpie-iOS_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E33994BCFEAB921A04A2BD /* libPods-Pixpie-iOS_Tests.a */; };
+		518852286E00A1A4D7907AF5 /* Pods_Pixpie_iOS_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623B5588637EF1118C82C9DA /* Pods_Pixpie_iOS_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -22,8 +22,8 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		6AFEE209EF030BA7825DC81E /* Pods_Pixpie_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09934E8936C76A955EA2005A /* Pods_Pixpie_iOS_Tests.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		AA4F8CBF37B4739B5B6B1687 /* libPods-Pixpie-iOS_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80CD245C34913666DD1C1ED4 /* libPods-Pixpie-iOS_Example.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09934E8936C76A955EA2005A /* Pods_Pixpie_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixpie_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AEEFA4C1BF8C9B5009DE083 /* server.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cer; sourceTree = "<group>"; };
 		2C438C694483E34A3EEC148E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2EF25F1A47604F703D2BB9AA /* Pods-Pixpie-iOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -59,11 +60,10 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		623B5588637EF1118C82C9DA /* Pods_Pixpie_iOS_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixpie_iOS_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65309581D9031D0F18BA8B04 /* Pods-Pixpie-iOS_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		7207A32477A2D959187DF189 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		80CD245C34913666DD1C1ED4 /* libPods-Pixpie-iOS_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pixpie-iOS_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		95E33994BCFEAB921A04A2BD /* libPods-Pixpie-iOS_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pixpie-iOS_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A356B237B900CD86D5429DA /* Pixpie-iOS.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "Pixpie-iOS.podspec"; path = "../Pixpie-iOS.podspec"; sourceTree = "<group>"; };
 		ADA71D97ACD329AA7169454A /* Pods-Pixpie-iOS_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B9A5716F625079A9204DACA9 /* Pods-Pixpie-iOS_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				AA4F8CBF37B4739B5B6B1687 /* libPods-Pixpie-iOS_Example.a in Frameworks */,
+				518852286E00A1A4D7907AF5 /* Pods_Pixpie_iOS_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +88,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				48D06EDFD55472A2ADB4D355 /* libPods-Pixpie-iOS_Tests.a in Frameworks */,
+				6AFEE209EF030BA7825DC81E /* Pods_Pixpie_iOS_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,8 +123,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				80CD245C34913666DD1C1ED4 /* libPods-Pixpie-iOS_Example.a */,
-				95E33994BCFEAB921A04A2BD /* libPods-Pixpie-iOS_Tests.a */,
+				623B5588637EF1118C82C9DA /* Pods_Pixpie_iOS_Example.framework */,
+				09934E8936C76A955EA2005A /* Pods_Pixpie_iOS_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -471,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -504,7 +504,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

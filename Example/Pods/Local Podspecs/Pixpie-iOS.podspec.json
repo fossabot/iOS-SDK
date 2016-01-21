@@ -1,6 +1,6 @@
 {
   "name": "Pixpie-iOS",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "Pixpie SDK for iOS",
   "description": "Pixpie is a media content optimization service for mobile applications. Built for mobile developers.",
   "homepage": "http://pixpie.co",
@@ -10,12 +10,12 @@
     "Dmitry Osipa": "dmitry@pixpie.co"
   },
   "source": {
-    "git": "https://github.com/Pixpie-iOS/Pixpie-iOS.git",
+    "git": "https://github.com/PixpieCo/Pixpie-iOS.git",
     "tag": "0.1.0"
   },
   "social_media_url": "https://www.facebook.com/PixpieCo",
   "platforms": {
-    "ios": "7.0"
+    "ios": "8.0"
   },
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*",
@@ -29,8 +29,12 @@
     "AFNetworking": [
       "~> 3.0"
     ],
-    "libwebp": [
+    "WebP": [
 
     ]
+  },
+  "frameworks": "WebP",
+  "xcconfig": {
+    "CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES": "YES"
   }
 }

@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <Pixpie-iOS/PXP.h>
-#import <Pixpie-iOS/UIImageView+PXPExtensions.h>
+@import Pixpie_iOS;
 
 @interface ViewController ()
 
