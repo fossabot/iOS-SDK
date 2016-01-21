@@ -1,6 +1,0 @@
-framework module Pods_Pixpie_iOS_Example {
-  umbrella header "Pods-Pixpie-iOS_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

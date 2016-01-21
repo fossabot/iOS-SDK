@@ -1,11 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
+source 'https://github.com/bomjkolyadun/PixpieCocoapods.git'
 
-target 'Pixpie-iOS_Example', :exclusive => true do
+target 'Pixpie-iOS_Example' do
   pod "Pixpie-iOS", :path => "../"
+  pod "GoogleMaps"
 end
 
-target 'Pixpie-iOS_Tests', :exclusive => true do
+target 'Pixpie-iOS_Tests' do
   pod "Pixpie-iOS", :path => "../"
 
   pod 'Specta'

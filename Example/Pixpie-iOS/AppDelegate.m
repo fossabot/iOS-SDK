@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-@import Pixpie_iOS;
+#import <Pixpie-iOS/PXP.h>
 
 @implementation AppDelegate
 

@@ -35,5 +35,6 @@ Pod::Spec.new do |s|
   s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'Security'
   s.dependency 'AFNetworking', '~> 3.0'
-  s.dependency      'libwebp', '~> 0.4.2'
+#  s.dependency 'WebP'
+  s.dependency 'libwebp-b'
 end
