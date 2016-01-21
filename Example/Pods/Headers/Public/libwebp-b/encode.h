@@ -1,0 +1,1 @@
+../../../libwebp-b/Classes/encode.h

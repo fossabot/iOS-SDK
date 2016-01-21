@@ -29,8 +29,8 @@
     "AFNetworking": [
       "~> 3.0"
     ],
-    "libwebp": [
-      "~> 0.4.2"
+    "libwebp-b": [
+
     ]
   }
 }
