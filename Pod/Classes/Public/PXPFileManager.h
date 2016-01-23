@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^PXPFileManagerCompletionBlock)(NSArray * _Nullable items, NSError * _Nullable error);
+@class PXPFile;
+
+typedef void(^PXPFileManagerCompletionBlock)(NSArray <PXPFile *> * _Nullable items, NSError * _Nullable error);
 
 @interface PXPFile : NSObject
 
