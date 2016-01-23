@@ -34,7 +34,7 @@
     self = [super init];
     if (self) {
         _name = name;
-        _url = [NSString stringWithFormat:@"%@%@%@", root, path, name];
+        _url = [NSString stringWithFormat:@"http://%@/%@/%@", root, path, name];
     }
     return self;
 }
@@ -47,6 +47,10 @@
         [result addObject:file];
     }
     return result;
+}
+
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"%@: %@", [super debugDescription], self.url];
 }
 
 @end
