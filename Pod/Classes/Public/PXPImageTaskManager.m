@@ -264,8 +264,7 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
     PXPImageDownloadRequestCompletionBlock block = ^(id responseObject, NSError* error) {
         if (error == nil) {
             completionBlock(responseObject, nil);
-        }
-        else {
+        } else {
             [self imageDownloadTaskWithUrl:url completion:completionBlock];
             [self.sdkRequestWrapper uploadImageTaskAtUrl:url.absoluteString width:transform.sizeString quality:transform.qualityString successBlock:^(id responseObject) {
                 NSLog(@"OK: %@", responseObject);
