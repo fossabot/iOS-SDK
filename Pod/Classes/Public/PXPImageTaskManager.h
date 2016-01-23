@@ -20,14 +20,14 @@ typedef void (^PXPImageUploadRequestCompletionBlock)(id _Nullable responseObject
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper * _Nullable)wrapper;
-- (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url
+- (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL *)url
                                         transform:(PXPTransform *)transform
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
-- (NSURLSessionDataTask*)imageDownloadTaskWithPath:(NSString*)path
+- (NSURLSessionDataTask*)imageDownloadTaskWithPath:(NSString *)path
                                          transform:(PXPTransform *)transform
                                         completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
-- (NSURLSessionDataTask*)imageDownloadWithRemoteUrl:(NSURL*)url
-                                          transform:(PXPTransform*)transform
+- (NSURLSessionDataTask*)imageDownloadWithRemoteUrl:(NSURL *)url
+                                          transform:(PXPTransform *)transform
                                          completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
 
 @end

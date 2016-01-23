@@ -11,10 +11,11 @@
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "YES"
+            hideIssues = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6EE997C422218CBF814FDAC8079CD10F"
+               BlueprintIdentifier = "FD5B06E9D40CB2763F395D17D2330EB2"
                BuildableName = "Pixpie_iOS.framework"
                BlueprintName = "Pixpie-iOS"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +46,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6EE997C422218CBF814FDAC8079CD10F"
+            BlueprintIdentifier = "FD5B06E9D40CB2763F395D17D2330EB2"
             BuildableName = "Pixpie_iOS.framework"
             BlueprintName = "Pixpie-iOS"
             ReferencedContainer = "container:Pods.xcodeproj">

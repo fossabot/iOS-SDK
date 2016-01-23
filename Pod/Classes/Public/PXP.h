@@ -14,6 +14,8 @@ typedef enum : NSInteger {
     PXPStateFailed
 } PXPState;
 
+@class PXPFileManager;
+
 @interface PXP : NSObject
 
 + (instancetype)sharedSDK;
@@ -21,5 +23,6 @@ typedef enum : NSInteger {
 - (void)authWithApiKey:(NSString*)apiKey;
 
 @property (nonatomic, readonly, assign) PXPState state;
+@property (nonatomic, readonly, strong) PXPFileManager* fileManager;
 
 @end

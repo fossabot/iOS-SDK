@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+@import Pixpie_iOS.PXP;
+@import Pixpie_iOS.PXPFileManager;
 @import Pixpie_iOS.UIImageView_PXPExtensions;
 
 @interface ViewController ()
@@ -27,6 +29,14 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //[self.imageView pxp_requestImageForPath:path];
         [self.imageView pxp_requestImage:url];
+
+        [[PXP sharedSDK].fileManager itemsAtPath:@"." completionBlock:^(NSArray * _Nullable items, NSError * _Nullable error) {
+            if (items != nil) {
+                NSLog(@"items %@", items);
+            } else {
+                NSLog(@"%@", error);
+            }
+        }];
     });
 }
 

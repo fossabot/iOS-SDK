@@ -13,6 +13,7 @@
 static NSString* const kPXPUpdateImageRequestPath = @"/images/newResolution/%@/%@/%@/%@";
 static NSString* const kPXPUploadImageRequestPath = @"/images/upload/%@/%@";
 static NSString* const kPXPUploadImageAtUrlRequestPath = @"/storage/upload/remoteImage/%@";
+static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
 
 @interface PXPSDKRequestWrapper ()
 
@@ -89,6 +90,21 @@ static NSString* const kPXPUploadImageAtUrlRequestPath = @"/storage/upload/remot
     }
     SAFE_SET_OBJECT(params, @"derivedImageSpecs", derivedImageSpecs);
     NSURLSessionDataTask *task = [self.sessionManager POST:requestUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failtureBlock(error);
+    }];
+    return task;
+}
+
+- (NSURLSessionDataTask *)imagesAtPath:(NSString *)path
+                          successBlock:(PXPRequestSuccessBlock)successBlock
+                         failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+
+    assert(path != nil);
+    NSString* apiPath = [NSString stringWithFormat:kPXPItemsInFolderRequestPath, self.appId, path];
+    NSString* requestUrl = [self.backendUrl stringByAppendingString:apiPath];
+    NSURLSessionDataTask *task = [self.sessionManager GET:requestUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failtureBlock(error);

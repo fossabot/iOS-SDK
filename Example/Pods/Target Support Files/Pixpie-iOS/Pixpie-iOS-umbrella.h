@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 
 #import "PXP.h"
+#import "PXPFileManager.h"
 #import "PXPImageTaskManager.h"
 #import "PXPTransform.h"
 #import "UIImageView+PXPExtensions.h"
