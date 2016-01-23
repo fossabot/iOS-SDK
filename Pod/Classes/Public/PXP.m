@@ -49,6 +49,7 @@
     self = [super init];
     if (self) {
         _state = PXPStateNotInitialized;
+        _imageTaskManager = [[PXPImageTaskManager alloc] initWithSDKRequestWrapper:nil];
         [[PXPNetworkMonitor sharedMonitor] startMonitoring];
     }
     return self;

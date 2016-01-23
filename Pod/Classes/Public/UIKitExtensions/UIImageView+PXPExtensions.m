@@ -41,11 +41,30 @@
 }
 
 - (void)pxp_requestImage:(NSURL*)url {
+    self.pxp_transfrom.fitSize = [self smallestSize];
     [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithUrl:url transform:self.pxp_transfrom completion:^(UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.image = responseObject;
         });
     }];
 }
+
+- (CGSize)smallestSize {
+    CGRect rect = self.bounds;
+    CGRect superRect = CGRectZero;
+    UIView* currentView = self.superview;
+    while (currentView != nil) {
+        if (currentView != nil) {
+            superRect = currentView.frame;
+            currentView = currentView.superview;
+        }
+    }
+    if (CGRectEqualToRect(CGRectZero, superRect)) {
+        return rect.size;
+    } else {
+        return superRect.size;
+    }
+}
+
 
 @end

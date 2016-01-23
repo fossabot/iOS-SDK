@@ -66,7 +66,7 @@ NSString* PXPTransformQualityForNetInfo(PXPNetInfo* netInfo) {
     return result;
 }
 
-static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048 };
+static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1024, 2048 };
 
 @interface PXPTransform (PXPStringRepresentation)
 
@@ -253,8 +253,10 @@ static const NSInteger sizes[] = { 160, 192, 310, 384, 512, 640, 768, 1024, 2048
     PXPUrlType urlType = [url pxp_URLType];
     if ((urlType == PXPUrlTypePath || urlType== PXPUrlTypeCDN) && self.sdkRequestWrapper != nil) {
         return [self imageDownloadTaskWithPath:url.path.pxp_imagePath transform:transform completion:completionBlock];
-    } else {
+    } else if (self.sdkRequestWrapper != nil) {
         return [self imageDownloadWithRemoteUrl:url transform:transform completion:completionBlock];
+    } else {
+        return [self imageDownloadTaskWithUrl:url completion:completionBlock];
     }
     return nil;
 }
