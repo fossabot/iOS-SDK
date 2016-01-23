@@ -278,8 +278,8 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
             }];
         }
     };
-    [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
-    return nil;
+    NSURLSessionDataTask* task = [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
+    return task;
 }
 
 #pragma mark - Private Interface
@@ -300,8 +300,8 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
             }];
         }
     };
-    [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
-    return nil;
+    NSURLSessionDataTask* task = [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
+    return task;
 }
 
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
