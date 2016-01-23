@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name             = "Pixpie-iOS"
-  s.version          = "0.1.2"
+  s.version          = "0.1.3"
   s.summary          = "Pixpie SDK for iOS"
   s.description      = "Pixpie is a media content optimization service for mobile applications. Built for mobile developers."
   s.homepage         = "http://pixpie.co"
   s.screenshots      = "http://pixpie.co/img/pixpie_full_logo.png"
   s.license          = 'MIT'
   s.author           = { "Dmitry Osipa" => "dmitry@pixpie.co" }
-  s.source           = { :git => "https://github.com/PixpieCo/Pixpie-iOS.git", :tag => '0.1.3' }
+  s.source           = { :git => "https://github.com/PixpieCo/Pixpie-iOS.git", :tag => s.version.to_s }
   s.social_media_url = 'https://www.facebook.com/PixpieCo'
 
   s.platform     = :ios, '8.0'
