@@ -87,7 +87,7 @@ static NSString* const kPXPUploadImageAtUrlRequestPath = @"/storage/upload/remot
         SAFE_SET_OBJECT(derivedImageSpecs, @"width", width);
         SAFE_SET_OBJECT(derivedImageSpecs, @"quality", quality);
     }
-    SAFE_SET_OBJECT(params, derivedImageSpecs, derivedImageSpecs);
+    SAFE_SET_OBJECT(params, @"derivedImageSpecs", derivedImageSpecs);
     NSURLSessionDataTask *task = [self.sessionManager POST:requestUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
