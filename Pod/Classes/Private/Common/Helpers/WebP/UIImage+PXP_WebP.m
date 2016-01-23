@@ -273,7 +273,7 @@ static void free_image_data(void *info, const void *data, size_t size)
 
 #pragma mark - Utilities
 
-- (UIImage *)imageByApplyingAlpha:(CGFloat) alpha
+- (UIImage *)pxp_imageByApplyingAlpha:(CGFloat) alpha
 {
     NSParameterAssert(alpha >= 0.0f && alpha <= 1.0f);
     
