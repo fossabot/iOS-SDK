@@ -20,23 +20,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-
-//    NSURL* url = [NSURL URLWithString:@"http://dmitry-230a.kxcdn.com/edb6716253fd34059401c3e198836aa0613a4b03c7e700fd05b9630c6032193d/kotivka.jpg"];
-
-    //NSString* path = @"kotivka.jpg";
-    NSURL* url = [NSURL URLWithString:@"https://pp.vk.me/c624523/v624523339/3e6c5/NltvMvI6w6k.jpg"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //[self.imageView pxp_requestImageForPath:path];
-        [self.imageView pxp_requestImage:url];
-
-        [[PXP sharedSDK].fileManager itemsAtPath:@"." completionBlock:^(NSArray * _Nullable items, NSError * _Nullable error) {
-            if (items != nil) {
-                NSLog(@"items %@", items);
-            } else {
-                NSLog(@"%@", error);
-            }
-        }];
+    //NSURL* url = [NSURL URLWithString:@"https://pp.vk.me/c624523/v624523339/3e6c5/NltvMvI6w6k.jpg"];
+    NSString* path = @"lena.jpg";
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.imageView pxp_requestImageForPath:path];
+        //[self.imageView pxp_requestImage:url];
     });
 }
 
