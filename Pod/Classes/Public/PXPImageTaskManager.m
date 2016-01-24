@@ -215,7 +215,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 @implementation NSURL (PXPUrl)
 
 - (PXPUrlType)pxp_URLType {
-    if ([self.host isEqualToString:[NSString pxp_cdnUrl]]) {
+    if ([self.absoluteString hasPrefix:[NSString pxp_cdnUrl]]) {
         return PXPUrlTypeCDN;
     } else if (self.host == nil) {
         return PXPUrlTypePath;
