@@ -14,7 +14,7 @@
 
 static NSString* const kPXPUpdateImageRequestPath = @"/async/images/newResolution/%@/%@/%@/%@";
 static NSString* const kPXPUploadImageRequestPath = @"/async/images/upload/%@/%@";
-static NSString* const kPXPUploadImageAtUrlRequestPath = @"/storage/upload/remoteImage/%@";
+static NSString* const kPXPUploadImageAtUrlRequestPath = @"/async/storage/upload/remoteImage/%@";
 static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
 
 @interface PXPSDKRequestWrapper ()
@@ -129,6 +129,39 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
         failtureBlock(error);
     }];
     return task;
+}
+
+- (void)handleFailture:(NSURLSessionDataTask*)task successBlock:(PXPRequestSuccessBlock)successBlock
+         failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+    [self.info update];
+}
+
+- (void)performRequest:(NSURLRequest*)request
+            retryCount:(NSInteger)retryCount
+             lastError:(NSError*)error
+          successBlock:(PXPRequestFailureBlock)successBlock
+         failtureBlock:(PXPRequestSuccessBlock)failureBlock
+{
+    if (retryCount <= 0)
+    {
+        BLOCK_SAFE_RUN(failureBlock, error);
+    }
+    else
+    {
+        __weak typeof(self)weakSelf = self;
+        NSURLSessionTask* operation = [self.sessionManager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            if (error == nil)
+            {
+                BLOCK_SAFE_RUN(successBlock, responseObject);
+            }
+            else
+            {
+                [strongSelf performRequest:request retryCount:retryCount - 1 lastError:error successBlock:successBlock failtureBlock:failureBlock];
+            }
+        }];
+        [operation resume];
+    }
 }
 
 @end

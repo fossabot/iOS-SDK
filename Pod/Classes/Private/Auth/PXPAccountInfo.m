@@ -16,7 +16,6 @@
 @property (nonatomic, readwrite, strong) NSString* cdnUrl;
 @property (nonatomic, readwrite, strong) PXPAuthPrincipal* principal;
 @property (nonatomic, readonly, strong) PXPAuthManager* authManager;
-
 @property (nonatomic, strong) NSURLSessionDataTask* updateTask;
 
 @end

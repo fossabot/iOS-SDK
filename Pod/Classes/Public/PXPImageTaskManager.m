@@ -22,6 +22,18 @@
 
 #define SAFE_ADD_OBJECT(mutableArray, value) if (nil != value) [mutableArray addObject:value]
 
+void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
+{
+    if ([NSThread isMainThread])
+    {
+        block();
+    }
+    else
+    {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
+
 typedef enum {
     PXPUrlTypeOther,
     PXPUrlTypePath,
@@ -136,7 +148,11 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 + (NSString *)pxp_cdnUrl {
     NSString* scheme = @"http://";
     NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;
-    return [NSString stringWithFormat:@"%@%@", scheme, host];
+    if (host.length == 0) {
+        return nil;
+    } else {
+        return [NSString stringWithFormat:@"%@%@", scheme, host];
+    }
 }
 
 + (NSString *)pxp_cdnPathForUrl:(NSString *)remoteUrl {
@@ -216,7 +232,8 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 @implementation NSURL (PXPUrl)
 
 - (PXPUrlType)pxp_URLType {
-    if ([self.absoluteString hasPrefix:[NSString pxp_cdnUrl]]) {
+    NSString* cdnUrl = [NSString pxp_cdnUrl];
+    if (cdnUrl != nil && [self.absoluteString hasPrefix:cdnUrl]) {
         return PXPUrlTypeCDN;
     } else if (self.host == nil) {
         return PXPUrlTypePath;
@@ -255,17 +272,31 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
     PXPUrlType urlType = [url pxp_URLType];
     if ((urlType == PXPUrlTypePath || urlType== PXPUrlTypeCDN) && self.sdkRequestWrapper != nil) {
-        return [self imageDownloadTaskWithPath:url.path.pxp_imagePath transform:transform completion:completionBlock];
+        return [self imageDownloadTaskWithPath:url.path.pxp_imagePath transform:transform completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+            PXPRunOnMainQueueWithoutDeadlocking(^{
+                completionBlock(responseObject, error);
+            });
+        }];
     } else if (self.sdkRequestWrapper != nil) {
-        return [self imageDownloadWithRemoteUrl:url transform:transform completion:completionBlock];
+        return [self imageDownloadWithRemoteUrl:url transform:transform completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+            PXPRunOnMainQueueWithoutDeadlocking(^{
+                completionBlock(responseObject, error);
+            });
+        }];
     } else {
         __weak typeof(self)weakSelf = self;
         return [self imageDownloadTaskWithUrl:url completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (responseObject != nil) {
-                [strongSelf applyTransfrom:transform toImage:responseObject completion:completionBlock];
+                [strongSelf applyTransfrom:transform toImage:responseObject completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+                    PXPRunOnMainQueueWithoutDeadlocking(^{
+                        completionBlock(responseObject, error);
+                    });
+                }];
             } else {
-                completionBlock(nil, error);
+                PXPRunOnMainQueueWithoutDeadlocking(^{
+                    completionBlock(nil, error);
+                });
             }
         }];
     }
@@ -293,18 +324,14 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
     return task;
 }
 
-#pragma mark - Private Interface
-
 - (NSURLSessionDataTask*)imageDownloadWithRemoteUrl:(NSURL*)url
                                           transform:(PXPTransform*)transform
                                          completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+
     NSString* urlString = [url.absoluteString pxp_urlStringForTransform:transform];
     PXPImageDownloadRequestCompletionBlock block = ^(id responseObject, NSError* error) {
         if (error == nil) {
-            //completionBlock(responseObject, nil);
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                completionBlock(responseObject, nil);
-            });
+            completionBlock(responseObject, error);
         } else {
             __weak typeof(self)weakSelf = self;
             [self imageDownloadTaskWithUrl:url completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
@@ -325,6 +352,8 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
     NSURLSessionDataTask* task = [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
     return task;
 }
+
+#pragma mark - Private Interface
 
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
@@ -348,9 +377,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
         [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
         UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            completionBlock(newImage, nil);
-        });
+        completionBlock(newImage, nil);
     }];
     [self.imageTransformQueue addOperation:operation];
 }
