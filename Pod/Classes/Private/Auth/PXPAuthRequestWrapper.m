@@ -25,10 +25,10 @@ static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
     return _sharedWrapper;
 }
 
-- (void)authWithAppId:(NSString*)appId
-               apiKey:(NSString*)apiKey
-         successBlock:(PXPRequestSuccessBlock)successBlock
-        failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+- (NSURLSessionDataTask *)authWithAppId:(NSString*)appId
+                                 apiKey:(NSString*)apiKey
+                           successBlock:(PXPRequestSuccessBlock)successBlock
+                          failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     long timestamp = (long)[[NSDate date] timeIntervalSince1970];
     NSString *stringTimestamp = [NSString stringWithFormat:@"%ld", timestamp];
@@ -39,7 +39,7 @@ static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
                              @"hash" : hash};
 
     NSString* url = [NSString stringWithFormat:@"%@%@", self.backendUrl, kPXPAuthMethod];
-    [self.sessionManager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    return [self.sessionManager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         failtureBlock(error);

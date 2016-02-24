@@ -18,6 +18,7 @@
 #import "PXPNetworkTechnologies.h"
 #import "PXPDefines.h"
 #import "NSString+PXPSecurity.h"
+@import UIKit.UIGraphics;
 
 #define SAFE_ADD_OBJECT(mutableArray, value) if (nil != value) [mutableArray addObject:value]
 
@@ -93,7 +94,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 
 @implementation PXPTransform (PXPStringRepresentation)
 
-+ (NSInteger)closestPXPSizeToSize:(PXSize)size {
++ (NSInteger)closestPXPSizeToSize:(CGSize)size {
     NSInteger value = PXPFirstClosest(sizes, 9, size.width);
     return value;
 }
@@ -232,6 +233,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 
 @property (nonatomic, strong) PXPImageRequestWrapper* imageRequestWrapper;
 @property (nonatomic, strong) PXPSDKRequestWrapper* sdkRequestWrapper;
+@property (nonatomic, strong) NSOperationQueue* imageTransformQueue;
 
 @end
 
@@ -245,6 +247,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
     if (self != nil) {
         _imageRequestWrapper = [PXPImageRequestWrapper new];
         _sdkRequestWrapper = wrapper;
+        _imageTransformQueue = [NSOperationQueue new];
     }
     return self;
 }
@@ -256,7 +259,15 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
     } else if (self.sdkRequestWrapper != nil) {
         return [self imageDownloadWithRemoteUrl:url transform:transform completion:completionBlock];
     } else {
-        return [self imageDownloadTaskWithUrl:url completion:completionBlock];
+        __weak typeof(self)weakSelf = self;
+        return [self imageDownloadTaskWithUrl:url completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            if (responseObject != nil) {
+                [strongSelf applyTransfrom:transform toImage:responseObject completion:completionBlock];
+            } else {
+                completionBlock(nil, error);
+            }
+        }];
     }
     return nil;
 }
@@ -290,9 +301,20 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
     NSString* urlString = [url.absoluteString pxp_urlStringForTransform:transform];
     PXPImageDownloadRequestCompletionBlock block = ^(id responseObject, NSError* error) {
         if (error == nil) {
-            completionBlock(responseObject, nil);
+            //completionBlock(responseObject, nil);
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                completionBlock(responseObject, nil);
+            });
         } else {
-            [self imageDownloadTaskWithUrl:url completion:completionBlock];
+            __weak typeof(self)weakSelf = self;
+            [self imageDownloadTaskWithUrl:url completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+                __strong __typeof(weakSelf)strongSelf = weakSelf;
+                if (responseObject != nil) {
+                    [strongSelf applyTransfrom:transform toImage:responseObject completion:completionBlock];
+                } else {
+                    completionBlock(nil, error);
+                }
+            }];
             [self.sdkRequestWrapper uploadImageTaskAtUrl:url.absoluteString width:transform.sizeString quality:transform.qualityString successBlock:^(id responseObject) {
                 NSLog(@"OK: %@", responseObject);
             } failtureBlock:^(NSError *error) {
@@ -307,6 +329,30 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
     return [self.imageRequestWrapper imageDownloadTaskForUrl:url completion:completionBlock];
+}
+
+- (void)applyTransfrom:(PXPTransform*)transform toImage:(UIImage*)image completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+
+    CGSize size = transform.fitSize;
+    CGSize currentSize = image.size;
+    NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
+        UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
+
+        float hfactor = currentSize.width / size.width;
+        float vfactor = currentSize.height / size.height;
+
+        float factor = fmax(hfactor, vfactor);
+        float newWidth = currentSize.width / hfactor;
+        float newHeight = currentSize.height / vfactor;
+        
+        [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            completionBlock(newImage, nil);
+        });
+    }];
+    [self.imageTransformQueue addOperation:operation];
 }
 
 @end

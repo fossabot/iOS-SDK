@@ -10,11 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class PXPAccountInfo;
+
 @interface PXPSDKRequestWrapper : PXPRequestWrapper
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithAuthToken:(NSString *)token
-                            appId:(NSString *)appId NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAccountInfo:(PXPAccountInfo *)info NS_DESIGNATED_INITIALIZER;
 - (void)updateImageWithWidth:(NSString *)width
                      quality:(NSString *)quality
                         path:(NSString *)path

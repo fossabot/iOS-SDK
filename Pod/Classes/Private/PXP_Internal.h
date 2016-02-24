@@ -11,9 +11,9 @@
 @class PXPAccountInfo;
 @class PXPImageTaskManager;
 
-@interface PXP ()
+@interface PXP (Internal)
 
-@property (nonatomic, strong) PXPAccountInfo* accountInfo;
-@property (nonatomic, strong) PXPImageTaskManager* imageTaskManager;
+@property (nonatomic, strong, readonly) PXPImageTaskManager* imageTaskManager;
+@property (nonatomic, strong, readonly) PXPAccountInfo *accountInfo;
 
 @end

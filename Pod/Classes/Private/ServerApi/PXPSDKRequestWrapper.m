@@ -9,30 +9,49 @@
 #import "PXPSDKRequestWrapper.h"
 #import "AFNetworking.h"
 #import "PXPDefines.h"
+#import "PXPAccountInfo.h"
+#import "PXPAuthPrincipal.h"
 
-static NSString* const kPXPUpdateImageRequestPath = @"/images/newResolution/%@/%@/%@/%@";
-static NSString* const kPXPUploadImageRequestPath = @"/images/upload/%@/%@";
+static NSString* const kPXPUpdateImageRequestPath = @"/async/images/newResolution/%@/%@/%@/%@";
+static NSString* const kPXPUploadImageRequestPath = @"/async/images/upload/%@/%@";
 static NSString* const kPXPUploadImageAtUrlRequestPath = @"/storage/upload/remoteImage/%@";
 static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
 
 @interface PXPSDKRequestWrapper ()
 
-@property (nonatomic, strong, readonly) NSString* appId;
-@property (nonatomic, strong, readonly) NSString* token;
+@property (nonatomic, weak) PXPAccountInfo *info;
 
 @end
 
 @implementation PXPSDKRequestWrapper
 
-- (instancetype)initWithAuthToken:(NSString*)token appId:(NSString*)appId
+- (instancetype)initWithAccountInfo:(PXPAccountInfo *)info
 {
     self = [super init];
     if (self != nil) {
-        [self.sessionManager.requestSerializer setValue:token forHTTPHeaderField:@"AuthToken"];
-        _appId = appId;
-        _token = token;
+        self.info = info;
     }
     return self;
+}
+
+- (void)setInfo:(PXPAccountInfo *)info {
+    if (_info != info) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPModelUpdatedNotification object:_info];
+        _info = info;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authInfoUpdate:) name:kPXPModelUpdatedNotification object:_info];
+    }
+}
+
+- (NSString*)appId {
+    return self.info.principal.appId;
+}
+
+- (void)authInfoUpdate:(NSNotification *)note {
+
+    PXPAccountInfo* info = note.object;
+    if (info.authToken.length > 0) {
+        [self.sessionManager.requestSerializer setValue:info.authToken forHTTPHeaderField:@"AuthToken"];
+    }
 }
 
 - (void)updateImageWithWidth:(NSString*)width

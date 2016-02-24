@@ -12,7 +12,7 @@
 @class PXPAccountInfo;
 
 //typedef void(^PXPCheckAuthBlock)(BOOL isAuthorized);
-typedef void(^PXPAuthBlock)(PXPAccountInfo* accountInfo, NSError* error);
+typedef void(^PXPAuthBlock)(NSDictionary* accountInfo, NSError* error);
 
 @interface PXPAuthManager : NSObject
 
@@ -20,7 +20,7 @@ typedef void(^PXPAuthBlock)(PXPAccountInfo* accountInfo, NSError* error);
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithPrincipal:(PXPAuthPrincipal *)principal NS_DESIGNATED_INITIALIZER;
-- (void)authorizeWithCompletionBlock:(PXPAuthBlock)block;
+- (NSURLSessionDataTask *)authorizeWithCompletionBlock:(PXPAuthBlock)block;
 //- (void)checkAuth:(PXPAuthBlock)block;
 
 @end

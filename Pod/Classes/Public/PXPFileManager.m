@@ -8,6 +8,7 @@
 
 #import "PXPFileManager.h"
 #import "PXPSDKRequestWrapper.h"
+#import "PXPAccountInfo.h"
 
 @interface PXPFile ()
 
@@ -22,6 +23,7 @@
 
 @property (nonatomic, strong, readwrite) PXPSDKRequestWrapper *sdkRequestWrapper;
 @property (nonatomic, strong, readwrite) NSString* root;
+@property (nonatomic, weak) PXPAccountInfo* info;
 
 @end
 
@@ -58,14 +60,29 @@
 @implementation PXPFileManager
 
 - (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper *)sdkRequestWrapper
-                                     root:(NSString *)root
+                              accountInfo:(PXPAccountInfo*)info
+
 {
     self = [super init];
     if (self != nil) {
         _sdkRequestWrapper = sdkRequestWrapper;
-        _root = root;
+        self.info = info;
     }
     return self;
+}
+
+- (void)setInfo:(PXPAccountInfo *)info {
+    if (info != _info) {
+        [_info removeObserver:self forKeyPath:NSStringFromSelector(@selector(cdnUrl)) context:nil];
+        _info = info;
+        [_info addObserver:self forKeyPath:NSStringFromSelector(@selector(cdnUrl)) options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if (object == _info) {
+        _root = _info.cdnUrl;
+    }
 }
 
 - (void)itemsAtPath:(NSString*)path

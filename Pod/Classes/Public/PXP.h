@@ -15,6 +15,7 @@ typedef enum : NSInteger {
 } PXPState;
 
 @class PXPFileManager;
+@class PXPAccountInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 

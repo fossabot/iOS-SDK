@@ -16,19 +16,19 @@
 #import "PXPNetworkMonitor.h"
 #import "PXPFileManager.h"
 
-
 @interface PXPFileManager (Private)
 
 - (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper *)sdkRequestWrapper
-                                     root:(NSString *)root;
+                              accountInfo:(PXPAccountInfo*)info;
 
 @end
 
 @interface PXP ()
 
-@property (nonatomic, strong) PXPAuthManager *authManager;
 @property (nonatomic, readwrite, assign) PXPState state;
 @property (nonatomic, readwrite, strong) PXPFileManager *fileManager;
+@property (nonatomic, readwrite, strong) PXPImageTaskManager* imageTaskManager;
+@property (nonatomic, readwrite, strong) PXPAccountInfo *accountInfo;
 
 @end
 
@@ -57,25 +57,32 @@
 
 - (void)dealloc {
     [[PXPNetworkMonitor sharedMonitor] stopMonitoring];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPModelUpdatedNotification object:self.accountInfo];
 }
 
 - (void)authWithApiKey:(NSString *)apiKey {
-   if (self.authManager == nil) {
+   if (self.accountInfo == nil) {
         PXPAuthPrincipal *principal = [PXPAuthPrincipal new];
         principal.appId = [[NSBundle mainBundle] bundleIdentifier];
         principal.appKey = apiKey;
-        self.authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
-        [self.authManager authorizeWithCompletionBlock:^(PXPAccountInfo *accountInfo, NSError *error) {
-            if (accountInfo != nil) {
-                self.state = PXPStateReady;
-                self.accountInfo = accountInfo;
-                PXPSDKRequestWrapper *wrapper = [[PXPSDKRequestWrapper alloc] initWithAuthToken:accountInfo.authToken appId:accountInfo.principal.appId];
-                self.imageTaskManager = [[PXPImageTaskManager alloc] initWithSDKRequestWrapper:wrapper];
-                self.fileManager = [[PXPFileManager alloc] initWithSDKRequestWrapper:wrapper root:self.accountInfo.cdnUrl];
-            } else {
-                self.state = PXPStateFailed;
-            }
-        }];
+        PXPAuthManager* authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
+       self.accountInfo = [[PXPAccountInfo alloc] initWithPrincipal:principal authManager:authManager];
+       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authUpdate:) name:kPXPModelUpdatedNotification object:self.accountInfo];
+       PXPSDKRequestWrapper *wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
+       self.imageTaskManager = [[PXPImageTaskManager alloc] initWithSDKRequestWrapper:wrapper];
+       self.fileManager = [[PXPFileManager alloc] initWithSDKRequestWrapper:wrapper accountInfo:self.accountInfo];
+       [self.accountInfo update];
+    }
+}
+
+- (void)authUpdate:(NSNotification *)note {
+
+    NSDictionary *dict = note.userInfo;
+    NSError *error = dict[kPXPModelUpdateErrorKey];
+    if (error == nil) {
+        self.state = PXPStateReady;
+    } else {
+        self.state = PXPStateFailed;
     }
 }
 

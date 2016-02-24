@@ -7,14 +7,15 @@
 //
 
 #import "PXPTransform.h"
+#import "PXPDefines.h"
 
 @implementation PXPTransform
 
-- (PXSize)fitSizeInPixels {
+- (CGSize)fitSizeInPixels {
     CGFloat scale = [UIScreen mainScreen].scale;
     NSUInteger width = lround(self.fitSize.width * scale);
     NSUInteger height = lround(self.fitSize.height * scale);
-    PXSize size = {width, height};
+    CGSize size = {width, height};
     return size;
 }
 

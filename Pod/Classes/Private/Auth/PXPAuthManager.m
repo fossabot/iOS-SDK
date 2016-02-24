@@ -30,17 +30,15 @@
     return self;
 }
 
-- (void)authorizeWithCompletionBlock:(PXPAuthBlock)block {
+- (NSURLSessionDataTask *)authorizeWithCompletionBlock:(PXPAuthBlock)block {
 
-// if (authorized) {block(YES); return;}
-    [self.requestWrapper authWithAppId:self.principal.appId
-                                apiKey:self.principal.appKey
-                          successBlock:^(id responseObject) {
-                              PXPAccountInfo* info = [[PXPAccountInfo alloc] initWithDict:responseObject principal:self.principal];
-                              block(info, nil);
-                          } failtureBlock:^(NSError *error) {
-                              block(nil, error);
-                          }];
+    return [self.requestWrapper authWithAppId:self.principal.appId
+                                       apiKey:self.principal.appKey
+                                 successBlock:^(id responseObject) {
+                                     block(responseObject, nil);
+                                 } failtureBlock:^(NSError *error) {
+                                     block(nil, error);
+                                 }];
 }
 
 @end
