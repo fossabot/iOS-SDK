@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class PXPFile;
+@class PXPAccountInfo;
 
 typedef void(^PXPFileManagerCompletionBlock)(NSArray <PXPFile *> * _Nullable items, NSError * _Nullable error);
 
@@ -25,6 +26,7 @@ typedef void(^PXPFileManagerCompletionBlock)(NSArray <PXPFile *> * _Nullable ite
 @interface PXPFileManager : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithAccountInfo:(PXPAccountInfo *)info;
 - (void)itemsAtPath:(NSString*)path
     completionBlock:(PXPFileManagerCompletionBlock)completionBlock;
 

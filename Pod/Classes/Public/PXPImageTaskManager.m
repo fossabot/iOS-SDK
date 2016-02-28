@@ -249,7 +249,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 @interface PXPImageTaskManager ()
 
 @property (nonatomic, strong) PXPImageRequestWrapper* imageRequestWrapper;
-@property (nonatomic, strong) PXPSDKRequestWrapper* sdkRequestWrapper;
+@property (nonatomic, strong, readonly) PXPSDKRequestWrapper* sdkRequestWrapper;
 @property (nonatomic, strong) NSOperationQueue* imageTransformQueue;
 
 @end
@@ -258,15 +258,18 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 
 #pragma mark - Public Interface
 
-- (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper * _Nullable)wrapper
+- (instancetype)init
 {
     self = [super init];
     if (self != nil) {
         _imageRequestWrapper = [PXPImageRequestWrapper new];
-        _sdkRequestWrapper = wrapper;
         _imageTransformQueue = [NSOperationQueue new];
     }
     return self;
+}
+
+- (PXPSDKRequestWrapper *)sdkRequestWrapper {
+    return [PXP sharedSDK].wrapper;
 }
 
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url transform:(PXPTransform*)transform completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {

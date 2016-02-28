@@ -16,19 +16,13 @@
 #import "PXPNetworkMonitor.h"
 #import "PXPFileManager.h"
 
-@interface PXPFileManager (Private)
-
-- (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper *)sdkRequestWrapper
-                              accountInfo:(PXPAccountInfo*)info;
-
-@end
-
 @interface PXP ()
 
 @property (nonatomic, readwrite, assign) PXPState state;
 @property (nonatomic, readwrite, strong) PXPFileManager *fileManager;
 @property (nonatomic, readwrite, strong) PXPImageTaskManager* imageTaskManager;
 @property (nonatomic, readwrite, strong) PXPAccountInfo *accountInfo;
+@property (nonatomic, readwrite, strong) PXPSDKRequestWrapper *wrapper;
 
 @end
 
@@ -49,7 +43,7 @@
     self = [super init];
     if (self) {
         _state = PXPStateNotInitialized;
-        _imageTaskManager = [[PXPImageTaskManager alloc] initWithSDKRequestWrapper:nil];
+        _imageTaskManager = [[PXPImageTaskManager alloc] init];
         [[PXPNetworkMonitor sharedMonitor] startMonitoring];
     }
     return self;
@@ -68,9 +62,8 @@
         PXPAuthManager* authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
        self.accountInfo = [[PXPAccountInfo alloc] initWithPrincipal:principal authManager:authManager];
        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authUpdate:) name:kPXPModelUpdatedNotification object:self.accountInfo];
-       PXPSDKRequestWrapper *wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
-       self.imageTaskManager = [[PXPImageTaskManager alloc] initWithSDKRequestWrapper:wrapper];
-       self.fileManager = [[PXPFileManager alloc] initWithSDKRequestWrapper:wrapper accountInfo:self.accountInfo];
+       self.wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
+       self.fileManager = [[PXPFileManager alloc] initWithAccountInfo:self.accountInfo];
        [self.accountInfo update];
     }
 }

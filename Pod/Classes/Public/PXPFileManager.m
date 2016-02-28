@@ -9,6 +9,7 @@
 #import "PXPFileManager.h"
 #import "PXPSDKRequestWrapper.h"
 #import "PXPAccountInfo.h"
+#import "PXP_Internal.h"
 
 @interface PXPFile ()
 
@@ -59,16 +60,16 @@
 
 @implementation PXPFileManager
 
-- (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper *)sdkRequestWrapper
-                              accountInfo:(PXPAccountInfo*)info
-
-{
+- (instancetype)initWithAccountInfo:(PXPAccountInfo*)info {
     self = [super init];
     if (self != nil) {
-        _sdkRequestWrapper = sdkRequestWrapper;
         self.info = info;
     }
     return self;
+}
+
+- (PXPSDKRequestWrapper *)sdkRequestWrapper {
+    return [PXP sharedSDK].wrapper;
 }
 
 - (void)setInfo:(PXPAccountInfo *)info {

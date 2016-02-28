@@ -16,6 +16,7 @@ typedef enum : NSInteger {
 
 @class PXPFileManager;
 @class PXPAccountInfo;
+@class PXPSDKRequestWrapper;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,7 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)authWithApiKey:(NSString*)apiKey;
 
 @property (nonatomic, readonly, assign) PXPState state;
-@property (nonatomic, readonly, strong, nullable) PXPFileManager* fileManager;
+@property (nonatomic, readonly, strong, nullable) PXPFileManager *fileManager;
+@property (nonatomic, readonly, strong, nullable) PXPSDKRequestWrapper *wrapper;
 
 @end
 

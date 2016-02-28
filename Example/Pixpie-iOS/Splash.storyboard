@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10109" systemVersion="15E49a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Rzh-ZD-cYt">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
+    </dependencies>
+    <scenes>
+        <!--Splash View Controller-->
+        <scene sceneID="bug-rn-8ei">
+            <objects>
+                <viewController id="Rzh-ZD-cYt" customClass="SplashViewController" customModule="Pixpie_iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wcc-EU-KzG"/>
+                        <viewControllerLayoutGuide type="bottom" id="66z-JN-efx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kqw-TY-eJy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright © 2016 Pixpie. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Re1-xS-q7o">
+                                <rect key="frame" x="20" y="559" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-qS-H5w">
+                                <rect key="frame" x="133" y="248" width="335" height="104"/>
+                            </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="FHQ-aA-aaI">
+                                <rect key="frame" x="290" y="531" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="dlI-Ob-bWs"/>
+                                    <constraint firstAttribute="height" constant="20" id="spO-mX-Ubv"/>
+                                </constraints>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5zI-9E-5J1">
+                                <rect key="frame" x="180" y="380" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.094117647060000004" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZzB-qS-H5w" firstAttribute="centerY" secondItem="Kqw-TY-eJy" secondAttribute="centerY" id="Ay9-Vb-EWf"/>
+                            <constraint firstItem="ZzB-qS-H5w" firstAttribute="centerX" secondItem="Kqw-TY-eJy" secondAttribute="centerX" id="Ibs-l6-zK1"/>
+                            <constraint firstAttribute="bottom" secondItem="Re1-xS-q7o" secondAttribute="bottom" constant="20" id="M9g-hC-jG9"/>
+                            <constraint firstItem="Re1-xS-q7o" firstAttribute="top" secondItem="FHQ-aA-aaI" secondAttribute="bottom" constant="8" id="ORL-G7-Ekc"/>
+                            <constraint firstItem="Re1-xS-q7o" firstAttribute="leading" secondItem="Kqw-TY-eJy" secondAttribute="leading" constant="20" symbolic="YES" id="sp1-JO-LOc"/>
+                            <constraint firstItem="FHQ-aA-aaI" firstAttribute="centerX" secondItem="Kqw-TY-eJy" secondAttribute="centerX" id="uOM-ty-Lig"/>
+                            <constraint firstAttribute="centerX" secondItem="Re1-xS-q7o" secondAttribute="centerX" id="xqd-c6-anZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="FHQ-aA-aaI" id="aUa-Kj-lEZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oEq-6O-X4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="215" y="391"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Image" width="335" height="104"/>
+    </resources>
+</document>

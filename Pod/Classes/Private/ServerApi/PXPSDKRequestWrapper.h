@@ -16,11 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithAccountInfo:(PXPAccountInfo *)info NS_DESIGNATED_INITIALIZER;
-- (void)updateImageWithWidth:(NSString *)width
-                     quality:(NSString *)quality
-                        path:(NSString *)path
-                successBlock:(PXPRequestSuccessBlock)successBlock
-               failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (NSURLSessionDataTask*)updateImageWithWidth:(NSString*)width
+                                      quality:(NSString*)quality
+                                         path:(NSString*)path
+                                 successBlock:(PXPRequestSuccessBlock)successBlock
+                                failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 - (NSURLSessionDataTask *)uploadImageTaskForStream:(NSInputStream *)stream
                                           mimeType:(NSString *)mimeType
                                             length:(int64_t)length

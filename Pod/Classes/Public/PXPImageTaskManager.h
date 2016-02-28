@@ -18,8 +18,7 @@ typedef void (^PXPImageUploadRequestCompletionBlock)(id _Nullable responseObject
 
 @interface PXPImageTaskManager : NSObject
 
-- (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithSDKRequestWrapper:(PXPSDKRequestWrapper * _Nullable)wrapper;
+- (instancetype)init;
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL *)url
                                         transform:(PXPTransform *)transform
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;

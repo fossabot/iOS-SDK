@@ -21,9 +21,14 @@
 @implementation PXPImageRequestWrapper
 
 - (instancetype)init {
+    self = [self initWithSessionConfiguration:[PXPImageRequestWrapper defaultImageSessionConfiguration]];
+    return self;
+}
+
+- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)config {
     self = [super init];
     if (self != nil) {
-        _sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[PXPImageRequestWrapper defaultImageSessionConfiguration]];
+        _sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
         _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
         NSArray <id<AFURLResponseSerialization>> *responseSerializers = @[[AFImageResponseSerializer serializer], [PXPWebPResponseSerializer serializer]];
         AFCompoundResponseSerializer *serializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:responseSerializers];
