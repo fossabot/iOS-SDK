@@ -69,8 +69,8 @@
 }
 
 + (NSURLCache *)defaultURLCache {
-    return [[NSURLCache alloc] initWithMemoryCapacity:20 * 1024 * 1024
-                                         diskCapacity:150 * 1024 * 1024
+    return [[NSURLCache alloc] initWithMemoryCapacity:0 //20 * 1024 * 1024
+                                         diskCapacity:0 //150 * 1024 * 1024
                                              diskPath:@"co.pixpie.imagecache"];
 }
 

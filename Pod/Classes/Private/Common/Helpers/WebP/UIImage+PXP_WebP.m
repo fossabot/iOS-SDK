@@ -165,7 +165,7 @@ static void free_image_data(void *info, const void *data, size_t size)
     CGImageRelease(imageRef);
     CGColorSpaceRelease(colorSpaceRef);
     CGDataProviderRelease(provider);
-    WebPFreeDecBuffer(&config.output);
+    //WebPFreeDecBuffer(&config.output);
     
     return result;
 }

@@ -169,8 +169,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
         case PXPUrlTypeRemote: {
             NSString* host = [NSString pxp_cdnUrl];
             NSString* folder = @"remote.resources";
-            NSString* remoteUrlMD5 = [remoteUrl MD5];
-            result = [NSString stringWithFormat:@"%@/%@/%@", host, folder, remoteUrlMD5];
+            result = [NSString stringWithFormat:@"%@/%@", host, folder];
             break;
         }
         default:
@@ -214,7 +213,13 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
     }
 
     NSMutableArray *pathArray = [NSMutableArray new];
-    SAFE_ADD_OBJECT(pathArray, name);
+    PXPUrlType type = [self pxp_URLType];
+    if (type != PXPUrlTypeRemote) {
+        SAFE_ADD_OBJECT(pathArray, name);
+    } else {
+         NSString* remoteUrlMD5 = [self MD5];
+        SAFE_ADD_OBJECT(pathArray, remoteUrlMD5);
+    }
     if (transform != nil) {
         SAFE_ADD_OBJECT(pathArray, @".pixpie.resource");
     }
