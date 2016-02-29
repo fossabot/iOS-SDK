@@ -16,9 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        let options = NSKeyValueObservingOptions([.New, .Initial])
-        PXP.sharedSDK().addObserver(self, forKeyPath: "state", options: options, context: nil);
-        PXP.sharedSDK().authWithApiKey("5e451ae39c44cbe6085fd51e7f1b443abc49ffe150334fe0cc0902b6df23da95")
+
+        let defaultLicense = "5e451ae39c44cbe6085fd51e7f1b443abc49ffe150334fe0cc0902b6df23da95"
+        NSUserDefaults.standardUserDefaults().registerDefaults(["pxp_license" : defaultLicense])
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "splashCompleted:", name: kSplashCompleteNotification, object: nil)
+        let license = NSUserDefaults.standardUserDefaults().stringForKey("pxp_license")
+        PXP.sharedSDK().authWithApiKey(license!)
         self.window?.tintColor = UIColor.whiteColor()
         return true
     }
@@ -27,14 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PXP.sharedSDK().removeObserver(self, forKeyPath: "state", context: nil)
     }
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-
-        if (object as! PXP == PXP.sharedSDK()) {
-            if (PXP.sharedSDK().state != PXPStateNotInitialized) {
-                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-                self.window?.rootViewController = storyboard.instantiateInitialViewController()
-            }
-        }
+    func splashCompleted(note: NSNotification) {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        self.window?.rootViewController = storyboard.instantiateInitialViewController()
     }
-
 }

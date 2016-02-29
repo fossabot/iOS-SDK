@@ -7,11 +7,35 @@
 //
 
 import UIKit
+import Pixpie_iOS
+
+let kSplashCompleteNotification = "kSplashNotification"
 
 class SplashViewController: UIViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var logoView: UIImageView!
+    var timer: NSTimer?
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+
+    deinit {
+        PXP.sharedSDK()
+        PXP.sharedSDK().removeObserver(self, forKeyPath: "state")
+    }
+
+    func commonInit() {
+        let options = NSKeyValueObservingOptions([.New, .Initial])
+        PXP.sharedSDK().addObserver(self, forKeyPath: "state", options: options, context: nil);
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +49,17 @@ class SplashViewController: UIViewController {
         activityIndicator.stopAnimating()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+
+        if (object as! PXP == PXP.sharedSDK()) {
+            timer?.invalidate()
+            if (PXP.sharedSDK().state != PXPStateNotInitialized) {
+                timer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "splashCompleteAction:", userInfo: nil, repeats: false)
+            }
+        }
     }
 
+    func splashCompleteAction(note: NSNotification) {
+        NSNotificationCenter.defaultCenter().postNotificationName(kSplashCompleteNotification, object: self)
+    }
 }

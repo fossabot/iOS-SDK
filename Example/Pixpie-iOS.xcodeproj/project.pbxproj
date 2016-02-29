@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A1CEA6E1C83B5F50035D679 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */; };
 		0A1CEA721C83B6980035D679 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1CEA711C83B6980035D679 /* Splash.storyboard */; };
+		0A56CFB31C84650B001C919C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A56CFB21C84650B001C919C /* Settings.bundle */; };
 		0AC43CB51C6DFCCB00337844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CB41C6DFCCB00337844 /* AppDelegate.swift */; };
 		0AC43CB91C6DFEBE00337844 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CB81C6DFEBE00337844 /* ImagesViewController.swift */; };
 		0AC43CBB1C6DFEEB00337844 /* ImageDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CBA1C6DFEEB00337844 /* ImageDetailsController.swift */; };
@@ -45,6 +46,7 @@
 		09934E8936C76A955EA2005A /* Pods_Pixpie_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixpie_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		0A1CEA711C83B6980035D679 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		0A56CFB21C84650B001C919C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0AC43CB41C6DFCCB00337844 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AC43CB81C6DFEBE00337844 /* ImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
 		0AC43CBA1C6DFEEB00337844 /* ImageDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailsController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A56CFB11C84650B001C919C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0A56CFB21C84650B001C919C /* Settings.bundle */,
+			);
+			name = Settings;
+			path = FlickrSettings;
+			sourceTree = "<group>";
+		};
 		0AC43CB31C6DFC3F00337844 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +177,7 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A56CFB11C84650B001C919C /* Settings */,
 				0AEEFA4C1BF8C9B5009DE083 /* server.cer */,
 				6003F595195388D20070C39A /* Pixpie-iOS-Info.plist */,
 				6003F596195388D20070C39A /* InfoPlist.strings */,
@@ -306,6 +318,7 @@
 				0AC43CC11C6E083700337844 /* LaunchScreen.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				0A1CEA721C83B6980035D679 /* Splash.storyboard in Resources */,
+				0A56CFB31C84650B001C919C /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

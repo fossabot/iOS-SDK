@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+        <dict>
+			<key>FooterText</key>
+			<string>Pick license from preset values or enter manually.</string>
+			<key>Title</key>
+			<string>License</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>b59af198e7facd9ef3f24feb4cc4ed588d71797194e27c0e231dff1bb8eb62d9</string>
+			<key>Key</key>
+			<string>pxp_license</string>
+			<key>Title</key>
+			<string>Preset</string>
+			<key>Titles</key>
+			<array>
+				<string>Pixpie ON</string>
+				<string>Pixpie OFF</string>
+			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Values</key>
+			<array>
+				<string>b59af198e7facd9ef3f24feb4cc4ed588d71797194e27c0e231dff1bb8eb62d9</string>
+				<string>none</string>
+			</array>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+</dict>
+</plist>
