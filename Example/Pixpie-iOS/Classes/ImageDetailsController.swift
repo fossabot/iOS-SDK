@@ -9,5 +9,15 @@
 import UIKit
 
 class ImageDetailsController: UIViewController {
+    var url: NSURL?
 
+    @IBOutlet weak var imageView: UIImageView!
+    override func viewWillAppear(animated: Bool) {
+        if isBeingPresented() || isMovingToParentViewController() {
+            guard let imageUrl = url
+                else {return}
+            imageView.pxp_requestImage(imageUrl)
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
+    }
 }

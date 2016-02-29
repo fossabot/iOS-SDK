@@ -18,6 +18,7 @@
 #import "PXPNetworkTechnologies.h"
 #import "PXPDefines.h"
 #import "NSString+PXPSecurity.h"
+#import "PXPDefines.h"
 @import UIKit.UIGraphics;
 
 #define SAFE_ADD_OBJECT(mutableArray, value) if (nil != value) [mutableArray addObject:value]
@@ -346,9 +347,9 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
                 }
             }];
             [self.sdkRequestWrapper uploadImageTaskAtUrl:url.absoluteString width:transform.sizeString quality:transform.qualityString successBlock:^(id responseObject) {
-                NSLog(@"OK: %@", responseObject);
+                PXPLogInfo(@"Remote Image Upload OK: %@", responseObject);
             } failtureBlock:^(NSError *error) {
-                NSLog(@"Error: %@", error);
+                PXPLogError(@"Remote Image Upload Error: %@", error);
             }];
         }
     };
@@ -374,10 +375,10 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
         float vfactor = currentSize.height / size.height;
 
         float factor = fmax(hfactor, vfactor);
-        float newWidth = currentSize.width / hfactor;
-        float newHeight = currentSize.height / vfactor;
+        float newWidth = currentSize.width / factor;
+        float newHeight = currentSize.height / factor;
         
-        [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        [image drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
         UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         completionBlock(newImage, nil);

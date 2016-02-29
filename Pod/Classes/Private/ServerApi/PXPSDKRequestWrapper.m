@@ -113,7 +113,11 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     NSError* error = nil;
     NSMutableURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:requestUrl parameters:params error:&error];
     assert(error == nil);
-    NSURLSessionDataTask *task = [self taskWithRequest:request successBlock:successBlock failtureBlock:failtureBlock];
+    NSURLSessionDataTask *task = [self taskWithRequest:request successBlock:^(id responseObject) {
+        successBlock(error);
+    } failtureBlock:^(NSError *error) {
+        failtureBlock(error);
+    }];
     return task;
 }
 
@@ -136,6 +140,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
                         successBlock:(PXPRequestSuccessBlock)successBlock
                        failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
+    assert(self.sessionManager != nil);
     __weak typeof(self)weakSelf = self;
     NSURLSessionDataTask *task = [self.sessionManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -149,6 +154,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
             }
         }
     }];
+    [task resume];
     return task;
 }
 

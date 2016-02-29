@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let options = NSKeyValueObservingOptions([.New, .Initial])
         PXP.sharedSDK().addObserver(self, forKeyPath: "state", options: options, context: nil);
         PXP.sharedSDK().authWithApiKey("5e451ae39c44cbe6085fd51e7f1b443abc49ffe150334fe0cc0902b6df23da95")
+        self.window?.tintColor = UIColor.whiteColor()
         return true
     }
 

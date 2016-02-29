@@ -11,14 +11,21 @@ import Pixpie_iOS
 
 private let kCellIdentifier = "kImageCell"
 private let kSectionsCount = 1
+private let kDetailsSegue = "DetailsSegue"
 
 class ImagesViewController: UICollectionViewController {
 
     let imageLinksArray = kImageLinkArray
+    var pickedUrl: NSURL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.registerClass(ImageCell.self, forCellWithReuseIdentifier: kCellIdentifier)
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -36,4 +43,15 @@ class ImagesViewController: UICollectionViewController {
         return cell
     }
 
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.pickedUrl = NSURL(string: imageLinksArray[indexPath.item])
+        performSegueWithIdentifier(kDetailsSegue, sender: collectionView)
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == kDetailsSegue) {
+            let detailsController = segue.destinationViewController as! ImageDetailsController
+            detailsController.url = self.pickedUrl
+        }
+    }
 }
