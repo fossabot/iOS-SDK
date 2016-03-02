@@ -39,6 +39,9 @@ class ImagesViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: ImageCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellIdentifier, forIndexPath: indexPath) as! ImageCell
         let url = NSURL(string: imageLinksArray[indexPath.item])
+        let transform = PXPTransform()
+        transform.fitSize = CGSize(width: 100.0, height: 100.0)
+        cell.imageView?.pxp_transfrom = transform
         cell.imageView?.pxp_requestImage(url)
         return cell
     }
@@ -53,5 +56,15 @@ class ImagesViewController: UICollectionViewController {
             let detailsController = segue.destinationViewController as! ImageDetailsController
             detailsController.url = self.pickedUrl
         }
+    }
+
+    func itemSize() -> CGSize {
+        var itemSize = CGSizeMake(self.view.frame.width/4.0, self.view.frame.width/4.0)
+        return itemSize
+    }
+
+    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize
+    {
+        return self.itemSize()
     }
 }

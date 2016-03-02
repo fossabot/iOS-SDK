@@ -10,6 +10,7 @@
 		0A1CEA6E1C83B5F50035D679 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */; };
 		0A1CEA721C83B6980035D679 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1CEA711C83B6980035D679 /* Splash.storyboard */; };
 		0A56CFB31C84650B001C919C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A56CFB21C84650B001C919C /* Settings.bundle */; };
+		0A56CFB51C849372001C919C /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A56CFB41C849372001C919C /* Icons.xcassets */; };
 		0AC43CB51C6DFCCB00337844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CB41C6DFCCB00337844 /* AppDelegate.swift */; };
 		0AC43CB91C6DFEBE00337844 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CB81C6DFEBE00337844 /* ImagesViewController.swift */; };
 		0AC43CBB1C6DFEEB00337844 /* ImageDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CBA1C6DFEEB00337844 /* ImageDetailsController.swift */; };
@@ -47,6 +48,7 @@
 		0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		0A1CEA711C83B6980035D679 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		0A56CFB21C84650B001C919C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		0A56CFB41C849372001C919C /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		0AC43CB41C6DFCCB00337844 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AC43CB81C6DFEBE00337844 /* ImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
 		0AC43CBA1C6DFEEB00337844 /* ImageDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailsController.swift; sourceTree = "<group>"; };
@@ -56,7 +58,7 @@
 		0AEEFA4C1BF8C9B5009DE083 /* server.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cer; sourceTree = "<group>"; };
 		2C438C694483E34A3EEC148E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2EF25F1A47604F703D2BB9AA /* Pods-Pixpie-iOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		6003F58A195388D20070C39A /* Pixpie-iOS_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pixpie-iOS_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F58A195388D20070C39A /* InspiringPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InspiringPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -141,7 +143,7 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* Pixpie-iOS_Example.app */,
+				6003F58A195388D20070C39A /* InspiringPhotos.app */,
 				6003F5AE195388D20070C39A /* Pixpie-iOS_Tests.xctest */,
 			);
 			name = Products;
@@ -168,6 +170,7 @@
 				0A1CEA711C83B6980035D679 /* Splash.storyboard */,
 				0AC43CC01C6E083700337844 /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
+				0A56CFB41C849372001C919C /* Icons.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			name = "Example for Pixpie-iOS";
@@ -228,9 +231,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6003F589195388D20070C39A /* Pixpie-iOS_Example */ = {
+		6003F589195388D20070C39A /* InspiringPhotos */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Pixpie-iOS_Example" */;
+			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "InspiringPhotos" */;
 			buildPhases = (
 				8EDF7F79B689A694AE933BAF /* Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
@@ -243,9 +246,9 @@
 			);
 			dependencies = (
 			);
-			name = "Pixpie-iOS_Example";
+			name = InspiringPhotos;
 			productName = "Pixpie-iOS";
-			productReference = 6003F58A195388D20070C39A /* Pixpie-iOS_Example.app */;
+			productReference = 6003F58A195388D20070C39A /* InspiringPhotos.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6003F5AD195388D20070C39A /* Pixpie-iOS_Tests */ = {
@@ -301,7 +304,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6003F589195388D20070C39A /* Pixpie-iOS_Example */,
+				6003F589195388D20070C39A /* InspiringPhotos */,
 				6003F5AD195388D20070C39A /* Pixpie-iOS_Tests */,
 			);
 		};
@@ -318,6 +321,7 @@
 				0AC43CC11C6E083700337844 /* LaunchScreen.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				0A1CEA721C83B6980035D679 /* Splash.storyboard in Resources */,
+				0A56CFB51C849372001C919C /* Icons.xcassets in Resources */,
 				0A56CFB31C84650B001C919C /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,7 +456,7 @@
 /* Begin PBXTargetDependency section */
 		6003F5B4195388D20070C39A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6003F589195388D20070C39A /* Pixpie-iOS_Example */;
+			target = 6003F589195388D20070C39A /* InspiringPhotos */;
 			targetProxy = 6003F5B3195388D20070C39A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -564,7 +568,7 @@
 				INFOPLIST_FILE = "Pixpie-iOS/Pixpie-iOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Pixpie-iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -586,7 +590,7 @@
 				INFOPLIST_FILE = "Pixpie-iOS/Pixpie-iOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Pixpie-iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -649,7 +653,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Pixpie-iOS_Example" */ = {
+		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "InspiringPhotos" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C0195388D20070C39A /* Debug */,
