@@ -102,6 +102,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 @interface NSURL (PXPUrl)
 
 - (PXPUrlType)pxp_URLType;
+- (NSString*)pathAndQuery;
 
 @end
 
@@ -217,8 +218,21 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
     if (type != PXPUrlTypeRemote) {
         SAFE_ADD_OBJECT(pathArray, name);
     } else {
-         NSString* remoteUrlMD5 = [self MD5];
-        SAFE_ADD_OBJECT(pathArray, remoteUrlMD5);
+        NSURL* url = [NSURL URLWithString:self];
+        NSString* domain = url.host;
+        NSMutableArray *md5Array = [NSMutableArray new];
+        NSString* remoteUrlMD5 = [self MD5];
+        NSString* firstPart = [remoteUrlMD5 substringToIndex:1];
+        NSString* secondPart = [remoteUrlMD5 substringWithRange:NSMakeRange(1, 1)];
+        NSString* thirdPart = [remoteUrlMD5 substringWithRange:NSMakeRange(2, 1)];
+        NSString* lastPart = [remoteUrlMD5 substringFromIndex:3];
+        SAFE_ADD_OBJECT(md5Array, domain);
+        SAFE_ADD_OBJECT(md5Array, firstPart);
+        SAFE_ADD_OBJECT(md5Array, secondPart);
+        SAFE_ADD_OBJECT(md5Array, thirdPart);
+        SAFE_ADD_OBJECT(md5Array, lastPart);
+        NSString* md5Path = [md5Array componentsJoinedByString:@"/"];
+        SAFE_ADD_OBJECT(pathArray, md5Path);
     }
     if (transform != nil) {
         SAFE_ADD_OBJECT(pathArray, @".pixpie.resource");
@@ -248,6 +262,15 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
     } else {
         return PXPUrlTypeOther;
     }
+}
+
+- (NSString*)pathAndQuery {
+    NSString* path = self.path;
+    NSString* query = self.query;
+    NSMutableArray* array = [NSMutableArray new];
+    SAFE_ADD_OBJECT(array, path);
+    SAFE_ADD_OBJECT(array, query);
+    return [array componentsJoinedByString:@""];
 }
 
 @end
