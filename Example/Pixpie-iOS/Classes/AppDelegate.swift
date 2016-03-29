@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaultLicense = "5e451ae39c44cbe6085fd51e7f1b443abc49ffe150334fe0cc0902b6df23da95"
         NSUserDefaults.standardUserDefaults().registerDefaults(["pxp_license" : defaultLicense])
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "splashCompleted:", name: kSplashCompleteNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.splashCompleted(_:)), name: kSplashCompleteNotification, object: nil)
         let license = NSUserDefaults.standardUserDefaults().stringForKey("pxp_license")
         PXP.sharedSDK().authWithApiKey(license!)
         self.window?.tintColor = UIColor.whiteColor()

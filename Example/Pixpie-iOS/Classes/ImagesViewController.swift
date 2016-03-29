@@ -59,7 +59,7 @@ class ImagesViewController: UICollectionViewController {
     }
 
     func itemSize() -> CGSize {
-        var itemSize = CGSizeMake(self.view.frame.width/4.0, self.view.frame.width/4.0)
+        let itemSize = CGSizeMake(self.view.frame.width/4.0, self.view.frame.width/4.0)
         return itemSize
     }
 
