@@ -23,7 +23,7 @@
     self = [super init];
     if (self != nil) {
 #warning to think how to implement this properly
-        _backendUrl = @"https://api.pixpie.co:9444";
+        _backendUrl = @"http://api.pixpie.co:9001";
         NSURLSessionConfiguration* configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:_backendUrl] sessionConfiguration:configuration];
         self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
