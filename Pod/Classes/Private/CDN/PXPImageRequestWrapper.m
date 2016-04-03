@@ -40,13 +40,17 @@
 - (NSURLSessionDataTask *)imageDownloadTaskForUrl:(NSURL *)url
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
-    NSURLSessionDataTask *task = [self.sessionManager GET:url.absoluteString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        completionBlock(responseObject, nil);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        completionBlock(nil, error);
+    NSError *error = nil;
+    NSURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:url.absoluteString parameters:nil error:&error];
+    assert(error == nil);
+    NSURLSessionDataTask* task = [self.sessionManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error == nil) {
+            completionBlock(responseObject, nil);
+        } else {
+            completionBlock(nil, error);
+        }
     }];
+    [task resume];
     return task;
 }
 
@@ -69,8 +73,8 @@
 }
 
 + (NSURLCache *)defaultURLCache {
-    return [[NSURLCache alloc] initWithMemoryCapacity:0 //20 * 1024 * 1024
-                                         diskCapacity:0 //150 * 1024 * 1024
+    return [[NSURLCache alloc] initWithMemoryCapacity: 20 * 1024 * 1024
+                                         diskCapacity: 150 * 1024 * 1024
                                              diskPath:@"co.pixpie.imagecache"];
 }
 
