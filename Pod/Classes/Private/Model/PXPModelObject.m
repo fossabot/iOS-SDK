@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PXPModelObject.h"
 
 NSString* const kPXPModelUpdatedNotification = @"kPXPModelUpdatedNotification";
 NSString* const kPXPModelUpdateErrorKey = @"kPXPModelUpdateErrorKey";

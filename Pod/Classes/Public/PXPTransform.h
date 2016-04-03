@@ -25,3 +25,11 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly, assign) CGSize fitSizeInPixels;
 
 @end
+
+@interface PXPTransform (PXPStringRepresentation)
+
+- (NSString *)qualityString;
+- (NSString *)formatString;
+- (NSString *)sizeString;
+
+@end
