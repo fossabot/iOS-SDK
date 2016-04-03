@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.splashCompleted(_:)), name: kSplashCompleteNotification, object: nil)
         let license = NSUserDefaults.standardUserDefaults().stringForKey("pxp_license")
-        PXP.sharedSDK().authWithApiKey(license!)
+        PXP.sharedSDK().auth()
         self.window?.tintColor = UIColor.whiteColor()
         return true
     }

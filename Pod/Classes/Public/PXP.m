@@ -56,16 +56,21 @@
 
 - (void)authWithApiKey:(NSString *)apiKey {
    if (self.accountInfo == nil) {
-        PXPAuthPrincipal *principal = [PXPAuthPrincipal new];
-        principal.appId = [[NSBundle mainBundle] bundleIdentifier];
-        principal.appKey = apiKey;
-        PXPAuthManager* authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
+       PXPAuthPrincipal *principal = [PXPAuthPrincipal new];
+       if (apiKey.length > 0) {
+           principal.appKey = apiKey;
+       }
+       PXPAuthManager* authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
        self.accountInfo = [[PXPAccountInfo alloc] initWithPrincipal:principal authManager:authManager];
        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authUpdate:) name:kPXPModelUpdatedNotification object:self.accountInfo];
        self.wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
        self.fileManager = [[PXPFileManager alloc] initWithAccountInfo:self.accountInfo];
        [self.accountInfo update];
     }
+}
+
+- (void)auth {
+    [self authWithApiKey:nil];
 }
 
 - (void)authUpdate:(NSNotification *)note {

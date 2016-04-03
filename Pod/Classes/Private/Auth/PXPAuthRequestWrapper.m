@@ -9,10 +9,15 @@
 #import "PXPAuthRequestWrapper.h"
 #import "AFNetworking.h"
 #import "NSString+PXPSecurity.h"
+#import "PXPConfig.h"
 
 static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
-#warning To be refactored
-static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
+
+@interface PXPAuthRequestWrapper ()
+
+@property (nonatomic, strong) NSString* requestSalt;
+
+@end
 
 @implementation PXPAuthRequestWrapper
 
@@ -25,14 +30,24 @@ static NSString* const kPXPSalt = @"PIXPIE_SALT_VERY_SECURE";
     return _sharedWrapper;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self != nil) {
+        
+    }
+    return self;
+}
+
 - (NSURLSessionDataTask *)authWithAppId:(NSString*)appId
                                  apiKey:(NSString*)apiKey
                            successBlock:(PXPRequestSuccessBlock)successBlock
                           failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
+    NSString* salt = PXPConfig.defaultConfig.requestSalt;
     long timestamp = (long)[[NSDate date] timeIntervalSince1970];
     NSString *stringTimestamp = [NSString stringWithFormat:@"%ld", timestamp];
-    NSString *toHash = [NSString stringWithFormat:@"%@%@%@", apiKey, kPXPSalt, stringTimestamp];
+    NSString *toHash = [NSString stringWithFormat:@"%@%@%@", apiKey, salt, stringTimestamp];
     NSString *hash = [toHash sha256];
     NSDictionary *params = @{@"reverseUrlId" : appId,
                              @"timestamp" : stringTimestamp,

@@ -24,7 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedSDK;
 
-- (void)authWithApiKey:(NSString*)apiKey;
+- (void)authWithApiKey:(NSString* __nullable)apiKey;
+- (void)auth;
 
 @property (nonatomic, readonly, assign) PXPState state;
 @property (nonatomic, readonly, strong, nullable) PXPFileManager *fileManager;

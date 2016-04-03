@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		00D6467F5364E899E00FA13E42C3D2B0 /* UIImageView+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 51329C37684D4DF13653ED9D8F926B7E /* UIImageView+PXPExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0995BC7026DE9A33EF7541B38245F4C7 /* PXPNetworkMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F3767D3E1E044657743E9468D8C8FB /* PXPNetworkMonitor.m */; };
+		0A504E871CB1246400998C1C /* PXPConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A504E851CB1246400998C1C /* PXPConfig.h */; };
+		0A504E881CB1246400998C1C /* PXPConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A504E861CB1246400998C1C /* PXPConfig.m */; };
 		0AE6B01F1CAAD66200559671 /* PXPTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6B01D1CAAD66200559671 /* PXPTask.m */; };
 		0AE6B0201CAAD66200559671 /* PXPTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE6B01E1CAAD66200559671 /* PXPTask.h */; };
 		0AE6B0231CAAE7FB00559671 /* NSURL+PXPUrl.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE6B0211CAAE7FB00559671 /* NSURL+PXPUrl.h */; };
@@ -289,6 +291,8 @@
 		07FA6CF8F3D250B167DC70319505061F /* EXPMatchers+raise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+raise.m"; path = "Expecta/Matchers/EXPMatchers+raise.m"; sourceTree = "<group>"; };
 		0830EE520222BD8BD4BE03038690CE60 /* EXPMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPMatcher.h; path = Expecta/EXPMatcher.h; sourceTree = "<group>"; };
 		09AD4FB701722A4652B7199DF287D17F /* EXPMatchers+beLessThanOrEqualTo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beLessThanOrEqualTo.m"; path = "Expecta/Matchers/EXPMatchers+beLessThanOrEqualTo.m"; sourceTree = "<group>"; };
+		0A504E851CB1246400998C1C /* PXPConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPConfig.h; sourceTree = "<group>"; };
+		0A504E861CB1246400998C1C /* PXPConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPConfig.m; sourceTree = "<group>"; };
 		0AB63D08578CD7389F9A015FAD0F6125 /* EXPMatchers+haveCountOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+haveCountOf.h"; path = "Expecta/Matchers/EXPMatchers+haveCountOf.h"; sourceTree = "<group>"; };
 		0AE6B01D1CAAD66200559671 /* PXPTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPTask.m; sourceTree = "<group>"; };
 		0AE6B01E1CAAD66200559671 /* PXPTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPTask.h; sourceTree = "<group>"; };
@@ -646,6 +650,8 @@
 			children = (
 				0AE8DEFA1C74C8590051553C /* PXPModelObject.h */,
 				0AE8DEFC1C74CC2B0051553C /* PXPModelObject.m */,
+				0A504E851CB1246400998C1C /* PXPConfig.h */,
+				0A504E861CB1246400998C1C /* PXPConfig.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1150,6 +1156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F28ED63BE1CDA552236D4F6D16DAD963 /* NSObject+SafeKVC.h in Headers */,
+				0A504E871CB1246400998C1C /* PXPConfig.h in Headers */,
 				90ACA23B61EFBD3A4EF7C6D831C68A03 /* NSString+PXPSecurity.h in Headers */,
 				728B142BA17D9F8CDA56F32E00F72661 /* Pixpie-iOS-umbrella.h in Headers */,
 				7D150872B1F0C91E4ED073F6A5E728BF /* PXP.h in Headers */,
@@ -1599,6 +1606,7 @@
 				5A33E12D32A1A7E0D2C995AAC1773ED3 /* PXPSDKRequestWrapper.m in Sources */,
 				CCE92363DBCB9CF2B60ADF11B5AADB4B /* PXPTransform.m in Sources */,
 				D1726521D95283AF7557240E49C6603D /* PXPWebPResponseSerializer.m in Sources */,
+				0A504E881CB1246400998C1C /* PXPConfig.m in Sources */,
 				3E256075CF06333D1EDE1FA6D846E542 /* PXPWifiMonitor.m in Sources */,
 				0AE6B0281CAAE8C700559671 /* NSString+PXPImageTransform.m in Sources */,
 				14578627D3B2E70D61C5DE160E90851F /* UIImage+PXP_WebP.m in Sources */,

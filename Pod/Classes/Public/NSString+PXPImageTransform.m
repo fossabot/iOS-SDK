@@ -22,12 +22,12 @@
 }
 
 + (NSString *)pxp_cdnUrl {
-    NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;
-    assert([host hasPrefix:@"http"]);
+    NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;;
     if (host.length == 0) {
         return nil;
     } else {
-        return [NSString stringWithFormat:@"%@", host];
+        assert([host hasPrefix:@"http"]);
+        return host;
     }
 }
 

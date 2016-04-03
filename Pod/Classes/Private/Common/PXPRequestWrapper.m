@@ -8,6 +8,7 @@
 
 #import "PXPRequestWrapper.h"
 #import "AFNetworking.h"
+#import "PXPConfig.h"
 
 @interface PXPRequestWrapper ()
 
@@ -22,8 +23,7 @@
 {
     self = [super init];
     if (self != nil) {
-#warning to think how to implement this properly
-        _backendUrl = @"http://api.pixpie.co:9001";
+        _backendUrl = [PXPConfig defaultConfig].backend;
         NSURLSessionConfiguration* configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:_backendUrl] sessionConfiguration:configuration];
         self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
