@@ -35,3 +35,12 @@
 }
 
 @end
+
+@implementation NSString (PXPUrlTypes)
+
+- (PXPUrlType)pxp_URLType {
+    NSURL* url = [NSURL URLWithString:self];
+    return ([url pxp_URLType]);
+}
+
+@end

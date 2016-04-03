@@ -13,13 +13,9 @@
 #import "PXPTransform.h"
 #import "PXPDefines.h"
 #import "NSString+PXPSecurity.h"
+#import "NSURL+PXPUrl.h"
 
 @implementation NSString (PXPImageTransform)
-
-- (PXPUrlType)pxp_URLType {
-    NSURL* url = [NSURL URLWithString:self];
-    return ([url pxp_URLType]);
-}
 
 + (NSString *)pxp_cdnUrl {
     NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;;

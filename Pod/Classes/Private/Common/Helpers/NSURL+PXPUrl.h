@@ -21,3 +21,9 @@ typedef enum {
 - (NSString*)pathAndQuery;
 
 @end
+
+@interface NSString (PXPUrlTypes)
+
+- (PXPUrlType)pxp_URLType;
+
+@end
