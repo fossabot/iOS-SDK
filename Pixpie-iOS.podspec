@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = "Pixpie-iOS"
-  s.version          = "0.3.0"
+  s.version          = "0.3.2"
   s.summary          = "Pixpie SDK for iOS"
   s.description      = "Pixpie is a media content optimization service for mobile applications. Built for mobile developers."
   s.homepage         = "http://pixpie.co"
-  s.screenshots      = "http://pixpie.co/img/pixpie_full_logo.png"
+  s.screenshots      = "http://pixpie-230a.kxcdn.com/images/pixpie_full_logo.png"
   s.license          = 'MIT'
   s.author           = { "Dmitry Osipa" => "dmitry@pixpie.co" }
   s.source           = { :git => "https://github.com/PixpieCo/Pixpie-iOS.git", :tag => s.version.to_s }
@@ -14,9 +14,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'Pixpie-iOS' => ['Pod/Assets/*.png']
-  }
   s.public_header_files = 'Pod/Classes/Public/**/*.h'
   s.dependency 'AFNetworking', '~> 3.0'
   s.dependency 'WebP'

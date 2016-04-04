@@ -161,7 +161,6 @@
 		B5852322ADE88AAD56EE042B80BA81E4 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3965E4992F12063DBB5685408F0EF182 /* AFURLResponseSerialization.m */; };
 		B84431CF8C64F363A334AA7089F6C134 /* NSValue+Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A56B92D4A8B836D65F75905BCAC4866 /* NSValue+Expecta.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BA12B131F10BCE3BE6E9A02FC908FE9D /* EXPMatchers+beCloseTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8182944556BFED5D105E9A0C9CEBA8B8 /* EXPMatchers+beCloseTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		BA9D29FB531A988C003A80ED40BCE59A /* Pixpie-iOS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 82609E7AEA2A32B48CB978BE52E2A740 /* Pixpie-iOS.bundle */; };
 		BC55C8365AEFF8217F6A567607754854 /* EXPDoubleTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 641613672DF7479C895481CBEE4DC412 /* EXPDoubleTuple.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BD68BAAC5154831C8D3B5B7F46F468C4 /* UIImage+PXP_WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A7DD7220327EDE727C7DCBC229A9411 /* UIImage+PXP_WebP.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BEFFE9FFE52E9A0833A7D2D8FB67EB4D /* EXPMatchers+beSubclassOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F90090CB17C11A8ED1299331A7F2E3B /* EXPMatchers+beSubclassOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -272,13 +271,6 @@
 			remoteGlobalIDString = FD5B06E9D40CB2763F395D17D2330EB2;
 			remoteInfo = "Pixpie-iOS";
 		};
-		DE27DBC13C29B8374146EEDC58E1FD5F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A65F2D10AB3ADCB0F968F2A36A2B92E2;
-			remoteInfo = "Pixpie-iOS-Pixpie-iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -374,7 +366,6 @@
 		545A5622CD759F8BE9B81E637A49B6CA /* EXPMatchers+beKindOf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beKindOf.m"; path = "Expecta/Matchers/EXPMatchers+beKindOf.m"; sourceTree = "<group>"; };
 		5506FF1C16F921303CA8FC92568FBAD1 /* EXPMatchers+beKindOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beKindOf.h"; path = "Expecta/Matchers/EXPMatchers+beKindOf.h"; sourceTree = "<group>"; };
 		551B1FF1D6DF07BC61DE32D4BCD34103 /* PXPWifiMonitor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PXPWifiMonitor.m; sourceTree = "<group>"; };
-		55CD4ACCA2D52A0F0D74E32C786B4F83 /* ResourceBundle-Pixpie-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-Pixpie-iOS-Info.plist"; sourceTree = "<group>"; };
 		56A4AE134FA8CA25A2817732258885E0 /* UIImageView+PXPExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+PXPExtensions.m"; sourceTree = "<group>"; };
 		579F51DDDC56EF9D46C5575E8C5F1737 /* PXPImageTaskManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PXPImageTaskManager.m; sourceTree = "<group>"; };
 		58F2FE00C17951D9E96904B445F46324 /* Pixpie-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pixpie-iOS.xcconfig"; sourceTree = "<group>"; };
@@ -424,7 +415,6 @@
 		812A89D3492B5FA68DA8B63E7BF983E5 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		8182944556BFED5D105E9A0C9CEBA8B8 /* EXPMatchers+beCloseTo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beCloseTo.m"; path = "Expecta/Matchers/EXPMatchers+beCloseTo.m"; sourceTree = "<group>"; };
 		822DD9837289B1B504A4EE983B4E546C /* PXPNetworkMonitor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PXPNetworkMonitor.h; sourceTree = "<group>"; };
-		82609E7AEA2A32B48CB978BE52E2A740 /* Pixpie-iOS.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pixpie-iOS.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D6D0FF8892AC1633195811C4F8AA82 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8475E963BDD68DA57EAB6F668CA41700 /* EXPMatchers+beTruthy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beTruthy.m"; path = "Expecta/Matchers/EXPMatchers+beTruthy.m"; sourceTree = "<group>"; };
 		84C1956150E6013ED6EEA2F5A5D66296 /* Pixpie-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pixpie-iOS-dummy.m"; sourceTree = "<group>"; };
@@ -586,13 +576,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				985F24CD91D6E00B19B9C51F3ABB7818 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBB2E8B5516EE2144A36B1B887E125CC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,7 +751,6 @@
 			children = (
 				E44BEBEC3AC09EF68E985ECFC5DFE01F /* AFNetworking.framework */,
 				AE780B0236F5B01FD90497B550B8AF01 /* Expecta.framework */,
-				82609E7AEA2A32B48CB978BE52E2A740 /* Pixpie-iOS.bundle */,
 				00F271C3AAC0B144F99B4DD202F56510 /* Pixpie_iOS.framework */,
 				8C19F9AB9D5623EEB8704D836A9177FF /* Pods_Pixpie_iOS_Example.framework */,
 				FF3C94803D91B3BB72F279EC673F1E9A /* Pods_Pixpie_iOS_Tests.framework */,
@@ -1062,7 +1044,6 @@
 				84C1956150E6013ED6EEA2F5A5D66296 /* Pixpie-iOS-dummy.m */,
 				21C41A63C54885D4DB0D1543448E3FFD /* Pixpie-iOS-prefix.pch */,
 				77FC7332AB17A89E979512BB8402C143 /* Pixpie-iOS-umbrella.h */,
-				55CD4ACCA2D52A0F0D74E32C786B4F83 /* ResourceBundle-Pixpie-iOS-Info.plist */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/Pixpie-iOS";
@@ -1377,23 +1358,6 @@
 			productReference = FF3C94803D91B3BB72F279EC673F1E9A /* Pods_Pixpie_iOS_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A65F2D10AB3ADCB0F968F2A36A2B92E2 /* Pixpie-iOS-Pixpie-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 629549179B30B1114E74C76FF50556FD /* Build configuration list for PBXNativeTarget "Pixpie-iOS-Pixpie-iOS" */;
-			buildPhases = (
-				B1B24C3DA19F301905C1D6D8C629778C /* Sources */,
-				FBB2E8B5516EE2144A36B1B887E125CC /* Frameworks */,
-				840E6BC66620BA6E54569EFCB01A8F68 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pixpie-iOS-Pixpie-iOS";
-			productName = "Pixpie-iOS-Pixpie-iOS";
-			productReference = 82609E7AEA2A32B48CB978BE52E2A740 /* Pixpie-iOS.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 		D7395774F71F144AEF249F1F2A27ACE0 /* Specta */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 462605DFE0FCC9159C92738967BBE1FF /* Build configuration list for PBXNativeTarget "Specta" */;
@@ -1424,7 +1388,6 @@
 			);
 			dependencies = (
 				B7BA790E1D585678C24DF3E56C869FF7 /* PBXTargetDependency */,
-				031F6388D05D05C781E09F0FEAA7B101 /* PBXTargetDependency */,
 			);
 			name = "Pixpie-iOS";
 			productName = "Pixpie-iOS";
@@ -1455,7 +1418,6 @@
 				1C3436CEA5C3D39764C5F54374794ECB /* AFNetworking */,
 				0D888F29E05E498D0CD91A51D28599A5 /* Expecta */,
 				FD5B06E9D40CB2763F395D17D2330EB2 /* Pixpie-iOS */,
-				A65F2D10AB3ADCB0F968F2A36A2B92E2 /* Pixpie-iOS-Pixpie-iOS */,
 				488E788F0D00173769387C1C39A28A59 /* Pods-Pixpie-iOS_Example */,
 				4E80F22A9AA117FFCE2A84003E16DA5A /* Pods-Pixpie-iOS_Tests */,
 				D7395774F71F144AEF249F1F2A27ACE0 /* Specta */,
@@ -1465,14 +1427,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		2A5FDFD84A58E58D826CF3567F7431C9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA9D29FB531A988C003A80ED40BCE59A /* Pixpie-iOS.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		840E6BC66620BA6E54569EFCB01A8F68 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1528,13 +1482,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FC39C468CF1323693683197FA870551 /* Pods-Pixpie-iOS_Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B1B24C3DA19F301905C1D6D8C629778C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1625,12 +1572,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		031F6388D05D05C781E09F0FEAA7B101 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pixpie-iOS-Pixpie-iOS";
-			target = A65F2D10AB3ADCB0F968F2A36A2B92E2 /* Pixpie-iOS-Pixpie-iOS */;
-			targetProxy = DE27DBC13C29B8374146EEDC58E1FD5F /* PBXContainerItemProxy */;
-		};
 		0BD1632F34FF1FAF66CE4228ADCD4FD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AFNetworking;
@@ -1716,6 +1657,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pixpie-iOS/Pixpie-iOS-prefix.pch";
@@ -1734,21 +1676,6 @@
 			};
 			name = Debug;
 		};
-		121E682898E2C4A7194A7D4A5A563ABB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58F2FE00C17951D9E96904B445F46324 /* Pixpie-iOS.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pixpie-iOS/ResourceBundle-Pixpie-iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = "Pixpie-iOS";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		2952B3C6909CF79419E899529474B8A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 11B55A25C0B1DD45D4D02AA28F6A189D /* AFNetworking.xcconfig */;
@@ -1760,6 +1687,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
@@ -1778,21 +1706,6 @@
 			};
 			name = Release;
 		};
-		5FC4F80AE09EB07D2EAD78089BF26B03 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58F2FE00C17951D9E96904B445F46324 /* Pixpie-iOS.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pixpie-iOS/ResourceBundle-Pixpie-iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = "Pixpie-iOS";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
 		782BA45A6F49E3A0D66DE3088DD50C76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F9AF82B17BFA2531E8B57A48EA5DDF8F /* Pods-Pixpie-iOS_Tests.debug.xcconfig */;
@@ -1804,6 +1717,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-Pixpie-iOS_Tests/Info.plist";
@@ -1973,6 +1887,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-Pixpie-iOS_Example/Info.plist";
@@ -2006,6 +1921,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-Pixpie-iOS_Example/Info.plist";
@@ -2039,6 +1955,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
@@ -2068,6 +1985,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pixpie-iOS/Pixpie-iOS-prefix.pch";
@@ -2097,6 +2015,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-Pixpie-iOS_Tests/Info.plist";
@@ -2174,15 +2093,6 @@
 			buildConfigurations = (
 				AC044B65E2FB02CB420DF9AE625B92F2 /* Debug */,
 				2952B3C6909CF79419E899529474B8A5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		629549179B30B1114E74C76FF50556FD /* Build configuration list for PBXNativeTarget "Pixpie-iOS-Pixpie-iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5FC4F80AE09EB07D2EAD78089BF26B03 /* Debug */,
-				121E682898E2C4A7194A7D4A5A563ABB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
