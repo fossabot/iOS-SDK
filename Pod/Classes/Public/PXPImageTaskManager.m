@@ -152,24 +152,25 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
 
 - (void)applyTransfrom:(PXPTransform*)transform toImage:(UIImage*)image completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
-    CGSize size = transform.fitSize;
-    CGSize currentSize = image.size;
-    NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
-        UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
-
-        float hfactor = currentSize.width / size.width;
-        float vfactor = currentSize.height / size.height;
-
-        float factor = fmax(hfactor, vfactor);
-        float newWidth = currentSize.width / factor;
-        float newHeight = currentSize.height / factor;
-        
-        [image drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
-        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        completionBlock(newImage, nil);
-    }];
-    [self.imageTransformQueue addOperation:operation];
+//    CGSize size = transform.fitSize;
+//    CGSize currentSize = image.size;
+//    NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
+//        UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
+//
+//        float hfactor = currentSize.width / size.width;
+//        float vfactor = currentSize.height / size.height;
+//
+//        float factor = fmax(hfactor, vfactor);
+//        float newWidth = currentSize.width / factor;
+//        float newHeight = currentSize.height / factor;
+//        
+//        [image drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+//        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        completionBlock(newImage, nil);
+//    }];
+//    [self.imageTransformQueue addOperation:operation];
+    completionBlock(image, nil);
 }
 
 @end
