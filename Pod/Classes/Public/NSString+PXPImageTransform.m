@@ -18,7 +18,7 @@
 @implementation NSString (PXPImageTransform)
 
 + (NSString *)pxp_cdnUrl {
-    NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;;
+    NSString* host = [PXP sharedSDK].accountInfo.cdnUrl;
     if (host.length == 0) {
         return nil;
     } else {
@@ -32,7 +32,10 @@
     NSString* result = nil;
     PXPUrlType type = [remoteUrl pxp_URLType];
     switch (type) {
-        case PXPUrlTypeCDN:
+        case PXPUrlTypeCDN: {
+            result = self;
+            break;
+        }
         case PXPUrlTypePath: {
             result = [NSString pxp_cdnUrl];
             break;
