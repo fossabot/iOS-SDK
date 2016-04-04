@@ -15,7 +15,6 @@
 @interface PXPAccountInfo : NSObject <PXPModelProtocol>
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithDict:(NSDictionary*)dict principal:(PXPAuthPrincipal*)principal;
 - (instancetype)initWithPrincipal:(PXPAuthPrincipal *)principal authManager:(PXPAuthManager *)authManager NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, strong, readonly) NSString* authToken;

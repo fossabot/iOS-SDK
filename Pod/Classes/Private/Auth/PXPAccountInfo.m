@@ -31,15 +31,6 @@
     return self;
 }
 
-- (instancetype)initWithDict:(NSDictionary*)dict principal:(PXPAuthPrincipal*)principal {
-    self = [super init];
-    if (self != nil) {
-        [self setIfExistsValuesForKeysWithDictionary:dict];
-        _principal = principal;
-    }
-    return self;
-}
-
 - (void)update {
     [self.updateTask cancel];
     self.updateTask = [self.authManager authorizeWithCompletionBlock:^(NSDictionary *dict, NSError *error) {

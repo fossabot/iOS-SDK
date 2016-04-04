@@ -43,6 +43,7 @@
         _callbackQueue = callbackQueue;
         _completionBlock = completionBlock;
     }
+    return self;
 }
 
 - (void)start {
