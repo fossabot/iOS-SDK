@@ -59,13 +59,13 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
     PXPUrlType urlType = [url pxp_URLType];
-    if ((urlType == PXPUrlTypePath) && self.sdkRequestWrapper != nil) {
+    if (urlType == PXPUrlTypePath && self.sdkRequestWrapper != nil) {
         return [self imageDownloadTaskWithPath:url.path.pxp_imagePath transform:transform completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
             PXPRunOnMainQueueWithoutDeadlocking(^{
                 completionBlock(responseObject, error);
             });
         }];
-    } else if ((urlType == PXPUrlTypeRemote) && (self.sdkRequestWrapper != nil)) {
+    } else if (urlType == PXPUrlTypeRemote && self.sdkRequestWrapper != nil) {
         return [self imageDownloadWithRemoteUrl:url transform:transform completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
             PXPRunOnMainQueueWithoutDeadlocking(^{
                 completionBlock(responseObject, error);

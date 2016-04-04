@@ -11,7 +11,8 @@
 
 @interface UIImage (PXP_WebP)
 
-+ (UIImage*)pxp_imageWithWebPData:(NSData*)imgData;
++ (UIImage *)pxp_imageWithWebPData:(NSData*)imgData;
++ (UIImage *)pxp_imageWithWebPData:(NSData *)imgData error:(NSError **)error;
 
 + (UIImage*)pxp_imageWithWebP:(NSString*)filePath;
 

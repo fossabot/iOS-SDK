@@ -109,11 +109,14 @@ static void free_image_data(void *info, const void *data, size_t size)
         *error = dataError;
         return nil;
     }
-    return [UIImage imageWithWebPData:imgData error:error];
+    return [UIImage pxp_imageWithWebPData:imgData error:error];
 }
 
-+ (UIImage *)imageWithWebPData:(NSData *)imgData error:(NSError **)error
+#pragma mark - Synchronous methods
+
++ (UIImage *)pxp_imageWithWebPData:(NSData *)imgData error:(NSError **)error
 {
+    NSParameterAssert(imgData != nil);
     // `WebPGetInfo` weill return image width and height
     int width = 0, height = 0;
     if(!WebPGetInfo([imgData bytes], [imgData length], &width, &height)) {
@@ -170,7 +173,6 @@ static void free_image_data(void *info, const void *data, size_t size)
     return result;
 }
 
-#pragma mark - Synchronous methods
 + (UIImage *)pxp_imageWithWebP:(NSString *)filePath
 {
     NSParameterAssert(filePath != nil);
@@ -179,8 +181,7 @@ static void free_image_data(void *info, const void *data, size_t size)
 
 + (UIImage *)pxp_imageWithWebPData:(NSData *)imgData
 {
-    NSParameterAssert(imgData != nil);
-    return [self imageWithWebPData:imgData error:nil];
+    return [self pxp_imageWithWebPData:imgData error:nil];
 }
 
 + (NSData *)pxp_imageToWebP:(UIImage *)image quality:(CGFloat)quality
