@@ -7,9 +7,9 @@
 //
 
 #import "PXPAuthRequestWrapper.h"
-#import "AFNetworking.h"
 #import "NSString+PXPSecurity.h"
 #import "PXPConfig.h"
+@import AFNetworking;
 
 static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
 

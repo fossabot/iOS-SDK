@@ -7,12 +7,12 @@
 //
 
 #import "PXPNetworkMonitor.h"
-#import "AFNetworkReachabilityManager.h"
 #import "PXPCellMonitor.h"
 #import "PXPWifiMonitor.h"
 #import "PXPNetInfo.h"
 #import "PXPNetworkTechnologies.h"
 @import UIKit.UIDevice;
+@import AFNetworking.AFNetworkReachabilityManager;
 
 NSString* const kPXPNetworkChangedNotification = @"kPXPNetworkChangedNotification";
 

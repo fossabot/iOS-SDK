@@ -18,6 +18,8 @@ profile
 DerivedData
 *.hmap
 *.ipa
+*.zip
+*.rar
 
 # Bundler
 .bundle
@@ -32,3 +34,4 @@ Carthage
 #
 # Pods/
 Pixpie-Info*.plist
+Pixpie.framework

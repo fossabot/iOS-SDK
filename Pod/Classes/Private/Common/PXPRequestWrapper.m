@@ -7,8 +7,8 @@
 //
 
 #import "PXPRequestWrapper.h"
-#import "AFNetworking.h"
 #import "PXPConfig.h"
+@import AFNetworking;
 
 @interface PXPRequestWrapper ()
 

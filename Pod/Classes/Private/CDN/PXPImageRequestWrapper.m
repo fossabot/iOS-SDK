@@ -7,9 +7,9 @@
 //
 
 #import "PXPImageRequestWrapper.h"
-#import "AFNetworking.h"
 #import "PXPWebPResponseSerializer.h"
-#import "AFAutoPurgingImageCache.h"
+@import AFNetworking.AFNetworkReachabilityManager;
+@import AFNetworking;
 
 @interface PXPImageRequestWrapper ()
 
@@ -59,7 +59,7 @@
 + (NSURLSessionConfiguration *)defaultImageSessionConfiguration {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
 
-#warning set the default HTTP headers
+    ***REMOVED***
 
     configuration.HTTPShouldSetCookies = YES;
     configuration.HTTPShouldUsePipelining = NO;

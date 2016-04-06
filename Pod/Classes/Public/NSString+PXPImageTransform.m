@@ -33,7 +33,7 @@
     PXPUrlType type = [remoteUrl pxp_URLType];
     switch (type) {
         case PXPUrlTypeCDN: {
-            result = self;
+            result = remoteUrl;
             break;
         }
         case PXPUrlTypePath: {

@@ -6,7 +6,8 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+@import UIKit;
 
 @class PXPTransform;
 @class PXPSDKRequestWrapper;

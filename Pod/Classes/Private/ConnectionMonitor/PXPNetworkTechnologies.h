@@ -11,6 +11,8 @@
  *  @discussion  list of all supported network technologies
  */
 
+@import Foundation;
+
 /*!
  *  @brief  Unknown type of network
  */
