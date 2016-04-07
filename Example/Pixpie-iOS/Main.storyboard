@@ -37,14 +37,15 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="WK4-EE-8BC">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="NvF-Ef-Lks">
-                            <view key="customView" contentMode="scaleToFill" id="jwF-dl-B1P">
-                                <rect key="frame" x="447" y="5" width="133" height="33"/>
+                            <view key="customView" contentMode="scaleToFill" id="jwF-dl-B1P" customClass="PXStatusView">
+                                <rect key="frame" x="547" y="5" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="statusView" destination="jwF-dl-B1P" id="c3q-7E-4XK"/>
                         <segue destination="jk8-Kj-LOe" kind="show" identifier="DetailsSegue" id="wQ0-4f-7wy"/>
                     </connections>
                 </collectionViewController>

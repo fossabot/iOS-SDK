@@ -4,7 +4,7 @@ use_frameworks!
 
 target 'InspiringPhotos' do
   pod 'Pixpie', :path => "../"
-  pod 'PXStatusView', '~> 0.1.0'
+  pod 'PXStatusView'
 end
 
 target 'Pixpie-iOS_Tests' do

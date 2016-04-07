@@ -8,6 +8,7 @@
 
 import UIKit
 import Pixpie
+import PXStatusView
 
 private let kCellIdentifier = "kImageCell"
 private let kSectionsCount = 1
@@ -15,6 +16,7 @@ private let kDetailsSegue = "DetailsSegue"
 
 class ImagesViewController: UICollectionViewController {
 
+    @IBOutlet weak var statusView: PXStatusView!
     let imageLinksArray = kImageLinkArray
     var pickedUrl: NSURL?
 
@@ -25,7 +27,16 @@ class ImagesViewController: UICollectionViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        //self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.statusView.backgroundColor = UIColor.clearColor()
+        switch PXP.sharedSDK().state {
+        case PXPStateReady:
+            self.statusView.state = .Green
+        case PXPStateFailed:
+            self.statusView.state = .Red
+        default:
+            self.statusView.state = .Yellow
+        }
     }
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

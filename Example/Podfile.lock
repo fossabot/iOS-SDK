@@ -25,7 +25,7 @@ PODS:
 DEPENDENCIES:
   - Expecta
   - Pixpie (from `../`)
-  - PXStatusView (~> 0.1.0)
+  - PXStatusView
   - Specta
 
 EXTERNAL SOURCES:
