@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Pixpie_iOS
+import Pixpie
 
 let kSplashCompleteNotification = "kSplashNotification"
 

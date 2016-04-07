@@ -1,1 +1,0 @@
-../../../../WebP/Frameworks/WebP.framework/Headers/encode.h

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Pixpie_iOS
+import Pixpie
 
 private let kCellIdentifier = "kImageCell"
 private let kSectionsCount = 1

@@ -1,14 +1,13 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/bomjkolyadun/PixpieCocoapods.git'
+source 'https://github.com/PixpieCo/PixpieCocoapods.git'
 use_frameworks!
 
-target 'Pixpie-iOS_Example' do
-  pod "Pixpie-iOS", :path => "../"
+target 'InspiringPhotos' do
+  pod "Pixpie", :path => "../"
 end
 
 target 'Pixpie-iOS_Tests' do
-  pod "Pixpie-iOS", :path => "../"
-
+  pod "Pixpie", :path => "../"
   pod 'Specta'
   pod 'Expecta'
 end
