@@ -3,11 +3,12 @@ source 'https://github.com/PixpieCo/PixpieCocoapods.git'
 use_frameworks!
 
 target 'InspiringPhotos' do
-  pod "Pixpie", :path => "../"
+  pod 'Pixpie', :path => "../"
+  pod 'PXStatusView', '~> 0.1.0'
 end
 
 target 'Pixpie-iOS_Tests' do
-  pod "Pixpie", :path => "../"
+  pod 'Pixpie', :path => "../"
   pod 'Specta'
   pod 'Expecta'
 end

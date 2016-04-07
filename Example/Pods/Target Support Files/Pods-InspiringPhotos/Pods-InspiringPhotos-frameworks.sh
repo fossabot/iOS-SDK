@@ -85,11 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-InspiringPhotos/AFNetworking.framework"
+  install_framework "Pods-InspiringPhotos/PXStatusView.framework"
   install_framework "Pods-InspiringPhotos/Pixpie.framework"
   install_framework "Pods-InspiringPhotos/WebP.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-InspiringPhotos/AFNetworking.framework"
+  install_framework "Pods-InspiringPhotos/PXStatusView.framework"
   install_framework "Pods-InspiringPhotos/Pixpie.framework"
   install_framework "Pods-InspiringPhotos/WebP.framework"
 fi

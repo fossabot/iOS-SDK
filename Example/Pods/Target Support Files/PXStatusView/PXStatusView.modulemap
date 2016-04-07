@@ -1,0 +1,6 @@
+framework module PXStatusView {
+  umbrella header "PXStatusView-umbrella.h"
+
+  export *
+  module * { export * }
+}
