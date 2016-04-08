@@ -94,8 +94,6 @@
 		7207A32477A2D959187DF189 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		78FF69FFFB4C71F314B016A7 /* Pods-InspiringPhotos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InspiringPhotos.release.xcconfig"; path = "Pods/Target Support Files/Pods-InspiringPhotos/Pods-InspiringPhotos.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		ADA71D97ACD329AA7169454A /* Pods-Pixpie-iOS_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B9A5716F625079A9204DACA9 /* Pods-Pixpie-iOS_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Example/Pods-Pixpie-iOS_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F5DE0EFC5277A0C0897EC562 /* Pods_InspiringPhotos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InspiringPhotos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -241,8 +239,6 @@
 		61D1478F97FC22DDAE3DBFA3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B9A5716F625079A9204DACA9 /* Pods-Pixpie-iOS_Example.debug.xcconfig */,
-				ADA71D97ACD329AA7169454A /* Pods-Pixpie-iOS_Example.release.xcconfig */,
 				2EF25F1A47604F703D2BB9AA /* Pods-Pixpie-iOS_Tests.debug.xcconfig */,
 				65309581D9031D0F18BA8B04 /* Pods-Pixpie-iOS_Tests.release.xcconfig */,
 				687D97B8C44CABD7957F530C /* Pods-InspiringPhotos.debug.xcconfig */,
@@ -264,6 +260,7 @@
 				6003F588195388D20070C39A /* Resources */,
 				0994D391AFBC347DE174D0AB /* Embed Pods Frameworks */,
 				1110E2573030FCDD9CAE0F12 /* Copy Pods Resources */,
+				0AA145871CB7AE17002DA031 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -380,6 +377,20 @@
 			shellPath = "/bin/sh                                                                                                                                ";
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InspiringPhotos/Pods-InspiringPhotos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		0AA145871CB7AE17002DA031 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 0312aba01a22510db11f59f8e5e94b8619b023b4 6ef9bca0b0c00edfac08e81fc33a02c65870d507140ac07b5ab0483904ebc1e2";
 		};
 		1110E2573030FCDD9CAE0F12 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

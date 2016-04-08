@@ -1,6 +1,0 @@
-framework module Pixpie {
-  umbrella header "Pixpie-umbrella.h"
-
-  export *
-  module * { export * }
-}

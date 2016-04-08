@@ -1,1 +1,0 @@
-../../../WebP/Pod/src/utils/rescaler.h

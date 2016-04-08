@@ -1,1 +1,0 @@
-../../../WebP/Pod/src/webp/format_constants.h

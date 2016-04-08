@@ -8,10 +8,7 @@
 
 import Foundation
 
-let kImageLinkArray: [String] = ["https://c2.staticflickr.com/2/1630/26144774781_0e2e3628de_k.jpg",
-    "https://sentinel2.luxoft.com/sen/wiki/download/attachments/521201154/Peak_Matrix_Award.JPG?version=2&modificationDate=1459515317000&api=v2",
-    "http://109.166.244.135/dmitry/ea144cb12d0e73c0d2e8cc78cf4a9bc41c3e7860d8e653c758378d08a664176a/remote.resources/sentinel2.luxoft.com/a/a/1/5938900314c4ddc9f001ece3b0690.pixpie.resource/768_90.webp",
-                                 "https://farm2.staticflickr.com/1442/24934891826_e7c17d061a_z.jpg",
+let kImageLinkArray: [String] = ["https://farm2.staticflickr.com/1442/24934891826_e7c17d061a_z.jpg",
                                  "https://farm2.staticflickr.com/1442/24937114956_2b32c75a0e_z.jpg",
                                  "https://farm2.staticflickr.com/1444/24326038983_038d2ce490_z.jpg",
                                  "https://farm2.staticflickr.com/1445/24328877053_ec1ed4072d_z.jpg",
