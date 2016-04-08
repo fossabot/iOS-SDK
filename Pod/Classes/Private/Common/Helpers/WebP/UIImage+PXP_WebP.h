@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@import WebP;
+#import <WebP/encode.h>
 
 @interface UIImage (PXP_WebP)
 

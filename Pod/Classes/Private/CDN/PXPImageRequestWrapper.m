@@ -8,8 +8,8 @@
 
 #import "PXPImageRequestWrapper.h"
 #import "PXPWebPResponseSerializer.h"
-@import AFNetworking.AFNetworkReachabilityManager;
-@import AFNetworking;
+#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFAutoPurgingImageCache.h>
 
 @interface PXPImageRequestWrapper ()
 

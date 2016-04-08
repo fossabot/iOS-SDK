@@ -35,3 +35,4 @@ Carthage
 Pods/
 Pixpie-Info*.plist
 Pixpie.framework
+PixpieFramework/Output/

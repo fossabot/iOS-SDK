@@ -10,7 +10,7 @@
 #import "PXPDefines.h"
 #import "PXPAccountInfo.h"
 #import "PXPAuthPrincipal.h"
-@import AFNetworking;
+#import <AFNetworking/AFNetworking.h>
 
 static NSString* const kPXPUpdateImageRequestPath = @"/async/images/newResolution/%@/%@/%@/%@";
 static NSString* const kPXPUploadImageRequestPath = @"/async/images/upload/%@/%@";
