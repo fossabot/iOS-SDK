@@ -58,9 +58,6 @@
 
 + (NSURLSessionConfiguration *)defaultImageSessionConfiguration {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-
-    ***REMOVED***
-
     configuration.HTTPShouldSetCookies = YES;
     configuration.HTTPShouldUsePipelining = NO;
 
