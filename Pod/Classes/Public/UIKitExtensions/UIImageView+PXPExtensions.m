@@ -38,7 +38,7 @@
 
 - (void)setPxp_transform:(PXPTransform *)transform {
     NSString* key = NSStringFromSelector(@selector(pxp_transform));
-    objc_setAssociatedObject(self, (__bridge const void *)(key), transform, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, (__bridge const void *)(key), transform, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (PXPTransform*)pxp_transform {
@@ -46,7 +46,7 @@
     PXPTransform* transform = objc_getAssociatedObject(self, (__bridge const void *)(key));
     if (transform == nil) {
         transform = [[PXPTransform alloc] initWithImageView:self];
-        objc_setAssociatedObject(self, (__bridge const void *)(key), transform, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, (__bridge const void *)(key), transform, OBJC_ASSOCIATION_RETAIN);
     }
     return transform;
 }
@@ -54,7 +54,7 @@
 - (void)setPxp_downloadTask:(NSURLSessionDataTask *)downloadTask {
     NSString* key = NSStringFromSelector(@selector(pxp_downloadTask));
     PXPWeakObjectContainer *container = [[PXPWeakObjectContainer alloc] initWithObject:downloadTask];
-    objc_setAssociatedObject(self, (__bridge const void *)(key), container, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, (__bridge const void *)(key), container, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (NSURLSessionDataTask*)pxp_downloadTask {
