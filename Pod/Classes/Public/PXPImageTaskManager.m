@@ -56,6 +56,7 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
 
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url
                                         transform:(PXPTransform*)transform
+                                          headers:(NSDictionary * _Nullable)headers
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
     PXPUrlType urlType = [url pxp_URLType];
@@ -66,14 +67,14 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
             });
         }];
     } else if (urlType == PXPUrlTypeRemote && self.sdkRequestWrapper != nil) {
-        return [self imageDownloadWithRemoteUrl:url transform:transform completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+        return [self imageDownloadWithRemoteUrl:url transform:transform headers:headers completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
             PXPRunOnMainQueueWithoutDeadlocking(^{
                 completionBlock(responseObject, error);
             });
         }];
     } else {
         __weak typeof(self)weakSelf = self;
-        return [self imageDownloadTaskWithUrl:url completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+        return [self imageDownloadTaskWithUrl:url headers:headers completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (responseObject != nil) {
                 [strongSelf applyTransfrom:transform toImage:responseObject completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
@@ -101,7 +102,7 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
             completionBlock(responseObject, nil);
         } else {
             NSURL* url = [NSURL URLWithString:[path pxp_urlStringForTransform:nil]];
-            [self imageDownloadTaskWithUrl:url completion:completionBlock];
+            [self imageDownloadTaskWithUrl:url  headers:nil completion:completionBlock];
             [self.sdkRequestWrapper updateImageWithWidth:transform.sizeString quality:transform.qualityString path:url.path.pxp_imagePath successBlock:^(id responseObject) {
                 NSLog(@"OK: %@", responseObject);
             } failtureBlock:^(NSError *error) {
@@ -109,12 +110,13 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
             }];
         }
     };
-    NSURLSessionDataTask* task = [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
+    NSURLSessionDataTask* task = [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString]  headers:nil completion:block];
     return task;
 }
 
 - (NSURLSessionDataTask*)imageDownloadWithRemoteUrl:(NSURL*)url
                                           transform:(PXPTransform*)transform
+                                            headers:(NSDictionary * _Nullable)params
                                          completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
     NSString* urlString = [url.absoluteString pxp_urlStringForTransform:transform];
@@ -123,7 +125,7 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
             completionBlock(responseObject, error);
         } else {
             __weak typeof(self)weakSelf = self;
-            [self imageDownloadTaskWithUrl:url completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+            [self imageDownloadTaskWithUrl:url headers:params completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
                 __strong __typeof(weakSelf)strongSelf = weakSelf;
                 if (responseObject != nil) {
                     [strongSelf applyTransfrom:transform toImage:responseObject completion:completionBlock];
@@ -138,16 +140,18 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
             }];
         }
     };
-    NSURLSessionDataTask* task = [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] completion:block];
+    NSURLSessionDataTask* task = [self imageDownloadTaskWithUrl:[NSURL URLWithString:urlString] headers:params completion:block];
     return task;
 }
 
 #pragma mark - Private Interface
 
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url
+                                          headers:(NSDictionary * _Nullable)headers
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
-    return [self.imageRequestWrapper imageDownloadTaskForUrl:url completion:completionBlock];
+    NSDictionary* params = [PXPImageTaskManager apiParamsFromHeaders:headers];
+    return [self.imageRequestWrapper imageDownloadTaskForUrl:url parameters:params completion:completionBlock];
 }
 
 - (void)applyTransfrom:(PXPTransform*)transform toImage:(UIImage*)image completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
@@ -171,6 +175,13 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
 //    }];
 //    [self.imageTransformQueue addOperation:operation];
     completionBlock(image, nil);
+}
+
++ (NSDictionary*)apiParamsFromHeaders:(NSDictionary*)headers {
+    NSMutableDictionary* params = [NSMutableDictionary new];
+    NSString* authValue = headers[@"Authorization"];
+    SAFE_SET_OBJECT(params, @"authorizationHeader", authValue);
+    return params;
 }
 
 @end

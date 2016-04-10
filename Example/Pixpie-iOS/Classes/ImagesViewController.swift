@@ -53,7 +53,7 @@ class ImagesViewController: UICollectionViewController {
         let transform = PXPTransform(imageView: cell.imageView!)
         transform.fitSize = CGSize(width: 100.0, height: 100.0)
         cell.imageView?.pxp_transform = transform
-        cell.imageView?.pxp_requestImage(url)
+        cell.imageView?.pxp_requestImage(url!, headers: nil)
         return cell
     }
 

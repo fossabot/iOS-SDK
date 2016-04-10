@@ -76,13 +76,17 @@
     }];
 }
 
-- (void)pxp_requestImage:(NSURL*)url {
+- (void)pxp_requestImage:(NSURL *)url {
+    [self pxp_requestImage:url headers:nil];
+}
+
+- (void)pxp_requestImage:(NSURL*)url headers:(NSDictionary  * _Nullable )headers {
     [self.pxp_downloadTask cancel];
     self.image = nil;
     if (self.pxp_transform.fitSizeStyle == PXPTransformFitSizeStyleAutomatic) {
         self.pxp_transform.fitSize = [self smallestSize];
     }
-    self.pxp_downloadTask = [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithUrl:url transform:self.pxp_transform completion:^(UIImage *responseObject, NSError *error) {
+    self.pxp_downloadTask = [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithUrl:url transform:self.pxp_transform headers:headers completion:^(UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.image = responseObject;
         });

@@ -17,7 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)config NS_DESIGNATED_INITIALIZER;
 
 - (NSURLSessionDataTask *)imageDownloadTaskForUrl:(NSURL *)url
+                                       parameters:(NSDictionary * _Nullable )params
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
+- (NSURLSessionDataTask *)imageDownloadTaskForRequest:(NSURLRequest *)request
+                                           completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
 
 + (NSURLSessionConfiguration *)defaultImageSessionConfiguration;
 

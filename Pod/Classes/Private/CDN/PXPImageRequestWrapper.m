@@ -38,11 +38,18 @@
 }
 
 - (NSURLSessionDataTask *)imageDownloadTaskForUrl:(NSURL *)url
+                                       parameters:(NSDictionary * _Nullable )params
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
     NSError *error = nil;
-    NSURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:url.absoluteString parameters:nil error:&error];
+    NSURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:url.absoluteString parameters:params error:&error];
     assert(error == nil);
+    return [self imageDownloadTaskForRequest:request completion:completionBlock];
+}
+
+- (NSURLSessionDataTask *)imageDownloadTaskForRequest:(NSURLRequest *)request
+                                           completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+
     NSURLSessionDataTask* task = [self.sessionManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error == nil) {
             completionBlock(responseObject, nil);

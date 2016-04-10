@@ -57,9 +57,10 @@
 #pragma mark - Private Interface
 
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL*)url
+                                           params:(NSDictionary * _Nullable)params
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
-    return [self.imageRequestWrapper imageDownloadTaskForUrl:url completion:completionBlock];
+    return [self.imageRequestWrapper imageDownloadTaskForUrl:url parameters:params completion:completionBlock];
 }
 
 - (void)applyTransfrom:(PXPTransform*)transform toImage:(UIImage*)image completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {

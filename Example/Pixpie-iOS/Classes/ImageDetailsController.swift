@@ -16,7 +16,7 @@ class ImageDetailsController: UIViewController {
         if isBeingPresented() || isMovingToParentViewController() {
             guard let imageUrl = url
                 else {return}
-            imageView.pxp_requestImage(imageUrl)
+            imageView.pxp_requestImage(imageUrl, headers: nil)
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     }

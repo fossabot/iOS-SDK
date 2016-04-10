@@ -22,12 +22,14 @@ typedef void (^PXPImageUploadRequestCompletionBlock)(id _Nullable responseObject
 - (instancetype)init;
 - (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL *)url
                                         transform:(PXPTransform *)transform
+                                          headers:(NSDictionary * _Nullable)headers
                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
 - (NSURLSessionDataTask*)imageDownloadTaskWithPath:(NSString *)path
                                          transform:(PXPTransform *)transform
                                         completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
 - (NSURLSessionDataTask*)imageDownloadWithRemoteUrl:(NSURL *)url
                                           transform:(PXPTransform *)transform
+                                            headers:(NSDictionary * _Nullable)headers
                                          completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
 
 @end
