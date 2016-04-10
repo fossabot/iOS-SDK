@@ -50,9 +50,9 @@ class ImagesViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: ImageCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellIdentifier, forIndexPath: indexPath) as! ImageCell
         let url = NSURL(string: imageLinksArray[indexPath.item])
-        let transform = PXPTransform()
+        let transform = PXPTransform(imageView: cell.imageView!)
         transform.fitSize = CGSize(width: 100.0, height: 100.0)
-        cell.imageView?.pxp_transfrom = transform
+        cell.imageView?.pxp_transform = transform
         cell.imageView?.pxp_requestImage(url)
         return cell
     }

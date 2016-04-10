@@ -11,6 +11,7 @@
 #import "PXPNetworkTechnologies.h"
 #import "PXPNetInfo.h"
 #import "PXPNetworkMonitor.h"
+#import "UIImageView+PXPExtensions.h"
 
 NSInteger PXPFirstClosest(const NSInteger *values, NSUInteger len, NSInteger value) {
     NSInteger dist = labs(values[0] - value);
@@ -53,12 +54,45 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 
 @implementation PXPTransform
 
+@synthesize fitSize = _fitSize;
+
+- (instancetype)initWithImageView:(UIImageView*)view {
+    self = [super init];
+    if (self != nil) {
+        _imageView = view;
+        _imageView.pxp_transform = self;
+    }
+    return self;
+}
+
+- (void)setImageView:(UIImageView *)view {
+    if (_imageView != view) {
+        _imageView = view;
+        _imageView.pxp_transform = self;
+    }
+}
+
 - (CGSize)fitSizeInPixels {
     CGFloat scale = [UIScreen mainScreen].scale;
     NSUInteger width = lround(self.fitSize.width * scale);
     NSUInteger height = lround(self.fitSize.height * scale);
     CGSize size = {width, height};
     return size;
+}
+
+- (CGSize)fitSize {
+    if (_fitSizeStyle == PXPTransformFitSizeStyleAutomatic) {
+        return self.imageView.bounds.size;
+    } else {
+        return _fitSize;
+    }
+}
+
+- (void)setFitSize:(CGSize)fitSize {
+    if (!CGSizeEqualToSize(_fitSize, fitSize)) {
+        _fitSizeStyle = PXPTransformFitSizeStyleManual;
+        _fitSize = fitSize;
+    }
 }
 
 @end

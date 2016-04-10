@@ -13,7 +13,7 @@
 
 @interface UIImageView (PXPExtensions)
 
-@property (nonatomic, strong) PXPTransform* pxp_transfrom;
+@property (nonatomic, strong) PXPTransform* pxp_transform;
 @property (nonatomic, strong) NSURLSessionDataTask* pxp_downloadTask;
 
 - (void)pxp_requestImage:(NSURL*)url;
