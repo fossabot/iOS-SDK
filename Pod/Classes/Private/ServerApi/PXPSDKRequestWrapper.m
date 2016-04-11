@@ -81,9 +81,13 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     assert(path != nil);
     NSString* apiPath = [NSString stringWithFormat:kPXPUploadImageRequestPath, self.appId, path];
     NSString* requestUrl = [self.backendUrl stringByAppendingString:apiPath];
-    NSURLSessionDataTask *task = [self.sessionManager POST:requestUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLSessionDataTask *task = [self.sessionManager POST:requestUrl
+                                                parameters:nil
+                                 constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithInputStream:stream name:@"image" fileName:@"image" length:length mimeType:mimeType];
-    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    }
+//                                                  progress:nil
+                                                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failtureBlock(error);
@@ -142,7 +146,10 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
 
     assert(self.sessionManager != nil);
     __weak typeof(self)weakSelf = self;
-    NSURLSessionDataTask *task = [self.sessionManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    NSURLSessionDataTask *task = [self.sessionManager dataTaskWithRequest:request
+//                                                           uploadProgress:nil
+//                                                         downloadProgress:nil
+                                                        completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (error == nil) {
             BLOCK_SAFE_RUN(successBlock, responseObject);

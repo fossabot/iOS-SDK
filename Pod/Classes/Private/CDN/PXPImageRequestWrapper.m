@@ -50,7 +50,10 @@
 - (NSURLSessionDataTask *)imageDownloadTaskForRequest:(NSURLRequest *)request
                                            completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
-    NSURLSessionDataTask* task = [self.sessionManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    NSURLSessionDataTask* task = [self.sessionManager dataTaskWithRequest:request
+//                                                           uploadProgress:nil
+//                                                         downloadProgress:nil
+                                                        completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error == nil) {
             completionBlock(responseObject, nil);
         } else {

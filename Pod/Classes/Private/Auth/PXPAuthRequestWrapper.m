@@ -54,7 +54,10 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
                              @"hash" : hash};
 
     NSString* url = [NSString stringWithFormat:@"%@%@", self.backendUrl, kPXPAuthMethod];
-    return [self.sessionManager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    return [self.sessionManager GET:url
+                         parameters:params
+//                           progress:nil
+                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         failtureBlock(error);
