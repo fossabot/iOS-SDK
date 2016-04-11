@@ -36,3 +36,4 @@ Pods/
 Pixpie-Info*.plist
 Pixpie.framework
 PixpieFramework/Output/
+PXPNamespacedDependencies.h
