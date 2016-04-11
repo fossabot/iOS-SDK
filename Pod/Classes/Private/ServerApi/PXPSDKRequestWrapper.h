@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSURLSessionDataTask *)uploadImageTaskAtUrl:(NSString *)url
                                          width:(NSString *)width
                                        quality:(NSString *)quality
+                                        params:(NSDictionary*)requestHeaders
                                   successBlock:(PXPRequestSuccessBlock)successBlock
                                  failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 - (NSURLSessionDataTask *)imagesAtPath:(NSString *)path

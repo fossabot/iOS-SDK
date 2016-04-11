@@ -98,6 +98,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
 - (NSURLSessionDataTask *)uploadImageTaskAtUrl:(NSString *)url
                                          width:(NSString *)width
                                        quality:(NSString *)quality
+                                        params:(NSDictionary*)requestHeaders
                                   successBlock:(PXPRequestSuccessBlock)successBlock
                                  failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
@@ -113,6 +114,10 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
         SAFE_SET_OBJECT(derivedImageSpecs, @"quality", quality);
     }
     SAFE_SET_OBJECT(params, @"derivedImageSpecs", derivedImageSpecs);
+    NSDictionary* headers = [PXPSDKRequestWrapper apiParamsFromHeaders:headers];
+    for (NSString* key in headers.allKeys) {
+        [params setObject:headers[key] forKey:key];
+    }
 
     NSError* error = nil;
     NSMutableURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:requestUrl parameters:params error:&error];
@@ -189,6 +194,14 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
         }];
         [operation resume];
     }
+}
+
++ (NSDictionary*)apiParamsFromHeaders:(NSDictionary*)headers {
+
+    NSMutableDictionary* params = [NSMutableDictionary new];
+    NSString* authValue = headers[@"Authorization"];
+    SAFE_SET_OBJECT(params, @"authorizationHeader", authValue);
+    return params;
 }
 
 @end
