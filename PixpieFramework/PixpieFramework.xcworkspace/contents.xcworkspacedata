@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:NamespacedDependencies/NamespacedDependencies.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:PixpieFramework.xcodeproj">
    </FileRef>
    <FileRef

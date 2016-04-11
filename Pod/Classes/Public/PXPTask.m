@@ -63,26 +63,26 @@
     return [self.imageRequestWrapper imageDownloadTaskForUrl:url parameters:params completion:completionBlock];
 }
 
-- (void)applyTransfrom:(PXPTransform*)transform toImage:(UIImage*)image completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
-
-    CGSize size = transform.fitSize;
-    CGSize currentSize = image.size;
-    NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
-        UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
-
-        float hfactor = currentSize.width / size.width;
-        float vfactor = currentSize.height / size.height;
-
-        float factor = fmax(hfactor, vfactor);
-        float newWidth = currentSize.width / factor;
-        float newHeight = currentSize.height / factor;
-
-        [image drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
-        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        completionBlock(newImage, nil);
-    }];
-    [self.processingQueue addOperation:operation];
-}
+//- (void)applyTransfrom:(PXPTransform*)transform toImage:(UIImage*)image completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+//
+//    CGSize size = transform.fitSize;
+//    CGSize currentSize = image.size;
+//    NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
+//        UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
+//
+//        float hfactor = currentSize.width / size.width;
+//        float vfactor = currentSize.height / size.height;
+//
+//        float factor = fmax(hfactor, vfactor);
+//        float newWidth = currentSize.width / factor;
+//        float newHeight = currentSize.height / factor;
+//
+//        [image drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+//        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        completionBlock(newImage, nil);
+//    }];
+//    [self.processingQueue addOperation:operation];
+//}
 
 @end

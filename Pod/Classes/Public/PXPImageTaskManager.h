@@ -14,8 +14,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^PXPImageDownloadRequestCompletionBlock)(UIImage  * _Nullable responseObject, NSError * _Nullable error);
-typedef void (^PXPImageUploadRequestCompletionBlock)(id _Nullable responseObject, NSError * _Nullable error);
+typedef void (^PXPImageDownloadRequestCompletionBlock)(NSURL* _Nullable url, UIImage  * _Nullable responseObject, NSError * _Nullable error);
+typedef void (^PXPImageUploadRequestCompletionBlock)(NSURL* _Nullable url, id _Nullable responseObject, NSError * _Nullable error);
 
 @interface PXPImageTaskManager : NSObject
 

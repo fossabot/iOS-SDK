@@ -55,9 +55,9 @@
 //                                                         downloadProgress:nil
                                                         completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error == nil) {
-            completionBlock(responseObject, nil);
+            completionBlock(request.URL, responseObject, nil);
         } else {
-            completionBlock(nil, error);
+            completionBlock(request.URL, nil, error);
         }
     }];
     [task resume];

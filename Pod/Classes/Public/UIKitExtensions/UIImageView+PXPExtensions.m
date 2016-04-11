@@ -44,10 +44,10 @@
     if (self.pxp_transform.fitSizeStyle == PXPTransformFitSizeStyleAutomatic) {
         self.pxp_transform.fitSize = [self smallestSize];
     }
-    self.pxp_downloadTask = [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithPath:path transform:self.pxp_transform completion:^(UIImage *responseObject, NSError *error) {
+    self.pxp_downloadTask = [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithPath:path transform:self.pxp_transform completion:^(NSURL* url, UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion != NULL) {
-                completion(responseObject, error);
+                completion(url, responseObject, error);
             } else {
                 self.image = responseObject;
             }
@@ -68,10 +68,10 @@
     if (self.pxp_transform.fitSizeStyle == PXPTransformFitSizeStyleAutomatic) {
         self.pxp_transform.fitSize = [self smallestSize];
     }
-    self.pxp_downloadTask = [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithUrl:url transform:self.pxp_transform headers:headers completion:^(UIImage *responseObject, NSError *error) {
+    self.pxp_downloadTask = [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithUrl:url transform:self.pxp_transform headers:headers completion:^(NSURL* url,UIImage *responseObject, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion != NULL) {
-                completion(responseObject, error);
+                completion(url, responseObject, error);
             } else {
                 self.image = responseObject;
             }

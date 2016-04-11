@@ -61,30 +61,30 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
 
     PXPUrlType urlType = [url pxp_URLType];
     if (urlType == PXPUrlTypePath && self.sdkRequestWrapper != nil) {
-        return [self imageDownloadTaskWithPath:url.path.pxp_imagePath transform:transform completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+        return [self imageDownloadTaskWithPath:url.path.pxp_imagePath transform:transform completion:^(NSURL* anUrl, UIImage * _Nullable responseObject, NSError * _Nullable error) {
             PXPRunOnMainQueueWithoutDeadlocking(^{
-                completionBlock(responseObject, error);
+                completionBlock(anUrl, responseObject, error);
             });
         }];
     } else if (urlType == PXPUrlTypeRemote && self.sdkRequestWrapper != nil) {
-        return [self imageDownloadWithRemoteUrl:url transform:transform headers:headers completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+        return [self imageDownloadWithRemoteUrl:url transform:transform headers:headers completion:^(NSURL* anUrl, UIImage * _Nullable responseObject, NSError * _Nullable error) {
             PXPRunOnMainQueueWithoutDeadlocking(^{
-                completionBlock(responseObject, error);
+                completionBlock(anUrl, responseObject, error);
             });
         }];
     } else {
         __weak typeof(self)weakSelf = self;
-        return [self imageDownloadTaskWithUrl:url headers:headers completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
+        return [self imageDownloadTaskWithUrl:url headers:headers completion:^(NSURL* anUrl, UIImage * _Nullable responseObject, NSError * _Nullable error) {
+//            __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (responseObject != nil) {
-                [strongSelf applyTransfrom:transform toImage:responseObject completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
+//                [strongSelf applyTransfrom:transform toImage:responseObject completion:^(NSURL* theUrl, UIImage * _Nullable responseObject, NSError * _Nullable error) {
                     PXPRunOnMainQueueWithoutDeadlocking(^{
-                        completionBlock(responseObject, error);
+                        completionBlock(anUrl, responseObject, error);
                     });
-                }];
+//                }];
             } else {
                 PXPRunOnMainQueueWithoutDeadlocking(^{
-                    completionBlock(nil, error);
+                    completionBlock(anUrl, nil, error);
                 });
             }
         }];
@@ -97,9 +97,10 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
                                         completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
     NSString* urlString = [path pxp_urlStringForTransform:transform];
-    PXPImageDownloadRequestCompletionBlock block = ^(id responseObject, NSError* error) {
+    PXPImageDownloadRequestCompletionBlock block = ^(NSURL* url, UIImage* responseObject, NSError* error) {
+        NSAssert([responseObject isKindOfClass:[UIImage class]], @"Response is not an UIImage");
         if (error == nil) {
-            completionBlock(responseObject, nil);
+            completionBlock(url, responseObject, nil);
         } else {
             NSURL* url = [NSURL URLWithString:[path pxp_urlStringForTransform:nil]];
             [self imageDownloadTaskWithUrl:url  headers:nil completion:completionBlock];
@@ -120,17 +121,21 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
                                          completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 
     NSString* urlString = [url.absoluteString pxp_urlStringForTransform:transform];
-    PXPImageDownloadRequestCompletionBlock block = ^(id responseObject, NSError* error) {
+    PXPImageDownloadRequestCompletionBlock block = ^(NSURL* anUrl, UIImage* responseObject, NSError* error) {
+
+        NSAssert([responseObject isKindOfClass:[UIImage class]], @"Response is not an UIImage");
         if (error == nil) {
-            completionBlock(responseObject, error);
+            completionBlock(anUrl, responseObject, error);
         } else {
-            __weak typeof(self)weakSelf = self;
-            [self imageDownloadTaskWithUrl:url headers:params completion:^(UIImage * _Nullable responseObject, NSError * _Nullable error) {
-                __strong __typeof(weakSelf)strongSelf = weakSelf;
+//            __weak typeof(self)weakSelf = self;
+            [self imageDownloadTaskWithUrl:url headers:params completion:^(NSURL* theUrl, UIImage * _Nullable responseObject, NSError * _Nullable error) {
+                NSAssert([responseObject isKindOfClass:[UIImage class]], @"Response is not an UIImage");
+                //__strong __typeof(weakSelf)strongSelf = weakSelf;
                 if (responseObject != nil) {
-                    [strongSelf applyTransfrom:transform toImage:responseObject completion:completionBlock];
+//                    [strongSelf applyTransfrom:transform toImage:responseObject completion:completionBlock];
+                    completionBlock(theUrl, responseObject, nil);
                 } else {
-                    completionBlock(nil, error);
+                    completionBlock(theUrl, nil, error);
                 }
             }];
             [self.sdkRequestWrapper uploadImageTaskAtUrl:url.absoluteString width:transform.sizeString quality:transform.qualityString successBlock:^(id responseObject) {
@@ -154,8 +159,7 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
     return [self.imageRequestWrapper imageDownloadTaskForUrl:url parameters:params completion:completionBlock];
 }
 
-- (void)applyTransfrom:(PXPTransform*)transform toImage:(UIImage*)image completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
-
+//- (void)applyTransfrom:(PXPTransform*)transform toImage:(UIImage*)image completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
 //    CGSize size = transform.fitSize;
 //    CGSize currentSize = image.size;
 //    NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
@@ -174,8 +178,8 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
 //        completionBlock(newImage, nil);
 //    }];
 //    [self.imageTransformQueue addOperation:operation];
-    completionBlock(image, nil);
-}
+//    completionBlock(image, nil);
+//}
 
 + (NSDictionary*)apiParamsFromHeaders:(NSDictionary*)headers {
     NSMutableDictionary* params = [NSMutableDictionary new];

@@ -16,7 +16,7 @@ class ImageDetailsController: UIViewController {
         if isBeingPresented() || isMovingToParentViewController() {
             guard let imageUrl = url
                 else {return}
-            imageView.pxp_requestImage(imageUrl, headers: nil, completion: { (image, error) in
+            imageView.pxp_requestImage(imageUrl, headers: nil, completion: { (url, image, error) in
                 guard let toImage = image
                     else { return }
                 UIView.transitionWithView(self.imageView,
