@@ -91,7 +91,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 }
 
 - (CGSize)fitSize {
-    if (_fitSizeStyle == PXPTransformFitSizeStyleAutomatic) {
+    if (_fitSizeStyle == PXPTransformFitSizeStyleAutomatic && self.imageView != nil) {
         return self.imageView.bounds.size;
     } else {
         return _fitSize;
