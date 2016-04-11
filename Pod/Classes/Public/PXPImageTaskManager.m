@@ -138,9 +138,9 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
                 }
             }];
             [self.sdkRequestWrapper uploadImageTaskAtUrl:url.absoluteString width:transform.sizeString quality:transform.qualityString params:params successBlock:^(id responseObject) {
-                PXPLogInfo(@"Remote Image Upload OK: %@", responseObject);
+                PXPLogInfo(@"Remote Image Upload OK: %@, url: %@", responseObject, url.absoluteString);
             } failtureBlock:^(NSError *error) {
-                PXPLogError(@"Remote Image Upload Error: %@", error);
+                PXPLogError(@"Remote Image Upload Error: %@, url: %@", error, url.absoluteString);
             }];
         }
     };

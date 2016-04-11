@@ -114,7 +114,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
         SAFE_SET_OBJECT(derivedImageSpecs, @"quality", quality);
     }
     SAFE_SET_OBJECT(params, @"derivedImageSpecs", derivedImageSpecs);
-    NSDictionary* headers = [PXPSDKRequestWrapper apiParamsFromHeaders:headers];
+    NSDictionary* headers = [PXPSDKRequestWrapper apiParamsFromHeaders:requestHeaders];
     for (NSString* key in headers.allKeys) {
         [params setObject:headers[key] forKey:key];
     }
