@@ -16,7 +16,15 @@ class ImageDetailsController: UIViewController {
         if isBeingPresented() || isMovingToParentViewController() {
             guard let imageUrl = url
                 else {return}
-            imageView.pxp_requestImage(imageUrl, headers: nil)
+            imageView.pxp_requestImage(imageUrl, headers: nil, completion: { (image, error) in
+                guard let toImage = image
+                    else { return }
+                UIView.transitionWithView(self.imageView,
+                    duration:0.25,
+                    options: UIViewAnimationOptions.TransitionCrossDissolve,
+                    animations: { self.imageView.image = toImage },
+                    completion: nil)
+            })
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     }

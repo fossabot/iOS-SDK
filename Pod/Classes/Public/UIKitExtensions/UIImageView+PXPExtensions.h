@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PXPImageTaskManager.h"
 
 @class PXPTransform;
 
@@ -19,8 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSURLSessionDataTask* pxp_downloadTask;
 
 - (void)pxp_requestImage:(NSURL*)url;
-- (void)pxp_requestImage:(NSURL*)url headers:(NSDictionary  * _Nullable )headers;
-- (void)pxp_requestImageForPath:(NSString*)path;
+- (void)pxp_requestImage:(NSURL*)url headers:(NSDictionary  * _Nullable )headers completion:(PXPImageDownloadRequestCompletionBlock _Nullable)completion;
+- (void)pxp_requestImageForPath:(NSString*)path completion:(PXPImageDownloadRequestCompletionBlock _Nullable)completion;
 
 @end
 

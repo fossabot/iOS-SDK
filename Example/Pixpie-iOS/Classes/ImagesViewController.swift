@@ -53,7 +53,18 @@ class ImagesViewController: UICollectionViewController {
         let transform = PXPTransform(imageView: cell.imageView!)
         transform.fitSize = CGSize(width: 100.0, height: 100.0)
         cell.imageView?.pxp_transform = transform
-        cell.imageView?.pxp_requestImage(url!, headers: nil)
+        cell.imageView?.pxp_requestImage(url!, headers: nil, completion: { (image, error) in
+            guard let toImage = image
+                else { return }
+            guard let imageView = cell.imageView
+                else { return }
+
+            UIView.transitionWithView(imageView,
+                duration:0.25,
+                options: UIViewAnimationOptions.TransitionCrossDissolve,
+                animations: { imageView.image = toImage },
+                completion: nil)
+        })
         return cell
     }
 
