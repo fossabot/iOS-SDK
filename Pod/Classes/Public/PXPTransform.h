@@ -18,17 +18,18 @@ typedef enum : NSInteger {
 } PXPTransformFormat;
 
 typedef enum : NSInteger {
-    PXPTransformFitSizeStyleAutomatic,
-    PXPTransformFitSizeStyleManual
+    PXPTransformFitSizeStyleManual,
+    PXPTransformFitSizeStyleAutomatic
 } PXPTransformFitSizeStyle;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface PXPTransform : NSObject
 
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithImageView:(UIImageView*)view;
+- (instancetype)init;
+- (instancetype)initWithImageView:(UIImageView* _Nullable)view;
 
-@property (nonatomic, weak) UIImageView* imageView;
+@property (nonatomic, weak, nullable) UIImageView* imageView;
 @property (nonatomic, assign) PXPTransformQuality imageQuality;
 @property (nonatomic, assign) PXPTransformFormat imageFormat;
 @property (nonatomic, assign) PXPTransformFitSizeStyle fitSizeStyle;
@@ -44,3 +45,5 @@ typedef enum : NSInteger {
 - (NSString *)sizeString;
 
 @end
+
+NS_ASSUME_NONNULL_END

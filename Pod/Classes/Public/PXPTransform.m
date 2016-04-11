@@ -56,11 +56,21 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 
 @synthesize fitSize = _fitSize;
 
-- (instancetype)initWithImageView:(UIImageView*)view {
+- (instancetype)init
+{
     self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
+- (instancetype)initWithImageView:(UIImageView*)view {
+    self = [self init];
     if (self != nil) {
         _imageView = view;
         _imageView.pxp_transform = self;
+        _fitSizeStyle = PXPTransformFitSizeStyleAutomatic;
     }
     return self;
 }
@@ -105,7 +115,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 }
 
 - (NSString *)qualityString {
-    NSString *quality = nil;
+    NSString *quality = @"80";
     if (self.imageQuality == PXPTransformQualityAutomatic) {
         PXPNetInfo* netInfo = [PXPNetworkMonitor sharedMonitor].currentNetworkTechnology;
         quality = PXPTransformQualityForNetInfo(netInfo);
@@ -114,7 +124,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 }
 
 - (NSString *)formatString {
-    NSString *extension = nil;
+    NSString *extension = @"webp";
     if (self.imageFormat == PXPTransformFormatAutomatic) {
         extension = @"webp";
     }
@@ -122,9 +132,9 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 }
 
 - (NSString *)sizeString {
-    NSString *size = nil;
+    NSString *size = @"640";
     if (!CGSizeEqualToSize(self.fitSize, CGSizeZero)) {
-        size = [NSString stringWithFormat:@"%ld", [PXPTransform closestPXPSizeToSize:self.fitSizeInPixels]];
+        size = [NSString stringWithFormat:@"%ld", (long)[PXPTransform closestPXPSizeToSize:self.fitSizeInPixels]];
     }
     return size;
 }
