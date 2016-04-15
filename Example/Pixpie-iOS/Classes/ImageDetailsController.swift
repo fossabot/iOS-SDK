@@ -13,6 +13,7 @@ class ImageDetailsController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         if isBeingPresented() || isMovingToParentViewController() {
             guard let imageUrl = url
                 else {return}
@@ -27,5 +28,10 @@ class ImageDetailsController: UIViewController {
             })
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        imageView.cancelLoad()
     }
 }
