@@ -16,11 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImageView (PXPExtensions)
 
 @property (nonatomic, strong) PXPTransform* pxp_transform;
-@property (nonatomic, strong) NSURLSessionDataTask* pxp_downloadTask;
+@property (nonatomic, strong) NSString* pxp_downloadTaskIdentifier;
 
 - (void)pxp_requestImage:(NSURL*)url;
-- (void)pxp_requestImage:(NSURL*)url headers:(NSDictionary  * _Nullable )headers completion:(PXPImageDownloadRequestCompletionBlock _Nullable)completion;
-- (void)pxp_requestImageForPath:(NSString*)path completion:(PXPImageDownloadRequestCompletionBlock _Nullable)completion;
+- (void)pxp_requestImage:(NSURL*)url headers:(NSDictionary * _Nullable )headers completion:(PXPImageRequestCompletionBlock _Nullable)completion;
+- (void)pxp_requestImageForPath:(NSString*)path completion:(PXPImageRequestCompletionBlock _Nullable)completion;
+- (void)cancelLoad;
 
 @end
 

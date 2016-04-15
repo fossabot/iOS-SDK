@@ -10,7 +10,8 @@
 @import UIKit;
 
 typedef enum : NSInteger {
-    PXPTransformQualityAutomatic
+    PXPTransformQualityAutomatic,
+    PXPTransformQualityDefault
 } PXPTransformQuality;
 
 typedef enum : NSInteger {

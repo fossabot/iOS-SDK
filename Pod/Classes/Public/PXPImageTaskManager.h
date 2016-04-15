@@ -14,23 +14,32 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^PXPImageDownloadRequestCompletionBlock)(NSURL* _Nullable url, UIImage  * _Nullable responseObject, NSError * _Nullable error);
-typedef void (^PXPImageUploadRequestCompletionBlock)(NSURL* _Nullable url, id _Nullable responseObject, NSError * _Nullable error);
+typedef void (^PXPImageRequestCompletionBlock)(NSURL* _Nullable url, UIImage  * _Nullable responseObject, NSError * _Nullable error);
+typedef void (^PXPProgressBlock)(NSProgress *progress);
 
 @interface PXPImageTaskManager : NSObject
 
 - (instancetype)init;
-- (NSURLSessionDataTask*)imageDownloadTaskWithUrl:(NSURL *)url
-                                        transform:(PXPTransform *)transform
-                                          headers:(NSDictionary * _Nullable)headers
-                                       completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
-- (NSURLSessionDataTask*)imageDownloadTaskWithPath:(NSString *)path
-                                         transform:(PXPTransform *)transform
-                                        completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
-- (NSURLSessionDataTask*)imageDownloadWithRemoteUrl:(NSURL *)url
-                                          transform:(PXPTransform *)transform
-                                            headers:(NSDictionary * _Nullable)headers
-                                         completion:(PXPImageDownloadRequestCompletionBlock)completionBlock;
+
+- (NSString*)imageDownloadTaskWithRequest:(NSURLRequest *)request
+                                transform:(PXPTransform *)transform
+                           uploadProgress:(PXPProgressBlock _Nullable)uploadProgress
+                         downloadProgress:(PXPProgressBlock _Nullable)downloadProgress
+                               completion:(PXPImageRequestCompletionBlock)completionBlock;
+- (NSString*)imageDownloadTaskWithUrl:(NSURL *)url
+                            transform:(PXPTransform *)transform
+                              headers:(NSDictionary * _Nullable)headers
+                       uploadProgress:(PXPProgressBlock _Nullable)uploadProgress
+                     downloadProgress:(PXPProgressBlock _Nullable)downloadProgress
+                           completion:(PXPImageRequestCompletionBlock)completionBlock;
+- (NSString*)imageDownloadTaskWithPath:(NSString *)path
+                             transform:(PXPTransform *)transform
+                               headers:(NSDictionary * _Nullable)headers
+                        uploadProgress:(PXPProgressBlock _Nullable)uploadProgress
+                      downloadProgress:(PXPProgressBlock _Nullable)downloadProgress
+                            completion:(PXPImageRequestCompletionBlock)completionBlock;
+
+- (void)cancelTaskWithIdentifier:(NSString *)identifier;
 
 @end
 

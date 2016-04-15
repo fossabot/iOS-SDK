@@ -10,10 +10,10 @@
 #import "PXPWebPResponseSerializer.h"
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFAutoPurgingImageCache.h>
+#import "AFHTTPSessionOperation.h"
 
 @interface PXPImageRequestWrapper ()
 
-@property (nonatomic, strong) AFHTTPSessionManager* sessionManager;
 @property (nonatomic, strong, nullable) id <AFImageRequestCache> imageCache;
 
 @end
@@ -37,33 +37,35 @@
     return self;
 }
 
-- (NSURLSessionDataTask *)imageDownloadTaskForUrl:(NSURL *)url
-                                       parameters:(NSDictionary * _Nullable )headers
-                                       completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+- (AFHTTPSessionOperation *)imageDownloadTaskForUrl:(NSString *)urlString
+                                             method:(NSString *)httpMethod
+                                         parameters:(nullable NSDictionary *)params
+                                            headers:(nullable NSDictionary *)headers
+                                     uploadProgress:(void (^)(NSProgress *uploadProgress)) uploadProgress
+                                   downloadProgress:(void (^)(NSProgress *downloadProgress)) downloadProgress
+                                            success:(PXPImageSuccessBlock)successBlock
+                                           failture:(PXPImageFailureBlock)failtureBlock {
 
     NSError *error = nil;
-    NSMutableURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:url.absoluteString parameters:nil error:&error];
+    NSMutableURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:httpMethod URLString:urlString parameters:params error:&error];
     assert(error == nil);
     for (NSString* key in headers.allKeys) {
         [request setValue:headers[key] forHTTPHeaderField:key];
     }
-    return [self imageDownloadTaskForRequest:request completion:completionBlock];
+    return [self imageDownloadTaskForRequest:request
+                              uploadProgress:uploadProgress
+                            downloadProgress:downloadProgress
+                                     success:successBlock
+                                    failture:failtureBlock];
 }
 
-- (NSURLSessionDataTask *)imageDownloadTaskForRequest:(NSURLRequest *)request
-                                           completion:(PXPImageDownloadRequestCompletionBlock)completionBlock {
+- (AFHTTPSessionOperation *)imageDownloadTaskForRequest:(NSURLRequest *)request
+                                         uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
+                                       downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
+                                                success:(PXPImageSuccessBlock)successBlock
+                                               failture:(PXPImageFailureBlock)failtureBlock  {
 
-    NSURLSessionDataTask* task = [self.sessionManager dataTaskWithRequest:request
-//                                                           uploadProgress:nil
-//                                                         downloadProgress:nil
-                                                        completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        if (error == nil) {
-            completionBlock(request.URL, responseObject, nil);
-        } else {
-            completionBlock(request.URL, nil, error);
-        }
-    }];
-    [task resume];
+    AFHTTPSessionOperation* task = [AFHTTPSessionOperation operationWithManager:self.sessionManager request:request uploadProgress:uploadProgress downloadProgress:downloadProgress success:successBlock failure:failtureBlock];
     return task;
 }
 

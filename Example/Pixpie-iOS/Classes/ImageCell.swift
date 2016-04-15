@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import Pixpie
 
 class ImageCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView : UIImageView?;
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.commonInit();
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit();
+    }
+
+    func commonInit() {
         let cellImageView = UIImageView(frame: bounds)
         cellImageView.frame = self.contentView.bounds
         cellImageView.contentMode = .ScaleAspectFit
@@ -21,11 +31,9 @@ class ImageCell: UICollectionViewCell {
         imageView = cellImageView
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     override func prepareForReuse() {
+        super.prepareForReuse();
+        imageView?.cancelLoad();
         imageView?.image = nil
     }
 }

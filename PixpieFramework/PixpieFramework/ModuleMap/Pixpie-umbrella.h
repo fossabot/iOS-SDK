@@ -4,7 +4,7 @@
 #import "PXP.h"
 #import "PXPFileManager.h"
 #import "PXPImageTaskManager.h"
-#import "PXPTask.h"
+#import "PXPImageTask.h"
 #import "PXPTransform.h"
 #import "UIImageView+PXPExtensions.h"
 

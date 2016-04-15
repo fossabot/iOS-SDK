@@ -10,6 +10,7 @@
 #import "PXPDefines.h"
 #import "PXPAccountInfo.h"
 #import "PXPAuthPrincipal.h"
+#import "NSURL+PXPUrl.h"
 #import <AFNetworking/AFNetworking.h>
 
 static NSString* const kPXPUpdateImageRequestPath = @"/async/images/newResolution/%@/%@/%@/%@";
@@ -103,6 +104,9 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
                                  failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     assert(url != nil);
+    if ([url pxp_URLType] == PXPUrlTypeCDN) {
+        successBlock(nil);
+    }
     NSString* apiPath = [NSString stringWithFormat:kPXPUploadImageAtUrlRequestPath, self.appId];
     NSString* requestUrl = [self.backendUrl stringByAppendingString:apiPath];
     NSMutableDictionary* params = [NSMutableDictionary new];
@@ -123,7 +127,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     NSMutableURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:requestUrl parameters:params error:&error];
     assert(error == nil);
     NSURLSessionDataTask *task = [self taskWithRequest:request successBlock:^(id responseObject) {
-        successBlock(error);
+        successBlock(responseObject);
     } failtureBlock:^(NSError *error) {
         failtureBlock(error);
     }];
@@ -145,7 +149,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     return task;
 }
 
-- (NSURLSessionTask*)taskWithRequest:(NSURLRequest *)request
+- (NSURLSessionDataTask*)taskWithRequest:(NSURLRequest *)request
                         successBlock:(PXPRequestSuccessBlock)successBlock
                        failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 

@@ -23,6 +23,14 @@
 /* Begin PBXBuildFile section */
 		0A4B43D91CB819E8003C372C /* Pixpie-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A4B43D81CB819E8003C372C /* Pixpie-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A4B43DF1CB81F6C003C372C /* module.modulemap in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A4B43D71CB8198D003C372C /* module.modulemap */; };
+		0A812AFA1CBEC1DF00879F9A /* AFHTTPSessionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A812AF41CBEC1DF00879F9A /* AFHTTPSessionOperation.h */; };
+		0A812AFB1CBEC1DF00879F9A /* AFHTTPSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A812AF51CBEC1DF00879F9A /* AFHTTPSessionOperation.m */; };
+		0A812AFC1CBEC1DF00879F9A /* AFURLSessionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A812AF61CBEC1DF00879F9A /* AFURLSessionOperation.h */; };
+		0A812AFD1CBEC1DF00879F9A /* AFURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A812AF71CBEC1DF00879F9A /* AFURLSessionOperation.m */; };
+		0A812AFE1CBEC1DF00879F9A /* PXPAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A812AF81CBEC1DF00879F9A /* PXPAsynchronousOperation.h */; };
+		0A812AFF1CBEC1DF00879F9A /* PXPAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A812AF91CBEC1DF00879F9A /* PXPAsynchronousOperation.m */; };
+		0AC063471CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AC063451CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.h */; };
+		0AC063481CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC063461CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m */; };
 		0AF1E7001CB7FBF1004B24F1 /* PXPAccountInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF1E6BF1CB7FBF1004B24F1 /* PXPAccountInfo.h */; };
 		0AF1E7011CB7FBF1004B24F1 /* PXPAccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1E6C01CB7FBF1004B24F1 /* PXPAccountInfo.m */; };
 		0AF1E7021CB7FBF1004B24F1 /* PXPAuthManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF1E6C11CB7FBF1004B24F1 /* PXPAuthManager.h */; };
@@ -72,12 +80,12 @@
 		0AF1E72E1CB7FBF1004B24F1 /* PXPFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1E6F51CB7FBF1004B24F1 /* PXPFileManager.m */; };
 		0AF1E72F1CB7FBF1004B24F1 /* PXPImageTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF1E6F61CB7FBF1004B24F1 /* PXPImageTaskManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0AF1E7301CB7FBF1004B24F1 /* PXPImageTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1E6F71CB7FBF1004B24F1 /* PXPImageTaskManager.m */; };
-		0AF1E7311CB7FBF1004B24F1 /* PXPTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF1E6F81CB7FBF1004B24F1 /* PXPTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0AF1E7321CB7FBF1004B24F1 /* PXPTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1E6F91CB7FBF1004B24F1 /* PXPTask.m */; };
 		0AF1E7331CB7FBF1004B24F1 /* PXPTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF1E6FA1CB7FBF1004B24F1 /* PXPTransform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0AF1E7341CB7FBF1004B24F1 /* PXPTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1E6FB1CB7FBF1004B24F1 /* PXPTransform.m */; };
 		0AF1E7351CB7FBF1004B24F1 /* UIImageView+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF1E6FD1CB7FBF1004B24F1 /* UIImageView+PXPExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0AF1E7361CB7FBF1004B24F1 /* UIImageView+PXPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1E6FE1CB7FBF1004B24F1 /* UIImageView+PXPExtensions.m */; };
+		0AF4FC741CC11F8000883FCF /* PXPImageTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF4FC721CC11F8000883FCF /* PXPImageTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0AF4FC751CC11F8000883FCF /* PXPImageTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4FC731CC11F8000883FCF /* PXPImageTask.m */; };
 		ED8F51FCFA09F9F6F60578DA /* libPods-Pixpie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBB9385EB4ED8CC280408BE /* libPods-Pixpie.a */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +106,14 @@
 		0A064A7D1CB7FB6300A6F6E8 /* Pixpie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pixpie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A4B43D71CB8198D003C372C /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		0A4B43D81CB819E8003C372C /* Pixpie-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pixpie-umbrella.h"; sourceTree = "<group>"; };
+		0A812AF41CBEC1DF00879F9A /* AFHTTPSessionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionOperation.h; sourceTree = "<group>"; };
+		0A812AF51CBEC1DF00879F9A /* AFHTTPSessionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionOperation.m; sourceTree = "<group>"; };
+		0A812AF61CBEC1DF00879F9A /* AFURLSessionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionOperation.h; sourceTree = "<group>"; };
+		0A812AF71CBEC1DF00879F9A /* AFURLSessionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionOperation.m; sourceTree = "<group>"; };
+		0A812AF81CBEC1DF00879F9A /* PXPAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAsynchronousOperation.h; sourceTree = "<group>"; };
+		0A812AF91CBEC1DF00879F9A /* PXPAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAsynchronousOperation.m; sourceTree = "<group>"; };
+		0AC063451CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+PXPExtensions.h"; sourceTree = "<group>"; };
+		0AC063461CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+PXPExtensions.m"; sourceTree = "<group>"; };
 		0AF1E6BF1CB7FBF1004B24F1 /* PXPAccountInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAccountInfo.h; sourceTree = "<group>"; };
 		0AF1E6C01CB7FBF1004B24F1 /* PXPAccountInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAccountInfo.m; sourceTree = "<group>"; };
 		0AF1E6C11CB7FBF1004B24F1 /* PXPAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAuthManager.h; sourceTree = "<group>"; };
@@ -147,12 +163,12 @@
 		0AF1E6F51CB7FBF1004B24F1 /* PXPFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPFileManager.m; sourceTree = "<group>"; };
 		0AF1E6F61CB7FBF1004B24F1 /* PXPImageTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPImageTaskManager.h; sourceTree = "<group>"; };
 		0AF1E6F71CB7FBF1004B24F1 /* PXPImageTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPImageTaskManager.m; sourceTree = "<group>"; };
-		0AF1E6F81CB7FBF1004B24F1 /* PXPTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPTask.h; sourceTree = "<group>"; };
-		0AF1E6F91CB7FBF1004B24F1 /* PXPTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPTask.m; sourceTree = "<group>"; };
 		0AF1E6FA1CB7FBF1004B24F1 /* PXPTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPTransform.h; sourceTree = "<group>"; };
 		0AF1E6FB1CB7FBF1004B24F1 /* PXPTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPTransform.m; sourceTree = "<group>"; };
 		0AF1E6FD1CB7FBF1004B24F1 /* UIImageView+PXPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+PXPExtensions.h"; sourceTree = "<group>"; };
 		0AF1E6FE1CB7FBF1004B24F1 /* UIImageView+PXPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+PXPExtensions.m"; sourceTree = "<group>"; };
+		0AF4FC721CC11F8000883FCF /* PXPImageTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPImageTask.h; sourceTree = "<group>"; };
+		0AF4FC731CC11F8000883FCF /* PXPImageTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPImageTask.m; sourceTree = "<group>"; };
 		0CBA5AEBA83165AB05CAB715 /* Pods-Pixpie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie/Pods-Pixpie.debug.xcconfig"; sourceTree = "<group>"; };
 		2CBB9385EB4ED8CC280408BE /* libPods-Pixpie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pixpie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80AD50C3C561DCB2234E889E /* Pods-Pixpie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie/Pods-Pixpie.release.xcconfig"; sourceTree = "<group>"; };
@@ -212,6 +228,19 @@
 				0A4B43D71CB8198D003C372C /* module.modulemap */,
 			);
 			path = ModuleMap;
+			sourceTree = "<group>";
+		};
+		0A812AF31CBEC1DF00879F9A /* PXPHTTPSessionOperation */ = {
+			isa = PBXGroup;
+			children = (
+				0A812AF41CBEC1DF00879F9A /* AFHTTPSessionOperation.h */,
+				0A812AF51CBEC1DF00879F9A /* AFHTTPSessionOperation.m */,
+				0A812AF61CBEC1DF00879F9A /* AFURLSessionOperation.h */,
+				0A812AF71CBEC1DF00879F9A /* AFURLSessionOperation.m */,
+				0A812AF81CBEC1DF00879F9A /* PXPAsynchronousOperation.h */,
+				0A812AF91CBEC1DF00879F9A /* PXPAsynchronousOperation.m */,
+			);
+			path = PXPHTTPSessionOperation;
 			sourceTree = "<group>";
 		};
 		0AF1E6BB1CB7FBF1004B24F1 /* Classes */ = {
@@ -278,12 +307,15 @@
 		0AF1E6CD1CB7FBF1004B24F1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0A812AF31CBEC1DF00879F9A /* PXPHTTPSessionOperation */,
 				0AF1E6CE1CB7FBF1004B24F1 /* NSObject+SafeKVC.h */,
 				0AF1E6CF1CB7FBF1004B24F1 /* NSObject+SafeKVC.m */,
 				0AF1E6D01CB7FBF1004B24F1 /* NSString+PXPSecurity.h */,
 				0AF1E6D11CB7FBF1004B24F1 /* NSString+PXPSecurity.m */,
 				0AF1E6D21CB7FBF1004B24F1 /* NSURL+PXPUrl.h */,
 				0AF1E6D31CB7FBF1004B24F1 /* NSURL+PXPUrl.m */,
+				0AC063451CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.h */,
+				0AC063461CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m */,
 				0AF1E6D41CB7FBF1004B24F1 /* WebP */,
 			);
 			path = Helpers;
@@ -345,10 +377,10 @@
 				0AF1E6F31CB7FBF1004B24F1 /* PXP.m */,
 				0AF1E6F41CB7FBF1004B24F1 /* PXPFileManager.h */,
 				0AF1E6F51CB7FBF1004B24F1 /* PXPFileManager.m */,
+				0AF4FC721CC11F8000883FCF /* PXPImageTask.h */,
+				0AF4FC731CC11F8000883FCF /* PXPImageTask.m */,
 				0AF1E6F61CB7FBF1004B24F1 /* PXPImageTaskManager.h */,
 				0AF1E6F71CB7FBF1004B24F1 /* PXPImageTaskManager.m */,
-				0AF1E6F81CB7FBF1004B24F1 /* PXPTask.h */,
-				0AF1E6F91CB7FBF1004B24F1 /* PXPTask.m */,
 				0AF1E6FA1CB7FBF1004B24F1 /* PXPTransform.h */,
 				0AF1E6FB1CB7FBF1004B24F1 /* PXPTransform.m */,
 				0AF1E6FC1CB7FBF1004B24F1 /* UIKitExtensions */,
@@ -393,17 +425,18 @@
 				0AF1E70C1CB7FBF1004B24F1 /* NSObject+SafeKVC.h in Headers */,
 				0AF1E71E1CB7FBF1004B24F1 /* PXPNetworkTechnologies.h in Headers */,
 				0A4B43D91CB819E8003C372C /* Pixpie-umbrella.h in Headers */,
+				0A812AFE1CBEC1DF00879F9A /* PXPAsynchronousOperation.h in Headers */,
 				0AF1E72B1CB7FBF1004B24F1 /* PXP.h in Headers */,
 				0AF1E7291CB7FBF1004B24F1 /* NSString+PXPImageTransform.h in Headers */,
 				0AF1E7201CB7FBF1004B24F1 /* PXPWifiMonitor.h in Headers */,
 				0AF1E7261CB7FBF1004B24F1 /* PXP_Internal.h in Headers */,
 				0AF1E7351CB7FBF1004B24F1 /* UIImageView+PXPExtensions.h in Headers */,
+				0A812AFA1CBEC1DF00879F9A /* AFHTTPSessionOperation.h in Headers */,
 				0AF1E7041CB7FBF1004B24F1 /* PXPAuthPrincipal.h in Headers */,
 				0AF1E7271CB7FBF1004B24F1 /* PXPSDKRequestWrapper.h in Headers */,
 				0AF1E71C1CB7FBF1004B24F1 /* PXPNetworkMonitor.h in Headers */,
 				0AF1E7121CB7FBF1004B24F1 /* UIImage+PXP_WebP.h in Headers */,
 				0AF1E7081CB7FBF1004B24F1 /* PXPImageRequestWrapper.h in Headers */,
-				0AF1E7311CB7FBF1004B24F1 /* PXPTask.h in Headers */,
 				0AF1E7061CB7FBF1004B24F1 /* PXPAuthRequestWrapper.h in Headers */,
 				0AF1E7221CB7FBF1004B24F1 /* PXPConfig.h in Headers */,
 				0AF1E72F1CB7FBF1004B24F1 /* PXPImageTaskManager.h in Headers */,
@@ -416,9 +449,12 @@
 				0AF1E7241CB7FBF1004B24F1 /* PXPModelObject.h in Headers */,
 				0AF1E7021CB7FBF1004B24F1 /* PXPAuthManager.h in Headers */,
 				0AF1E7141CB7FBF1004B24F1 /* PXPDefines.h in Headers */,
+				0A812AFC1CBEC1DF00879F9A /* AFURLSessionOperation.h in Headers */,
 				0AF1E7171CB7FBF1004B24F1 /* PXPCellMonitor.h in Headers */,
 				0AF1E71A1CB7FBF1004B24F1 /* PXPNetInfo.h in Headers */,
 				0AF1E70E1CB7FBF1004B24F1 /* NSString+PXPSecurity.h in Headers */,
+				0AC063471CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.h in Headers */,
+				0AF4FC741CC11F8000883FCF /* PXPImageTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,11 +577,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF4FC751CC11F8000883FCF /* PXPImageTask.m in Sources */,
+				0A812AFF1CBEC1DF00879F9A /* PXPAsynchronousOperation.m in Sources */,
 				0AF1E71D1CB7FBF1004B24F1 /* PXPNetworkMonitor.m in Sources */,
+				0A812AFD1CBEC1DF00879F9A /* AFURLSessionOperation.m in Sources */,
 				0AF1E7031CB7FBF1004B24F1 /* PXPAuthManager.m in Sources */,
 				0AF1E70B1CB7FBF1004B24F1 /* PXPWebPResponseSerializer.m in Sources */,
 				0AF1E72C1CB7FBF1004B24F1 /* PXP.m in Sources */,
 				0AF1E7091CB7FBF1004B24F1 /* PXPImageRequestWrapper.m in Sources */,
+				0AC063481CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m in Sources */,
 				0AF1E7181CB7FBF1004B24F1 /* PXPCellMonitor.m in Sources */,
 				0AF1E70D1CB7FBF1004B24F1 /* NSObject+SafeKVC.m in Sources */,
 				0AF1E70F1CB7FBF1004B24F1 /* NSString+PXPSecurity.m in Sources */,
@@ -557,7 +597,6 @@
 				0AF1E7161CB7FBF1004B24F1 /* PXPRequestWrapper.m in Sources */,
 				0AF1E7341CB7FBF1004B24F1 /* PXPTransform.m in Sources */,
 				0AF1E7281CB7FBF1004B24F1 /* PXPSDKRequestWrapper.m in Sources */,
-				0AF1E7321CB7FBF1004B24F1 /* PXPTask.m in Sources */,
 				0AF1E72E1CB7FBF1004B24F1 /* PXPFileManager.m in Sources */,
 				0AF1E7211CB7FBF1004B24F1 /* PXPWifiMonitor.m in Sources */,
 				0AF1E7071CB7FBF1004B24F1 /* PXPAuthRequestWrapper.m in Sources */,
@@ -567,6 +606,7 @@
 				0AF1E72A1CB7FBF1004B24F1 /* NSString+PXPImageTransform.m in Sources */,
 				0AF1E71F1CB7FBF1004B24F1 /* PXPNetworkTechnologies.m in Sources */,
 				0AF1E7011CB7FBF1004B24F1 /* PXPAccountInfo.m in Sources */,
+				0A812AFB1CBEC1DF00879F9A /* AFHTTPSessionOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
