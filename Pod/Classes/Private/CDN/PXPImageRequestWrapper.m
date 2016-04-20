@@ -30,8 +30,7 @@
     if (self != nil) {
         _sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
         _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-        NSArray <id<AFURLResponseSerialization>> *responseSerializers = @[[AFImageResponseSerializer serializer], [PXPWebPResponseSerializer serializer]];
-        AFCompoundResponseSerializer *serializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:responseSerializers];
+        AFImageResponseSerializer *serializer = [PXPWebPImageResponseSerializer serializer];
         _sessionManager.responseSerializer = serializer;
     }
     return self;

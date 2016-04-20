@@ -110,7 +110,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 @implementation PXPTransform (PXPStringRepresentation)
 
 + (NSInteger)closestPXPSizeToSize:(CGSize)size {
-    NSInteger value = PXPFirstClosest(sizes, 9, size.width);
+    NSInteger value = PXPFirstClosest(sizes, 11, size.width);
     return value;
 }
 

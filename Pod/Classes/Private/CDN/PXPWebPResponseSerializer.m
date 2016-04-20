@@ -9,22 +9,32 @@
 #import "PXPWebPResponseSerializer.h"
 #import <UIImage+PXP_WebP.h>
 
-@implementation PXPWebPResponseSerializer
+#import <objc/runtime.h>
 
+@implementation PXPWebPImageResponseSerializer
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self != nil) {
-        self.acceptableContentTypes = [NSSet setWithObjects:@"image/webp", @"application/octet-stream", nil];
+        NSMutableSet *contentTypes = [self.acceptableContentTypes mutableCopy];
+        [contentTypes addObjectsFromArray:@[@"image/webp", @"application/octet-stream"]];
+        self.acceptableContentTypes = contentTypes;
     }
     return self;
 }
 
-- (nullable id)responseObjectForResponse:(nullable NSURLResponse *)response
-                                    data:(nullable NSData *)data
-                                   error:(NSError * _Nullable __autoreleasing *)error {
-    UIImage* image = [UIImage pxp_imageWithWebPData:data error:error];
-    return image;
+- (id)responseObjectForResponse:(NSURLResponse *)response
+                           data:(NSData *)data
+                          error:(NSError *__autoreleasing *)error
+{
+    if ([response.MIMEType isEqualToString:@"image/webp"] ||
+        [response.MIMEType isEqualToString:@"application/octet-stream"]) {
+        
+        return [UIImage pxp_imageWithWebPData:data error:error];
+    }
+
+    return [super responseObjectForResponse:response data:data error:error];
 }
 
 @end
