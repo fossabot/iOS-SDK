@@ -22,25 +22,37 @@ class ImagesViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.registerClass(ImageCell.self, forCellWithReuseIdentifier: kCellIdentifier)
+        //collectionView?.registerClass(ImageCell.self, forCellWithReuseIdentifier: kCellIdentifier)
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.statusView.backgroundColor = UIColor.clearColor()
-        switch PXP.sharedSDK().state {
-        case PXPStateReady:
-            self.statusView.state = .Green
-        case PXPStateFailed:
-            self.statusView.state = .Red
-        default:
-            self.statusView.state = .Yellow
-        }
+        let options = NSKeyValueObservingOptions([.New, .Initial])
+        PXP.sharedSDK().addObserver(self, forKeyPath: "state", options: options, context: nil);
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        PXP.sharedSDK().removeObserver(self, forKeyPath: "state")
     }
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return kSectionsCount
+    }
+
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+
+        if (object as! PXP == PXP.sharedSDK()) {
+            self.statusView.backgroundColor = UIColor.clearColor()
+            switch PXP.sharedSDK().state {
+            case PXPStateReady:
+                self.statusView.state = .Green
+            case PXPStateFailed:
+                self.statusView.state = .Red
+            default:
+                self.statusView.state = .Yellow
+            }
+        }
     }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -49,7 +61,11 @@ class ImagesViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: ImageCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellIdentifier, forIndexPath: indexPath) as! ImageCell
-        let url = NSURL(string: imageLinksArray[indexPath.item])
+        var urlString = imageLinksArray[indexPath.item]
+        if let range = urlString.rangeOfString("_z.jpg"){
+            urlString.replaceRange(range, with: "_q.jpg")
+        }
+        let url = NSURL(string: urlString)
         let transform = PXPTransform(imageView: cell.imageView!)
         transform.fitSize = CGSize(width: 100.0, height: 100.0)
         cell.imageView?.pxp_transform = transform

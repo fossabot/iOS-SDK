@@ -14,11 +14,13 @@ typedef enum : NSInteger {
     PXPStateFailed
 } PXPState;
 
+NS_ASSUME_NONNULL_BEGIN
+
+extern NSString * const PXPStateChangeNotification;
+
 @class PXPFileManager;
 @class PXPAccountInfo;
 @class PXPSDKRequestWrapper;
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface PXP : NSObject
 

@@ -16,6 +16,8 @@
 #import "PXPNetworkMonitor.h"
 #import "PXPFileManager.h"
 
+NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateChange";
+
 @interface PXP ()
 
 @property (nonatomic, readwrite, assign) PXPState state;
@@ -82,6 +84,17 @@
     } else {
         self.state = PXPStateFailed;
     }
+}
+
+- (void)setState:(PXPState)state {
+    if (state == _state) {
+        return;
+    }
+
+    [self willChangeValueForKey:@"state"];
+    _state = state;
+    [self didChangeValueForKey:@"state"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PXPStateChangeNotification object:self];
 }
 
 @end
