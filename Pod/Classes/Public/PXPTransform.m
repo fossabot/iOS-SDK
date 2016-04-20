@@ -29,7 +29,7 @@ NSString* PXPTransformQualityForNetInfo(PXPNetInfo* netInfo) {
     static NSDictionary *sPXPQualities = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sPXPQualities = @{PXPNetworkUnknown : @"75",
+        sPXPQualities = @{PXPNetworkUnknown : @"80",
                           PXPNetworkWiFi : @"90",
                           PXPNetworkCDMAEVDORevB : @"80",
                           PXPNetworkCDMAEVDORevA : @"80",
