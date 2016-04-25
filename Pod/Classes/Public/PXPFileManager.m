@@ -89,10 +89,10 @@
 - (void)itemsAtPath:(NSString*)path
     completionBlock:(PXPFileManagerCompletionBlock)completionBlock {
 
-    [self.sdkRequestWrapper imagesAtPath:path successBlock:^(id responseObject) {
+    [self.sdkRequestWrapper imagesAtPath:path successBlock:^(NSURLSessionTask* task, id responseObject) {
         NSArray* result = [PXPFile itemsFromDict:responseObject path:path root:self.root];
         completionBlock(result, nil);
-    } failtureBlock:^(NSError *error) {
+    } failtureBlock:^(NSURLSessionTask* task, NSError *error) {
         completionBlock(nil, error);
     }];
 }

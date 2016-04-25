@@ -28,7 +28,6 @@ class SplashViewController: UIViewController {
     }
 
     deinit {
-        PXP.sharedSDK()
         PXP.sharedSDK().removeObserver(self, forKeyPath: "state")
     }
 

@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^PXPRequestSuccessBlock)(id responseObject);
-typedef void (^PXPRequestFailureBlock)(NSError* error);
+typedef void (^PXPRequestSuccessBlock)(NSURLSessionTask* task, id responseObject);
+typedef void (^PXPRequestFailureBlock)(NSURLSessionTask* task, NSError* error);
+typedef BOOL (^PXPRequestEvaluationBlock)(NSURLSessionTask* task, NSError* error);
 
 @class AFHTTPSessionManager;
 
@@ -21,6 +22,7 @@ typedef void (^PXPRequestFailureBlock)(NSError* error);
                           queue:(NSOperationQueue*)queue
                      identifier:(NSString*)identifier
                  sessionManager:(AFHTTPSessionManager*)sessionManager
+                evaluationBlock:(PXPRequestEvaluationBlock)evaluationBlock
                         success:(PXPRequestSuccessBlock)successBlock
                         failure:(PXPRequestFailureBlock)failureBlock;
 - (void)start;
@@ -32,6 +34,7 @@ typedef void (^PXPRequestFailureBlock)(NSError* error);
 @property (nonatomic, strong, readonly) NSString *identifier;
 @property (nonatomic, strong, readonly) NSOperationQueue *queue;
 @property (nonatomic, assign, getter=isExecuting) BOOL executing;
+@property (nonatomic, copy, readonly) PXPRequestEvaluationBlock evaluationBlock;
 @property (nonatomic, copy, readonly) PXPRequestSuccessBlock successBlock;
 @property (nonatomic, copy, readonly) PXPRequestFailureBlock failureBlock;
 

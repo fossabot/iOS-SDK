@@ -90,9 +90,9 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
                                  }
                                   //                                                  progress:nil
                                                    success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                                       successBlock(responseObject);
+                                                       successBlock(task, responseObject);
                                                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                                       failtureBlock(error);
+                                                       failtureBlock(task, error);
                                                    }];
     return task;
 }
@@ -106,7 +106,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
 
     assert(url != nil);
     if ([url pxp_URLType] == PXPUrlTypeCDN) {
-        successBlock(nil);
+        successBlock(nil, nil);
     }
     NSString* apiPath = [NSString stringWithFormat:kPXPUploadImageAtUrlRequestPath, self.appId];
     NSString* requestUrl = [self.backendUrl stringByAppendingString:apiPath];
@@ -127,10 +127,10 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     NSError* error = nil;
     NSMutableURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:requestUrl parameters:params error:&error];
     assert(error == nil);
-    PXPAPITask *task = [self taskWithRequest:request successBlock:^(id responseObject) {
-        successBlock(responseObject);
-    } failtureBlock:^(NSError *error) {
-        failtureBlock(error);
+    PXPAPITask *task = [self taskWithRequest:request successBlock:^(NSURLSessionTask* task, id responseObject) {
+        successBlock(task, responseObject);
+    } failtureBlock:^(NSURLSessionTask* task, NSError *error) {
+        failtureBlock(task, error);
     }];
     return task;
 }
@@ -157,12 +157,15 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     assert(self.sessionManager != nil);
     __weak typeof(self)weakSelf = self;
     NSString *uuid = [[NSUUID UUID] UUIDString];
-    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:self.operationQueue identifier:uuid sessionManager:self.sessionManager success:successBlock failure:^(NSError *error) {
-        BLOCK_SAFE_RUN(failtureBlock, error);
+    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:self.operationQueue identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (error.code == 403 || error.code == 401) {
+        NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
+        if (response.statusCode == 403 || response.statusCode == 401) {
             [strongSelf.info update];
         }
+        return YES;
+    } success:successBlock failure:^(NSURLSessionTask* task, NSError *error) {
+        BLOCK_SAFE_RUN(failtureBlock, task, error);
     }];
     [task start];
     return task;

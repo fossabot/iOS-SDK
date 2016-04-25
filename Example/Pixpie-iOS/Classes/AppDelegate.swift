@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     deinit {
-        PXP.sharedSDK().removeObserver(self, forKeyPath: "state", context: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kSplashCompleteNotification, object: nil)
     }
 
     func splashCompleted(note: NSNotification) {

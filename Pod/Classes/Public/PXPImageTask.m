@@ -162,9 +162,9 @@
     [self.sdkRequestWrapper updateImageWithWidth:_transform.sizeString
                                          quality:_transform.qualityString
                                             path:urlString.pxp_imagePath
-                                    successBlock:^(id responseObject) {
+                                    successBlock:^(NSURLSessionTask* task, id responseObject) {
                                         PXPLogInfo(@"Update Image OK: %@", urlString);
-                                    } failtureBlock:^(NSError *error) {
+                                    } failtureBlock:^(NSURLSessionTask* task, NSError *error) {
                                         PXPLogError(@"Update Image Error: %@ : %@", error, urlString);
                                     }];
 }
@@ -176,9 +176,9 @@
                                            width:_transform.sizeString
                                          quality:_transform.qualityString
                                           params:params
-                                    successBlock:^(id responseObject) {
+                                    successBlock:^(NSURLSessionTask* task, id responseObject) {
                                         PXPLogInfo(@"Remote Image Upload OK: %@, url: %@", responseObject, urlString);
-                                    } failtureBlock:^(NSError *error) {
+                                    } failtureBlock:^(NSURLSessionTask* task, NSError *error) {
                                         PXPLogError(@"Remote Image Upload Error: %@, url: %@", error, urlString);
                                     }];
 }

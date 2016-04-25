@@ -61,4 +61,19 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
     return task;
 }
 
+- (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
+                   successBlock:(PXPRequestSuccessBlock)successBlock
+                  failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+
+    assert(self.sessionManager != nil);
+    NSString *uuid = [[NSUUID UUID] UUIDString];
+    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:self.operationQueue identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
+        NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
+        return (response == nil);
+    } success:successBlock failure:failtureBlock];
+    [task start];
+    return task;
+}
+
+
 @end

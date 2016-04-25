@@ -33,10 +33,10 @@
 - (PXPAPITask *)authorizeWithCompletionBlock:(PXPAuthBlock)block {
 
     return [self.requestWrapper authWithAppId:self.principal.appId
-                                       apiKey:self.principal.appKey
-                                 successBlock:^(id responseObject) {
+                                       apiKey:self.principal.appKey 
+                                 successBlock:^(NSURLSessionTask* task, id responseObject) {
                                      block(responseObject, nil);
-                                 } failtureBlock:^(NSError *error) {
+                                 } failtureBlock:^(NSURLSessionTask* task, NSError *error) {
                                      block(nil, error);
                                  }];
 }

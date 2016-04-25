@@ -9,6 +9,7 @@
 #import "PXPAccountInfo.h"
 #import "PXPAuthManager.h"
 #import "NSObject+SafeKVC.h"
+#import <UIKit/UIApplication.h>
 
 @interface PXPAccountInfo ()
 
@@ -37,6 +38,7 @@
 }
 
 - (void)update {
+    if (self.principal == nil) return;
     [self.updateTask cancel];
     self.updateTask = [self.authManager authorizeWithCompletionBlock:^(NSDictionary *dict, NSError *error) {
         NSDictionary* userInfo = nil;

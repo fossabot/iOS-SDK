@@ -26,6 +26,7 @@
                           queue:(NSOperationQueue*)queue
                      identifier:(NSString*)identifier
                  sessionManager:(AFHTTPSessionManager*)sessionManager
+                evaluationBlock:(PXPRequestEvaluationBlock)evaluationBlock
                         success:(PXPRequestSuccessBlock)successBlock
                         failure:(PXPRequestFailureBlock)failureBlock {
     self = [super init];
@@ -34,6 +35,7 @@
         _queue = queue;
         _identifier = identifier;
         _sessionManager = sessionManager;
+        _evaluationBlock = evaluationBlock;
         _successBlock = successBlock;
         _failureBlock = failureBlock;
         _retryCount = 5;
@@ -46,6 +48,7 @@
     if (self.isExecuting) return;
     _executing = YES;
     [self performRequestWithRetryCount:self.retryCount
+                              lastTask:nil
                              lastError:nil];
 }
 
@@ -57,11 +60,12 @@
 }
 
 - (void)performRequestWithRetryCount:(NSInteger)retryCount
-                           lastError:(NSError*)error
+                            lastTask:(NSURLSessionDataTask*)lastTask
+                           lastError:(NSError*)lastError
 {
     if (retryCount <= 0 || !self.isExecuting)
     {
-        BLOCK_SAFE_RUN(self.failureBlock, error);
+        BLOCK_SAFE_RUN(self.failureBlock, lastTask, lastError);
         _executing = NO;
     }
     else
@@ -71,14 +75,19 @@
         __block NSOperation* operation = nil;
         operation = [AFHTTPSessionOperation operationWithManager:self.sessionManager request:self.originalRequest uploadProgress:nil downloadProgress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
-            BLOCK_SAFE_RUN(strongSelf.successBlock, responseObject);
+            BLOCK_SAFE_RUN(strongSelf.successBlock, task, responseObject);
             _executing = NO;
         } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
+            BOOL shouldContinue = self.evaluationBlock(task, error);
+            if (!shouldContinue) {
+                [strongSelf performRequestWithRetryCount:0 lastTask:task lastError:error];
+                return;
+            }
             NSOperation* dummyOperation = [NSBlockOperation blockOperationWithBlock:^{
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(strongSelf.retryInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (!dummyOperation.isCancelled) {
-                        [strongSelf performRequestWithRetryCount:retryCount - 1 lastError:error];
+                        [strongSelf performRequestWithRetryCount:retryCount - 1 lastTask:task lastError:error];
                     }
                 });
             }];
