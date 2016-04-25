@@ -4,7 +4,7 @@
 <dict>
 	<key>PreferenceSpecifiers</key>
 	<array>
-        <dict>
+		<dict>
 			<key>FooterText</key>
 			<string>Pick license from preset values or enter manually.</string>
 			<key>Title</key>
@@ -14,7 +14,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>b59af198e7facd9ef3f24feb4cc4ed588d71797194e27c0e231dff1bb8eb62d9</string>
+			<string>5e451ae39c44cbe6085fd51e7f1b443abc49ffe150334fe0cc0902b6df23da95</string>
 			<key>Key</key>
 			<string>pxp_license</string>
 			<key>Title</key>
@@ -28,7 +28,7 @@
 			<string>PSMultiValueSpecifier</string>
 			<key>Values</key>
 			<array>
-				<string>b59af198e7facd9ef3f24feb4cc4ed588d71797194e27c0e231dff1bb8eb62d9</string>
+				<string>5e451ae39c44cbe6085fd51e7f1b443abc49ffe150334fe0cc0902b6df23da95</string>
 				<string>none</string>
 			</array>
 		</dict>
