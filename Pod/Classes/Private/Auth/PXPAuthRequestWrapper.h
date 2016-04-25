@@ -11,9 +11,9 @@
 @interface PXPAuthRequestWrapper : PXPRequestWrapper
 
 + (instancetype)sharedWrapper;
-- (NSURLSessionDataTask *)authWithAppId:(NSString*)appId
-                                 apiKey:(NSString*)apiKey
-                           successBlock:(PXPRequestSuccessBlock)successBlock
-                          failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (PXPAPITask *)authWithAppId:(NSString*)appId
+                       apiKey:(NSString*)apiKey
+                 successBlock:(PXPRequestSuccessBlock)successBlock
+                failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 
 @end

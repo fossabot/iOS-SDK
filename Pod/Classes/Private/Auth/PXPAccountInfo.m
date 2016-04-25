@@ -27,8 +27,13 @@
     if (self != nil) {
         _principal = principal;
         _authManager = authManager;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)update {
@@ -37,7 +42,7 @@
         NSDictionary* userInfo = nil;
         if (error == nil) {
             [self setIfExistsValuesForKeysWithDictionary:dict];
-        } else {
+        } else if (error.code != NSURLErrorCancelled) {
             userInfo = @{kPXPModelUpdateErrorKey : error};
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kPXPModelUpdatedNotification object:self userInfo:userInfo];

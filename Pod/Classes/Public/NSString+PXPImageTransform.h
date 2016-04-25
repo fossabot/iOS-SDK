@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (PXPImageTransform)
 
 + (NSString *)pxp_cdnUrl;
-- (NSString *)pxp_imagePath;
+- (NSString * _Nullable)pxp_imagePath;
 - (NSString *)pxp_urlStringForTransform:( PXPTransform* _Nullable )transform;
 
 @end

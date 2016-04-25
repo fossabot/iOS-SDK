@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PXPAPITask.h"
 
 @class PXPAuthPrincipal;
 @class PXPAccountInfo;
@@ -20,7 +21,7 @@ typedef void(^PXPAuthBlock)(NSDictionary* accountInfo, NSError* error);
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithPrincipal:(PXPAuthPrincipal *)principal NS_DESIGNATED_INITIALIZER;
-- (NSURLSessionDataTask *)authorizeWithCompletionBlock:(PXPAuthBlock)block;
+- (PXPAPITask *)authorizeWithCompletionBlock:(PXPAuthBlock)block;
 //- (void)checkAuth:(PXPAuthBlock)block;
 
 @end

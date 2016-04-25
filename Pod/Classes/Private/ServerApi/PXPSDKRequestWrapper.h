@@ -16,26 +16,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithAccountInfo:(PXPAccountInfo *)info NS_DESIGNATED_INITIALIZER;
-- (NSURLSessionDataTask*)updateImageWithWidth:(NSString*)width
-                                      quality:(NSString*)quality
-                                         path:(NSString*)path
-                                 successBlock:(PXPRequestSuccessBlock)successBlock
-                                failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (PXPAPITask *)updateImageWithWidth:(NSString*)width
+                             quality:(NSString*)quality
+                                path:(NSString*)path
+                        successBlock:(PXPRequestSuccessBlock)successBlock
+                       failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (PXPAPITask *)uploadImageTaskAtUrl:(NSString *)url
+                               width:(NSString *)width
+                             quality:(NSString *)quality
+                              params:(NSDictionary*)requestHeaders
+                        successBlock:(PXPRequestSuccessBlock)successBlock
+                       failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 - (NSURLSessionDataTask *)uploadImageTaskForStream:(NSInputStream *)stream
                                           mimeType:(NSString *)mimeType
                                             length:(int64_t)length
                                             toPath:(NSString *)path
                                       successBlock:(PXPRequestSuccessBlock)successBlock
                                      failtureBlock:(PXPRequestFailureBlock)failtureBlock;
-- (NSURLSessionDataTask *)uploadImageTaskAtUrl:(NSString *)url
-                                         width:(NSString *)width
-                                       quality:(NSString *)quality
-                                        params:(NSDictionary*)requestHeaders
-                                  successBlock:(PXPRequestSuccessBlock)successBlock
-                                 failtureBlock:(PXPRequestFailureBlock)failtureBlock;
-- (NSURLSessionDataTask *)imagesAtPath:(NSString *)path
-                          successBlock:(PXPRequestSuccessBlock)successBlock
-                         failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (PXPAPITask *)imagesAtPath:(NSString *)path
+                successBlock:(PXPRequestSuccessBlock)successBlock
+               failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 
 @end
 

@@ -30,7 +30,7 @@
     return self;
 }
 
-- (NSURLSessionDataTask *)authorizeWithCompletionBlock:(PXPAuthBlock)block {
+- (PXPAPITask *)authorizeWithCompletionBlock:(PXPAuthBlock)block {
 
     return [self.requestWrapper authWithAppId:self.principal.appId
                                        apiKey:self.principal.appKey

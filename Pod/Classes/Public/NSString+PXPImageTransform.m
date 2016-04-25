@@ -52,14 +52,46 @@
     return result;
 }
 
-- (NSString *)pxp_imagePath {
+- (NSString * _Nullable)pxp_imagePath {
     NSString* imagePath = nil;
-    // URL ex.: http://cdn.example.com/app-id/image-path/../image.jpg
-    NSMutableArray<NSString *> *pathComponents = [self.pathComponents mutableCopy];
-    if (pathComponents.count > 1) {
-        [pathComponents removeObjectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 2)]];
-        imagePath = [pathComponents componentsJoinedByString:@"/"];
+
+    PXPUrlType type = [self pxp_URLType];
+    switch (type) {
+        case PXPUrlTypePath:
+        case PXPUrlTypeCDN: {
+            NSMutableArray<NSString *> *pathComponents = [self.pathComponents mutableCopy];
+            if (pathComponents.count > 1) {
+                [pathComponents removeObjectsAtIndexes:[[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 2)]];
+                imagePath = [pathComponents componentsJoinedByString:@"/"];
+            }
+            break;
+        }
+        case PXPUrlTypeRemote: {
+            NSMutableArray* pathArray = [NSMutableArray new];
+            NSString* folder = @"remote.resources";
+            SAFE_ADD_OBJECT(pathArray, folder);
+            NSURL* url = [NSURL URLWithString:self];
+            NSString* domain = url.host;
+            NSMutableArray *md5Array = [NSMutableArray new];
+            NSString* remoteUrlMD5 = [self MD5];
+            NSString* firstPart = [remoteUrlMD5 substringToIndex:1];
+            NSString* secondPart = [remoteUrlMD5 substringWithRange:NSMakeRange(1, 1)];
+            NSString* thirdPart = [remoteUrlMD5 substringWithRange:NSMakeRange(2, 1)];
+            NSString* lastPart = [remoteUrlMD5 substringFromIndex:3];
+            SAFE_ADD_OBJECT(md5Array, domain);
+            SAFE_ADD_OBJECT(md5Array, firstPart);
+            SAFE_ADD_OBJECT(md5Array, secondPart);
+            SAFE_ADD_OBJECT(md5Array, thirdPart);
+            SAFE_ADD_OBJECT(md5Array, lastPart);
+            NSString* md5Path = [md5Array componentsJoinedByString:@"/"];
+            SAFE_ADD_OBJECT(pathArray, md5Path);
+            imagePath = [pathArray componentsJoinedByString:@"/"];
+        }
+        default:
+            break;
     }
+    // URL ex.: http://cdn.example.com/app-id/image-path/../image.jpg
+
     return imagePath;
 }
 

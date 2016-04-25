@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef void (^PXPRequestSuccessBlock)(id responseObject);
-typedef void (^PXPRequestFailureBlock)(NSError* error);
+#import "PXPAPITask.h"
 
 @class AFHTTPSessionManager;
 
@@ -17,5 +15,10 @@ typedef void (^PXPRequestFailureBlock)(NSError* error);
 
 @property (nonatomic, strong, readonly) NSString* backendUrl;
 @property (nonatomic, strong, readonly) AFHTTPSessionManager* sessionManager;
+@property (nonatomic, strong, readonly) NSOperationQueue* operationQueue;
+
+- (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
+                   successBlock:(PXPRequestSuccessBlock)successBlock
+                  failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 
 @end

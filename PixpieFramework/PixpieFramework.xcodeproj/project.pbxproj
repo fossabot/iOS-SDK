@@ -29,6 +29,8 @@
 		0A812AFD1CBEC1DF00879F9A /* AFURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A812AF71CBEC1DF00879F9A /* AFURLSessionOperation.m */; };
 		0A812AFE1CBEC1DF00879F9A /* PXPAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A812AF81CBEC1DF00879F9A /* PXPAsynchronousOperation.h */; };
 		0A812AFF1CBEC1DF00879F9A /* PXPAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A812AF91CBEC1DF00879F9A /* PXPAsynchronousOperation.m */; };
+		0A9AE5FF1CCE2425009E9120 /* PXPAPITask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A9AE5FD1CCE2425009E9120 /* PXPAPITask.h */; };
+		0A9AE6001CCE2425009E9120 /* PXPAPITask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9AE5FE1CCE2425009E9120 /* PXPAPITask.m */; };
 		0AC063471CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AC063451CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.h */; };
 		0AC063481CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC063461CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m */; };
 		0AF1E7001CB7FBF1004B24F1 /* PXPAccountInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AF1E6BF1CB7FBF1004B24F1 /* PXPAccountInfo.h */; };
@@ -112,6 +114,8 @@
 		0A812AF71CBEC1DF00879F9A /* AFURLSessionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionOperation.m; sourceTree = "<group>"; };
 		0A812AF81CBEC1DF00879F9A /* PXPAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAsynchronousOperation.h; sourceTree = "<group>"; };
 		0A812AF91CBEC1DF00879F9A /* PXPAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAsynchronousOperation.m; sourceTree = "<group>"; };
+		0A9AE5FD1CCE2425009E9120 /* PXPAPITask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAPITask.h; sourceTree = "<group>"; };
+		0A9AE5FE1CCE2425009E9120 /* PXPAPITask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXPAPITask.m; sourceTree = "<group>"; };
 		0AC063451CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+PXPExtensions.h"; sourceTree = "<group>"; };
 		0AC063461CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+PXPExtensions.m"; sourceTree = "<group>"; };
 		0AF1E6BF1CB7FBF1004B24F1 /* PXPAccountInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXPAccountInfo.h; sourceTree = "<group>"; };
@@ -362,6 +366,8 @@
 		0AF1E6EC1CB7FBF1004B24F1 /* ServerApi */ = {
 			isa = PBXGroup;
 			children = (
+				0A9AE5FD1CCE2425009E9120 /* PXPAPITask.h */,
+				0A9AE5FE1CCE2425009E9120 /* PXPAPITask.m */,
 				0AF1E6ED1CB7FBF1004B24F1 /* PXPSDKRequestWrapper.h */,
 				0AF1E6EE1CB7FBF1004B24F1 /* PXPSDKRequestWrapper.m */,
 			);
@@ -449,6 +455,7 @@
 				0AF1E7241CB7FBF1004B24F1 /* PXPModelObject.h in Headers */,
 				0AF1E7021CB7FBF1004B24F1 /* PXPAuthManager.h in Headers */,
 				0AF1E7141CB7FBF1004B24F1 /* PXPDefines.h in Headers */,
+				0A9AE5FF1CCE2425009E9120 /* PXPAPITask.h in Headers */,
 				0A812AFC1CBEC1DF00879F9A /* AFURLSessionOperation.h in Headers */,
 				0AF1E7171CB7FBF1004B24F1 /* PXPCellMonitor.h in Headers */,
 				0AF1E71A1CB7FBF1004B24F1 /* PXPNetInfo.h in Headers */,
@@ -586,6 +593,7 @@
 				0AF1E72C1CB7FBF1004B24F1 /* PXP.m in Sources */,
 				0AF1E7091CB7FBF1004B24F1 /* PXPImageRequestWrapper.m in Sources */,
 				0AC063481CC160FE006BAB18 /* NSOperationQueue+PXPExtensions.m in Sources */,
+				0A9AE6001CCE2425009E9120 /* PXPAPITask.m in Sources */,
 				0AF1E7181CB7FBF1004B24F1 /* PXPCellMonitor.m in Sources */,
 				0AF1E70D1CB7FBF1004B24F1 /* NSObject+SafeKVC.m in Sources */,
 				0AF1E70F1CB7FBF1004B24F1 /* NSString+PXPSecurity.m in Sources */,

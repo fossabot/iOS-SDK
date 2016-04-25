@@ -39,10 +39,10 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
     return self;
 }
 
-- (NSURLSessionDataTask *)authWithAppId:(NSString*)appId
-                                 apiKey:(NSString*)apiKey
-                           successBlock:(PXPRequestSuccessBlock)successBlock
-                          failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+- (PXPAPITask *)authWithAppId:(NSString*)appId
+                       apiKey:(NSString*)apiKey
+                 successBlock:(PXPRequestSuccessBlock)successBlock
+                failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     NSString* salt = PXPConfig.defaultConfig.requestSalt;
     long timestamp = (long)[[NSDate date] timeIntervalSince1970];
@@ -54,14 +54,11 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
                              @"hash" : hash};
 
     NSString* url = [NSString stringWithFormat:@"%@%@", self.backendUrl, kPXPAuthMethod];
-    return [self.sessionManager GET:url
-                         parameters:params
-//                           progress:nil
-                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        successBlock(responseObject);
-    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
-        failtureBlock(error);
-    }];
+    NSError* error = nil;
+    NSURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:url parameters:params error:&error];
+    NSAssert(error == nil, @"Auth Request error is not nil");
+    PXPAPITask* task = [self taskWithRequest:request successBlock:successBlock failtureBlock:failtureBlock];
+    return task;
 }
 
 @end

@@ -111,7 +111,7 @@
     void(^failtureBlock)(NSURLSessionTask * _Nonnull, id  _Nullable) = ^(NSURLSessionTask * _Nonnull task, NSError* _Nullable error) {
         _completionBlock(task.originalRequest.URL, nil, error);
     };
-    if (self.sdkRequestWrapper == nil) {
+    if ([PXP sharedSDK].state != PXPStateReady) {
         [self addOriginalImageOperationWithSuccess:successBlock
                                           failture:failtureBlock];
 
@@ -163,9 +163,9 @@
                                          quality:_transform.qualityString
                                             path:urlString.pxp_imagePath
                                     successBlock:^(id responseObject) {
-                                        PXPLogInfo(@"OK: %@", responseObject);
+                                        PXPLogInfo(@"Update Image OK: %@", urlString);
                                     } failtureBlock:^(NSError *error) {
-                                        PXPLogError(@"Error: %@", error);
+                                        PXPLogError(@"Update Image Error: %@ : %@", error, urlString);
                                     }];
 }
 
@@ -210,7 +210,9 @@
                                                                                      downloadProgress:_downloadProgress
                                                                                               success:successBlock
                                                                                              failture:failtureBlock];
-    [self uploadImage];
+    if ([PXP sharedSDK].state == PXPStateReady) {
+        [self uploadImage];
+    }
     [self addOperation:imageDownloadOperation];
 }
 

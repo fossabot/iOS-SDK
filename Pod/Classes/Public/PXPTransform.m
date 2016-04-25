@@ -45,12 +45,13 @@ NSString* PXPTransformQualityForNetInfo(PXPNetInfo* netInfo) {
     });
     NSString* result = sPXPQualities[netInfo.technology];
     if (result == nil) {
-        result = @"75";
+        result = @"80";
     };
     return result;
 }
 
-static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1024, 2048 };
+static const NSInteger PXPImageSizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1024, 1536, 2048 };
+static const NSInteger PXPImageSizesLength = 12;
 
 @implementation PXPTransform
 
@@ -110,7 +111,7 @@ static const NSInteger sizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1
 @implementation PXPTransform (PXPStringRepresentation)
 
 + (NSInteger)closestPXPSizeToSize:(CGSize)size {
-    NSInteger value = PXPFirstClosest(sizes, 11, size.width);
+    NSInteger value = PXPFirstClosest(PXPImageSizes, PXPImageSizesLength, size.width);
     return value;
 }
 

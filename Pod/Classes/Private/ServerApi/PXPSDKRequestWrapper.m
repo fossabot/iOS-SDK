@@ -12,6 +12,7 @@
 #import "PXPAuthPrincipal.h"
 #import "NSURL+PXPUrl.h"
 #import <AFNetworking/AFNetworking.h>
+#import "PXPAPITask.h"
 
 static NSString* const kPXPUpdateImageRequestPath = @"/async/images/newResolution/%@/%@/%@/%@";
 static NSString* const kPXPUploadImageRequestPath = @"/async/images/upload/%@/%@";
@@ -55,11 +56,11 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     }
 }
 
-- (NSURLSessionDataTask*)updateImageWithWidth:(NSString*)width
-                                      quality:(NSString*)quality
-                                         path:(NSString*)path
-                                 successBlock:(PXPRequestSuccessBlock)successBlock
-                                failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+- (PXPAPITask *)updateImageWithWidth:(NSString*)width
+                             quality:(NSString*)quality
+                                path:(NSString*)path
+                        successBlock:(PXPRequestSuccessBlock)successBlock
+                       failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     assert(path != nil);
     NSString* apiPath = [NSString stringWithFormat:kPXPUpdateImageRequestPath, self.appId, width, quality, path];
@@ -68,7 +69,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     NSError* error = nil;
     NSMutableURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:requestUrl parameters:nil error:&error];
     assert(error == nil);
-    NSURLSessionDataTask *task = [self taskWithRequest:request successBlock:successBlock failtureBlock:failtureBlock];
+    PXPAPITask *task = [self taskWithRequest:request successBlock:successBlock failtureBlock:failtureBlock];
     return task;
 }
 
@@ -85,23 +86,23 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     NSURLSessionDataTask *task = [self.sessionManager POST:requestUrl
                                                 parameters:nil
                                  constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithInputStream:stream name:@"image" fileName:@"image" length:length mimeType:mimeType];
-    }
-//                                                  progress:nil
+                                     [formData appendPartWithInputStream:stream name:@"image" fileName:@"image" length:length mimeType:mimeType];
+                                 }
+                                  //                                                  progress:nil
                                                    success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        successBlock(responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failtureBlock(error);
-    }];
+                                                       successBlock(responseObject);
+                                                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                       failtureBlock(error);
+                                                   }];
     return task;
 }
 
-- (NSURLSessionDataTask *)uploadImageTaskAtUrl:(NSString *)url
-                                         width:(NSString *)width
-                                       quality:(NSString *)quality
-                                        params:(NSDictionary*)requestHeaders
-                                  successBlock:(PXPRequestSuccessBlock)successBlock
-                                 failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+- (PXPAPITask *)uploadImageTaskAtUrl:(NSString *)url
+                               width:(NSString *)width
+                             quality:(NSString *)quality
+                              params:(NSDictionary*)requestHeaders
+                        successBlock:(PXPRequestSuccessBlock)successBlock
+                       failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     assert(url != nil);
     if ([url pxp_URLType] == PXPUrlTypeCDN) {
@@ -126,7 +127,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     NSError* error = nil;
     NSMutableURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:requestUrl parameters:params error:&error];
     assert(error == nil);
-    NSURLSessionDataTask *task = [self taskWithRequest:request successBlock:^(id responseObject) {
+    PXPAPITask *task = [self taskWithRequest:request successBlock:^(id responseObject) {
         successBlock(responseObject);
     } failtureBlock:^(NSError *error) {
         failtureBlock(error);
@@ -134,9 +135,9 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     return task;
 }
 
-- (NSURLSessionDataTask *)imagesAtPath:(NSString *)path
-                          successBlock:(PXPRequestSuccessBlock)successBlock
-                         failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+- (PXPAPITask *)imagesAtPath:(NSString *)path
+                successBlock:(PXPRequestSuccessBlock)successBlock
+               failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     assert(path != nil);
     NSString* apiPath = [NSString stringWithFormat:kPXPItemsInFolderRequestPath, self.appId, path];
@@ -145,59 +146,26 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     NSError* error = nil;
     NSMutableURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:requestUrl parameters:nil error:&error];
     assert(error == nil);
-    NSURLSessionDataTask *task = [self taskWithRequest:request successBlock:successBlock failtureBlock:failtureBlock];
+    PXPAPITask *task = [self taskWithRequest:request successBlock:successBlock failtureBlock:failtureBlock];
     return task;
 }
 
-- (NSURLSessionDataTask*)taskWithRequest:(NSURLRequest *)request
-                        successBlock:(PXPRequestSuccessBlock)successBlock
-                       failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+- (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
+                   successBlock:(PXPRequestSuccessBlock)successBlock
+                  failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     assert(self.sessionManager != nil);
     __weak typeof(self)weakSelf = self;
-    NSURLSessionDataTask *task = [self.sessionManager dataTaskWithRequest:request
-//                                                           uploadProgress:nil
-//                                                         downloadProgress:nil
-                                                        completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    NSString *uuid = [[NSUUID UUID] UUIDString];
+    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:self.operationQueue identifier:uuid sessionManager:self.sessionManager success:successBlock failure:^(NSError *error) {
+        BLOCK_SAFE_RUN(failtureBlock, error);
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (error == nil) {
-            BLOCK_SAFE_RUN(successBlock, responseObject);
-        } else {
-#warning To add repeat and completion
-            BLOCK_SAFE_RUN(failtureBlock, responseObject);
-            if (error.code == 403 || error.code == 401) {
-                [strongSelf.info update];
-            }
+        if (error.code == 403 || error.code == 401) {
+            [strongSelf.info update];
         }
     }];
-    [task resume];
+    [task start];
     return task;
-}
-
-
-- (void)performRequest:(NSURLRequest*)request
-            retryCount:(NSInteger)retryCount
-             lastError:(NSError*)error
-          successBlock:(PXPRequestFailureBlock)successBlock
-         failtureBlock:(PXPRequestSuccessBlock)failureBlock
-{
-    if (retryCount <= 0) {
-        BLOCK_SAFE_RUN(failureBlock, error);
-    } else {
-        __weak typeof(self)weakSelf = self;
-        NSURLSessionTask* operation = [self.sessionManager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            if (error == nil)
-            {
-                BLOCK_SAFE_RUN(successBlock, responseObject);
-            }
-            else
-            {
-                [strongSelf performRequest:request retryCount:retryCount - 1 lastError:error successBlock:successBlock failtureBlock:failureBlock];
-            }
-        }];
-        [operation resume];
-    }
 }
 
 + (NSDictionary*)apiParamsFromHeaders:(NSDictionary*)headers {

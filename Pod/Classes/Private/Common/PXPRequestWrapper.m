@@ -9,6 +9,7 @@
 #import "PXPRequestWrapper.h"
 #import "PXPConfig.h"
 #import <AFNetworking/AFNetworking.h>
+#import "PXPDefines.h"
 
 @interface PXPRequestWrapper ()
 
@@ -34,8 +35,21 @@
         policy.validatesDomainName = NO;
         policy.allowInvalidCertificates = YES;
         self.sessionManager.securityPolicy = policy;
+        _operationQueue = [[NSOperationQueue alloc] init];
+        _operationQueue.maxConcurrentOperationCount = 1;
     }
     return self;
+}
+
+- (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
+                   successBlock:(PXPRequestSuccessBlock)successBlock
+                  failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+
+    assert(self.sessionManager != nil);
+    NSString *uuid = [[NSUUID UUID] UUIDString];
+    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:self.operationQueue identifier:uuid sessionManager:self.sessionManager success:successBlock failure:failtureBlock];
+    [task start];
+    return task;
 }
 
 @end
