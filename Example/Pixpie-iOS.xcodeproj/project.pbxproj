@@ -261,6 +261,7 @@
 				0994D391AFBC347DE174D0AB /* Embed Pods Frameworks */,
 				1110E2573030FCDD9CAE0F12 /* Copy Pods Resources */,
 				0AA145871CB7AE17002DA031 /* Crashlytics */,
+				0A5A24591CD0D79200247D88 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -307,7 +308,7 @@
 						CreatedOnToolsVersion = 7.3;
 					};
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = 32G6AL6N76;
+						DevelopmentTeam = 2VQ32E4N43;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -378,6 +379,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InspiringPhotos/Pods-InspiringPhotos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		0A5A24591CD0D79200247D88 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
 		0AA145871CB7AE17002DA031 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -390,7 +405,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 0312aba01a22510db11f59f8e5e94b8619b023b4 6ef9bca0b0c00edfac08e81fc33a02c65870d507140ac07b5ab0483904ebc1e2";
+			shellScript = "# \"${PODS_ROOT}/Fabric/run\" 0312aba01a22510db11f59f8e5e94b8619b023b4 6ef9bca0b0c00edfac08e81fc33a02c65870d507140ac07b5ab0483904ebc1e2";
 		};
 		1110E2573030FCDD9CAE0F12 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -615,7 +630,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -638,7 +653,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

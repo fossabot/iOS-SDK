@@ -30,22 +30,22 @@ NSString* PXPTransformQualityForNetInfo(PXPNetInfo* netInfo) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sPXPQualities = @{PXPNetworkUnknown : @"80",
-                          PXPNetworkWiFi : @"90",
+                          PXPNetworkWiFi : @"80",
                           PXPNetworkCDMAEVDORevB : @"80",
                           PXPNetworkCDMAEVDORevA : @"80",
                           PXPNetworkCDMAEVDORev0 : @"80",
                           PXPNetworkCDMA1x : @"70",
-                          PXPNetworkWCDMA : @"80",
-                          PXPNetworkHSUPA : @"80",
-                          PXPNetworkHSDPA : @"80",
-                          PXPNetworkeHRPD : @"80",
+                          PXPNetworkWCDMA : @"50",
+                          PXPNetworkHSUPA : @"50",
+                          PXPNetworkHSDPA : @"50",
+                          PXPNetworkeHRPD : @"50",
                           PXPNetworkGPRS : @"30",
-                          PXPNetworkEdge : @"50",
-                          PXPNetworkLTE : @"90"};
+                          PXPNetworkEdge : @"30",
+                          PXPNetworkLTE : @"80"};
     });
     NSString* result = sPXPQualities[netInfo.technology];
     if (result == nil) {
-        result = @"80";
+        result = @"50";
     };
     return result;
 }
