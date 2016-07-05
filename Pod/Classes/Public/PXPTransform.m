@@ -12,6 +12,7 @@
 #import "PXPNetInfo.h"
 #import "PXPNetworkMonitor.h"
 #import "UIImageView+PXPExtensions.h"
+#import "PXPDataMonitor.h"
 
 NSInteger PXPFirstClosest(const NSInteger *values, NSUInteger len, NSInteger value) {
     NSInteger dist = labs(values[0] - value);
@@ -23,6 +24,26 @@ NSInteger PXPFirstClosest(const NSInteger *values, NSUInteger len, NSInteger val
         }
     }
     return values[closest];
+}
+
+NSString* PXPTransformQualityForSpeed(PXPDataSpeed dataSpeed) {
+    static NSDictionary *_sPXPQualities = nil;
+    static dispatch_once_t _onceToken;
+    dispatch_once(&_onceToken, ^{
+        _sPXPQualities = @{
+                           @(PXPDataSpeedExtraLow) : @"30",
+                           @(PXPDataSpeedLow) : @"30",
+                           @(PXPDataSpeedMedium) : @"50",
+                           @(PXPDataSpeedHigh) : @"80",
+                           @(PXPDataSpeedExtraHigh) : @"80",
+                           @(PXPDataSpeedUndefined) : @"80"
+                           };
+    });
+    NSString* result = _sPXPQualities[@(dataSpeed)];
+    if (result == nil) {
+        result = @"50";
+    };
+    return result;
 }
 
 NSString* PXPTransformQualityForNetInfo(PXPNetInfo* netInfo) {
@@ -120,6 +141,8 @@ static const NSInteger PXPImageSizesLength = 12;
     if (self.imageQuality == PXPTransformQualityAutomatic) {
         PXPNetInfo* netInfo = [PXPNetworkMonitor sharedMonitor].currentNetworkTechnology;
         quality = PXPTransformQualityForNetInfo(netInfo);
+        NSString *_quality = PXPTransformQualityForSpeed([PXPDataMonitor sharedMonitor].speedType);
+        quality = [quality compare:_quality options:NSNumericSearch] == NSOrderedAscending ? quality : _quality;
     }
     return quality;
 }

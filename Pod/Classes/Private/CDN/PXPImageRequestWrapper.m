@@ -11,6 +11,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFAutoPurgingImageCache.h>
 #import "AFHTTPSessionOperation.h"
+#import "PXPURLProtocol.h"
 
 @interface PXPImageRequestWrapper ()
 
@@ -79,6 +80,8 @@
     configuration.allowsCellularAccess = YES;
     configuration.timeoutIntervalForRequest = 60.0;
     configuration.URLCache = [PXPImageRequestWrapper defaultURLCache];
+    
+    configuration.protocolClasses = @[[PXPURLProtocol class]];
 
     return configuration;
 }

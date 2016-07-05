@@ -15,6 +15,7 @@
 #import "PXPSDKRequestWrapper.h"
 #import "PXPNetworkMonitor.h"
 #import "PXPFileManager.h"
+#import "PXPDataMonitor.h"
 
 NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateChange";
 
@@ -44,6 +45,7 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 {
     self = [super init];
     if (self) {
+        [PXPDataMonitor sharedMonitor];
         _state = PXPStateNotInitialized;
         _imageTaskManager = [[PXPImageTaskManager alloc] init];
         [[PXPNetworkMonitor sharedMonitor] startMonitoring];
