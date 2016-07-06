@@ -36,7 +36,8 @@ NSString* PXPTransformQualityForSpeed(PXPDataSpeed dataSpeed) {
                            @(PXPDataSpeedMedium) : @"50",
                            @(PXPDataSpeedHigh) : @"80",
                            @(PXPDataSpeedExtraHigh) : @"80",
-                           @(PXPDataSpeedUndefined) : @"80"
+                           @(PXPDataSpeedUndefined) : @"80",
+                           @(PXPDataSpeedIdle) : @"50"
                            };
     });
     NSString* result = _sPXPQualities[@(dataSpeed)];

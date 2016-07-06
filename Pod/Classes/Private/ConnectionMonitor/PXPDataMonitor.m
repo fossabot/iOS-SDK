@@ -9,9 +9,17 @@
 #import "PXPDataMonitor.h"
 #import "PXPURLProtocol.h"
 
+static const NSInteger precisionConstant = 100;
+static const NSInteger frameDuration = 1 * precisionConstant;
+
 @interface PXPDataMonitor() <PXPURLProtocolDelegate>
 
-@property (nonatomic, strong) NSMutableDictionary *responsesSamples;
+@property (nonatomic) NSInteger frameBytesSum;
+@property (nonatomic) NSInteger frameChunkCount;
+@property (nonatomic) NSInteger lastFrame;
+@property (nonatomic) NSInteger currentFrame;
+
+@property (nonatomic) PXPDataSpeed lastMeasuredSpeed;
 
 @end
 
@@ -36,88 +44,52 @@
 {
     self = [super init];
     if (self) {
-        self.responsesSamples = [NSMutableDictionary dictionary];
+        self.frameBytesSum = -1;
+        self.frameChunkCount = -1;
+        self.lastFrame = -1;
+        self.currentFrame = -1;
+        self.lastMeasuredSpeed = PXPDataSpeedUndefined;
     }
     return self;
 }
 
-- (NSTimeInterval)currentTimeInterval
+- (NSInteger)currentTimeInterval
 {
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSArray *comps = [cal components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:[NSDate date]];
-    NSTimeInterval ti = [[cal dateFromComponents:comps] timeIntervalSinceReferenceDate];
-
-    return ti;
+    return [NSDate timeIntervalSinceReferenceDate] * precisionConstant;
 }
 
 - (void)customHTTPProtocol:(PXPURLProtocol *)protocol receivedBlockSize:(ssize_t)size
 {
-    NSTimeInterval ti = [self currentTimeInterval];
-    NSString *key = [NSString stringWithFormat:@"%f", ti];
-    
-    NSNumber *currentSize = self.responsesSamples[key];
-    if (currentSize) {
-        currentSize = @(currentSize.integerValue + size);
-    }
-    else {
-        currentSize = @(size);
+    NSInteger frame = [self currentTimeInterval];
+    BOOL newFrame = self.currentFrame == -1 || (frame - self.currentFrame) > frameDuration;
+    if (newFrame) {
+        [self calculateSpeed];
+        self.currentFrame = frame;
     }
     
-    self.responsesSamples[key] = currentSize;
+    self.frameChunkCount++;
+    self.frameBytesSum += size;
 }
 
-- (CGFloat)averageSpeedForInterval:(NSInteger)seconds
+- (void)calculateSpeed
 {
-    NSTimeInterval ti = [self currentTimeInterval];
-    CGFloat sum = 0;
-    NSInteger _sec = 0;
-    for (NSInteger i = 0; i < seconds; i++) {
-        NSString *key = [NSString stringWithFormat:@"%f", ti - i];
-        CGFloat sample = [self.responsesSamples[key] floatValue];
-        sum += sample;
-        _sec += sample != 0 ? 1 : 0;
+    if (self.frameBytesSum > 40 * 1 << 10 && self.frameChunkCount > 1) {
+        self.lastMeasuredSpeed = PXPDataSpeedExtraHigh;
     }
-    return sum / _sec;
-}
-
-- (CGFloat)averageSpeedForSamples:(NSInteger)sampleCount
-{
-    NSArray *sampleKeys = [self.responsesSamples.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        return ![obj1 compare:obj2];
-    }];
-    
-    CGFloat sum = 0;
-    NSInteger _samples = MIN(sampleCount, sampleKeys.count);
-    for (NSInteger i = 0; i < _samples; i++) {
-        NSString *key = sampleKeys[i];
-        CGFloat sample = [self.responsesSamples[key] floatValue];
-        sum += sample;
-    }
-
-    return sum / _samples;
+    self.frameChunkCount = 0;
+    self.frameBytesSum = 0;
 }
 
 - (PXPDataSpeed)speedType
 {
-    CGFloat currentAvgSpeed = [self averageSpeedForSamples:60];
-    if (currentAvgSpeed >= PXPDataSpeedExtraHigh) {
-        return PXPDataSpeedExtraHigh;
+    if ([self currentTimeInterval] - self.currentFrame > frameDuration * 2) {
+        return PXPDataSpeedIdle;
     }
-    else if (currentAvgSpeed >= PXPDataSpeedHigh) {
-        return PXPDataSpeedHigh;
+    if ([self currentTimeInterval] - self.currentFrame > frameDuration) {
+        [self calculateSpeed];
     }
-    else if (currentAvgSpeed >= PXPDataSpeedMedium) {
-        return PXPDataSpeedMedium;
-    }
-    else if (currentAvgSpeed >= PXPDataSpeedLow) {
-        return PXPDataSpeedLow;
-    }
-    else if (currentAvgSpeed >= PXPDataSpeedExtraLow){
-        return PXPDataSpeedExtraLow;
-    }
-    else {
-        return PXPDataSpeedUndefined;
-    }
+    
+    return self.lastMeasuredSpeed;
 }
 
 @end

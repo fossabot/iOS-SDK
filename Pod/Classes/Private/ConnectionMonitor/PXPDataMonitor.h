@@ -10,11 +10,12 @@
 
 typedef NS_ENUM(NSInteger, PXPDataSpeed) {
     PXPDataSpeedUndefined = 0,
-    PXPDataSpeedExtraLow = 20  * 1 << 10,
-    PXPDataSpeedLow = 220 * 1 << 10,
-    PXPDataSpeedMedium = 420 * 1 << 10,
-    PXPDataSpeedHigh = 620 * 1 << 10,
-    PXPDataSpeedExtraHigh = 1 * 1 << 20
+    PXPDataSpeedExtraLow,
+    PXPDataSpeedLow,
+    PXPDataSpeedMedium,
+    PXPDataSpeedHigh,
+    PXPDataSpeedExtraHigh,
+    PXPDataSpeedIdle
 };
 
 @interface PXPDataMonitor : NSObject
