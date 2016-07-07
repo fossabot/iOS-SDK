@@ -8,6 +8,7 @@
 
 #import "PXPDataMonitor.h"
 #import "PXPURLProtocol.h"
+#import "PXPTrafficMonitor.h"
 
 static const NSInteger precisionConstant = 100;
 static const NSInteger frameDuration = 1 * precisionConstant;
@@ -69,6 +70,10 @@ static const NSInteger frameDuration = 1 * precisionConstant;
     
     self.frameChunkCount++;
     self.frameBytesSum += size;
+    
+    [[PXPTrafficMonitor sharedMonitor] performSelector:@selector(reportBlockSizes:) withObject:@(size)];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PXPURLProtocolReceivedChunk" object:nil userInfo:@{@"chunkSize" : @(size)}];
 }
 
 - (void)calculateSpeed
