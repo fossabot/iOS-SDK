@@ -140,10 +140,9 @@ static const NSInteger PXPImageSizesLength = 12;
 - (NSString *)qualityString {
     NSString *quality = @"80";
     if (self.imageQuality == PXPTransformQualityAutomatic) {
-        PXPNetInfo* netInfo = [PXPNetworkMonitor sharedMonitor].currentNetworkTechnology;
-        quality = PXPTransformQualityForNetInfo(netInfo);
-        NSString *_quality = PXPTransformQualityForSpeed([PXPDataMonitor sharedMonitor].speedType);
-        quality = [quality compare:_quality options:NSNumericSearch] == NSOrderedAscending ? quality : _quality;
+//        PXPNetInfo* netInfo = [PXPNetworkMonitor sharedMonitor].currentNetworkTechnology;
+//        quality = PXPTransformQualityForNetInfo(netInfo);
+        quality = PXPTransformQualityForSpeed([PXPDataMonitor sharedMonitor].speedType);
     }
     return quality;
 }
