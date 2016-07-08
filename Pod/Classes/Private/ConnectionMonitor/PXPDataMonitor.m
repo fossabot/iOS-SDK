@@ -78,8 +78,18 @@ static const NSInteger frameDuration = 1 * precisionConstant;
 
 - (void)calculateSpeed
 {
-    if (self.frameBytesSum > 40 * 1 << 10 && self.frameChunkCount > 1) {
+    NSInteger avgChunkSize = self.frameBytesSum / self.frameChunkCount;
+    if (avgChunkSize > 6 * 1<<10) {
         self.lastMeasuredSpeed = PXPDataSpeedExtraHigh;
+    }
+    else if (avgChunkSize > 5 * 1<<10) {
+        self.lastMeasuredSpeed = PXPDataSpeedHigh;
+    }
+    else if (avgChunkSize > 4 * 1<<10) {
+        self.lastMeasuredSpeed = PXPDataSpeedMedium;
+    }
+    else {
+        self.lastMeasuredSpeed = PXPDataSpeedExtraLow;
     }
     self.frameChunkCount = 0;
     self.frameBytesSum = 0;
