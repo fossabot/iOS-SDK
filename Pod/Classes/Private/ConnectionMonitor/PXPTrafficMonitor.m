@@ -56,15 +56,21 @@
 
 - (void)reportBlockSizes:(NSNumber *)blockSize
 {
-    self.currentFrameBytes += blockSize.integerValue;
-    self.totalBytes += blockSize.integerValue;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.currentFrameBytes += blockSize.integerValue;
+        [self willChangeValueForKey:@"totalBytesForSession"];
+        self.totalBytes += blockSize.integerValue;
+        [self didChangeValueForKey:@"totalBytesForSession"];
+    });
 }
 
 - (void)slideArray
 {
-    [self.minuteSamples removeObjectAtIndex:0];
-    [self.minuteSamples addObject:@(self.currentFrameBytes)];
-    self.currentFrameBytes = 0;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.minuteSamples removeObjectAtIndex:0];
+        [self.minuteSamples addObject:@(self.currentFrameBytes)];
+        self.currentFrameBytes = 0;
+    });
 }
 
 - (NSUInteger)totalBytesForSession
@@ -75,6 +81,11 @@
 - (NSArray *)dataSamples
 {
     return [[NSArray alloc] initWithArray:self.minuteSamples copyItems:YES];
+}
+
+- (NSNumber *)lastSample
+{
+    return self.minuteSamples.lastObject;
 }
 
 @end

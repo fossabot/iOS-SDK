@@ -14,5 +14,6 @@
 
 @property (nonatomic, readonly) NSUInteger totalBytesForSession;
 @property (nonatomic, readonly) NSArray *dataSamples;
+@property (nonatomic, readonly) NSNumber *lastSample;
 
 @end
