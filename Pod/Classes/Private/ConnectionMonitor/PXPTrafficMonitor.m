@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSTimer *sliderTimer;
 @property (nonatomic) NSUInteger currentFrameBytes;
 
+@property (nonatomic, strong) dispatch_queue_t monitorQueue;
 @end
 
 @implementation PXPTrafficMonitor
@@ -37,6 +38,8 @@
 {
     self = [super init];
     if (self) {
+        self.monitorQueue =  dispatch_queue_create("co.pixpie.trafficmonitor", DISPATCH_QUEUE_CONCURRENT);
+
         self.totalBytes = 0;
         self.currentFrameBytes = 0;
         self.minuteSamples = [NSMutableArray arrayWithCapacity:60];
@@ -56,7 +59,7 @@
 
 - (void)reportBlockSizes:(NSNumber *)blockSize
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(self.monitorQueue, ^{
         self.currentFrameBytes += blockSize.integerValue;
         [self willChangeValueForKey:@"totalBytesForSession"];
         self.totalBytes += blockSize.integerValue;
@@ -66,7 +69,7 @@
 
 - (void)slideArray
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(self.monitorQueue, ^{
         [self.minuteSamples removeObjectAtIndex:0];
         [self.minuteSamples addObject:@(self.currentFrameBytes)];
         self.currentFrameBytes = 0;
