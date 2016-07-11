@@ -20,9 +20,36 @@ class ImagesViewController: UICollectionViewController {
     let imageLinksArray = kImageLinkArray
     var pickedUrl: NSURL?
 
+    var graphView : PXGraphView?
+    
+    var timer : NSTimer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //collectionView?.registerClass(ImageCell.self, forCellWithReuseIdentifier: kCellIdentifier)
+        self.configStatusView()
+        
+        self.graphView = PXGraphView.init(frame: CGRect.init(x: 0, y: self.view.frame.maxY - 100, width: self.view.frame.width, height: 100))
+        self.graphView?.backgroundColor = UIColor.whiteColor()
+        self.graphView?.pointsNumber = 60
+        self.graphView?.alpha = 0.65
+        self.view.addSubview(self.graphView!)
+        let ti = Int(NSDate.timeIntervalSinceReferenceDate()) + 1
+        self.timer = NSTimer.init(fireDate: NSDate.init(timeIntervalSinceReferenceDate: NSTimeInterval(ti)), interval: 1, target: self, selector: #selector(updateGraph), userInfo: nil, repeats: false)
+        let runloop = NSRunLoop.currentRunLoop()
+        runloop.addTimer(self.timer!, forMode: NSDefaultRunLoopMode)
+        
+        self.navigationItem.title = "0b"
+        
+        let options = NSKeyValueObservingOptions([.New, .Initial])
+        PXPTrafficMonitor.sharedMonitor().addObserver(self, forKeyPath: "totalBytesForSession", options: options, context: nil)
+    }
+    
+    func updateGraph() {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+            self.graphView?.addPoint(PXPTrafficMonitor.sharedMonitor().lastSample)
+            self.updateGraph()
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -42,16 +69,25 @@ class ImagesViewController: UICollectionViewController {
 
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
 
-        if (object as! PXP == PXP.sharedSDK()) {
-            self.statusView.backgroundColor = UIColor.clearColor()
-            switch PXP.sharedSDK().state {
-            case PXPStateReady:
-                self.statusView.state = .Green
-            case PXPStateFailed:
-                self.statusView.state = .Red
-            default:
-                self.statusView.state = .Yellow
-            }
+        if (object as? PXP == PXP.sharedSDK()) {
+            self.configStatusView()
+        }
+        else if (object as? PXPTrafficMonitor == PXPTrafficMonitor.sharedMonitor()) {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.navigationItem.title = "\(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)b"
+            })
+        }
+    }
+    
+    func configStatusView() {
+        self.statusView.backgroundColor = UIColor.clearColor()
+        switch PXP.sharedSDK().state {
+        case PXPStateReady:
+            self.statusView.state = .Green
+        case PXPStateFailed:
+            self.statusView.state = .Red
+        default:
+            self.statusView.state = .Yellow
         }
     }
 
