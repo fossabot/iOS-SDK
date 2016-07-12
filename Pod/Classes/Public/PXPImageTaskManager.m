@@ -87,11 +87,10 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
     return identifier;
 }
 
-- (NSString *)imageUploadTaskWithImage:(UIImage *)image
+- (void)imageUploadTaskWithImage:(UIImage *)image
                                   path:(NSString *)path
                         uploadProgress:(PXPProgressBlock)uploadProgress
                             completion:(PXPImageRequestCompletionBlock)completionBlock {
-    NSString* identifier = [[NSUUID UUID] UUIDString];
     NSURLSessionDataTask *task = [[PXP sharedSDK].wrapper uploadImageTaskForImage:image toPath:path successBlock:^(NSURLSessionTask *task, id responseObject) {
         if (completionBlock) {
             completionBlock(nil, nil, nil);
@@ -102,13 +101,12 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
         }
     }];
     [task resume];
-    return identifier;
 }
-- (NSString *)imageUploadTaskWithImage:(UIImage *)image
+- (void)imageUploadTaskWithImage:(UIImage *)image
                         uploadProgress:(PXPProgressBlock)uploadProgress
                             completion:(PXPImageRequestCompletionBlock)completionBlock {
     NSString* identifier = [[NSUUID UUID] UUIDString];
-    return [self imageUploadTaskWithImage:image path:[NSString stringWithFormat:@"%@.jpg", identifier] uploadProgress:uploadProgress completion:completionBlock];
+    [self imageUploadTaskWithImage:image path:[NSString stringWithFormat:@"%@.jpg", identifier] uploadProgress:uploadProgress completion:completionBlock];
 }
 
 - (void)cancelTaskWithIdentifier:(NSString*)identifier {
