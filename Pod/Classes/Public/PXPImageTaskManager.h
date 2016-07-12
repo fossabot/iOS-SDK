@@ -38,7 +38,13 @@ typedef void (^PXPProgressBlock)(NSProgress *progress);
                         uploadProgress:(PXPProgressBlock _Nullable)uploadProgress
                       downloadProgress:(PXPProgressBlock _Nullable)downloadProgress
                             completion:(PXPImageRequestCompletionBlock)completionBlock;
-
+- (void)imageUploadTaskWithImage:(UIImage *)image
+                                  path:(NSString *)path
+                        uploadProgress:(PXPProgressBlock)uploadProgress
+                            completion:(PXPImageRequestCompletionBlock)completionBlock;
+- (void)imageUploadTaskWithImage:(UIImage *)image
+                        uploadProgress:(PXPProgressBlock)uploadProgress
+                            completion:(PXPImageRequestCompletionBlock)completionBlock;
 - (void)cancelTaskWithIdentifier:(NSString *)identifier;
 
 @end

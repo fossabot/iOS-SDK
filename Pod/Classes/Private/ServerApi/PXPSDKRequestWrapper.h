@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
                               params:(NSDictionary*)requestHeaders
                         successBlock:(PXPRequestSuccessBlock)successBlock
                        failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+- (NSURLSessionDataTask *)uploadImageTaskForImage:(UIImage *)image
+                                           toPath:(NSString *)path
+                                     successBlock:(PXPRequestSuccessBlock)successBlock
+                                    failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 - (NSURLSessionDataTask *)uploadImageTaskForStream:(NSInputStream *)stream
                                           mimeType:(NSString *)mimeType
                                             length:(int64_t)length

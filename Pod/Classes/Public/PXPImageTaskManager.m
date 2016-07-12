@@ -87,6 +87,28 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
     return identifier;
 }
 
+- (void)imageUploadTaskWithImage:(UIImage *)image
+                                  path:(NSString *)path
+                        uploadProgress:(PXPProgressBlock)uploadProgress
+                            completion:(PXPImageRequestCompletionBlock)completionBlock {
+    NSURLSessionDataTask *task = [[PXP sharedSDK].wrapper uploadImageTaskForImage:image toPath:path successBlock:^(NSURLSessionTask *task, id responseObject) {
+        if (completionBlock) {
+            completionBlock(nil, nil, nil);
+        }
+    } failtureBlock:^(NSURLSessionTask *task, NSError *error) {
+        if (completionBlock) {
+            completionBlock(nil, nil, error);
+        }
+    }];
+    [task resume];
+}
+- (void)imageUploadTaskWithImage:(UIImage *)image
+                        uploadProgress:(PXPProgressBlock)uploadProgress
+                            completion:(PXPImageRequestCompletionBlock)completionBlock {
+    NSString* identifier = [[NSUUID UUID] UUIDString];
+    [self imageUploadTaskWithImage:image path:[NSString stringWithFormat:@"%@.jpg", identifier] uploadProgress:uploadProgress completion:completionBlock];
+}
+
 - (void)cancelTaskWithIdentifier:(NSString*)identifier {
     NSArray* operations = [self.imageQueue operationsForIdentifier:identifier];
     [operations makeObjectsPerformSelector:@selector(cancel)];
