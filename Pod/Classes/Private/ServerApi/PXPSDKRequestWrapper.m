@@ -73,6 +73,35 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     return task;
 }
 
+- (NSURLSessionDataTask *)uploadImageTaskForImage:(UIImage *)image
+                                           toPath:(NSString *)path
+                                     successBlock:(PXPRequestSuccessBlock)successBlock
+                                    failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+    assert(path != nil);
+    assert(image != nil);
+    NSString* apiPath = [NSString stringWithFormat:kPXPUploadImageRequestPath, self.appId, path];
+    NSString* requestUrl = [self.backendUrl stringByAppendingString:apiPath];
+    NSURLSessionDataTask *task = [self.sessionManager POST:requestUrl
+                                                parameters:nil
+                                 constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                                     NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
+                                     [formData appendPartWithFileData:imageData name:@"image" fileName:path.lastPathComponent mimeType:@"image/jpeg"];
+                                 }
+                                                  progress:nil
+                                                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                                       if (successBlock) {
+                                                           successBlock(task, responseObject);
+                                                       }
+                                                   }
+                                                   failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                       if (failtureBlock) {
+                                                           failtureBlock(task, error);
+                                                       }
+                                                   }];
+    return task;
+
+}
+
 - (NSURLSessionDataTask *)uploadImageTaskForStream:(NSInputStream *)stream
                                           mimeType:(NSString *)mimeType
                                             length:(int64_t)length
