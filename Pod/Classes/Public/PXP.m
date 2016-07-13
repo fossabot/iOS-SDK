@@ -27,6 +27,7 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 @property (nonatomic, readwrite, strong) PXPImageTaskManager* imageTaskManager;
 @property (nonatomic, readwrite, strong) PXPAccountInfo *accountInfo;
 @property (nonatomic, readwrite, strong) PXPSDKRequestWrapper *wrapper;
+@property (nonatomic, readwrite, strong) NSTimer *authTimer;
 
 @end
 
@@ -58,6 +59,7 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 - (void)dealloc {
     [[PXPNetworkMonitor sharedMonitor] stopMonitoring];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPModelUpdatedNotification object:self.accountInfo];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPNetworkChangedNotification object:nil];
 }
 
 - (void)authWithApiKey:(NSString *)apiKey {
@@ -85,9 +87,33 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
     NSError *error = dict[kPXPModelUpdateErrorKey];
     if (error == nil) {
         self.state = PXPStateReady;
+        if (self.authTimer) {
+            [self.authTimer invalidate];
+            self.authTimer = nil;
+        }
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPNetworkChangedNotification object:nil];
     } else {
         self.state = PXPStateFailed;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:) name:kPXPNetworkChangedNotification object:nil];
+        [self scheduleReauth];
     }
+}
+
+- (void)networkChanged:(NSNotification *)note
+{
+    if ([PXPNetworkMonitor sharedMonitor].currentNetworkTechnology) {
+        [self timerCall];
+    }
+}
+
+- (void)scheduleReauth
+{
+    self.authTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerCall) userInfo:nil repeats:YES];
+}
+
+- (void)timerCall
+{
+    [self.accountInfo update];
 }
 
 - (void)setState:(PXPState)state {
