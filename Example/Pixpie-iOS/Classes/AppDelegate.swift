@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
 
         //Fabric.with([Crashlytics.self])
-        let defaultLicense = "5e451ae39c44cbe6085fd51e7f1b443abc49ffe150334fe0cc0902b6df23da95"
+        let defaultLicense = "5ef4c48258e85c88fd44c0b6dccf8f5bc0ec1ac49e9c283dda9dcdc090d5155a"
         NSUserDefaults.standardUserDefaults().registerDefaults(["pxp_license" : defaultLicense])
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.splashCompleted(_:)), name: kSplashCompleteNotification, object: nil)
