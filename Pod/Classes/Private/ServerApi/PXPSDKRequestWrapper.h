@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class PXPAccountInfo;
+@class UIImage;
 
 @interface PXPSDKRequestWrapper : PXPRequestWrapper
 
