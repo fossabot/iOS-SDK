@@ -10,6 +10,7 @@
 #import "PXPConfig.h"
 #import <AFNetworking/AFNetworking.h>
 #import "PXPDefines.h"
+#import "PXPURLProtocol.h"
 
 @interface PXPRequestWrapper ()
 
@@ -26,6 +27,7 @@
     if (self != nil) {
         _backendUrl = [PXPConfig defaultConfig].backend;
         NSURLSessionConfiguration* configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.protocolClasses = @[[PXPURLProtocol class]];
         _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:_backendUrl] sessionConfiguration:configuration];
         self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
         self.sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];

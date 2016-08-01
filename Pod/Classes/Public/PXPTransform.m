@@ -31,18 +31,18 @@ NSString* PXPTransformQualityForSpeed(PXPDataSpeed dataSpeed) {
     static dispatch_once_t _onceToken;
     dispatch_once(&_onceToken, ^{
         _sPXPQualities = @{
-                           @(PXPDataSpeedExtraLow) : @"30",
-                           @(PXPDataSpeedLow) : @"30",
-                           @(PXPDataSpeedMedium) : @"50",
+                           @(PXPDataSpeedExtraLow) : @"50",
+                           @(PXPDataSpeedLow) : @"50",
+                           @(PXPDataSpeedMedium) : @"80",
                            @(PXPDataSpeedHigh) : @"80",
                            @(PXPDataSpeedExtraHigh) : @"80",
                            @(PXPDataSpeedUndefined) : @"80",
-                           @(PXPDataSpeedIdle) : @"50"
+                           @(PXPDataSpeedIdle) : @"80"
                            };
     });
     NSString* result = _sPXPQualities[@(dataSpeed)];
     if (result == nil) {
-        result = @"50";
+        result = @"80";
     };
     return result;
 }

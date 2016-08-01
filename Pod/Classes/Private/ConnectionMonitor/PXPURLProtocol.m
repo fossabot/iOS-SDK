@@ -48,6 +48,22 @@ typedef void (^ChallengeCompletionHandler)(NSURLSessionAuthChallengeDisposition 
 
 @end
 
+static BOOL sPXPIsProtocolRegistered = NO;
+
+
+__attribute__((constructor))
+void initialize() {
+    sPXPIsProtocolRegistered = [NSURLProtocol registerClass:[PXPURLProtocol class]];
+    assert(sPXPIsProtocolRegistered == YES);
+}
+
+__attribute__((destructor))
+static void deinitialize()
+{
+    [NSURLProtocol unregisterClass:[PXPURLProtocol class]];
+    sPXPIsProtocolRegistered = NO;
+}
+
 @implementation PXPURLProtocol
 
 static id<PXPURLProtocolDelegate> sDelegate;
@@ -300,17 +316,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     
     [[self class] customHTTPProtocol:self logWithFormat:@"stop (elapsed %.1f)", [NSDate timeIntervalSinceReferenceDate] - self.startTime];
     
-    assert(self.clientThread != nil);           // someone must have called -startLoading
-
-    // Check that we're being stopped on the same thread that we were started
-    // on.  Without this invariant things are going to go badly (for example,
-    // run loop sources that got attached during -startLoading may not get
-    // detached here).
-    //
-    // I originally had code here to bounce over to the client thread but that
-    // actually gets complex when you consider run loop modes, so I've nixed it.
-    // Rather, I rely on our client calling us on the right thread, which is what
-    // the following assert is about.
+    assert(self.clientThread != nil);
     _flags.didStopLoading = 1;
     assert([NSThread currentThread] == self.clientThread);
     if (_flags.didFinishLoading)

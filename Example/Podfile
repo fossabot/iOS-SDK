@@ -6,6 +6,7 @@ target 'InspiringPhotos' do
   pod 'Pixpie', :path => "../"
   pod 'PXStatusView'
   # pod 'Crashlytics'
+  pod 'InAppSettingsKit'
   pod 'HockeySDK', '~> 3.8.5'
 end
 
