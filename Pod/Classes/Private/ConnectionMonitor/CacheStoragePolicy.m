@@ -116,7 +116,7 @@ extern NSURLCacheStoragePolicy CacheStoragePolicyForRequestAndResponse(NSURLRequ
         } else {
             // result = NSURLCacheStorageAllowed;
             // cm: we don't want disk caches to interfere with our tests
-            result = NSURLCacheStorageAllowedInMemoryOnly;
+            result = NSURLCacheStorageAllowed;
 
         }
     } else {

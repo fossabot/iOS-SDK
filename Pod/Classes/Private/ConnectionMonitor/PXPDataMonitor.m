@@ -38,7 +38,6 @@ static NSInteger const kPXPUndefined = -1;
     dispatch_once(&p, ^{
         _sharedObject = [[self alloc] init];
         [PXPURLProtocol setDelegate:_sharedObject];
-        [PXPURLProtocol start];
     });
     
     return _sharedObject;
@@ -85,8 +84,8 @@ static NSInteger const kPXPUndefined = -1;
 - (void)calculateSpeed
 {
     CFTimeInterval faticialFrameLength = (self.lastDataTime - self.currentFrameTime);
-    if (faticialFrameLength > kPXPFrameDuration / 2.0) {
-        NSInteger predictedChunkCount = (self.frameChunkCount / faticialFrameLength);
+    if (faticialFrameLength > kPXPFrameDuration / 3.0) {
+        NSInteger predictedChunkCount = (self.frameChunkCount / faticialFrameLength) / kPXPFrameDuration;
         NSInteger throughput = predictedChunkCount * self.frameMaxSpeed;
         self.lastThroughput = throughput;
     }
@@ -94,7 +93,6 @@ static NSInteger const kPXPUndefined = -1;
 
 - (PXPDataSpeed)speedType
 {
-    [self calculateSpeed];
     NSInteger throughput = self.lastThroughput;
     if (throughput == kPXPUndefined) {
         return PXPDataSpeedIdle;

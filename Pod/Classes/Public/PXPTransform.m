@@ -31,7 +31,7 @@ NSString* PXPTransformQualityForSpeed(PXPDataSpeed dataSpeed) {
     static dispatch_once_t _onceToken;
     dispatch_once(&_onceToken, ^{
         _sPXPQualities = @{
-                           @(PXPDataSpeedExtraLow) : @"50",
+                           @(PXPDataSpeedExtraLow) : @"30",
                            @(PXPDataSpeedLow) : @"50",
                            @(PXPDataSpeedMedium) : @"80",
                            @(PXPDataSpeedHigh) : @"80",

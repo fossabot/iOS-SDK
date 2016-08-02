@@ -71,11 +71,6 @@ static id<PXPURLProtocolDelegate> sDelegate;
 static NSString* const kPXPCanonicalPropertyKey = @"x-pixpie-is-canonical-request";
 static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-request";
 
-+ (void)start
-{
-    [NSURLProtocol registerClass:self];
-}
-
 + (id<PXPURLProtocolDelegate>)delegate
 {
     id<PXPURLProtocolDelegate> result;
