@@ -30,7 +30,7 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
         //collectionView?.registerClass(ImageCell.self, forCellWithReuseIdentifier: kCellIdentifier)
         self.configStatusView()
         
-        self.graphView = PXGraphView.init(frame: CGRect.init(x: 0, y: self.view.frame.maxY - 100, width: self.view.frame.width, height: 100))
+        self.graphView = PXGraphView.init(frame: CGRectZero)
         self.graphView?.backgroundColor = UIColor.whiteColor()
         self.graphView?.pointsNumber = 60
         self.graphView?.alpha = 0.65
@@ -45,7 +45,12 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
         let options = NSKeyValueObservingOptions([.New, .Initial])
         PXPTrafficMonitor.sharedMonitor().addObserver(self, forKeyPath: "totalBytesForSession", options: options, context: nil)
     }
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.graphView?.frame = CGRect.init(x: 0, y: self.view.frame.maxY - 100, width: self.view.frame.width, height: 100)
+    }
+
     func updateGraph() {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
             self.graphView?.addPoint(PXPTrafficMonitor.sharedMonitor().lastSample)
