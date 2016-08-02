@@ -20,6 +20,7 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
     @IBOutlet weak var statusView: PXStatusView!
     let imageLinksArray = kImageLinkArray
     var pickedUrl: NSURL?
+    var shouldResetCache: Bool = false
 
     var graphView : PXGraphView?
     
@@ -48,12 +49,15 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
     }
 
     func sdkStateChange() {
-        let inset = self.collectionView!.contentInset.top
-        self.collectionView?.setContentOffset(CGPointMake(0.0, -inset), animated: false)
-        PXPTrafficMonitor.sharedMonitor().reset()
-        PXP.cleanUp()
-        self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
-        self.collectionView?.reloadData()
+        if (shouldResetCache) {
+            let inset = self.collectionView!.contentInset.top
+            self.collectionView?.setContentOffset(CGPointMake(0.0, -inset), animated: false)
+            PXPTrafficMonitor.sharedMonitor().reset()
+            PXP.cleanUp()
+            self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
+            self.collectionView?.reloadData()
+            shouldResetCache = false
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -168,6 +172,7 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
     func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
         self.dismissViewControllerAnimated(true, completion: nil)
         PixpieManager.authorize()
+        shouldResetCache = true
     }
 
     let tokens: [AnyObject] = ["b", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
