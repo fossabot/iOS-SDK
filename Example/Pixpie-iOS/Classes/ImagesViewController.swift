@@ -144,13 +144,14 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
 
     @IBAction func settingsAction(sender: AnyObject) {
         let settingsVC = SettingsViewController()
-        settingsVC.view.tintColor = UIColor.blueColor();
-        settingsVC.delegate = self;
-        self.navigationController?.pushViewController(settingsVC, animated: true)
+        settingsVC.delegate = self
+        let navigationController = UINavigationController(rootViewController: settingsVC)
+        navigationController.view.tintColor = UIColor.blueColor()
+        self.presentViewController(navigationController, animated: true, completion: nil)
     }
 
     func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
         PixpieManager.authorize()
         PXPTrafficMonitor.sharedMonitor().reset()
         self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
