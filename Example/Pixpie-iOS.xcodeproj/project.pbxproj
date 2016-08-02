@@ -27,6 +27,7 @@
 		0A56CFB31C84650B001C919C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A56CFB21C84650B001C919C /* Settings.bundle */; };
 		0A56CFB51C849372001C919C /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A56CFB41C849372001C919C /* Icons.xcassets */; };
 		0A6309EB1D4775CE0084BFB6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6309EA1D4775CE0084BFB6 /* SettingsViewController.swift */; };
+		0A83B3431D5018980010CDF0 /* PixpieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A83B3421D5018980010CDF0 /* PixpieManager.swift */; };
 		0AC43CB51C6DFCCB00337844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CB41C6DFCCB00337844 /* AppDelegate.swift */; };
 		0AC43CB91C6DFEBE00337844 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CB81C6DFEBE00337844 /* ImagesViewController.swift */; };
 		0AC43CBB1C6DFEEB00337844 /* ImageDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CBA1C6DFEEB00337844 /* ImageDetailsController.swift */; };
@@ -68,6 +69,7 @@
 		0A56CFB21C84650B001C919C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0A56CFB41C849372001C919C /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		0A6309EA1D4775CE0084BFB6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		0A83B3421D5018980010CDF0 /* PixpieManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixpieManager.swift; sourceTree = "<group>"; };
 		0AC43CB41C6DFCCB00337844 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AC43CB81C6DFEBE00337844 /* ImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
 		0AC43CBA1C6DFEEB00337844 /* ImageDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailsController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				0AC43CBE1C6E04A300337844 /* ImageCell.swift */,
 				0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */,
 				0A6309EA1D4775CE0084BFB6 /* SettingsViewController.swift */,
+				0A83B3421D5018980010CDF0 /* PixpieManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A83B3431D5018980010CDF0 /* PixpieManager.swift in Sources */,
 				0AC43CBB1C6DFEEB00337844 /* ImageDetailsController.swift in Sources */,
 				0AC43CBD1C6E026500337844 /* ImageList.swift in Sources */,
 				0A6309EB1D4775CE0084BFB6 /* SettingsViewController.swift in Sources */,

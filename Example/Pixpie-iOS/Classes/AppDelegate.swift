@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-    BITHockeyManager.sharedHockeyManager().configureWithIdentifier("1281ec03743d493bb76953318bb49bf4")
+        BITHockeyManager.sharedHockeyManager().configureWithIdentifier("1281ec03743d493bb76953318bb49bf4")
         // Do some additional configuration if needed here
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
@@ -30,8 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSUserDefaults.standardUserDefaults().registerDefaults(["pxp_license" : defaultLicense])
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.splashCompleted(_:)), name: kSplashCompleteNotification, object: nil)
-        let license = NSUserDefaults.standardUserDefaults().stringForKey("pxp_license")
-        PXP.sharedSDK().authWithApiKey(license)
+        PixpieManager.authorize();
         self.window?.tintColor = UIColor.whiteColor()
         return true
     }

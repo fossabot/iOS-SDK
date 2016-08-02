@@ -91,4 +91,9 @@
     return self.minuteSamples.lastObject;
 }
 
+- (void)reset {
+    self.totalBytes = 0;
+    self.currentFrameBytes = 0;
+}
+
 @end

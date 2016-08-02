@@ -9,12 +9,13 @@
 import UIKit
 import Pixpie
 import PXStatusView
+import InAppSettingsKit
 
 private let kCellIdentifier = "kImageCell"
 private let kSectionsCount = 1
 private let kDetailsSegue = "DetailsSegue"
 
-class ImagesViewController: UICollectionViewController {
+class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
 
     @IBOutlet weak var statusView: PXStatusView!
     let imageLinksArray = kImageLinkArray
@@ -74,7 +75,7 @@ class ImagesViewController: UICollectionViewController {
         }
         else if (object as? PXPTrafficMonitor == PXPTrafficMonitor.sharedMonitor()) {
             dispatch_async(dispatch_get_main_queue(), {
-                self.navigationItem.title = "\(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)b"
+                self.navigationItem.title = self.transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
             })
         }
     }
@@ -143,6 +144,27 @@ class ImagesViewController: UICollectionViewController {
 
     @IBAction func settingsAction(sender: AnyObject) {
         let settingsVC = SettingsViewController()
+        settingsVC.view.tintColor = UIColor.blueColor();
+        settingsVC.delegate = self;
         self.navigationController?.pushViewController(settingsVC, animated: true)
+    }
+
+    func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
+        self.navigationController?.popViewControllerAnimated(true)
+        PixpieManager.authorize()
+        PXPTrafficMonitor.sharedMonitor().reset()
+        self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
+    }
+
+    let tokens: [AnyObject] = ["b", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+
+    func transformedValue(value: UInt) -> String {
+        var convertedValue: Double = CDouble(value)
+        var multiplyFactor: Int = 0
+        while convertedValue > 1024 && multiplyFactor < tokens.count {
+            convertedValue /= 1024
+            multiplyFactor += 1
+        }
+        return "\(String(format:"%.2f", (convertedValue)))\(tokens[multiplyFactor])"
     }
 }

@@ -63,7 +63,7 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 }
 
 - (void)authWithApiKey:(NSString *)apiKey {
-   if (self.accountInfo == nil) {
+//   if (self.accountInfo == nil) {
        PXPAuthPrincipal *principal = [PXPAuthPrincipal new];
        if (apiKey.length > 0) {
            principal.appKey = apiKey;
@@ -74,7 +74,7 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
        self.wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
        self.fileManager = [[PXPFileManager alloc] initWithAccountInfo:self.accountInfo];
        [self.accountInfo update];
-    }
+//    }
 }
 
 - (void)auth {
@@ -83,6 +83,7 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 
 - (void)authUpdate:(NSNotification *)note {
 
+    if (self.accountInfo == nil) return;
     NSDictionary *dict = note.userInfo;
     NSError *error = dict[kPXPModelUpdateErrorKey];
     if (error == nil) {
@@ -94,8 +95,12 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
         [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPNetworkChangedNotification object:nil];
     } else {
         self.state = PXPStateFailed;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:) name:kPXPNetworkChangedNotification object:nil];
-        [self scheduleReauth];
+        if ([error.domain isEqualToString:NSURLErrorDomain] &&
+            error.code <= NSURLErrorTimedOut &&
+            error.code >= NSURLErrorBadServerResponse) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:) name:kPXPNetworkChangedNotification object:nil];
+            [self scheduleReauth];
+        }
     }
 }
 

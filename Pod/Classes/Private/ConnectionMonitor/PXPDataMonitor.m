@@ -10,10 +10,8 @@
 #import "PXPURLProtocol.h"
 #import "PXPTrafficMonitor.h"
 
-static const NSInteger PXPPrecisionConstant = 1000;
-static const NSInteger PXPFrameDuration = 1.0;
-
-static NSInteger const PXPUndefined = -1;
+static NSInteger const kPXPFrameDuration = 1.0;
+static NSInteger const kPXPUndefined = -1;
 
 @interface PXPDataMonitor() <PXPURLProtocolDelegate>
 
@@ -50,12 +48,12 @@ static NSInteger const PXPUndefined = -1;
 {
     self = [super init];
     if (self) {
-        self.frameBytesSum = PXPUndefined;
-        self.frameChunkCount = PXPUndefined;
+        self.frameBytesSum = kPXPUndefined;
+        self.frameChunkCount = kPXPUndefined;
         self.lastFrameTime = 0.0;
         self.currentFrameTime = 0.0;
-        self.frameMaxSpeed = PXPUndefined;
-        self.lastThroughput = PXPUndefined;
+        self.frameMaxSpeed = kPXPUndefined;
+        self.lastThroughput = kPXPUndefined;
     }
     return self;
 }
@@ -63,7 +61,7 @@ static NSInteger const PXPUndefined = -1;
 - (void)customHTTPProtocol:(PXPURLProtocol *)protocol receivedBlockSize:(ssize_t)size
 {
     NSInteger frame = CACurrentMediaTime();
-    BOOL newFrame = fabs(self.currentFrameTime) < DBL_EPSILON || (frame - self.currentFrameTime) > PXPFrameDuration;
+    BOOL newFrame = fabs(self.currentFrameTime) < DBL_EPSILON || (frame - self.currentFrameTime) > kPXPFrameDuration;
     if (newFrame) {
         self.frameChunkCount = 0;
         self.frameBytesSum = 0;
@@ -87,34 +85,18 @@ static NSInteger const PXPUndefined = -1;
 - (void)calculateSpeed
 {
     CFTimeInterval faticialFrameLength = (self.lastDataTime - self.currentFrameTime);
-    if (faticialFrameLength > PXPFrameDuration / 2.0) {
+    if (faticialFrameLength > kPXPFrameDuration / 2.0) {
         NSInteger predictedChunkCount = (self.frameChunkCount / faticialFrameLength);
         NSInteger throughput = predictedChunkCount * self.frameMaxSpeed;
         self.lastThroughput = throughput;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"Data %ld", (long)self.lastThroughput);
-    });
-//    if (self.frameChunkCount == 0) return;
-//    NSInteger avgChunkSize = self.frameBytesSum / self.frameChunkCount;
-//    if (avgChunkSize > 6 * 1 << 10 * faticialFrameLength / PXPPrecisionConstant) {
-//        self.lastMeasuredSpeed = PXPDataSpeedExtraHigh;
-//    } else if (avgChunkSize > 5 * 1 << 10 * faticialFrameLength / PXPPrecisionConstant) {
-//        self.lastMeasuredSpeed = PXPDataSpeedHigh;
-//    } else if (avgChunkSize > 4 * 1 << 10 * faticialFrameLength / PXPPrecisionConstant) {
-//        self.lastMeasuredSpeed = PXPDataSpeedMedium;
-//    } else {
-//        self.lastMeasuredSpeed = PXPDataSpeedExtraLow;
-//    }
-//    self.frameChunkCount = 0;
-//    self.frameBytesSum = 0;
 }
 
 - (PXPDataSpeed)speedType
 {
     [self calculateSpeed];
     NSInteger throughput = self.lastThroughput;
-    if (throughput == PXPUndefined) {
+    if (throughput == kPXPUndefined) {
         return PXPDataSpeedIdle;
     } else if (throughput > 630000) {
         return PXPDataSpeedExtraHigh;

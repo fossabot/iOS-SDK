@@ -11,6 +11,7 @@
 @interface PXPTrafficMonitor : NSObject
 
 + (instancetype)sharedMonitor;
+- (void)reset;
 
 @property (nonatomic, readonly) NSUInteger totalBytesForSession;
 @property (nonatomic, readonly) NSArray *dataSamples;
