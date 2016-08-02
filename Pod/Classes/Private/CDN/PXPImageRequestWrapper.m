@@ -80,7 +80,6 @@
     configuration.allowsCellularAccess = YES;
     configuration.timeoutIntervalForRequest = 60.0;
     configuration.URLCache = [PXPImageRequestWrapper defaultURLCache];
-    configuration.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
     configuration.protocolClasses = @[[PXPURLProtocol class]];
 
     return configuration;
@@ -89,7 +88,7 @@
 + (NSURLCache *)defaultURLCache {
     return [[NSURLCache alloc] initWithMemoryCapacity: 20 * 1024 * 1024
                                          diskCapacity: 150 * 1024 * 1024
-                                             diskPath:@"co.pixpie.imagecache"];
+                                             diskPath: @"co.pixpie.imagecache"];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol PXPURLProtocolDelegate;
+@class PXPURLSessionDemux;
 
 @interface PXPURLProtocol : NSURLProtocol
 
@@ -22,6 +23,7 @@
 @property (atomic, strong, readonly ) NSURLAuthenticationChallenge *pendingChallenge;
 
 - (void)resolveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge withCredential:(NSURLCredential *)credential;
++ (NSURLCache *)defaultURLCache;
 
 @end
 

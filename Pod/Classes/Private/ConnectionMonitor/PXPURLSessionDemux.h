@@ -34,6 +34,5 @@
  */
 
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request delegate:(id<NSURLSessionDataDelegate>)delegate modes:(NSArray *)modes;
-- (NSURLCache *)defaultURLCache;
 
 @end

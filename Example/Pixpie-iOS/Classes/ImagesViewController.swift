@@ -48,8 +48,12 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
     }
 
     func sdkStateChange() {
+        let inset = self.collectionView!.contentInset.top
+        self.collectionView?.setContentOffset(CGPointMake(0.0, -inset), animated: false)
         PXPTrafficMonitor.sharedMonitor().reset()
+        PXP.cleanUp()
         self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
+        self.collectionView?.reloadData()
     }
 
     override func viewDidLayoutSubviews() {

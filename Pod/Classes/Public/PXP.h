@@ -27,6 +27,7 @@ extern NSString * const PXPStateChangeNotification;
 
 - (void)authWithApiKey:(NSString* __nullable)apiKey;
 - (void)auth;
++ (void)cleanUp;
 
 @property (nonatomic, readonly, assign) PXPState state;
 @property (nonatomic, readonly, strong, nullable) PXPSDKRequestWrapper *wrapper;

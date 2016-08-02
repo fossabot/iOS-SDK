@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Pixpie
 import HockeySDK
 
 //import Fabric
@@ -28,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Fabric.with([Crashlytics.self])
         let defaultLicense = "41bc38fde0dfed6917b6f54fdc32761ac2d9e7eb6cd66b8591e586e6fc6b9063"
         NSUserDefaults.standardUserDefaults().registerDefaults(["pxp_license" : defaultLicense])
-
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.splashCompleted(_:)), name: kSplashCompleteNotification, object: nil)
+        PixpieManager.cleanUp();
         PixpieManager.authorize();
         self.window?.tintColor = UIColor.whiteColor()
         return true

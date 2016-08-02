@@ -16,4 +16,8 @@ class PixpieManager: NSObject {
         PXP.sharedSDK().authWithApiKey(license)
     }
 
+    static func cleanUp() {
+        PXP.cleanUp()
+    }
+
 }

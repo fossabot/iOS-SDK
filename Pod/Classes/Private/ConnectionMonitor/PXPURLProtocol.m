@@ -791,7 +791,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 
 - (void)checkCache:(NSURLResponse *)response task:(NSURLSessionDataTask *)dataTask {
     if (dataTask == nil) return;
-    NSURLCache* cache = [PXPURLProtocol sharedDemux].defaultURLCache;
+    NSURLCache* cache = [PXPURLProtocol defaultURLCache];
     NSCachedURLResponse *cachedResponse = [cache cachedResponseForRequest:dataTask.currentRequest];
     if (cachedResponse == nil) {
         cache = [NSURLCache sharedURLCache];
@@ -799,6 +799,17 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     }
     NSHTTPURLResponse *httpCacheResponse = (NSHTTPURLResponse *)cachedResponse.response;
     _flags.isCached = (httpCacheResponse != nil);
+}
+
++ (NSURLCache *)defaultURLCache {
+    static NSURLCache* sCache = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sCache = [[NSURLCache alloc] initWithMemoryCapacity: 20 * 1024 * 1024
+                                               diskCapacity: 150 * 1024 * 1024
+                                                   diskPath: @"co.pixpie.imagecache"];
+    });
+    return sCache;
 }
 
 @end

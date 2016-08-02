@@ -90,7 +90,6 @@
     if (self != nil) {
         if (configuration == nil) {
             configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-            configuration.URLCache = [self defaultURLCache];
         }
         self->_configuration = [configuration copy];
         
@@ -274,17 +273,6 @@
     } else {
         completionHandler(proposedResponse);
     }
-}
-
-- (NSURLCache *)defaultURLCache {
-    static NSURLCache* sCache = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sCache = [[NSURLCache alloc] initWithMemoryCapacity: 20 * 1024 * 1024
-                                               diskCapacity: 150 * 1024 * 1024
-                                                   diskPath: @"co.pixpie.imagecache"];
-    });
-    return sCache;
 }
 
 @end

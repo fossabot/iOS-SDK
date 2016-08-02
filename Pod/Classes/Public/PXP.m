@@ -16,6 +16,8 @@
 #import "PXPNetworkMonitor.h"
 #import "PXPDataMonitor.h"
 #import "PXPTrafficMonitor.h"
+#import "PXPURLProtocol.h"
+#import "PXPURLSessionDemux.h"
 
 NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateChange";
 
@@ -127,6 +129,11 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
     _state = state;
     [self didChangeValueForKey:@"state"];
     [[NSNotificationCenter defaultCenter] postNotificationName:PXPStateChangeNotification object:self];
+}
+
++ (void)cleanUp {
+    [NSURLCache sharedURLCache].removeAllCachedResponses;
+    PXPURLProtocol.defaultURLCache.removeAllCachedResponses;
 }
 
 @end
