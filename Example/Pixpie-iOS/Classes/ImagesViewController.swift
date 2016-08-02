@@ -44,6 +44,12 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
         
         let options = NSKeyValueObservingOptions([.New, .Initial])
         PXPTrafficMonitor.sharedMonitor().addObserver(self, forKeyPath: "totalBytesForSession", options: options, context: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sdkStateChange), name: PXPStateChangeNotification, object: nil)
+    }
+
+    func sdkStateChange() {
+        PXPTrafficMonitor.sharedMonitor().reset()
+        self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
     }
 
     override func viewDidLayoutSubviews() {
@@ -158,8 +164,6 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
     func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
         self.dismissViewControllerAnimated(true, completion: nil)
         PixpieManager.authorize()
-        PXPTrafficMonitor.sharedMonitor().reset()
-        self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
     }
 
     let tokens: [AnyObject] = ["b", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]

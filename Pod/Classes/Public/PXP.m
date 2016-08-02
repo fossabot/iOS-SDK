@@ -14,7 +14,6 @@
 #import "PXPImageTaskManager.h"
 #import "PXPSDKRequestWrapper.h"
 #import "PXPNetworkMonitor.h"
-#import "PXPFileManager.h"
 #import "PXPDataMonitor.h"
 #import "PXPTrafficMonitor.h"
 
@@ -23,7 +22,6 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 @interface PXP ()
 
 @property (nonatomic, readwrite, assign) PXPState state;
-@property (nonatomic, readwrite, strong) PXPFileManager *fileManager;
 @property (nonatomic, readwrite, strong) PXPImageTaskManager* imageTaskManager;
 @property (nonatomic, readwrite, strong) PXPAccountInfo *accountInfo;
 @property (nonatomic, readwrite, strong) PXPSDKRequestWrapper *wrapper;
@@ -63,7 +61,7 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 }
 
 - (void)authWithApiKey:(NSString *)apiKey {
-//   if (self.accountInfo == nil) {
+   if (![self.accountInfo.principal.appKey isEqualToString:apiKey]) {
        PXPAuthPrincipal *principal = [PXPAuthPrincipal new];
        if (apiKey.length > 0) {
            principal.appKey = apiKey;
@@ -72,9 +70,8 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
        self.accountInfo = [[PXPAccountInfo alloc] initWithPrincipal:principal authManager:authManager];
        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authUpdate:) name:kPXPModelUpdatedNotification object:self.accountInfo];
        self.wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
-       self.fileManager = [[PXPFileManager alloc] initWithAccountInfo:self.accountInfo];
        [self.accountInfo update];
-//    }
+    }
 }
 
 - (void)auth {

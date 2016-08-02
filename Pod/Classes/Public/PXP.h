@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * const PXPStateChangeNotification;
 
-@class PXPFileManager;
 @class PXPAccountInfo;
 @class PXPSDKRequestWrapper;
 
@@ -30,7 +29,6 @@ extern NSString * const PXPStateChangeNotification;
 - (void)auth;
 
 @property (nonatomic, readonly, assign) PXPState state;
-@property (nonatomic, readonly, strong, nullable) PXPFileManager *fileManager;
 @property (nonatomic, readonly, strong, nullable) PXPSDKRequestWrapper *wrapper;
 
 @end

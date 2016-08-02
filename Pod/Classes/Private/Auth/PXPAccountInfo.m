@@ -17,7 +17,7 @@
 @property (nonatomic, readwrite, strong) NSString* cdnUrl;
 @property (nonatomic, readwrite, strong) PXPAuthPrincipal* principal;
 @property (nonatomic, readonly, strong) PXPAuthManager* authManager;
-@property (nonatomic, strong) NSURLSessionDataTask* updateTask;
+@property (nonatomic, strong) PXPAPITask* updateTask;
 
 @end
 
@@ -40,14 +40,16 @@
 - (void)update {
     if (self.principal == nil) return;
     [self.updateTask cancel];
+    __weak typeof(self)weakSelf = self;
     self.updateTask = [self.authManager authorizeWithCompletionBlock:^(NSDictionary *dict, NSError *error) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
         NSDictionary* userInfo = nil;
         if (error == nil) {
-            [self setIfExistsValuesForKeysWithDictionary:dict];
+            [strongSelf setIfExistsValuesForKeysWithDictionary:dict];
         } else if (error.code != NSURLErrorCancelled) {
             userInfo = @{kPXPModelUpdateErrorKey : error};
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:kPXPModelUpdatedNotification object:self userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPXPModelUpdatedNotification object:strongSelf userInfo:userInfo];
     }];
 }
 
