@@ -19,6 +19,7 @@ typedef void (^ChallengeCompletionHandler)(NSURLSessionAuthChallengeDisposition 
         BOOL didStopLoading:1;
         BOOL didFinishLoading:1;
         BOOL didRecieveResponse:1;
+        BOOL isCached:1;
     } _flags;
 }
 
@@ -243,6 +244,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     // At this point we kick off the process of loading the URL via NSURLSession.
     // The thread that calls this method becomes the client thread.
     _flags.didStartLoading = 1;
+    _flags.isCached = 0;
     assert(self.clientThread == nil);           // you can't call -startLoading twice
     assert(self.task == nil);
 
@@ -289,8 +291,9 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 
     if (self.cachedResponse != nil)
     {
+        _flags.isCached = 1;
         [self.client URLProtocol:self cachedResponseIsValid:self.cachedResponse];
-        [self handleResponse:self.cachedResponse.response cachePolicy:NSURLCacheStorageNotAllowed];
+        [self handleResponse:self.cachedResponse.response task:nil cachePolicy:NSURLCacheStorageNotAllowed];
         [self handleData:self.cachedResponse.data];
         [self handleFinishLoading];
         [self stopLoading];
@@ -673,12 +676,14 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     
     [[self class] customHTTPProtocol:self logWithFormat:@"received response %zd / %@ with cache storage policy %zu", (ssize_t) statusCode, [response URL], (size_t) cacheStoragePolicy];
 
-    [self handleResponse:response cachePolicy:cacheStoragePolicy];
+    [self handleResponse:response task:dataTask cachePolicy:cacheStoragePolicy];
     
     completionHandler(NSURLSessionResponseAllow);
 }
 
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+- (void)URLSession:(NSURLSession *)session
+          dataTask:(NSURLSessionDataTask *)dataTask
+    didReceiveData:(NSData *)data
 {
 #pragma unused(session)
 #pragma unused(dataTask)
@@ -687,8 +692,9 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     assert([NSThread currentThread] == self.clientThread);
     
     id<PXPURLProtocolDelegate> dlg = [[self class] delegate];
-    if ([dlg respondsToSelector:@selector(customHTTPProtocol:receivedBlockSize:)]) {
-        [dlg customHTTPProtocol:self receivedBlockSize:data.length];
+    if ([dlg respondsToSelector:@selector(customHTTPProtocol:receivedBlockSize:)] &&
+        !_flags.isCached) {
+            [dlg customHTTPProtocol:self receivedBlockSize:data.length];
     }
 
     // Just pass the call on to our client.
@@ -773,11 +779,26 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     [self.client URLProtocolDidFinishLoading:self];
 }
 
-- (void)handleResponse:(NSURLResponse*)response cachePolicy:(NSURLCacheStoragePolicy)policy
+- (void)handleResponse:(NSURLResponse *)response
+                  task:(NSURLSessionDataTask *)task
+           cachePolicy:(NSURLCacheStoragePolicy)policy
 {
     assert(response);
     _flags.didRecieveResponse = YES;
+    [self checkCache:response task:task];
     [self.client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:policy];
+}
+
+- (void)checkCache:(NSURLResponse *)response task:(NSURLSessionDataTask *)dataTask {
+    if (dataTask == nil) return;
+    NSURLCache* cache = [PXPURLProtocol sharedDemux].defaultURLCache;
+    NSCachedURLResponse *cachedResponse = [cache cachedResponseForRequest:dataTask.currentRequest];
+    if (cachedResponse == nil) {
+        cache = [NSURLCache sharedURLCache];
+        cachedResponse = [cache cachedResponseForRequest:dataTask.currentRequest];
+    }
+    NSHTTPURLResponse *httpCacheResponse = (NSHTTPURLResponse *)cachedResponse.response;
+    _flags.isCached = (httpCacheResponse != nil);
 }
 
 @end
