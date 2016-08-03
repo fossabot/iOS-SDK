@@ -101,7 +101,6 @@ let kImageLinkArray: [String] = ["https://farm2.staticflickr.com/1442/2493711495
                                  "https://farm2.staticflickr.com/1503/26518025855_45c1ce369a_z.jpg",
                                  "https://farm2.staticflickr.com/1460/25915879963_74d9729389_z.jpg",
                                  "https://farm2.staticflickr.com/1574/26525872085_486e23945b_z.jpg",
-                                 "https://farm2.staticflickr.com/1470/25922314833_4a7ba64720_z.jpg",
                                  "https://farm2.staticflickr.com/1577/25912856944_ddaa61fc36_z.jpg",
                                  "https://farm2.staticflickr.com/1583/26517785445_877e85d159_z.jpg",
                                  "https://farm2.staticflickr.com/1444/26246836950_2a19e00c12_z.jpg",
@@ -188,6 +187,5 @@ let kImageLinkArray: [String] = ["https://farm2.staticflickr.com/1442/2493711495
                                  "https://farm2.staticflickr.com/1626/25916793023_0b5a3dd9e8_z.jpg",
                                  "https://farm2.staticflickr.com/1528/25916438883_e049472ce4_z.jpg",
                                  "https://farm2.staticflickr.com/1667/26492662036_3fe9ee4a72_z.jpg",
-                                 "https://farm2.staticflickr.com/1717/26423723242_d74c921c19_z.jpg",
-                                 "https://farm2.staticflickr.com/1623/25924789774_a996db9286_z.jpg"
+                                 "https://farm2.staticflickr.com/1717/26423723242_d74c921c19_z.jpg"
 ]

@@ -119,11 +119,12 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
         let cell: ImageCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellIdentifier, forIndexPath: indexPath) as! ImageCell
         var urlString = imageLinksArray[indexPath.item]
         if let range = urlString.rangeOfString("_z.jpg"){
-            urlString.replaceRange(range, with: "_q.jpg")
+            urlString.replaceRange(range, with: "_n.jpg")
         }
         let url = NSURL(string: urlString)
         let transform = PXPTransform(imageView: cell.imageView!)
         transform.fitSize = CGSize(width: 100.0, height: 100.0)
+        cell.imageView?.contentMode = .ScaleAspectFill
         cell.imageView?.pxp_transform = transform
         cell.imageView?.pxp_requestImage(url!, headers: nil, completion: { (url, image, error) in
             guard let toImage = image
