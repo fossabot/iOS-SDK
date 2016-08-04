@@ -6,8 +6,8 @@
 
 @interface PXPAsynchronousOperation ()
 
-@property (nonatomic, getter = isFinished, readwrite)  BOOL finished;
-@property (nonatomic, getter = isExecuting, readwrite) BOOL executing;
+@property (getter = isFinished, readwrite)  BOOL finished;
+@property (getter = isExecuting, readwrite) BOOL executing;
 
 @end
 
@@ -65,23 +65,23 @@
 }
 
 - (void)setExecuting:(BOOL)executing {
-    if (_executing != executing) {
-        [self willChangeValueForKey:@"isExecuting"];
-        @synchronized(self) {
+    @synchronized(self) {
+        if (_executing != executing) {
+            [self willChangeValueForKey:@"isExecuting"];
             _executing = executing;
+            [self didChangeValueForKey:@"isExecuting"];
         }
-        [self didChangeValueForKey:@"isExecuting"];
     }
 }
 
 - (void)setFinished:(BOOL)finished {
-    [self willChangeValueForKey:@"isFinished"];
     @synchronized(self) {
         if (_finished != finished) {
+            [self willChangeValueForKey:@"isFinished"];
             _finished = finished;
+            [self didChangeValueForKey:@"isFinished"];
         }
     }
-    [self didChangeValueForKey:@"isFinished"];
 }
 
 @end
