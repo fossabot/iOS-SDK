@@ -78,7 +78,7 @@
 
     configuration.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
     configuration.allowsCellularAccess = YES;
-    configuration.timeoutIntervalForRequest = 60.0;
+    configuration.timeoutIntervalForRequest = 120.0;
     configuration.URLCache = [PXPImageRequestWrapper defaultURLCache];
     configuration.protocolClasses = @[[PXPURLProtocol class]];
 

@@ -118,18 +118,4 @@
     return operation;
 }
 
-- (void)main {
-    [self.task resume];
-}
-
-- (void)completeOperation {
-    self.task = nil;
-    [super completeOperation];
-}
-
-- (void)cancel {
-    [self.task cancel];
-    [super cancel];
-}
-
 @end

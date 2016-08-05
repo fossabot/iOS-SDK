@@ -9,9 +9,29 @@
 #import "PXPDataMonitor.h"
 #import "PXPURLProtocol.h"
 #import "PXPTrafficMonitor.h"
+#import "PXPNetInfo.h"
+#import "PXPNetworkMonitor.h"
+#import "PXPNetworkTechnologies.h"
 
 static NSInteger const kPXPFrameDuration = 1.0;
 static NSInteger const kPXPUndefined = -1;
+
+/*
+ * Source https://toolstud.io/data/bandwidth.php?compare=mobile
+ * NSData is in bytes, values there are in *bits
+ */
+
+static NSUInteger const kPXPNormalizingCoeficient = 2;
+
+static NSUInteger const kPXP2GGSMSpeed = 14400 / (8 * kPXPNormalizingCoeficient);
+static NSUInteger const kPXP2GGPRSSpeed = 57600 / (8 * kPXPNormalizingCoeficient);
+static NSUInteger const kPXP2GEdgeSpeed = 238800 / (8 * kPXPNormalizingCoeficient);
+static NSUInteger const kPXP3GUTMSSpeed = 384800 / (8 * kPXPNormalizingCoeficient);
+static NSUInteger const kPXP3GHSPASpeed = 13980000 / (8 * kPXPNormalizingCoeficient);
+static NSUInteger const kPXP3GHSPAPSpeed = 4.2e+7 / (8 * kPXPNormalizingCoeficient);
+static NSUInteger const kPXP4GLTESpeed = 1.73e+8 / (8 * kPXPNormalizingCoeficient);
+static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
+
 
 @interface PXPDataMonitor() <PXPURLProtocolDelegate>
 
@@ -23,6 +43,7 @@ static NSInteger const kPXPUndefined = -1;
 @property (nonatomic) CFTimeInterval currentFrameTime;
 @property (nonatomic) CFTimeInterval lastDataTime;
 
+@property (nonatomic) NSInteger throughput;
 @property (nonatomic) NSInteger lastThroughput;
 
 @end
@@ -52,9 +73,43 @@ static NSInteger const kPXPUndefined = -1;
         self.lastFrameTime = 0.0;
         self.currentFrameTime = 0.0;
         self.frameMaxSpeed = kPXPUndefined;
-        self.lastThroughput = kPXPUndefined;
+        self.lastThroughput = kPXP3GUTMSSpeed;
+        self.throughput = kPXP3GUTMSSpeed;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChange) name:kPXPNetworkChangedNotification object:nil];
     }
     return self;
+}
+
++ (NSInteger)throughputForNetInfo {
+    static NSDictionary* sPXPNetworkTechnologies = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sPXPNetworkTechnologies = @{ PXPNetworkCDMAEVDORevB : @(kPXP2GEdgeSpeed),
+                                     PXPNetworkCDMAEVDORevA : @(kPXP2GEdgeSpeed),
+                                     PXPNetworkCDMAEVDORev0 : @(kPXP2GEdgeSpeed),
+                                     PXPNetworkCDMA1x: @(kPXP3GUTMSSpeed),
+                                     PXPNetworkWCDMA : @(kPXP3GUTMSSpeed),
+                                     PXPNetworkHSUPA : @(kPXP3GHSPASpeed),
+                                     PXPNetworkHSDPA : @(kPXP3GHSPASpeed),
+                                     PXPNetworkeHRPD : @(kPXP3GHSPASpeed),
+                                     PXPNetworkGPRS : @(kPXP2GGPRSSpeed),
+                                     PXPNetworkEdge : @(kPXP2GEdgeSpeed),
+                                     PXPNetworkLTE : @(kPXP4GLTESpeed),
+                                     PXPNetworkWiFi : @(kPXPWifiSpeed) };
+    });
+
+    PXPNetworkMonitor* monitor = [PXPNetworkMonitor sharedMonitor];
+    NSString* technology = monitor.currentNetworkTechnology.technology;
+    if (technology == nil) {
+        return 0;
+    } else {
+        NSNumber* value = sPXPNetworkTechnologies[technology];
+        return value.integerValue;
+    }
+}
+
+- (void)networkChange {
+    self.throughput = [PXPDataMonitor throughputForNetInfo];
 }
 
 - (void)customHTTPProtocol:(PXPURLProtocol *)protocol receivedBlockSize:(ssize_t)size
@@ -62,6 +117,7 @@ static NSInteger const kPXPUndefined = -1;
     NSInteger frame = CACurrentMediaTime();
     BOOL newFrame = fabs(self.currentFrameTime) < DBL_EPSILON || (frame - self.currentFrameTime) > kPXPFrameDuration;
     if (newFrame) {
+        self.lastThroughput = self.throughput;
         self.frameChunkCount = 0;
         self.frameBytesSum = 0;
         self.currentFrameTime = CACurrentMediaTime();
@@ -87,7 +143,7 @@ static NSInteger const kPXPUndefined = -1;
     if (faticialFrameLength > kPXPFrameDuration / 3.0) {
         NSInteger predictedChunkCount = (self.frameChunkCount / faticialFrameLength) / kPXPFrameDuration;
         NSInteger throughput = predictedChunkCount * self.frameMaxSpeed;
-        self.lastThroughput = throughput;
+        self.throughput = throughput;
     }
 }
 
@@ -96,13 +152,13 @@ static NSInteger const kPXPUndefined = -1;
     NSInteger throughput = self.lastThroughput;
     if (throughput == kPXPUndefined) {
         return PXPDataSpeedIdle;
-    } else if (throughput > 630000) {
+    } else if (throughput > kPXP3GHSPASpeed) {
         return PXPDataSpeedExtraHigh;
-    } else if (throughput > 440000) {
+    } else if (throughput > kPXP3GUTMSSpeed) {
         return PXPDataSpeedHigh;
-    } else if (throughput > 48000) {
+    } else if (throughput > kPXP2GEdgeSpeed) {
         return PXPDataSpeedMedium;
-    } else if (throughput > 29000) {
+    } else if (throughput > kPXP2GGPRSSpeed) {
         return PXPDataSpeedLow;
     }
     return PXPDataSpeedExtraLow;

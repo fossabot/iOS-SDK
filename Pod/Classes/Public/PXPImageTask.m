@@ -190,14 +190,14 @@
     NSString* urlString = _originalRequest.URL.absoluteString;
     NSDictionary* headers = self.originalRequest.allHTTPHeaderFields;
     NSString* pxpUrlString = [urlString pxp_urlStringForTransform:transform];
-    AFHTTPSessionOperation* imageDownloadOperation = [self.requestWrapper imageDownloadTaskForUrl:pxpUrlString
-                                                                                           method:@"GET"
-                                                                                       parameters:nil
-                                                                                          headers:headers
-                                                                                   uploadProgress:_uploadProgress
-                                                                                 downloadProgress:_downloadProgress
-                                                                                          success:successBlock
-                                                                                         failture:failtureBlock];
+    PXPAPITask* imageDownloadOperation = [self.requestWrapper imageDownloadTaskForUrl:pxpUrlString
+                                                                               method:@"GET"
+                                                                           parameters:nil
+                                                                              headers:headers
+                                                                       uploadProgress:_uploadProgress
+                                                                     downloadProgress:_downloadProgress
+                                                                              success:successBlock
+                                                                             failture:failtureBlock];
 
     [self addOperation:imageDownloadOperation];
 }

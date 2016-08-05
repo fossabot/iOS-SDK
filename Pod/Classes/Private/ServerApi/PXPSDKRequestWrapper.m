@@ -117,7 +117,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
                                  constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
                                      [formData appendPartWithInputStream:stream name:@"image" fileName:@"image" length:length mimeType:mimeType];
                                  }
-                                  //                                                  progress:nil
+                                                  progress:nil
                                                    success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                                        successBlock(task, responseObject);
                                                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

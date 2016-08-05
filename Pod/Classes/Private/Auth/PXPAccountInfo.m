@@ -46,7 +46,9 @@
         NSDictionary* userInfo = nil;
         if (error == nil) {
             [strongSelf setIfExistsValuesForKeysWithDictionary:dict];
-        } else if (error.code != NSURLErrorCancelled) {
+        } else if (error.code == NSURLErrorCancelled && [error.domain isEqualToString:NSURLErrorDomain]) {
+
+        } else {
             userInfo = @{kPXPModelUpdateErrorKey : error};
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kPXPModelUpdatedNotification object:strongSelf userInfo:userInfo];

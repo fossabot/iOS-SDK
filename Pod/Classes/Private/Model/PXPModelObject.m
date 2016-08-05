@@ -14,4 +14,8 @@ NSString* const kPXPModelUpdateErrorKey = @"kPXPModelUpdateErrorKey";
 
 @implementation PXPModelObject
 
+- (void)update {
+
+}
+
 @end

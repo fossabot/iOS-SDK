@@ -24,7 +24,6 @@
 
 @interface AFHTTPSessionOperation ()
 
-@property (nonatomic, strong) AFHTTPSessionManager *manager;
 @property (nonatomic, strong, readwrite, nullable) NSURLSessionTask *task;
 
 @end
@@ -41,31 +40,50 @@
     AFHTTPSessionOperation *operation = [self new];
     __block NSURLSessionDataTask *dataTask = nil;
     dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        if (!operation.isCancelled) {
-            if (error) {
-                BLOCK_SAFE_RUN(failure, dataTask, error);
-            } else {
-                BLOCK_SAFE_RUN(success, dataTask, responseObject);
-            }
+        if (operation.isCancelled) {
+            NSError* error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:nil];
+            BLOCK_SAFE_RUN(failure, dataTask, error);
+        } else if (error) {
+            BLOCK_SAFE_RUN(failure, dataTask, error);
+        } else {
+            BLOCK_SAFE_RUN(success, dataTask, responseObject);
         }
         [operation completeOperation];
     }];
     operation.task = dataTask;
+    [operation startObservingStateChange];
     return operation;
 }
 
+- (void)startObservingStateChange {
+    [self addObserver:self forKeyPath:@"isCancelled" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)stopObservingStateChange {
+    @try {
+        [self removeObserver:self forKeyPath:@"isCancelled"];
+    }
+    @catch (NSException * __unused exception) {}
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"isCancelled"]) {
+        if (self.isCancelled) {
+            [self.task cancel];
+        }
+    }
+}
+
+- (void)dealloc {
+    [self stopObservingStateChange];
+}
+
 - (void)main {
-    [self.task resume];
-}
-
-- (void)completeOperation {
-    self.task = nil;
-    [super completeOperation];
-}
-
-- (void)cancel {
-    [self.task cancel];
-    [super cancel];
+    if (self.isCancelled) {
+        [self.task cancel];
+    } else {
+        [self.task resume];
+    }
 }
 
 @end

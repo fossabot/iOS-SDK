@@ -4,6 +4,7 @@
 
 #import "PXPAsynchronousOperation.h"
 
+
 @interface PXPAsynchronousOperation ()
 
 @property (getter = isFinished, readwrite)  BOOL finished;
@@ -26,13 +27,8 @@
 }
 
 - (void)start {
-    if ([self isCancelled]) {
-        self.finished = YES;
-        return;
-    }
 
     self.executing = YES;
-
     [self main];
 }
 

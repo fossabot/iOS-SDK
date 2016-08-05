@@ -84,7 +84,8 @@
                 [strongSelf performRequestWithRetryCount:0 lastTask:task lastError:error];
                 return;
             }
-            NSOperation* dummyOperation = [NSBlockOperation blockOperationWithBlock:^{
+            NSOperation* dummyOperation = nil;
+            dummyOperation = [NSBlockOperation blockOperationWithBlock:^{
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(strongSelf.retryInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (!dummyOperation.isCancelled) {
                         [strongSelf performRequestWithRetryCount:retryCount - 1 lastTask:task lastError:error];

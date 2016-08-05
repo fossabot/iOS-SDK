@@ -49,21 +49,21 @@ typedef void (^ChallengeCompletionHandler)(NSURLSessionAuthChallengeDisposition 
 
 @end
 
-static BOOL sPXPIsProtocolRegistered = NO;
-
-
-__attribute__((constructor))
-void initialize() {
-    sPXPIsProtocolRegistered = [NSURLProtocol registerClass:[PXPURLProtocol class]];
-    assert(sPXPIsProtocolRegistered == YES);
-}
-
-__attribute__((destructor))
-static void deinitialize()
-{
-    [NSURLProtocol unregisterClass:[PXPURLProtocol class]];
-    sPXPIsProtocolRegistered = NO;
-}
+//static BOOL sPXPIsProtocolRegistered = NO;
+//
+//
+//__attribute__((constructor))
+//void initialize() {
+//    sPXPIsProtocolRegistered = [NSURLProtocol registerClass:[PXPURLProtocol class]];
+//    assert(sPXPIsProtocolRegistered == YES);
+//}
+//
+//__attribute__((destructor))
+//static void deinitialize()
+//{
+//    [NSURLProtocol unregisterClass:[PXPURLProtocol class]];
+//    sPXPIsProtocolRegistered = NO;
+//}
 
 @implementation PXPURLProtocol
 
@@ -603,7 +603,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     [self.task cancel];
     self.task = nil;
 
-    [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil]];
+    [self handleError:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:nil]];
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *))completionHandler
