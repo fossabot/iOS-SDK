@@ -23,6 +23,7 @@
 @interface PXPImageTask ()
 
 @property (nonatomic, strong) PXPImageRequestWrapper* requestWrapper;
+@property (nonatomic, assign) NSInteger retryCount;
 
 @end
 
@@ -68,6 +69,7 @@
         _requestWrapper = requestWrapper;
         _uploadProgress = uploadProgress;
         _downloadProgress = downloadProgress;
+        _retryCount = 5;
         _completionBlock = ^(NSURL* _Nullable url, UIImage  * _Nullable responseObject, NSError * _Nullable error) {
 
             completion(url, responseObject, error);
@@ -118,6 +120,7 @@
     } else {
         __weak typeof(self)weakSelf = self;
         [self addPixpieImageOperationWithTransform:_transform
+                                        retryCount:self.retryCount
                                            success:successBlock
                                           failture:^(NSURLSessionTask * _Nonnull task, NSError * _Nonnull error) {
                                               if (((NSHTTPURLResponse*)task.response).statusCode == 404) {
@@ -140,6 +143,7 @@
     defaultTransform.fitSizeStyle = PXPTransformFitSizeStyleManual;
     __weak typeof(self)weakSelf = self;
     [self addPixpieImageOperationWithTransform:defaultTransform
+                                    retryCount: self.retryCount
                                        success:^(NSURLSessionTask * _Nonnull task, id  _Nullable responseObject) {
                                            successBlock(task, responseObject);
                                            __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -183,21 +187,30 @@
                                     }];
 }
 
-- (void)addPixpieImageOperationWithTransform:(PXPTransform*)transform
+- (void)addPixpieImageOperationWithTransform:(PXPTransform*)transform retryCount:(NSInteger)retry
                                      success:(PXPImageSuccessBlock)successBlock
                                     failture:(PXPImageFailureBlock)failtureBlock {
 
     NSString* urlString = _originalRequest.URL.absoluteString;
     NSDictionary* headers = self.originalRequest.allHTTPHeaderFields;
     NSString* pxpUrlString = [urlString pxp_urlStringForTransform:transform];
-    PXPAPITask* imageDownloadOperation = [self.requestWrapper imageDownloadTaskForUrl:pxpUrlString
+    AFHTTPSessionOperation* imageDownloadOperation = [self.requestWrapper imageDownloadTaskForUrl:pxpUrlString
                                                                                method:@"GET"
                                                                            parameters:nil
                                                                               headers:headers
                                                                        uploadProgress:_uploadProgress
                                                                      downloadProgress:_downloadProgress
                                                                               success:successBlock
-                                                                             failture:failtureBlock];
+                                                                             failture:^(NSURLSessionTask * _Nonnull task, NSError * _Nonnull error) {
+                                                                                 if (retry == 0 || !(error.code == NSURLErrorTimedOut && [error.domain isEqualToString:NSURLErrorDomain])) {
+                                                                                     failtureBlock(task, error);
+                                                                                 } else {
+                                                                                     [self addPixpieImageOperationWithTransform:transform
+                                                                                                                     retryCount:retry - 1
+                                                                                                                        success:successBlock
+                                                                                                                       failture:failtureBlock];
+                                                                                 }
+                                                                             }];
 
     [self addOperation:imageDownloadOperation];
 }

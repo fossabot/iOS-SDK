@@ -191,8 +191,10 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
         NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
         if (response.statusCode == 403 || response.statusCode == 401) {
             [strongSelf.info update];
+            return YES;
+        } else {
+            return (error.code == NSURLErrorTimedOut && [error.domain isEqualToString:NSURLErrorDomain]);
         }
-        return YES;
     } success:successBlock failure:^(NSURLSessionTask* task, NSError *error) {
         BLOCK_SAFE_RUN(failtureBlock, task, error);
     }];

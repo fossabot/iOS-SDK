@@ -67,9 +67,7 @@
     {
         BLOCK_SAFE_RUN(self.failureBlock, lastTask, lastError);
         _executing = NO;
-    }
-    else
-    {
+    } else {
         NSAssert(self.sessionManager, @"Session manager must be initialized");
         __weak typeof(self)weakSelf = self;
         __block NSOperation* operation = nil;
