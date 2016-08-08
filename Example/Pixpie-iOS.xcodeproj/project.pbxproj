@@ -34,7 +34,6 @@
 		0AC43CBD1C6E026500337844 /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CBC1C6E026500337844 /* ImageList.swift */; };
 		0AC43CBF1C6E04A300337844 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC43CBE1C6E04A300337844 /* ImageCell.swift */; };
 		0AC43CC11C6E083700337844 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AC43CC01C6E083700337844 /* LaunchScreen.storyboard */; };
-		0AEEFA4D1BF8C9B5009DE083 /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0AEEFA4C1BF8C9B5009DE083 /* server.cer */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -76,7 +75,6 @@
 		0AC43CBC1C6E026500337844 /* ImageList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
 		0AC43CBE1C6E04A300337844 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		0AC43CC01C6E083700337844 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0AEEFA4C1BF8C9B5009DE083 /* server.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.cer; sourceTree = "<group>"; };
 		2C438C694483E34A3EEC148E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2EF25F1A47604F703D2BB9AA /* Pods-Pixpie-iOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* InspiringPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InspiringPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				0A56CFB11C84650B001C919C /* Settings */,
-				0AEEFA4C1BF8C9B5009DE083 /* server.cer */,
 				6003F595195388D20070C39A /* Pixpie-iOS-Info.plist */,
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 			);
@@ -346,7 +343,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AEEFA4D1BF8C9B5009DE083 /* server.cer in Resources */,
 				0A4556491CB6962D00B7DAB1 /* Pixpie.podspec in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
