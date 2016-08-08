@@ -51,39 +51,26 @@
         [operation completeOperation];
     }];
     operation.task = dataTask;
-    [operation startObservingStateChange];
     return operation;
-}
-
-- (void)startObservingStateChange {
-    [self addObserver:self forKeyPath:@"isCancelled" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
-}
-
-- (void)stopObservingStateChange {
-    @try {
-        [self removeObserver:self forKeyPath:@"isCancelled"];
-    }
-    @catch (NSException * __unused exception) {}
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"isCancelled"]) {
-        if (self.isCancelled) {
-            [self.task cancel];
-        }
-    }
-}
-
-- (void)dealloc {
-    [self stopObservingStateChange];
 }
 
 - (void)main {
     if (self.isCancelled) {
-        [self.task cancel];
+        [self cancelTaskIfExecuting];
     } else {
         [self.task resume];
     }
+}
+
+- (void)cancelTaskIfExecuting {
+    if (self.isExecuting) {
+        [self.task cancel];
+    }
+}
+
+- (void)cancel {
+    [self cancelTaskIfExecuting];
+    [super cancel];
 }
 
 @end

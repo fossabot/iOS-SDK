@@ -89,8 +89,7 @@
 
     PXPNetInfo* updatedInfo = (currentWifiSSID.length != 0 ? [PXPNetInfo infoWithName:currentWifiSSID
                                                                               technology:PXPNetworkWiFi] : nil);
-
-    if (!PXPNetInfosAreEqual(updatedInfo, previousNetInfo))
+    if (updatedInfo != previousNetInfo && ![updatedInfo isEqual:previousNetInfo])
     {
         self.currentInfo = updatedInfo;
         BLOCK_SAFE_RUN(self.wifiChangeBlock, self.currentInfo);

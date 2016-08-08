@@ -11,21 +11,6 @@
 @import CoreTelephony.CTTelephonyNetworkInfo;
 @import CoreTelephony.CTCarrier;
 
-BOOL PXPNetInfosAreEqual(PXPNetInfo* firstNetInfo, PXPNetInfo* secondNetInfo) {
-    BOOL isEqualToInfo = NO;
-    if (firstNetInfo != nil && secondNetInfo != nil)
-    {
-        isEqualToInfo = [firstNetInfo isEqualToNetInfo:secondNetInfo];
-    }
-    else
-    {
-        isEqualToInfo = NO;
-    }
-    return isEqualToInfo;
-}
-
-
-
 @interface PXPNetInfo ()
 
 - (instancetype)initWithName:(NSString*)name technology:(NSString*)technology;
@@ -92,9 +77,13 @@ BOOL PXPNetInfosAreEqual(PXPNetInfo* firstNetInfo, PXPNetInfo* secondNetInfo) {
 
 - (BOOL)isEqualToNetInfo:(PXPNetInfo*)other
 {
-    BOOL equalNames = [self.name isEqualToString:other.name];
-    BOOL equalTechnologies = [self.technology isEqualToString:other.technology];
-    return (equalNames && equalTechnologies);
+    BOOL same = (self == other);
+    if (!same) {
+        BOOL equalNames = [self.name isEqualToString:other.name];
+        BOOL equalTechnologies = [self.technology isEqualToString:other.technology];
+        return (equalNames && equalTechnologies);
+    }
+    else return same;
 }
 
 #pragma mark - Class methods

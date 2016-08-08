@@ -13,6 +13,8 @@
 #import "PXPNetworkMonitor.h"
 #import "PXPNetworkTechnologies.h"
 
+
+
 static NSInteger const kPXPFrameDuration = 1.0;
 static NSInteger const kPXPUndefined = -1;
 
@@ -21,7 +23,7 @@ static NSInteger const kPXPUndefined = -1;
  * NSData is in bytes, values there are in *bits
  */
 
-static NSUInteger const kPXPNormalizingCoeficient = 2;
+static NSUInteger const kPXPNormalizingCoeficient = 1;
 
 static NSUInteger const kPXP2GGSMSpeed = 14400 / (8 * kPXPNormalizingCoeficient);
 static NSUInteger const kPXP2GGPRSSpeed = 57600 / (8 * kPXPNormalizingCoeficient);
@@ -45,6 +47,8 @@ static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
 
 @property (nonatomic) NSInteger throughput;
 @property (nonatomic) NSInteger lastThroughput;
+
+@property (atomic, readwrite, assign) PXPDataSpeed speedType;
 
 @end
 
@@ -73,11 +77,16 @@ static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
         self.lastFrameTime = 0.0;
         self.currentFrameTime = 0.0;
         self.frameMaxSpeed = kPXPUndefined;
-        self.lastThroughput = kPXP3GUTMSSpeed;
-        self.throughput = kPXP3GUTMSSpeed;
+        self.lastThroughput = [PXPDataMonitor throughputForNetInfo];
+        self.throughput = kPXPUndefined;
+        [self updateSpeedType];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChange) name:kPXPNetworkChangedNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPNetworkChangedNotification object:nil];
 }
 
 + (NSInteger)throughputForNetInfo {
@@ -118,6 +127,7 @@ static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
     BOOL newFrame = fabs(self.currentFrameTime) < DBL_EPSILON || (frame - self.currentFrameTime) > kPXPFrameDuration;
     if (newFrame) {
         self.lastThroughput = self.throughput;
+        [self updateSpeedType];
         self.frameChunkCount = 0;
         self.frameBytesSum = 0;
         self.currentFrameTime = CACurrentMediaTime();
@@ -147,21 +157,22 @@ static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
     }
 }
 
-- (PXPDataSpeed)speedType
+- (void)updateSpeedType
 {
     NSInteger throughput = self.lastThroughput;
     if (throughput == kPXPUndefined) {
-        return PXPDataSpeedIdle;
+        self.speedType = PXPDataSpeedIdle;
     } else if (throughput > kPXP3GHSPASpeed) {
-        return PXPDataSpeedExtraHigh;
+        self.speedType = PXPDataSpeedExtraHigh;
     } else if (throughput > kPXP3GUTMSSpeed) {
-        return PXPDataSpeedHigh;
+        self.speedType = PXPDataSpeedHigh;
     } else if (throughput > kPXP2GEdgeSpeed) {
-        return PXPDataSpeedMedium;
+        self.speedType = PXPDataSpeedMedium;
     } else if (throughput > kPXP2GGPRSSpeed) {
-        return PXPDataSpeedLow;
+        self.speedType = PXPDataSpeedLow;
+    } else {
+        self.speedType = PXPDataSpeedExtraLow;
     }
-    return PXPDataSpeedExtraLow;
 }
 
 @end

@@ -15,12 +15,15 @@ typedef NS_ENUM(NSInteger, PXPDataSpeed) {
     PXPDataSpeedMedium,
     PXPDataSpeedHigh,
     PXPDataSpeedExtraHigh,
-    PXPDataSpeedIdle
+    PXPDataSpeedIdle,
+    PXPDataSpeedNone
 };
+
+static NSString* const kPXPSpeedChanged;
 
 @interface PXPDataMonitor : NSObject
 
-@property (nonatomic, readonly) PXPDataSpeed speedType;
+@property (atomic, readonly, assign) PXPDataSpeed speedType;
 
 + (instancetype)sharedMonitor;
 

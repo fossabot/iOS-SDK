@@ -85,7 +85,7 @@
     
     PXPNetInfo* updatedInfo = ((carrier != nil || cellTechnology != nil) ? [PXPNetInfo infoWithName:carrier.carrierName technology:cellTechnology] : nil);
 
-    if (!PXPNetInfosAreEqual(updatedInfo, previousNetInfo)) {
+    if (updatedInfo != previousNetInfo && ![updatedInfo isEqual:previousNetInfo]) {
         self.currentInfo = updatedInfo;
         BLOCK_SAFE_RUN(self.cellNetworkChangeBlock, _currentInfo);
     }

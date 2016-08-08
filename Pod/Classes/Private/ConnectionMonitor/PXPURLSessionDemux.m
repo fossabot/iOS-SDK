@@ -90,6 +90,10 @@
     if (self != nil) {
         if (configuration == nil) {
             configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            configuration.allowsCellularAccess = YES;
+            configuration.HTTPShouldUsePipelining = YES;
+            configuration.timeoutIntervalForRequest = 15;
+            configuration.HTTPMaximumConnectionsPerHost = 6;
         }
         self->_configuration = [configuration copy];
         

@@ -17,16 +17,6 @@
  */
 
 /*!
- *  @brief method to compare net infos
- *
- *  @param firstNetInfo first info to compare
- *  @param secondNetInfo second info to compare
- *
- *  @return YES, if infos are equal
- */
-BOOL PXPNetInfosAreEqual(PXPNetInfo* firstNetInfo, PXPNetInfo* secondNetInfo);
-
-/*!
  *  @brief  class for storing network related info
  */
 @interface PXPNetInfo : NSObject

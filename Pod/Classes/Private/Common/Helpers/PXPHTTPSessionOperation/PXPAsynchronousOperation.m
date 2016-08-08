@@ -49,35 +49,35 @@
 }
 
 - (BOOL)isExecuting {
-    @synchronized(self) {
+//    @synchronized(self) {
         return _executing;
-    }
+//    }
 }
 
 - (BOOL)isFinished {
-    @synchronized(self) {
+//    @synchronized(self) {
         return _finished;
-    }
+//    }
 }
 
 - (void)setExecuting:(BOOL)executing {
-    @synchronized(self) {
+//    @synchronized(self) {
         if (_executing != executing) {
             [self willChangeValueForKey:@"isExecuting"];
             _executing = executing;
             [self didChangeValueForKey:@"isExecuting"];
         }
-    }
+//    }
 }
 
 - (void)setFinished:(BOOL)finished {
-    @synchronized(self) {
+//    @synchronized(self) {
         if (_finished != finished) {
             [self willChangeValueForKey:@"isFinished"];
             _finished = finished;
             [self didChangeValueForKey:@"isFinished"];
         }
-    }
+//    }
 }
 
 @end

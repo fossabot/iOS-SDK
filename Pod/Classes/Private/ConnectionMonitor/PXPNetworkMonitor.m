@@ -32,7 +32,7 @@ NSString* const kPXPNetworkChangedNotification = @"kPXPNetworkChangedNotificatio
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedMonitor = [PXPNetworkMonitor new];
-        [_sharedMonitor startMonitoring];
+        //[_sharedMonitor startMonitoring];
     });
 
     return _sharedMonitor;
@@ -58,6 +58,7 @@ NSString* const kPXPNetworkChangedNotification = @"kPXPNetworkChangedNotificatio
 - (void)startMonitoring
 {
     [self stopMonitoring];
+    self.currentNetworkTechnology = (self.currentWifiInfo != nil ? self.currentWifiInfo : self.currentCellInfo);
     __weak typeof(self)weakSelf = self;
     [self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -114,15 +115,11 @@ NSString* const kPXPNetworkChangedNotification = @"kPXPNetworkChangedNotificatio
 
 - (void)setCurrentNetworkTechnology:(PXPNetInfo*)networkTechnology
 {
-    BOOL isNewTechnologyEqualToOld = NO;
+    BOOL isNewTechnologyEqualToOld = YES;
 
-    if (_currentNetworkTechnology != nil && networkTechnology != nil)
+    if (_currentNetworkTechnology != networkTechnology)
     {
-        isNewTechnologyEqualToOld = [_currentNetworkTechnology isEqualToNetInfo:networkTechnology];
-    }
-    else
-    {
-        isNewTechnologyEqualToOld = NO;
+        isNewTechnologyEqualToOld = [_currentNetworkTechnology isEqual:networkTechnology];
     }
 
     if (!isNewTechnologyEqualToOld)
