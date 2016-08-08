@@ -46,12 +46,13 @@
         NSDictionary* userInfo = nil;
         if (error == nil) {
             [strongSelf setIfExistsValuesForKeysWithDictionary:dict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kPXPModelUpdatedNotification object:strongSelf userInfo:userInfo];
         } else if (error.code == NSURLErrorCancelled && [error.domain isEqualToString:NSURLErrorDomain]) {
 
         } else {
             userInfo = @{kPXPModelUpdateErrorKey : error};
+            [[NSNotificationCenter defaultCenter] postNotificationName:kPXPModelUpdatedNotification object:strongSelf userInfo:userInfo];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:kPXPModelUpdatedNotification object:strongSelf userInfo:userInfo];
     }];
 }
 

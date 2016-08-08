@@ -15,8 +15,6 @@
 
 @interface PXPImageRequestWrapper ()
 
-@property (nonatomic, strong, nullable) id <AFImageRequestCache> imageCache;
-
 @end
 
 @implementation PXPImageRequestWrapper
@@ -74,7 +72,7 @@
 + (NSURLSessionConfiguration *)defaultImageSessionConfiguration {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.HTTPShouldSetCookies = YES;
-    configuration.HTTPShouldUsePipelining = NO;
+    configuration.HTTPShouldUsePipelining = YES;
 
     configuration.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
     configuration.allowsCellularAccess = YES;
