@@ -36,7 +36,6 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
 
 @property (nonatomic, strong) PXPImageRequestWrapper* imageRequestWrapper;
 @property (nonatomic, strong, readonly) PXPSDKRequestWrapper* sdkRequestWrapper;
-@property (nonatomic, strong) NSOperationQueue* imageQueue;
 
 @end
 
@@ -49,8 +48,6 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
     self = [super init];
     if (self != nil) {
         _imageRequestWrapper = [PXPImageRequestWrapper new];
-        _imageQueue = [NSOperationQueue new];
-        _imageQueue.name = @"co.pixpie.ImageTaskManagerQueue";
     }
     return self;
 }
@@ -71,7 +68,7 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
                       downloadProgress:(PXPProgressBlock _Nullable)downloadProgress
                             completion:(PXPImageRequestCompletionBlock)completionBlock {
     NSString* identifier = [[NSUUID UUID] UUIDString];
-    PXPImageTask* task = [[PXPImageTask alloc] initWithUrl:path method:@"GET" transfrom:transform params:nil headers:headers identifier:identifier queue:self.imageQueue requestWrapper:self.imageRequestWrapper uploadProgress:uploadProgress downloadProgress:downloadProgress completion:completionBlock];
+    PXPImageTask* task = [[PXPImageTask alloc] initWithUrl:path method:@"GET" transfrom:transform params:nil headers:headers identifier:identifier requestWrapper:self.imageRequestWrapper uploadProgress:uploadProgress downloadProgress:downloadProgress completion:completionBlock];
     [task start];
     return identifier;
 }
@@ -82,15 +79,15 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
                          downloadProgress:(PXPProgressBlock)downloadProgress
                                completion:(PXPImageRequestCompletionBlock)completionBlock {
     NSString* identifier = [[NSUUID UUID] UUIDString];
-    PXPImageTask* task = [[PXPImageTask alloc] initWithRequest:request transfrom:transform identifier:identifier queue:self.imageQueue requestWrapper:self.imageRequestWrapper uploadProgress:uploadProgress downloadProgress:downloadProgress completion:completionBlock];
+    PXPImageTask* task = [[PXPImageTask alloc] initWithRequest:request transfrom:transform identifier:identifier requestWrapper:self.imageRequestWrapper uploadProgress:uploadProgress downloadProgress:downloadProgress completion:completionBlock];
     [task start];
     return identifier;
 }
 
-- (void)imageUploadTaskWithImage:(UIImage *)image
-                                  path:(NSString *)path
-                        uploadProgress:(PXPProgressBlock)uploadProgress
-                            completion:(PXPImageRequestCompletionBlock)completionBlock {
+- (NSString*)imageUploadTaskWithImage:(UIImage *)image
+                                 path:(NSString *)path
+                       uploadProgress:(PXPProgressBlock)uploadProgress
+                           completion:(PXPImageRequestCompletionBlock)completionBlock {
     NSURLSessionDataTask *task = [[PXP sharedSDK].wrapper uploadImageTaskForImage:image toPath:path successBlock:^(NSURLSessionTask *task, id responseObject) {
         if (completionBlock) {
             completionBlock(nil, nil, nil);
@@ -102,15 +99,18 @@ void PXPRunOnMainQueueWithoutDeadlocking(void (^block)(void))
     }];
     [task resume];
 }
-- (void)imageUploadTaskWithImage:(UIImage *)image
+
+- (NSString *)imageUploadTaskWithImage:(UIImage *)image
                         uploadProgress:(PXPProgressBlock)uploadProgress
                             completion:(PXPImageRequestCompletionBlock)completionBlock {
+#warning Must return identifier to cancel uploading
     NSString* identifier = [[NSUUID UUID] UUIDString];
     [self imageUploadTaskWithImage:image path:[NSString stringWithFormat:@"%@.jpg", identifier] uploadProgress:uploadProgress completion:completionBlock];
+    return identifier;
 }
 
 - (void)cancelTaskWithIdentifier:(NSString*)identifier {
-    NSArray* operations = [self.imageQueue operationsForIdentifier:identifier];
+    NSArray* operations = [[PXPRequestWrapper networkQueue] operationsForIdentifier:identifier];
     [operations makeObjectsPerformSelector:@selector(cancel)];
 }
 

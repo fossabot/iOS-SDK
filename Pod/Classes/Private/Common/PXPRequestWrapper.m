@@ -11,6 +11,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "PXPDefines.h"
 #import "PXPURLProtocol.h"
+#import "PXPDataMonitor.h"
 
 @interface PXPRequestWrapper ()
 
@@ -35,12 +36,21 @@
         NSSet* certs = [AFSecurityPolicy certificatesInBundle:mainBundle];
         AFSecurityPolicy* policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate withPinnedCertificates:certs];
         policy.validatesDomainName = NO;
-        policy.allowInvalidCertificates = YES;
+        policy.allowInvalidCertificates = NO;
         self.sessionManager.securityPolicy = policy;
-        _operationQueue = [[NSOperationQueue alloc] init];
-        _operationQueue.maxConcurrentOperationCount = 1;
+        [[PXPDataMonitor sharedMonitor] addObserver:self forKeyPath:@"speedType" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[PXPDataMonitor sharedMonitor] removeObserver:self forKeyPath:@"speedType" context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"speedType"] && object == [PXPDataMonitor sharedMonitor]) {
+        [PXPRequestWrapper setupQueue:[PXPRequestWrapper networkQueue]];
+    }
 }
 
 - (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
@@ -49,11 +59,52 @@
 
     assert(self.sessionManager != nil);
     NSString *uuid = [[NSUUID UUID] UUIDString];
-    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:self.operationQueue identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
+    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPRequestWrapper networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         return (error.code == NSURLErrorTimedOut && [error.domain isEqualToString:NSURLErrorDomain]);
     } success:successBlock failure:failtureBlock];
     [task start];
     return task;
+}
+
++ (NSOperationQueue *)networkQueue {
+    static dispatch_once_t onceToken;
+    static NSOperationQueue* sQueue = nil;
+    dispatch_once(&onceToken, ^{
+        sQueue = [NSOperationQueue new];
+        [PXPRequestWrapper setupQueue:sQueue];
+    });
+    return sQueue;
+}
+
++ (void)setupQueue:(NSOperationQueue*)aQueue {
+    PXPDataSpeed speed = [PXPDataMonitor sharedMonitor].speedType;
+    NSOperationQueue* queue = aQueue;
+    switch (speed) {
+        case PXPDataSpeedUndefined:
+            queue.maxConcurrentOperationCount = 4;
+            break;
+        case PXPDataSpeedExtraLow:
+            queue.maxConcurrentOperationCount = 1;
+            break;
+        case PXPDataSpeedLow:
+            queue.maxConcurrentOperationCount = 1;
+            break;
+        case PXPDataSpeedMedium:
+            queue.maxConcurrentOperationCount = 4;
+            break;
+        case PXPDataSpeedHigh:
+            queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+            break;
+        case PXPDataSpeedExtraHigh:
+            queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+            break;
+        case PXPDataSpeedNone:
+            queue.maxConcurrentOperationCount = 0;
+            break;
+        default:
+            queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+            break;
+    }
 }
 
 @end

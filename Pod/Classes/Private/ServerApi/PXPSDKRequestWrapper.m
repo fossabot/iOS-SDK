@@ -186,7 +186,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     assert(self.sessionManager != nil);
     __weak typeof(self)weakSelf = self;
     NSString *uuid = [[NSUUID UUID] UUIDString];
-    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:self.operationQueue identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
+    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPRequestWrapper networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
         if (response.statusCode == 403 || response.statusCode == 401) {

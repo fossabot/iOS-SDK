@@ -27,7 +27,6 @@ typedef void (^PXPImageRequestCompletionBlock)(NSURL* _Nullable url, UIImage  * 
                      params:(nullable NSDictionary*)params
                     headers:(nullable NSDictionary*)headers
                  identifier:(NSString*)identifier
-                      queue:(NSOperationQueue*)queue
              requestWrapper:(PXPImageRequestWrapper*)requestWrapper
              uploadProgress:(PXPProgressBlock)uploadProgress
            downloadProgress:(PXPProgressBlock)downloadProgress
@@ -36,7 +35,6 @@ typedef void (^PXPImageRequestCompletionBlock)(NSURL* _Nullable url, UIImage  * 
 - (instancetype)initWithRequest:(NSURLRequest*)request
                       transfrom:(PXPTransform*)transform
                      identifier:(NSString*)identifier
-                          queue:(NSOperationQueue*)queue
                  requestWrapper:(PXPImageRequestWrapper*)requestWrapper
                  uploadProgress:(PXPProgressBlock)uploadProgress
                downloadProgress:(PXPProgressBlock)downloadProgress

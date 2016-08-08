@@ -15,10 +15,11 @@
 
 @property (nonatomic, strong, readonly) NSString* backendUrl;
 @property (nonatomic, strong, readonly) AFHTTPSessionManager* sessionManager;
-@property (nonatomic, strong, readonly) NSOperationQueue* operationQueue;
 
 - (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
                    successBlock:(PXPRequestSuccessBlock)successBlock
                   failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+
++ (NSOperationQueue *)networkQueue;
 
 @end

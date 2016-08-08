@@ -37,7 +37,6 @@
                      params:(nullable NSDictionary *)params
                     headers:(nullable NSDictionary *)headers
                  identifier:(NSString *)identifier
-                      queue:(NSOperationQueue*)queue
              requestWrapper:(PXPImageRequestWrapper *)requestWrapper
              uploadProgress:(PXPProgressBlock)uploadProgress
            downloadProgress:(PXPProgressBlock)downloadProgress
@@ -48,14 +47,13 @@
     AFHTTPRequestSerializer<AFURLRequestSerialization> *serializer = requestWrapper.sessionManager.requestSerializer;
     NSURLRequest* request = [PXPImageTask requestWithUrlString:urlString method:method params:params headers:headers serializer:serializer error:&error];
     NSAssert(error == nil, @"Request serialization error");
-    task = [self initWithRequest:request transfrom:transform identifier:identifier queue:queue requestWrapper:requestWrapper uploadProgress:uploadProgress downloadProgress:downloadProgress completion:completion];
+    task = [self initWithRequest:request transfrom:transform identifier:identifier requestWrapper:requestWrapper uploadProgress:uploadProgress downloadProgress:downloadProgress completion:completion];
     return task;
 }
 
 - (instancetype)initWithRequest:(NSURLRequest*)request
                       transfrom:(PXPTransform*)transform
                      identifier:(NSString*)identifier
-                          queue:(NSOperationQueue*)queue
                  requestWrapper:(PXPImageRequestWrapper*)requestWrapper
                  uploadProgress:(PXPProgressBlock)uploadProgress
                downloadProgress:(PXPProgressBlock)downloadProgress
@@ -64,7 +62,7 @@
     if (self != nil) {
         _originalRequest = request;
         _transform = transform;
-        _queue = queue;
+        _queue = [PXPRequestWrapper networkQueue];
         _identifier = identifier;
         _requestWrapper = requestWrapper;
         _uploadProgress = uploadProgress;
