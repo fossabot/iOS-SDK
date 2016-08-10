@@ -22,7 +22,7 @@ pod "Pixpie-iOS"
 
 ## Author
 
-Dmitry Osipa, dima.osipa@gmail.com
+Dmitry Osipa, dmitry@pixpie.co
 
 ## License
 

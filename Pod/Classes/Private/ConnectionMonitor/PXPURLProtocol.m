@@ -10,6 +10,7 @@
 #import "CanonicalRequest.h"
 #import "CacheStoragePolicy.h"
 #import "PXPURLSessionDemux.h"
+@import UIKit.UIDevice;
 
 typedef void (^ChallengeCompletionHandler)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * credential);
 

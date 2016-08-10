@@ -12,7 +12,7 @@
 #import "PXPNetInfo.h"
 #import "PXPNetworkMonitor.h"
 #import "PXPNetworkTechnologies.h"
-
+@import QuartzCore.CAAnimation;
 
 
 static NSInteger const kPXPFrameDuration = 1.0;

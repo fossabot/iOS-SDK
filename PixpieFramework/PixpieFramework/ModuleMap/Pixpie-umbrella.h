@@ -2,7 +2,6 @@
 
 #import "NSString+PXPImageTransform.h"
 #import "PXP.h"
-#import "PXPFileManager.h"
 #import "PXPImageTaskManager.h"
 #import "PXPImageTask.h"
 #import "PXPTransform.h"

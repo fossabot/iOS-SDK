@@ -132,8 +132,8 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 }
 
 + (void)cleanUp {
-    [NSURLCache sharedURLCache].removeAllCachedResponses;
-    PXPURLProtocol.defaultURLCache.removeAllCachedResponses;
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    [PXPURLProtocol.defaultURLCache removeAllCachedResponses];
 }
 
 @end

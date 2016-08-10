@@ -115,7 +115,7 @@ static NSString* const kPXPDownloadTaskKey = @"pxp_downloadTaskKey";
     }
 }
 
-- (void)setPxp_transform:(PXPTransform *)transform {
+- (void)setPxp_transform:(PXPTransform * __nullable)transform {
     objc_setAssociatedObject(self, (__bridge const void *)(kPXPTransformKey), transform, OBJC_ASSOCIATION_RETAIN);
 }
 
@@ -128,7 +128,7 @@ static NSString* const kPXPDownloadTaskKey = @"pxp_downloadTaskKey";
     return transform;
 }
 
-- (void)setPxp_downloadTaskIdentifier:(NSString *)downloadTaskIdentifier {
+- (void)setPxp_downloadTaskIdentifier:(NSString * __nullable)downloadTaskIdentifier {
     PXPWeakObjectContainer* container = [[PXPWeakObjectContainer alloc] initWithObject:downloadTaskIdentifier];
     objc_setAssociatedObject(self, (__bridge const void *)(kPXPDownloadTaskKey), container, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
