@@ -24,9 +24,6 @@ typedef void (^PXPImageFailureBlock)(NSURLSessionTask* task, NSError* error);
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)config NS_DESIGNATED_INITIALIZER;
 
 - (AFHTTPSessionOperation *)imageDownloadTaskForUrl:(NSString *)urlString
-                                             method:(NSString *)httpMethod
-                                         parameters:(nullable NSDictionary *)params
-                                            headers:(nullable NSDictionary *)headers
                                      uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
                                    downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
                                             success:(PXPImageSuccessBlock)successBlock
@@ -37,8 +34,6 @@ typedef void (^PXPImageFailureBlock)(NSURLSessionTask* task, NSError* error);
                                        downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
                                                 success:(PXPImageSuccessBlock)successBlock
                                                failture:(PXPImageFailureBlock)failtureBlock;
-
-+ (NSURLSessionConfiguration *)defaultImageSessionConfiguration;
 
 @end
 

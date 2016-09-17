@@ -11,7 +11,6 @@
 #import "PXPAuthPrincipal.h"
 #import "PXPAccountInfo.h"
 #import "PXP_Internal.h"
-#import "PXPImageTaskManager.h"
 #import "PXPSDKRequestWrapper.h"
 #import "PXPNetworkMonitor.h"
 #import "PXPDataMonitor.h"
@@ -49,7 +48,6 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
     if (self) {
         [PXPDataMonitor sharedMonitor];
         _state = PXPStateNotInitialized;
-        _imageTaskManager = [[PXPImageTaskManager alloc] init];
         [[PXPNetworkMonitor sharedMonitor] startMonitoring];
         [PXPTrafficMonitor sharedMonitor];
     }

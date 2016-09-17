@@ -7,20 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PXPImageTaskManager.h"
+#import "PXPImageRequestWrapper.h"
 
 @class PXPTransform;
+@class AFHTTPSessionOperation;
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^PXPImageRequestCompletionBlock)(NSURLSessionTask* task, id _Nullable responseObject, NSError  * _Nullable  error);
+
 
 @interface UIImageView (PXPExtensions)
 
 @property (nonatomic, strong, nullable) PXPTransform* pxp_transform;
-@property (nonatomic, strong, nullable) NSString* pxp_downloadTaskIdentifier;
+@property (nonatomic, strong, nullable) AFHTTPSessionOperation* pxp_downloadTask;
 
-- (void)pxp_requestImage:(NSURL*)url;
-- (void)pxp_requestImage:(NSURL*)url headers:(NSDictionary * _Nullable )headers completion:(PXPImageRequestCompletionBlock _Nullable)completion;
-- (void)pxp_requestImageForPath:(NSString*)path completion:(PXPImageRequestCompletionBlock _Nullable)completion;
+- (void)pxp_requestImage:(NSString*)url;
+- (void)pxp_requestImage:(NSString*)url headers:(NSDictionary * _Nullable )headers completion:(PXPImageRequestCompletionBlock _Nullable)completion;
 - (void)cancelLoad;
 
 @end

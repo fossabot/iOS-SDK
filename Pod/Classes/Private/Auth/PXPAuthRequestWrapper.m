@@ -9,6 +9,7 @@
 #import "PXPAuthRequestWrapper.h"
 #import "NSString+PXPSecurity.h"
 #import "PXPConfig.h"
+#import "PXPQueueManager.h"
 #import <AFNetworking/AFNetworking.h>
 
 static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
@@ -67,7 +68,7 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
 
     assert(self.sessionManager != nil);
     NSString *uuid = [[NSUUID UUID] UUIDString];
-    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPRequestWrapper networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
+    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPQueueManager networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
         return (response == nil);
     } success:successBlock failure:failtureBlock];

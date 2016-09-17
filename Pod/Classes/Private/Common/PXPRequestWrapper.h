@@ -20,6 +20,4 @@
                    successBlock:(PXPRequestSuccessBlock)successBlock
                   failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 
-+ (NSOperationQueue *)networkQueue;
-
 @end

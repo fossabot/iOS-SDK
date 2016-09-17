@@ -7,11 +7,10 @@
 //
 
 #import "UIImageView+PXPExtensions.h"
-#import "PXPTransform.h"
+#import "PXPAutomaticTransform.h"
 #import <objc/runtime.h>
-#import "PXPImageTaskManager.h"
 #import "PXP_Internal.h"
-#import "PXPImageTask.h"
+#import "AFHTTPSessionOperation.h"
 
 @interface PXPWeakObjectContainer : NSObject
 
@@ -37,83 +36,42 @@ static NSString* const kPXPDownloadTaskKey = @"pxp_downloadTaskKey";
 
 @implementation UIImageView (PXPExtensions)
 
-//@dynamic pxp_transform;
-//@dynamic pxp_downloadTask;
-
 #pragma mark - Public Interface
 
-- (void)pxp_requestImageForPath:(NSString*)path completion:(PXPImageRequestCompletionBlock _Nullable)completion {
 
-    [self cancelLoad];
-    self.image = nil;
-    if (self.pxp_transform.fitSizeStyle == PXPTransformFitSizeStyleAutomatic) {
-        self.pxp_transform.fitSize = [self smallestSize];
-    }
-    self.pxp_downloadTaskIdentifier = [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithPath:path
-                                                                                        transform:self.pxp_transform
-                                                                                          headers:nil
-                                                                                   uploadProgress:nil
-                                                                                 downloadProgress:nil
-                                                                                       completion:^(NSURL * _Nullable url, UIImage * _Nullable responseObject, NSError * _Nullable error) {
-                                                                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                                                                               if (completion != NULL) {
-                                                                                                   
-                                                                                                   completion(url, responseObject, error);
-                                                                                               } else {
-                                                                                                   self.image = responseObject;
-                                                                                               }
-                                                                                           });
-                                                                                       }];
+- (void)pxp_requestImage:(NSString *)url {
+    [self pxp_requestImage:url headers:nil completion:^(NSURLSessionTask * _Nonnull task, id  _Nullable responseObject, NSError * _Nullable error) {
+        if ([responseObject isKindOfClass:[UIImage class]]) {
+            self.image = (UIImage*)responseObject;
+        }
+    }];
 }
 
-- (void)pxp_requestImage:(NSURL *)url {
-    [self pxp_requestImage:url headers:nil completion:nil];
-}
-
-- (void)pxp_requestImage:(NSURL*)url
+- (void)pxp_requestImage:(NSString *)url
                  headers:(NSDictionary * _Nullable )headers
               completion:(PXPImageRequestCompletionBlock _Nullable)completion {
 
     [self cancelLoad];
     self.image = nil;
-    if (self.pxp_transform.fitSizeStyle == PXPTransformFitSizeStyleAutomatic) {
-        self.pxp_transform.fitSize = [self smallestSize];
-    }
-    self.pxp_downloadTaskIdentifier = [[PXP sharedSDK].imageTaskManager imageDownloadTaskWithUrl:url transform:self.pxp_transform headers:headers uploadProgress:nil downloadProgress:nil completion:^(NSURL * _Nullable url, UIImage * _Nullable responseObject, NSError * _Nullable error) {
+    self.pxp_transform.originUrl = url;
+    NSString* finalUrl = self.pxp_transform.contentUrl;
+    self.pxp_downloadTask = [[UIImageView pxp_sharedImageDownloader] imageDownloadTaskForUrl:finalUrl uploadProgress:nil downloadProgress:nil success:^(NSURLSessionTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (completion != NULL) {
-
-                completion(url, responseObject, error);
-            } else {
-                self.image = responseObject;
-            }
+            completion(task, responseObject, nil);
+        });
+    } failture:^(NSURLSessionTask * _Nonnull task, NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(task, nil, error);
         });
     }];
 }
 
 - (void)cancelLoad {
-    [[PXP sharedSDK].imageTaskManager cancelTaskWithIdentifier:self.pxp_downloadTaskIdentifier];
-    self.pxp_downloadTaskIdentifier = nil;
+    [self.pxp_downloadTask cancel];
+    self.pxp_downloadTask = nil;
 }
 
 #pragma mark - Private Interface
-
-- (CGSize)smallestSize {
-    CGRect rect = self.bounds;
-    CGRect superRect = CGRectZero;
-    UIView* currentView = self.superview;
-    while (currentView != nil) {
-        if (currentView != nil) {
-            superRect = currentView.frame;
-            currentView = currentView.superview;
-        }
-    }
-    if (CGRectEqualToRect(CGRectZero, superRect)) {
-        return rect.size;
-    } else {
-        return superRect.size;
-    }
-}
 
 - (void)setPxp_transform:(PXPTransform * __nullable)transform {
     objc_setAssociatedObject(self, (__bridge const void *)(kPXPTransformKey), transform, OBJC_ASSOCIATION_RETAIN);
@@ -122,21 +80,32 @@ static NSString* const kPXPDownloadTaskKey = @"pxp_downloadTaskKey";
 - (PXPTransform*)pxp_transform {
     PXPTransform* transform = objc_getAssociatedObject(self, (__bridge const void *)(kPXPTransformKey));
     if (transform == nil) {
-        transform = [[PXPTransform alloc] initWithImageView:self];
+        transform = [[PXPAutomaticTransform alloc] initWithImageView:self originUrl:nil];
         objc_setAssociatedObject(self, (__bridge const void *)(kPXPTransformKey), transform, OBJC_ASSOCIATION_RETAIN);
     }
     return transform;
 }
 
-- (void)setPxp_downloadTaskIdentifier:(NSString * __nullable)downloadTaskIdentifier {
+- (void)setPxp_downloadTask:(AFHTTPSessionOperation * __nullable)downloadTaskIdentifier {
     PXPWeakObjectContainer* container = [[PXPWeakObjectContainer alloc] initWithObject:downloadTaskIdentifier];
     objc_setAssociatedObject(self, (__bridge const void *)(kPXPDownloadTaskKey), container, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSString*)pxp_downloadTaskIdentifier {
+- (NSString*)pxp_downloadTask {
 
     PXPWeakObjectContainer* container = objc_getAssociatedObject(self, (__bridge const void *)(kPXPDownloadTaskKey));
     return container.object;
+}
+
+#pragma mark - Class Methods
+
++ (PXPImageRequestWrapper*)pxp_sharedImageDownloader {
+    static PXPImageRequestWrapper* sWrapper = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sWrapper = [PXPImageRequestWrapper new];
+    });
+    return sWrapper;
 }
 
 @end

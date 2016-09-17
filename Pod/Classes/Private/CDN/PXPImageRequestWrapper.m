@@ -12,8 +12,11 @@
 #import <AFNetworking/AFAutoPurgingImageCache.h>
 #import "AFHTTPSessionOperation.h"
 #import "PXPURLProtocol.h"
+#import "PXPQueueManager.h"
 
 @interface PXPImageRequestWrapper ()
+
+@property (nonatomic, weak) NSOperationQueue* queue;
 
 @end
 
@@ -28,28 +31,22 @@
     self = [super init];
     if (self != nil) {
         _sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
-        _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        _sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         AFImageResponseSerializer *serializer = [PXPWebPImageResponseSerializer serializer];
         _sessionManager.responseSerializer = serializer;
+        _queue = [PXPQueueManager networkQueue];
     }
     return self;
 }
 
 - (AFHTTPSessionOperation *)imageDownloadTaskForUrl:(NSString *)urlString
-                                             method:(NSString *)httpMethod
-                                         parameters:(nullable NSDictionary *)params
-                                            headers:(nullable NSDictionary *)headers
-                                     uploadProgress:(void (^)(NSProgress *uploadProgress)) uploadProgress
-                                   downloadProgress:(void (^)(NSProgress *downloadProgress)) downloadProgress
+                                     uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
+                                   downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
                                             success:(PXPImageSuccessBlock)successBlock
                                            failture:(PXPImageFailureBlock)failtureBlock {
 
     NSError *error = nil;
-    NSMutableURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:httpMethod URLString:urlString parameters:params error:&error];
-    assert(error == nil);
-    for (NSString* key in headers.allKeys) {
-        [request setValue:headers[key] forHTTPHeaderField:key];
-    }
+    NSMutableURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:urlString parameters:nil error:&error];
     return [self imageDownloadTaskForRequest:request
                               uploadProgress:uploadProgress
                             downloadProgress:downloadProgress
@@ -64,6 +61,7 @@
                                                failture:(PXPImageFailureBlock)failtureBlock  {
 
     AFHTTPSessionOperation* task = [AFHTTPSessionOperation operationWithManager:self.sessionManager request:request uploadProgress:uploadProgress downloadProgress:downloadProgress success:successBlock failure:failtureBlock];
+    [self.queue addOperation:task];
     return task;
 }
 

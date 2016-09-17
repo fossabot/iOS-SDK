@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageDetailsController: UIViewController {
-    var url: NSURL?
+    var url: NSString?
 
     @IBOutlet weak var imageView: UIImageView!
     override func viewWillAppear(animated: Bool) {
@@ -17,8 +17,8 @@ class ImageDetailsController: UIViewController {
         if isBeingPresented() || isMovingToParentViewController() {
             guard let imageUrl = url
                 else {return}
-            imageView.pxp_requestImage(imageUrl, headers: nil, completion: { (url, image, error) in
-                guard let toImage = image
+            imageView.pxp_requestImage(imageUrl as String, headers: nil, completion: { (url, image, error) in
+                guard let toImage = image as! UIImage?
                     else { return }
                 UIView.transitionWithView(self.imageView,
                     duration:0.25,

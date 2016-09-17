@@ -13,154 +13,106 @@
 #import "PXPNetworkMonitor.h"
 #import "UIImageView+PXPExtensions.h"
 #import "PXPDataMonitor.h"
+#import "PXP.h"
+#import "PXP_Internal.h"
+#import "PXPAccountInfo.h"
 
-NSInteger PXPFirstClosest(const NSInteger *values, NSUInteger len, NSInteger value) {
-    NSInteger dist = labs(values[0] - value);
-    NSInteger closest;
-    for (int i = 0; i < len; i++) {
-        if (labs(values[i] - value) < dist) {
-            dist = labs(values[i] - value);
-            closest = i;
-        }
-    }
-    return values[closest];
-}
+NS_ASSUME_NONNULL_BEGIN
 
-NSString* PXPTransformQualityForSpeed(PXPDataSpeed dataSpeed) {
-    static NSDictionary *_sPXPQualities = nil;
-    static dispatch_once_t _onceToken;
-    dispatch_once(&_onceToken, ^{
-        _sPXPQualities = @{
-                           @(PXPDataSpeedExtraLow) : @"30",
-                           @(PXPDataSpeedLow) : @"30",
-                           @(PXPDataSpeedMedium) : @"80",
-                           @(PXPDataSpeedHigh) : @"80",
-                           @(PXPDataSpeedExtraHigh) : @"80",
-                           @(PXPDataSpeedUndefined) : @"80",
-                           @(PXPDataSpeedIdle) : @"80"
-                           };
-    });
-    NSString* result = _sPXPQualities[@(dataSpeed)];
-    if (result == nil) {
-        result = @"80";
-    };
-    return result;
-}
-
-NSString* PXPTransformQualityForNetInfo(PXPNetInfo* netInfo) {
-    static NSDictionary *sPXPQualities = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sPXPQualities = @{PXPNetworkUnknown : @"80",
-                          PXPNetworkWiFi : @"80",
-                          PXPNetworkCDMAEVDORevB : @"80",
-                          PXPNetworkCDMAEVDORevA : @"80",
-                          PXPNetworkCDMAEVDORev0 : @"80",
-                          PXPNetworkCDMA1x : @"70",
-                          PXPNetworkWCDMA : @"50",
-                          PXPNetworkHSUPA : @"50",
-                          PXPNetworkHSDPA : @"50",
-                          PXPNetworkeHRPD : @"50",
-                          PXPNetworkGPRS : @"30",
-                          PXPNetworkEdge : @"30",
-                          PXPNetworkLTE : @"80"};
-    });
-    NSString* result = sPXPQualities[netInfo.technology];
-    if (result == nil) {
-        result = @"50";
-    };
-    return result;
-}
-
-static const NSInteger PXPImageSizes[] = { 50, 100, 160, 192, 310, 384, 512, 640, 768, 1024, 1536, 2048 };
-static const NSInteger PXPImageSizesLength = 12;
+static NSString* const kPXPDefaultFormat = @"def";
+static NSString* const kPXPWebPFormat = @"webp";
 
 @implementation PXPTransform
 
-@synthesize fitSize = _fitSize;
-
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
-    if (self) {
-        
+    if (self != nil) {
+        _format = PXPTransformFormatDefault;
     }
     return self;
 }
 
-- (instancetype)initWithImageView:(UIImageView*)view {
+- (instancetype)initWithOriginUrl:(NSString*)url {
     self = [self init];
     if (self != nil) {
-        _imageView = view;
-        _imageView.pxp_transform = self;
-        _fitSizeStyle = PXPTransformFitSizeStyleAutomatic;
+        _originUrl = url;
+        _format = PXPTransformFormatDefault;
     }
     return self;
 }
 
-- (void)setImageView:(UIImageView *)view {
-    if (_imageView != view) {
-        _imageView = view;
-        _imageView.pxp_transform = self;
+- (NSString*)transfromFormatString {
+    NSString* result = [PXPTransform transfromFormatDictionary][@(self.format)];
+    if (result == nil) {
+        result = kPXPDefaultFormat;
     }
+    return result;
 }
 
-- (CGSize)fitSizeInPixels {
-    CGFloat scale = [UIScreen mainScreen].scale;
-    NSUInteger width = lround(self.fitSize.width * scale);
-    NSUInteger height = lround(self.fitSize.height * scale);
-    CGSize size = {width, height};
-    return size;
+- (NSString* _Nullable)contentUrl {
+    NSString* result = self.originUrl;
+    NSMutableArray* components = [NSMutableArray new];
+    NSString* cdnUrl = [PXPTransform cdnUrl];
+    do {
+        if (cdnUrl != nil) {
+            [components addObject:cdnUrl];
+        } else break;
+        NSString* urlType = [PXPTransform originUrlType:self.originUrl];
+        [components addObject:urlType];
+        [components addObject:[self transfromFormatString]];
+        NSMutableArray* transfromComponents = [NSMutableArray new];
+
+        if (self.width == nil && self.height == nil) {
+            [transfromComponents addObject:@"original"];
+        }
+        if (self.width != nil) {
+            NSUInteger value = self.width.unsignedIntegerValue * [UIScreen mainScreen].scale;
+            NSString* width = [NSString stringWithFormat:@"w_%lu", value];
+            [transfromComponents addObject:width];
+        }
+        if (self.height != nil) {
+            NSUInteger value = self.height.unsignedIntegerValue * [UIScreen mainScreen].scale;
+            NSString* height = [NSString stringWithFormat:@"h_%lu", value];
+            [transfromComponents addObject:height];
+        }
+        if (self.quality != nil) {
+            NSString* quality = [NSString stringWithFormat:@"q_%lu", self.quality.unsignedIntegerValue];
+            [transfromComponents addObject:quality];
+        }
+        NSString* transfrom = [transfromComponents componentsJoinedByString:@","];
+        [components addObject:transfrom];
+        [components addObject:self.originUrl];
+        result = [components componentsJoinedByString:@"/"];
+    } while (NO);
+    NSLog(@"URL: %@", result);
+    return result;
 }
 
-- (CGSize)fitSize {
-    if (_fitSizeStyle == PXPTransformFitSizeStyleAutomatic && self.imageView != nil) {
-        return self.imageView.bounds.size;
+#pragma mark - Class Methods
+
++ (NSString*)originUrlType:(NSString*)originUrl {
+    if ([originUrl hasPrefix:@"http://"] || [originUrl hasPrefix:@"https://"]) {
+        return @"remote";
     } else {
-        return _fitSize;
+        return @"local";
     }
 }
 
-- (void)setFitSize:(CGSize)fitSize {
-    if (!CGSizeEqualToSize(_fitSize, fitSize)) {
-        _fitSizeStyle = PXPTransformFitSizeStyleManual;
-        _fitSize = fitSize;
-    }
++ (NSString * _Nullable)cdnUrl {
+    NSString* result =  [[PXP sharedSDK].accountInfo.cdnUrl mutableCopy];
+    return result;
+}
+
++ (NSDictionary<NSNumber*, NSString*>*)transfromFormatDictionary {
+    static NSDictionary *_sPXPFormats = nil;
+    static dispatch_once_t _onceToken;
+    dispatch_once(&_onceToken, ^{
+        _sPXPFormats = @{ @(PXPTransformFormatDefault) : kPXPDefaultFormat,
+                          @(PXPTransformFormatWebP) : kPXPWebPFormat};
+    });
+    return _sPXPFormats;
 }
 
 @end
 
-@implementation PXPTransform (PXPStringRepresentation)
-
-+ (NSInteger)closestPXPSizeToSize:(CGSize)size {
-    NSInteger value = PXPFirstClosest(PXPImageSizes, PXPImageSizesLength, size.width);
-    return value;
-}
-
-- (NSString *)qualityString {
-    NSString *quality = @"80";
-    if (self.imageQuality == PXPTransformQualityAutomatic) {
-//        PXPNetInfo* netInfo = [PXPNetworkMonitor sharedMonitor].currentNetworkTechnology;
-//        quality = PXPTransformQualityForNetInfo(netInfo);
-        quality = PXPTransformQualityForSpeed([PXPDataMonitor sharedMonitor].speedType);
-    }
-    return quality;
-}
-
-- (NSString *)formatString {
-    NSString *extension = @"webp";
-    if (self.imageFormat == PXPTransformFormatAutomatic) {
-        extension = @"webp";
-    }
-    return extension;
-}
-
-- (NSString *)sizeString {
-    NSString *size = @"640";
-    if (!CGSizeEqualToSize(self.fitSize, CGSizeZero)) {
-        size = [NSString stringWithFormat:@"%ld", (long)[PXPTransform closestPXPSizeToSize:self.fitSizeInPixels]];
-    }
-    return size;
-}
-
-@end
+NS_ASSUME_NONNULL_END

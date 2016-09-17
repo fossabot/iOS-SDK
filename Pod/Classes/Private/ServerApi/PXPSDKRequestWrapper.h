@@ -22,12 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
                                 path:(NSString*)path
                         successBlock:(PXPRequestSuccessBlock)successBlock
                        failtureBlock:(PXPRequestFailureBlock)failtureBlock;
-- (PXPAPITask *)uploadImageTaskAtUrl:(NSString *)url
-                               width:(NSString *)width
-                             quality:(NSString *)quality
-                              params:(NSDictionary*)requestHeaders
-                        successBlock:(PXPRequestSuccessBlock)successBlock
-                       failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 - (NSURLSessionDataTask *)uploadImageTaskForImage:(UIImage *)image
                                            toPath:(NSString *)path
                                      successBlock:(PXPRequestSuccessBlock)successBlock

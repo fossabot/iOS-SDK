@@ -10,9 +10,9 @@
 #import "PXPDefines.h"
 #import "PXPAccountInfo.h"
 #import "PXPAuthPrincipal.h"
-#import "NSURL+PXPUrl.h"
 #import <AFNetworking/AFNetworking.h>
 #import "PXPAPITask.h"
+#import "PXPQueueManager.h"
 
 static NSString* const kPXPUpdateImageRequestPath = @"/async/images/newResolution/%@/%@/%@/%@";
 static NSString* const kPXPUploadImageRequestPath = @"/async/images/upload/%@/%@";
@@ -126,44 +126,6 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     return task;
 }
 
-- (PXPAPITask *)uploadImageTaskAtUrl:(NSString *)url
-                               width:(NSString *)width
-                             quality:(NSString *)quality
-                              params:(NSDictionary*)requestHeaders
-                        successBlock:(PXPRequestSuccessBlock)successBlock
-                       failtureBlock:(PXPRequestFailureBlock)failtureBlock {
-
-    assert(url != nil);
-    if ([url pxp_URLType] == PXPUrlTypeCDN) {
-        successBlock(nil, nil);
-    }
-    NSString* apiPath = [NSString stringWithFormat:kPXPUploadImageAtUrlRequestPath, self.appId];
-    NSString* requestUrl = [self.backendUrl stringByAppendingString:apiPath];
-    NSMutableDictionary* params = [NSMutableDictionary new];
-    [params setObject:url forKey:@"remoteImageUrl"];
-    NSMutableDictionary* derivedImageSpecs = nil;
-    if (width.length > 0 && quality.length > 0) {
-        derivedImageSpecs = [NSMutableDictionary new];
-        SAFE_SET_OBJECT(derivedImageSpecs, @"width", width);
-        SAFE_SET_OBJECT(derivedImageSpecs, @"quality", quality);
-    }
-    SAFE_SET_OBJECT(params, @"derivedImageSpecs", derivedImageSpecs);
-    NSDictionary* headers = [PXPSDKRequestWrapper apiParamsFromHeaders:requestHeaders];
-    for (NSString* key in headers.allKeys) {
-        [params setObject:headers[key] forKey:key];
-    }
-
-    NSError* error = nil;
-    NSMutableURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:requestUrl parameters:params error:&error];
-    assert(error == nil);
-    PXPAPITask *task = [self taskWithRequest:request successBlock:^(NSURLSessionTask* task, id responseObject) {
-        successBlock(task, responseObject);
-    } failtureBlock:^(NSURLSessionTask* task, NSError *error) {
-        failtureBlock(task, error);
-    }];
-    return task;
-}
-
 - (PXPAPITask *)imagesAtPath:(NSString *)path
                 successBlock:(PXPRequestSuccessBlock)successBlock
                failtureBlock:(PXPRequestFailureBlock)failtureBlock {
@@ -186,7 +148,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     assert(self.sessionManager != nil);
     __weak typeof(self)weakSelf = self;
     NSString *uuid = [[NSUUID UUID] UUIDString];
-    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPRequestWrapper networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
+    PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPQueueManager networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
         if (response.statusCode == 403 || response.statusCode == 401) {

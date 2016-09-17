@@ -19,7 +19,7 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
 
     @IBOutlet weak var statusView: PXStatusView!
     let imageLinksArray = kImageLinkArray
-    var pickedUrl: NSURL?
+    var pickedUrl: NSString?
     var shouldResetCache: Bool = false
 
     var graphView : PXGraphView?
@@ -121,13 +121,14 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
         if let range = urlString.rangeOfString("_z.jpg"){
             urlString.replaceRange(range, with: "_n.jpg")
         }
-        let url = NSURL(string: urlString)
-        let transform = PXPTransform(imageView: cell.imageView!)
-        transform.fitSize = CGSize(width: 100.0, height: 100.0)
+        let url = urlString
+        let transform = PXPAutomaticTransform(imageView: cell.imageView!, originUrl: urlString)
+        transform.width = 100
+        transform.height = 100
         cell.imageView?.contentMode = .ScaleAspectFill
         cell.imageView?.pxp_transform = transform
-        cell.imageView?.pxp_requestImage(url!, headers: nil, completion: { (url, image, error) in
-            guard let toImage = image
+        cell.imageView?.pxp_requestImage(url, headers: nil, completion: { (url, image, error) in
+            guard let toImage = image as! UIImage?
                 else { return }
             guard let imageView = cell.imageView
                 else { return }
@@ -142,7 +143,7 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.pickedUrl = NSURL(string: imageLinksArray[indexPath.item])
+        self.pickedUrl = imageLinksArray[indexPath.item]
         performSegueWithIdentifier(kDetailsSegue, sender: collectionView)
     }
 

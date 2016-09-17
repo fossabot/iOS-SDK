@@ -13,11 +13,7 @@
 
 @interface PXPURLProtocol : NSURLProtocol
 
-+ (void)start;
-+ (void)stop;
-
 + (void)setDelegate:(id<PXPURLProtocolDelegate>)newValue;
-
 + (id<PXPURLProtocolDelegate>)delegate;
 
 @property (atomic, strong, readonly ) NSURLAuthenticationChallenge *pendingChallenge;
