@@ -15,10 +15,10 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - Expecta (1.0.5)
-  - HockeySDK (3.8.6):
-    - HockeySDK/AllFeaturesLib (= 3.8.6)
-  - HockeySDK/AllFeaturesLib (3.8.6)
-  - InAppSettingsKit (2.7.1)
+  - HockeySDK (4.1.1):
+    - HockeySDK/DefaultLib (= 4.1.1)
+  - HockeySDK/DefaultLib (4.1.1)
+  - InAppSettingsKit (2.8)
   - JBChartView (3.0.12)
   - Pixpie (0.3.3):
     - AFNetworking (~> 3.0)
@@ -30,7 +30,7 @@ PODS:
 
 DEPENDENCIES:
   - Expecta
-  - HockeySDK (~> 3.8.5)
+  - HockeySDK
   - InAppSettingsKit
   - Pixpie (from `../`)
   - PXStatusView
@@ -43,12 +43,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
-  HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
-  InAppSettingsKit: 2b9fcdb82cdff2f99c51cae544e9f4df0df7afbf
+  HockeySDK: 364679ba00f3447d014dd75cac57e59cc2574318
+  InAppSettingsKit: fe3e73f8f9530cdd6270065cd7df7b3773f557e6
   JBChartView: 08877554448ccf99c12625ad0ebce70588ff8318
   Pixpie: 8a9cc7a2ec2bc9981a068664a66489ed2e481c75
   PXStatusView: 86a08a11b6e1f355220b018fbe587c6d61ec548b
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
   WebP: e2e30d70bfc7a6f6567861225e8f189abd55ccd0
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: a6f96c2a0375f2d6d4dbb2273de4d3387feacdc2
+
+COCOAPODS: 1.0.1

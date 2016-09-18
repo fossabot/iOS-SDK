@@ -7,7 +7,7 @@ target 'InspiringPhotos' do
   pod 'PXStatusView'
   # pod 'Crashlytics'
   pod 'InAppSettingsKit'
-  pod 'HockeySDK', '~> 3.8.5'
+  pod 'HockeySDK'
 end
 
 target 'Pixpie-iOS_Tests' do
