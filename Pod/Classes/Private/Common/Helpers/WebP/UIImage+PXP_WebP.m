@@ -9,17 +9,6 @@
 #import "UIImage+PXP_WebP.h"
 #import <WebP/decode.h>
 
-// This gets called when the UIImage gets collected and frees the underlying image.
-static void free_image_data(void *info, const void *data, size_t size)
-{
-    if(info != NULL) {
-        WebPFreeDecBuffer(&(((WebPDecoderConfig *)info)->output));
-        free(info);
-    } else {
-        free((void *)data);
-    }
-}
-
 @implementation UIImage (PXP_WebP)
 
 #pragma mark - Synchronous methods

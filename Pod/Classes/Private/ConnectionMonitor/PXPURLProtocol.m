@@ -182,8 +182,6 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request
 {
-    NSURLRequest *      result;
-    
     assert(request != nil);
     // can be called on any thread
     
@@ -646,7 +644,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
 {
     NSURLCacheStoragePolicy cacheStoragePolicy;
-    NSInteger               statusCode;
+    NSInteger               statusCode = 0;
 
 #pragma unused(session)
 #pragma unused(dataTask)

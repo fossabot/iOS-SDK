@@ -59,12 +59,12 @@
 }
 
 - (NSNumber*)quality {
-    PXPDataMonitor* monitor = [PXPDataMonitor sharedMonitor];
-    NSString* value = [PXPAutomaticTransform qualityDictionary][@(monitor.speedType)];
-    if (value == nil) {
-        return [super quality];
+    NSNumber* quality = [super quality];
+    if (quality == nil) {
+        PXPDataMonitor* monitor = [PXPDataMonitor sharedMonitor];
+        quality = [PXPAutomaticTransform qualityDictionary][@(monitor.speedType)];
     }
-    return value;
+    return quality;
 }
 
 - (PXPTransformFormat)format {
@@ -84,9 +84,9 @@
                    @(PXPDataSpeedLow) : @50,
                    @(PXPDataSpeedMedium) : @80,
                    @(PXPDataSpeedHigh) : @80,
-                   @(PXPDataSpeedExtraHigh) : @100,
-                   @(PXPDataSpeedIdle) : @100,
-                   @(PXPDataSpeedNone) : @100
+                   @(PXPDataSpeedExtraHigh) : @90,
+                   @(PXPDataSpeedIdle) : @90,
+                   @(PXPDataSpeedNone) : @90
                    };
     });
     return sDict;

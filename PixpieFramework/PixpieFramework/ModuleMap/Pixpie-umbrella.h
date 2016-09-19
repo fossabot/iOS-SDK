@@ -1,10 +1,10 @@
 #import <UIKit/UIKit.h>
 
-#import "NSString+PXPImageTransform.h"
 #import "PXP.h"
-#import "PXPImageTaskManager.h"
-#import "PXPImageTask.h"
+#import "PXPTrafficMonitor.h"
 #import "PXPTransform.h"
+#import "PXPImageRequestWrapper.h"
+#import "PXPAutomaticTransform.h"
 #import "UIImageView+PXPExtensions.h"
 
 FOUNDATION_EXPORT double PixpieVersionNumber;

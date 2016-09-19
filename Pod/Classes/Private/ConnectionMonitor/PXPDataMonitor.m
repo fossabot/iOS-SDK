@@ -12,6 +12,7 @@
 #import "PXPNetInfo.h"
 #import "PXPNetworkMonitor.h"
 #import "PXPNetworkTechnologies.h"
+#import "PXPTrafficMonitor_Internal.h"
 @import QuartzCore.CAAnimation;
 
 

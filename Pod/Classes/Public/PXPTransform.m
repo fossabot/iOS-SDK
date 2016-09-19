@@ -67,16 +67,16 @@ static NSString* const kPXPWebPFormat = @"webp";
         }
         if (self.width != nil) {
             NSUInteger value = self.width.unsignedIntegerValue * [UIScreen mainScreen].scale;
-            NSString* width = [NSString stringWithFormat:@"w_%lu", value];
+            NSString* width = [NSString stringWithFormat:@"w_%lu", (unsigned long)value];
             [transfromComponents addObject:width];
         }
         if (self.height != nil) {
             NSUInteger value = self.height.unsignedIntegerValue * [UIScreen mainScreen].scale;
-            NSString* height = [NSString stringWithFormat:@"h_%lu", value];
+            NSString* height = [NSString stringWithFormat:@"h_%lu", (unsigned long)value];
             [transfromComponents addObject:height];
         }
         if (self.quality != nil) {
-            NSString* quality = [NSString stringWithFormat:@"q_%lu", self.quality.unsignedIntegerValue];
+            NSString* quality = [NSString stringWithFormat:@"q_%lu", (unsigned long)self.quality.unsignedIntegerValue];
             [transfromComponents addObject:quality];
         }
         NSString* transfrom = [transfromComponents componentsJoinedByString:@","];

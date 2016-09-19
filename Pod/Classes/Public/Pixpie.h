@@ -14,6 +14,7 @@
 #import "PXP.h"
 #import "PXPTrafficMonitor.h"
 #import "PXPTransform.h"
+#import "PXPImageRequestWrapper.h"
 #import "PXPAutomaticTransform.h"
 #import "UIImageView+PXPExtensions.h"
 
