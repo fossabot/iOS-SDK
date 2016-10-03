@@ -14,6 +14,11 @@ typedef enum : NSInteger {
     PXPTransformFormatWebP
 } PXPTransformFormat;
 
+typedef enum {
+    PXPTransformModeFill,
+    PXPTransformModeFit
+} PXPTransformMode;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PXPTransform : NSObject
@@ -23,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) NSNumber* height;
 @property (nonatomic, strong, nullable) NSNumber* quality;
 @property (nonatomic, assign) PXPTransformFormat format;
+@property (nonatomic, assign) PXPTransformMode transformMode;
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithOriginUrl:(NSString*)url;

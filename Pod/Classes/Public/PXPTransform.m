@@ -28,6 +28,7 @@ static NSString* const kPXPWebPFormat = @"webp";
     self = [super init];
     if (self != nil) {
         _format = PXPTransformFormatDefault;
+        _transformMode = PXPTransformModeFit;
     }
     return self;
 }
@@ -65,15 +66,35 @@ static NSString* const kPXPWebPFormat = @"webp";
         if (self.width == nil && self.height == nil) {
             [transfromComponents addObject:@"original"];
         }
+
+        NSUInteger widthValue = 0;
+        NSUInteger heightValue = 0;
+        NSString* height = nil;
+        NSString* width = nil;
+
         if (self.width != nil) {
-            NSUInteger value = self.width.unsignedIntegerValue * [UIScreen mainScreen].scale;
-            NSString* width = [NSString stringWithFormat:@"w_%lu", (unsigned long)value];
-            [transfromComponents addObject:width];
+            widthValue = (self.width != nil ? self.width.unsignedIntegerValue * [UIScreen mainScreen].scale : 0);
+            width = [NSString stringWithFormat:@"w_%lu", (unsigned long)widthValue];
         }
         if (self.height != nil) {
-            NSUInteger value = self.height.unsignedIntegerValue * [UIScreen mainScreen].scale;
-            NSString* height = [NSString stringWithFormat:@"h_%lu", (unsigned long)value];
-            [transfromComponents addObject:height];
+            heightValue = (self.height != nil ? self.height.unsignedIntegerValue * [UIScreen mainScreen].scale : 0);
+            height = [NSString stringWithFormat:@"h_%lu", (unsigned long)heightValue];
+        }
+
+        switch (self.transformMode) {
+            case PXPTransformModeFill: {
+                SAFE_ADD_OBJECT(transfromComponents, width);
+                SAFE_ADD_OBJECT(transfromComponents, height);
+                break;
+            }
+            default: {
+                if (widthValue >= heightValue) {
+                    SAFE_ADD_OBJECT(transfromComponents, width);
+                } else {
+                    SAFE_ADD_OBJECT(transfromComponents, height);
+                }
+                break;
+            }
         }
         if (self.quality != nil) {
             NSString* quality = [NSString stringWithFormat:@"q_%lu", (unsigned long)self.quality.unsignedIntegerValue];
