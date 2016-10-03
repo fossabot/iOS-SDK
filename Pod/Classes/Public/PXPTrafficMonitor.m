@@ -88,7 +88,11 @@
 
 - (NSNumber *)lastSample
 {
-    return self.minuteSamples.lastObject;
+    __block NSNumber* result = nil;
+    dispatch_sync(self.monitorQueue, ^{
+        result = self.minuteSamples.lastObject;
+    });
+    return result;
 }
 
 - (void)reset {
