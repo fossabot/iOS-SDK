@@ -258,9 +258,9 @@
 				D03755184DF7774F2CC51380 /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
+				0AAF56431DA2814D00744329 /* Bump Build Number */,
 				6003F588195388D20070C39A /* Resources */,
-				0AA145871CB7AE17002DA031 /* Crashlytics */,
-				0A5A24591CD0D79200247D88 /* Run Script */,
+				0A5A24591CD0D79200247D88 /* Hockey App */,
 				56602052188D5F1CC072E2E9 /* [CP] Embed Pods Frameworks */,
 				F0566C66DEB88E6BA84C6E1B /* [CP] Copy Pods Resources */,
 			);
@@ -364,33 +364,33 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A5A24591CD0D79200247D88 /* Run Script */ = {
+		0A5A24591CD0D79200247D88 /* Hockey App */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = "Hockey App";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
-		0AA145871CB7AE17002DA031 /* Crashlytics */ = {
+		0AAF56431DA2814D00744329 /* Bump Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Crashlytics;
+			name = "Bump Build Number";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# \"${PODS_ROOT}/Fabric/run\" 0312aba01a22510db11f59f8e5e94b8619b023b4 6ef9bca0b0c00edfac08e81fc33a02c65870d507140ac07b5ab0483904ebc1e2";
+			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Build Phases Tab\n# 3. Select: Add Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 		39F74F5D302ACD5ED4DB33CF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

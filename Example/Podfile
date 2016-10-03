@@ -5,7 +5,6 @@ use_frameworks!
 target 'InspiringPhotos' do
   pod 'Pixpie', :path => "../"
   pod 'PXStatusView'
-  # pod 'Crashlytics'
   pod 'InAppSettingsKit'
   pod 'HockeySDK'
 end
