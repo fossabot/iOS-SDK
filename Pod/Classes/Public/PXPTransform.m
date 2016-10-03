@@ -88,7 +88,7 @@ static NSString* const kPXPWebPFormat = @"webp";
                 break;
             }
             default: {
-                if (widthValue >= heightValue) {
+                if (widthValue <= heightValue) {
                     SAFE_ADD_OBJECT(transfromComponents, width);
                 } else {
                     SAFE_ADD_OBJECT(transfromComponents, height);
