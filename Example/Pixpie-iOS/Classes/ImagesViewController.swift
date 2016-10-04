@@ -44,7 +44,7 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
         self.navigationItem.title = "0b"
         
         let options = NSKeyValueObservingOptions([.New, .Initial])
-        PXPTrafficMonitor.sharedMonitor().addObserver(self, forKeyPath: "totalBytesForSession", options: options, context: nil)
+        PXPTrafficMonitor.sharedMonitor().addObserver(self, forKeyPath: "totalBytes", options: options, context: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(sdkStateChange), name: PXPStateChangeNotification, object: nil)
     }
 
@@ -54,7 +54,7 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
             self.collectionView?.setContentOffset(CGPointMake(0.0, -inset), animated: false)
             PXPTrafficMonitor.sharedMonitor().reset()
             PXP.cleanUp()
-            self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
+            self.navigationItem.title = transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytes)
             self.collectionView?.reloadData()
             shouldResetCache = false
         }
@@ -94,7 +94,7 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
         }
         else if (object as? PXPTrafficMonitor == PXPTrafficMonitor.sharedMonitor()) {
             dispatch_async(dispatch_get_main_queue(), {
-                self.navigationItem.title = self.transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytesForSession)
+                self.navigationItem.title = self.transformedValue(PXPTrafficMonitor.sharedMonitor().totalBytes)
             })
         }
     }

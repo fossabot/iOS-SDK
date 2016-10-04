@@ -12,7 +12,8 @@ import Pixpie
 class PixpieManager: NSObject {
     
     static func authorize() {
-        let license = NSUserDefaults.standardUserDefaults().stringForKey("pxp_license")
+        guard let license = NSUserDefaults.standardUserDefaults().stringForKey("pxp_license")
+            else {return}
         PXP.sharedSDK().authWithApiKey(license)
     }
 

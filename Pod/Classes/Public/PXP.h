@@ -25,7 +25,7 @@ extern NSString * const PXPStateChangeNotification;
 
 + (instancetype)sharedSDK;
 
-- (void)authWithApiKey:(NSString* __nullable)apiKey;
+- (void)authWithApiKey:(NSString*)apiKey;
 - (void)auth;
 + (void)cleanUp;
 

@@ -13,8 +13,8 @@
 + (instancetype)sharedMonitor;
 - (void)reset;
 
-@property (nonatomic, readonly) NSUInteger totalBytesForSession;
 @property (nonatomic, readonly) NSArray *dataSamples;
 @property (nonatomic, readonly) NSNumber *lastSample;
+@property (nonatomic, assign, readonly) NSUInteger totalBytes;
 
 @end

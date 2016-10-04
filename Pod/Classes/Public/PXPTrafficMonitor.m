@@ -10,7 +10,7 @@
 
 @interface PXPTrafficMonitor()
 
-@property (nonatomic) NSUInteger totalBytes;
+@property (nonatomic, assign, readwrite) NSUInteger totalBytes;
 @property (nonatomic, strong) NSMutableArray *minuteSamples;
 
 @property (nonatomic, strong) NSTimer *sliderTimer;
@@ -61,9 +61,7 @@
 {
     dispatch_async(self.monitorQueue, ^{
         self.currentFrameBytes += blockSize.integerValue;
-        [self willChangeValueForKey:@"totalBytesForSession"];
         self.totalBytes += blockSize.integerValue;
-        [self didChangeValueForKey:@"totalBytesForSession"];
     });
 }
 
@@ -74,11 +72,6 @@
         [self.minuteSamples addObject:@(self.currentFrameBytes)];
         self.currentFrameBytes = 0;
     });
-}
-
-- (NSUInteger)totalBytesForSession
-{
-    return self.totalBytes;
 }
 
 - (NSArray *)dataSamples
