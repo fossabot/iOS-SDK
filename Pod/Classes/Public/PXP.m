@@ -32,6 +32,8 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 
 @implementation PXP
 
+#pragma mark - Public Interface
+
 + (instancetype)sharedSDK {
     static PXP *_sharedPXP = nil;
     static dispatch_once_t onceToken;
@@ -42,40 +44,27 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
     return _sharedPXP;
 }
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [PXPDataMonitor sharedMonitor];
-        _state = PXPStateNotInitialized;
-        [[PXPNetworkMonitor sharedMonitor] startMonitoring];
-        [PXPTrafficMonitor sharedMonitor];
-    }
-    return self;
-}
-
-- (void)dealloc {
-    [[PXPNetworkMonitor sharedMonitor] stopMonitoring];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPModelUpdatedNotification object:self.accountInfo];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPNetworkChangedNotification object:nil];
-}
-
 - (void)authWithApiKey:(NSString *)apiKey {
-   if (![self.accountInfo.principal.appKey isEqualToString:apiKey]) {
-       PXPAuthPrincipal *principal = [PXPAuthPrincipal new];
-       if (apiKey.length > 0) {
-           principal.appKey = apiKey;
-       }
-       PXPAuthManager* authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
-       self.accountInfo = [[PXPAccountInfo alloc] initWithPrincipal:principal authManager:authManager];
-       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authUpdate:) name:kPXPModelUpdatedNotification object:self.accountInfo];
-       self.wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
-       [self.accountInfo update];
-    }
+    PXPAuthPrincipal *principal = [[PXPAuthPrincipal alloc] initWithAppSecret:apiKey];
+    [self authWithPrincipal:principal];
 }
 
-- (void)auth {
-    [self authWithApiKey:nil];
+- (void)authWithApiKey:(NSString*)apiKey userId:(NSString* _Nullable)userId {
+    PXPAuthPrincipal *principal = [[PXPAuthPrincipal alloc] initWithAppSecret:apiKey];
+    principal.userId = userId;
+    [self authWithPrincipal:principal];
+}
+
+#pragma mark - Private Interface
+
+- (void)authWithPrincipal:(PXPAuthPrincipal*)principal {
+    if (![self.accountInfo.principal isEqual:principal]) {
+        PXPAuthManager* authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
+        self.accountInfo = [[PXPAccountInfo alloc] initWithPrincipal:principal authManager:authManager];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authUpdate:) name:kPXPModelUpdatedNotification object:self.accountInfo];
+        self.wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
+        [self.accountInfo update];
+    }
 }
 
 - (void)authUpdate:(NSNotification *)note {
@@ -132,6 +121,26 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 + (void)cleanUp {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     [PXPURLProtocol.defaultURLCache removeAllCachedResponses];
+}
+
+#pragma mark - Object Lifecycle
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [PXPDataMonitor sharedMonitor];
+        _state = PXPStateNotInitialized;
+        [[PXPNetworkMonitor sharedMonitor] startMonitoring];
+        [PXPTrafficMonitor sharedMonitor];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [[PXPNetworkMonitor sharedMonitor] stopMonitoring];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPModelUpdatedNotification object:self.accountInfo];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPXPNetworkChangedNotification object:nil];
 }
 
 @end

@@ -12,7 +12,7 @@
 #import "PXPQueueManager.h"
 #import <AFNetworking/AFNetworking.h>
 
-static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
+static NSString* const kPXPAuthMethod = @"/authentication/token/client_sdk";
 
 @interface PXPAuthRequestWrapper ()
 
@@ -42,6 +42,11 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
 
 - (PXPAPITask *)authWithAppId:(NSString*)appId
                        apiKey:(NSString*)apiKey
+                     deviceId:(NSString*)deviceId
+                clientSdkType:(NSNumber*)clientSdkType
+                       userId:(NSString*)userId
+            deviceDescription:(NSString*)deviceDescription
+                   sdkVersion:(NSString*)sdkVersion
                  successBlock:(PXPRequestSuccessBlock)successBlock
                 failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
@@ -52,11 +57,16 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/sdk";
     NSString *hash = [toHash sha256];
     NSDictionary *params = @{@"reverseUrlId" : appId,
                              @"timestamp" : stringTimestamp,
-                             @"hash" : hash};
+                             @"hash" : hash,
+                             @"clientSdkType" : clientSdkType,
+                             @"deviceUniqueId" : deviceId,
+                             @"userUniqueId" : userId == nil ? deviceId : userId,
+                             @"deviceDescription" : deviceDescription,
+                             @"sdkVersion" : sdkVersion};
 
     NSString* url = [NSString stringWithFormat:@"%@%@", self.backendUrl, kPXPAuthMethod];
     NSError* error = nil;
-    NSURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:url parameters:params error:&error];
+    NSURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:url parameters:params error:&error];
     NSAssert(error == nil, @"Auth Request error is not nil");
     PXPAPITask* task = [self taskWithRequest:request successBlock:successBlock failtureBlock:failtureBlock];
     return task;

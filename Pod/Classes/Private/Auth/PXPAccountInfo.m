@@ -15,6 +15,7 @@
 
 @property (nonatomic, readwrite, strong) NSString* authToken;
 @property (nonatomic, readwrite, strong) NSString* cdnUrl;
+@property (nonatomic, readwrite, strong) NSNumber* abTestingEnabled;
 @property (nonatomic, readwrite, strong) PXPAuthPrincipal* principal;
 @property (nonatomic, readonly, strong) PXPAuthManager* authManager;
 @property (nonatomic, strong) PXPAPITask* updateTask;

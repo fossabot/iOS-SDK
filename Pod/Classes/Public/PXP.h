@@ -26,7 +26,7 @@ extern NSString * const PXPStateChangeNotification;
 + (instancetype)sharedSDK;
 
 - (void)authWithApiKey:(NSString*)apiKey;
-- (void)auth;
+- (void)authWithApiKey:(NSString*)apiKey userId:(NSString* _Nullable)userId;
 + (void)cleanUp;
 
 @property (nonatomic, readonly, assign) PXPState state;

@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong, readonly) NSString* authToken;
 @property (nonatomic, strong, readonly) NSString* cdnUrl;
+@property (nonatomic, assign, readonly) BOOL abEnabled;
 @property (nonatomic, strong, readonly) PXPAuthPrincipal* principal;
 
 @end

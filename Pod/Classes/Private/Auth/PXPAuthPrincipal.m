@@ -11,14 +11,25 @@
 
 @implementation PXPAuthPrincipal
 
-- (instancetype)init
+- (instancetype)initWithAppSecret:(NSString*)appSecret
 {
     self = [super init];
     if (self != nil) {
         _appId = [PXPConfig defaultConfig].appId;
-        _appKey = [PXPConfig defaultConfig].appSecret;
+        _appSecret = appSecret;
     }
     return self;
 }
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[self class]]) {
+        PXPAuthPrincipal* otherPrincipal = (PXPAuthPrincipal*)object;
+        return [self.appSecret isEqualToString:otherPrincipal.appSecret];
+    } else {
+        return [super isEqual:object];
+    }
+}
+
+
 
 @end

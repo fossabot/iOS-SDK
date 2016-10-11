@@ -7,6 +7,7 @@
 //
 
 #import "PXPConfig.h"
+#include <sys/sysctl.h>
 
 static NSString* const kPXPPlistName = @"Pixpie-Info";
 
@@ -14,13 +15,12 @@ static NSString* const kPXPAppSecretKey = @"PXPAppSecretKey";
 static NSString* const kPXPBackendUrlKey = @"PXPBackendUrl";
 static NSString* const kPXPRequestSaltKey = @"PXPRequestSalt";
 static NSString* const kPXPAppId = @"PXPAppId";
-
-//@"http://api.pixpie.co:9001"
-//PIXPIE_SALT_VERY_SECURE
+static NSInteger const kPXPSDKTypeiOS = 1;
 
 @interface PXPConfig ()
 
 @property (nonatomic, strong) NSDictionary* config;
+@property (nonatomic, readwrite, strong) NSString* deviceDescription;
 
 @end
 
@@ -41,23 +41,29 @@ static NSString* const kPXPAppId = @"PXPAppId";
     self = [super init];
     if (self != nil) {
         NSString *path = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
-        NSAssert(path.length, @"Pixpie-Info.plist is missing");
         _config =  [NSDictionary dictionaryWithContentsOfFile:path];
-        NSAssert(_config, @"Pixpie-Info.plist is invalid");
+        _clientSdkType = @(kPXPSDKTypeiOS);
+        _deviceId = [UIDevice currentDevice].identifierForVendor.UUIDString;
+        _deviceDescription = [PXPConfig hardwareString];
+        _sdkVersion = [NSString stringWithUTF8String:PIXPIE_VERSION];
     }
     return self;
 }
 
 - (NSString *)backend {
-    return _config[kPXPBackendUrlKey];
-}
-
-- (NSString *)appSecret {
-    return _config[kPXPAppSecretKey];
+    NSString* result = _config[kPXPBackendUrlKey];
+    if (result.length == 0) {
+        result =  [NSString stringWithUTF8String:PIXPIE_URL];
+    }
+    return result;
 }
 
 - (NSString *)requestSalt {
-    return _config[kPXPRequestSaltKey];
+    NSString* result = _config[kPXPRequestSaltKey];
+    if (result.length == 0) {
+        result =  [NSString stringWithUTF8String:PIXPIE_MAGIC_KEY];
+    }
+    return result;
 }
 
 - (NSString *)appId {
@@ -66,6 +72,27 @@ static NSString* const kPXPAppId = @"PXPAppId";
         bundleId = [NSBundle mainBundle].bundleIdentifier;
     }
     return bundleId;
+}
+
+- (NSString*)deviceDescription {
+    if (_deviceDescription == nil) {
+        _deviceDescription = [PXPConfig hardwareString];
+    }
+    return _deviceDescription;
+}
+
+#pragma mark - Class Methods
+
++ (NSString*)hardwareString {
+    int name[] = {CTL_HW,HW_MACHINE};
+    size_t size = 100;
+    sysctl(name, 2, NULL, &size, NULL, 0); // getting size of answer
+    char *hw_machine = malloc(size);
+
+    sysctl(name, 2, hw_machine, &size, NULL, 0);
+    NSString *hardware = [NSString stringWithUTF8String:hw_machine];
+    free(hw_machine);
+    return hardware;
 }
 
 

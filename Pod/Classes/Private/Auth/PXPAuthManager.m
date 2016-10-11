@@ -10,6 +10,7 @@
 #import "PXPAuthRequestWrapper.h"
 #import "PXPAuthPrincipal.h"
 #import "PXPAccountInfo.h"
+#import "PXPConfig.h"
 
 @interface PXPAuthManager ()
 
@@ -33,7 +34,12 @@
 - (PXPAPITask *)authorizeWithCompletionBlock:(PXPAuthBlock)block {
 
     return [self.requestWrapper authWithAppId:self.principal.appId
-                                       apiKey:self.principal.appKey 
+                                       apiKey:self.principal.appSecret
+                                     deviceId:[PXPConfig defaultConfig].deviceId
+                                clientSdkType:[PXPConfig defaultConfig].clientSdkType
+                                       userId:self.principal.userId
+                            deviceDescription:[PXPConfig defaultConfig].deviceDescription
+                                   sdkVersion:[PXPConfig defaultConfig].sdkVersion
                                  successBlock:^(NSURLSessionTask* task, id responseObject) {
                                      block(responseObject, nil);
                                  } failtureBlock:^(NSURLSessionTask* task, NSError *error) {

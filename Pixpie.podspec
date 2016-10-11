@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.screenshots      = "http://pixpie-230a.kxcdn.com/images/pixpie_full_logo.png"
   s.license          = 'MIT'
   s.author           = { "Dmitry Osipa" => "dmitry@pixpie.co" }
-  s.source           = { :git => "https://github.com/PixpieCo/Pixpie-iOS.git", :tag => s.version.to_s }
+  s.source           = { :git => "git@bitbucket.org:pixpie/pixpie-ios.git", :tag => s.version.to_s }
   s.social_media_url = 'https://www.facebook.com/PixpieCo'
 
   s.platform     = :ios, '8.0'
