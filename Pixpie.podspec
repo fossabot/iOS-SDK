@@ -18,5 +18,19 @@ Pod::Spec.new do |s|
   s.dependency 'AFNetworking', '~> 3.0'
   s.dependency 'WebP', '~> 0.5.0'
   s.xcconfig = { :'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES'}
+  s.private_header_files = 'Pod/Classes/Public/Pixpie.h'
 
+pch_PXP = <<-EOS
+#ifndef PIXPIE_VERSION
+  #define PIXPIE_VERSION "#{s.version.to_s}"
+#endif
+#ifndef PIXPIE_URL
+  #define PIXPIE_URL "http://api.pixpie.co:9000"
+#endif
+#ifndef PIXPIE_MAGIC_KEY
+    #define PIXPIE_MAGIC_KEY "yuuRiesahs3niet7thac"
+#endif
+EOS
+
+  s.prefix_header_contents = pch_PXP
 end
