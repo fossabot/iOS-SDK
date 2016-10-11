@@ -63,23 +63,10 @@ static NSString* const kPXPWebPFormat = @"webp";
         [components addObject:[self transfromFormatString]];
         NSMutableArray* transfromComponents = [NSMutableArray new];
 
-        if (self.width == nil && self.height == nil) {
-            [transfromComponents addObject:@"original"];
-        }
-
-        NSUInteger widthValue = 0;
-        NSUInteger heightValue = 0;
-        NSString* height = nil;
-        NSString* width = nil;
-
-        if (self.width != nil) {
-            widthValue = (self.width != nil ? self.width.unsignedIntegerValue * [UIScreen mainScreen].scale : 0);
-            width = [NSString stringWithFormat:@"w_%lu", (unsigned long)widthValue];
-        }
-        if (self.height != nil) {
-            heightValue = (self.height != nil ? self.height.unsignedIntegerValue * [UIScreen mainScreen].scale : 0);
-            height = [NSString stringWithFormat:@"h_%lu", (unsigned long)heightValue];
-        }
+        NSUInteger widthValue = (self.width != nil ? self.width.unsignedIntegerValue * [UIScreen mainScreen].scale : 0);
+        NSUInteger heightValue = (self.height != nil ? self.height.unsignedIntegerValue * [UIScreen mainScreen].scale : 0);
+        NSString* height = [NSString stringWithFormat:@"h_%lu", (unsigned long)heightValue];
+        NSString* width = [NSString stringWithFormat:@"w_%lu", (unsigned long)widthValue];
 
         switch (self.transformMode) {
             case PXPTransformModeFill: {
@@ -88,9 +75,12 @@ static NSString* const kPXPWebPFormat = @"webp";
                 break;
             }
             default: {
-                if (widthValue <= heightValue) {
+                if (widthValue <= heightValue && widthValue > 0) {
                     SAFE_ADD_OBJECT(transfromComponents, width);
+                } else if (heightValue > 0) {
+                    SAFE_ADD_OBJECT(transfromComponents, height);
                 } else {
+                    SAFE_ADD_OBJECT(transfromComponents, width);
                     SAFE_ADD_OBJECT(transfromComponents, height);
                 }
                 break;
