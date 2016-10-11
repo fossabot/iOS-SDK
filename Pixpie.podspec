@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Pixpie"
-  s.version          = "0.3.3"
+  s.version          = "0.3.4"
   s.summary          = "Pixpie SDK for iOS"
   s.description      = "Pixpie is a media content optimization service for mobile applications. Built for mobile developers."
   s.homepage         = "http://pixpie.co"
