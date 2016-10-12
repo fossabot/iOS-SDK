@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0A1CEA6E1C83B5F50035D679 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */; };
 		0A1CEA721C83B6980035D679 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1CEA711C83B6980035D679 /* Splash.storyboard */; };
-		0A4556491CB6962D00B7DAB1 /* Pixpie.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0A4556481CB6962D00B7DAB1 /* Pixpie.podspec */; };
 		0A56CFB31C84650B001C919C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A56CFB21C84650B001C919C /* Settings.bundle */; };
 		0A56CFB51C849372001C919C /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A56CFB41C849372001C919C /* Icons.xcassets */; };
 		0A6309EB1D4775CE0084BFB6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6309EA1D4775CE0084BFB6 /* SettingsViewController.swift */; };
@@ -321,7 +320,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A4556491CB6962D00B7DAB1 /* Pixpie.podspec in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				0AC43CC11C6E083700337844 /* LaunchScreen.storyboard in Resources */,
