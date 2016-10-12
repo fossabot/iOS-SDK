@@ -6,19 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		0A4057321CB30DC900FCE94E /* Pixpie-Framework */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 0A4057351CB30DC900FCE94E /* Build configuration list for PBXAggregateTarget "Pixpie-Framework" */;
-			buildPhases = (
-			);
-			dependencies = (
-			);
-			name = "Pixpie-Framework";
-			productName = "Pixpie-Framework";
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		0A1CEA6E1C83B5F50035D679 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */; };
 		0A1CEA721C83B6980035D679 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1CEA711C83B6980035D679 /* Splash.storyboard */; };
@@ -302,9 +289,6 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Pixpie;
 				TargetAttributes = {
-					0A4057321CB30DC900FCE94E = {
-						CreatedOnToolsVersion = 7.3;
-					};
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = 2VQ32E4N43;
 					};
@@ -328,7 +312,6 @@
 			targets = (
 				6003F589195388D20070C39A /* InspiringPhotos */,
 				6003F5AD195388D20070C39A /* Pixpie-iOS_Tests */,
-				0A4057321CB30DC900FCE94E /* Pixpie-Framework */,
 			);
 		};
 /* End PBXProject section */
@@ -534,20 +517,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0A4057331CB30DC900FCE94E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		0A4057341CB30DC900FCE94E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		6003F5BD195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -726,15 +695,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A4057351CB30DC900FCE94E /* Build configuration list for PBXAggregateTarget "Pixpie-Framework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0A4057331CB30DC900FCE94E /* Debug */,
-				0A4057341CB30DC900FCE94E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		6003F585195388D10070C39A /* Build configuration list for PBXProject "Pixpie-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
