@@ -8,37 +8,45 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol PXPURLProtocolDelegate;
 @class PXPURLSessionDemux;
+@class PXPHTTPProtocol;
+@class PXPLogger;
+
+@protocol PXPHTTPProtocolDataDelegate <NSObject>
+
+- (void)HTTPProtocol:(PXPHTTPProtocol *)protocol receivedBlockSize:(ssize_t)size;
+
+@optional
+- (void)HTTPProtocol:(PXPHTTPProtocol *)protocol receivedResponseAfter:(NSTimeInterval)interval isRedirect:(BOOL)redirect;
+
+@end
+
+@protocol PXPHTTPProtocolAuthDelegate <NSObject>
+
+@optional
+- (BOOL)HTTPProtocol:(PXPHTTPProtocol *)protocol canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
+- (void)HTTPProtocol:(PXPHTTPProtocol *)protocol didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+- (void)HTTPProtocol:(PXPHTTPProtocol *)protocol didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+
+@end
 
 @interface PXPHTTPProtocol : NSURLProtocol
 
-+ (void)setDelegate:(id<PXPURLProtocolDelegate>)newValue;
-+ (id<PXPURLProtocolDelegate>)delegate;
-
-@property (atomic, strong, readonly ) NSURLAuthenticationChallenge *pendingChallenge;
+@property (atomic, strong, readonly) NSURLAuthenticationChallenge *pendingChallenge;
 
 - (void)resolveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge withCredential:(NSURLCredential *)credential;
 + (NSURLCache *)defaultURLCache;
 
 @end
 
-@protocol PXPURLProtocolDelegate <NSObject>
+@interface PXPHTTPProtocol (PXPDelegates)
 
-@optional
-- (BOOL)customHTTPProtocol:(PXPURLProtocol *)protocol canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
++ (void)setDataDelegate:(id<PXPHTTPProtocolDataDelegate>)dataDelegate;
++ (id<PXPHTTPProtocolDataDelegate>)dataDelegate;
 
-- (void)customHTTPProtocol:(PXPURLProtocol *)protocol didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-
-- (void)customHTTPProtocol:(PXPURLProtocol *)protocol didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-
-- (void)customHTTPProtocol:(PXPURLProtocol *)protocol logWithFormat:(NSString *)format arguments:(va_list)arguments;
-
-- (void)customHTTPProtocol:(PXPURLProtocol *)protocol
-      receivedResponseAfter:(NSTimeInterval)latency isRedirect:(BOOL)redirect;
-
-- (void)customHTTPProtocol:(PXPURLProtocol *)protocol
-          receivedBlockSize:(ssize_t)size;
++ (void)setAuthDelegate:(id<PXPHTTPProtocolDataDelegate>)authDelegate;
++ (id<PXPHTTPProtocolAuthDelegate>)authDelegate;
 
 
 @end
+
