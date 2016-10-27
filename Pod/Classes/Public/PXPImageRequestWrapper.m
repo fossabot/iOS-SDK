@@ -11,12 +11,16 @@
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFAutoPurgingImageCache.h>
 #import "AFHTTPSessionOperation.h"
-#import "PXPURLProtocol.h"
+#import "PXPHTTPProtocol.h"
 #import "PXPQueueManager.h"
+#import "PXPSDKRequestWrapper.h"
+#import "PXP.h"
+#import "PXP_Internal.h"
 
 @interface PXPImageRequestWrapper ()
 
 @property (nonatomic, weak) NSOperationQueue* queue;
+@property (nonatomic, strong) PXPSDKRequestWrapper* sdkRequestWrapper;
 
 @end
 
@@ -77,7 +81,7 @@
     configuration.timeoutIntervalForRequest = 15.0;
     configuration.HTTPMaximumConnectionsPerHost = 3;
     configuration.URLCache = [PXPImageRequestWrapper defaultURLCache];
-    configuration.protocolClasses = @[[PXPURLProtocol class]];
+    configuration.protocolClasses = @[[PXPHTTPProtocol class]];
 
     return configuration;
 }

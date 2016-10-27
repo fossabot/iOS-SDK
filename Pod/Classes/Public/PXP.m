@@ -15,7 +15,7 @@
 #import "PXPNetworkMonitor.h"
 #import "PXPDataMonitor.h"
 #import "PXPTrafficMonitor.h"
-#import "PXPURLProtocol.h"
+#import "PXPHTTPProtocol.h"
 #import "PXPURLSessionDemux.h"
 
 NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateChange";
@@ -120,7 +120,7 @@ NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateCh
 
 + (void)cleanUp {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    [PXPURLProtocol.defaultURLCache removeAllCachedResponses];
+    [PXPHTTPProtocol.defaultURLCache removeAllCachedResponses];
 }
 
 #pragma mark - Object Lifecycle

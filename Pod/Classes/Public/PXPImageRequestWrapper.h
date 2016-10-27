@@ -35,6 +35,8 @@ typedef void (^PXPImageFailureBlock)(NSURLSessionTask* task, NSError* error);
                                                 success:(PXPImageSuccessBlock)successBlock
                                                failture:(PXPImageFailureBlock)failtureBlock;
 
+
+
 @end
 
 NS_ASSUME_NONNULL_END

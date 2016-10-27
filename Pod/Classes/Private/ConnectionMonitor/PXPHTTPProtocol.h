@@ -1,5 +1,5 @@
 //
-//  PXPURLProtocol.h
+//  PXPHTTPProtocol.h
 //  Pods
 //
 //  Created by Boris Polyakov on 7/5/16.
@@ -11,7 +11,7 @@
 @protocol PXPURLProtocolDelegate;
 @class PXPURLSessionDemux;
 
-@interface PXPURLProtocol : NSURLProtocol
+@interface PXPHTTPProtocol : NSURLProtocol
 
 + (void)setDelegate:(id<PXPURLProtocolDelegate>)newValue;
 + (id<PXPURLProtocolDelegate>)delegate;

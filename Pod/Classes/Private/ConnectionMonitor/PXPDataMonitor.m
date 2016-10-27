@@ -7,7 +7,7 @@
 //
 
 #import "PXPDataMonitor.h"
-#import "PXPURLProtocol.h"
+#import "PXPHTTPProtocol.h"
 #import "PXPTrafficMonitor.h"
 #import "PXPNetInfo.h"
 #import "PXPNetworkMonitor.h"
@@ -36,7 +36,7 @@ static NSUInteger const kPXP4GLTESpeed = 1.73e+8 / (8 * kPXPNormalizingCoeficien
 static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
 
 
-@interface PXPDataMonitor() <PXPURLProtocolDelegate>
+@interface PXPDataMonitor() <PXPHTTPProtocolDataDelegate>
 
 @property (nonatomic) NSInteger frameBytesSum;
 @property (nonatomic) NSInteger frameMaxSpeed;
@@ -63,7 +63,7 @@ static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
     
     dispatch_once(&p, ^{
         _sharedObject = [[self alloc] init];
-        [PXPURLProtocol setDelegate:_sharedObject];
+        [PXPHTTPProtocol setDataDelegate:_sharedObject];
     });
     
     return _sharedObject;
@@ -122,7 +122,7 @@ static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
     self.throughput = [PXPDataMonitor throughputForNetInfo];
 }
 
-- (void)customHTTPProtocol:(PXPURLProtocol *)protocol receivedBlockSize:(ssize_t)size
+- (void)HTTPProtocol:(PXPHTTPProtocol *)protocol receivedBlockSize:(ssize_t)size
 {
     NSInteger frame = CACurrentMediaTime();
     BOOL newFrame = fabs(self.currentFrameTime) < DBL_EPSILON || (frame - self.currentFrameTime) > kPXPFrameDuration;

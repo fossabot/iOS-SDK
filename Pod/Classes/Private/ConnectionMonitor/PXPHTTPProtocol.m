@@ -1,20 +1,28 @@
 //
-//  PXPURLProtocol.m
+//  PXPHTTPProtocol.m
 //  Pods
 //
 //  Created by Boris Polyakov on 7/5/16.
 //
 //
 
-#import "PXPURLProtocol.h"
+#import "PXPHTTPProtocol.h"
 #import "CanonicalRequest.h"
 #import "CacheStoragePolicy.h"
 #import "PXPURLSessionDemux.h"
-@import UIKit.UIDevice;
+#import "PXPDefines.h"
+
+static NSString* const kPXPCanonicalPropertyKey = @"x-pixpie-is-canonical-request";
+static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-request";
 
 typedef void (^ChallengeCompletionHandler)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * credential);
 
-@interface PXPURLProtocol() <NSURLSessionDataDelegate> {
+BOOL PXPisOS8() {
+    return (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1 &&
+            NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_8_x_Max);
+}
+
+@interface PXPHTTPProtocol() <NSURLSessionDataDelegate> {
     struct {
         BOOL didStartLoading:1;
         BOOL didStopLoading:1;
@@ -36,59 +44,48 @@ typedef void (^ChallengeCompletionHandler)(NSURLSessionAuthChallengeDisposition 
 
 @end
 
-@interface UIDevice (PXPFloatVersion)
+@implementation PXPHTTPProtocol (PXPDelegates)
 
-+ (float)floatOSVersion;
+static id<PXPHTTPProtocolDataDelegate> sDataDelegate;
+static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
 
-@end
-
-@implementation UIDevice (PXPFloatVersion)
-
-+ (float)floatOSVersion {
-    return [[UIDevice currentDevice] systemVersion].floatValue;
-}
-
-@end
-
-//static BOOL sPXPIsProtocolRegistered = NO;
-//
-//
-//__attribute__((constructor))
-//void initialize() {
-//    sPXPIsProtocolRegistered = [NSURLProtocol registerClass:[PXPURLProtocol class]];
-//    assert(sPXPIsProtocolRegistered == YES);
-//}
-//
-//__attribute__((destructor))
-//static void deinitialize()
-//{
-//    [NSURLProtocol unregisterClass:[PXPURLProtocol class]];
-//    sPXPIsProtocolRegistered = NO;
-//}
-
-@implementation PXPURLProtocol
-
-static id<PXPURLProtocolDelegate> sDelegate;
-
-static NSString* const kPXPCanonicalPropertyKey = @"x-pixpie-is-canonical-request";
-static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-request";
-
-+ (id<PXPURLProtocolDelegate>)delegate
++ (id<PXPHTTPProtocolDataDelegate>)dataDelegate
 {
-    id<PXPURLProtocolDelegate> result;
-    
+    id<PXPHTTPProtocolDataDelegate> result;
     @synchronized (self) {
-        result = sDelegate;
+        result = sDataDelegate;
     }
     return result;
 }
 
-+ (void)setDelegate:(id<PXPURLProtocolDelegate>)newValue
++ (void)setDataDelegate:(id<PXPHTTPProtocolDataDelegate>)dataDelegate
 {
     @synchronized (self) {
-        sDelegate = newValue;
+        sDataDelegate = dataDelegate;
     }
 }
+
++ (id<PXPHTTPProtocolAuthDelegate>)authDelegate
+{
+    id<PXPHTTPProtocolAuthDelegate> result;
+    @synchronized (self) {
+        result = sAuthDelegate;
+    }
+    return result;
+}
+
++ (void)setAuthDelegate:(id<PXPHTTPProtocolAuthDelegate>)authDelegate
+{
+    @synchronized (self) {
+        sAuthDelegate = authDelegate;
+    }
+}
+
+@end
+
+@implementation PXPHTTPProtocol
+
+
 
 + (PXPURLSessionDemux *)sharedDemux
 {
@@ -105,21 +102,12 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     return sDemux;
 }
 
-+ (void)customHTTPProtocol:(PXPURLProtocol *)protocol logWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(2, 3)
-// All internal logging calls this routine, which routes the log message to the
-// delegate.
++ (void)HTTPProtocol:(PXPHTTPProtocol *)protocol logWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(2, 3)
 {
-    // protocol may be nil
-    id<PXPURLProtocolDelegate> strongDelegate;
-    
-    strongDelegate = [self delegate];
-    if ([strongDelegate respondsToSelector:@selector(customHTTPProtocol:logWithFormat:arguments:)]) {
-        va_list arguments;
-        
-        va_start(arguments, format);
-        [strongDelegate customHTTPProtocol:protocol logWithFormat:format arguments:arguments];
-        va_end(arguments);
-    }
+    va_list arguments;
+    va_start(arguments, format);
+    NSLog(format, arguments);
+    va_end(arguments);
 }
 
 #pragma mark - NSURLProtocol overrides
@@ -139,7 +127,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
         shouldAccept = (url != nil);
     }
     if ( ! shouldAccept ) {
-        [self customHTTPProtocol:nil logWithFormat:@"decline request (malformed)"];
+        [self HTTPProtocol:nil logWithFormat:@"decline request (malformed)"];
     }
     
     // Decline our recursive requests.
@@ -147,7 +135,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     if (shouldAccept) {
         shouldAccept = ([self propertyForKey:kPXPRecursivePropertyKey inRequest:request] == nil);
         if ( ! shouldAccept ) {
-            [self customHTTPProtocol:nil logWithFormat:@"decline request %@ (recursive)", url];
+            [self HTTPProtocol:nil logWithFormat:@"decline request %@ (recursive)", url];
         }
     }
     
@@ -158,7 +146,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
         shouldAccept = (scheme != nil);
         
         if ( ! shouldAccept ) {
-            [self customHTTPProtocol:nil logWithFormat:@"decline request %@ (no scheme)", url];
+            [self HTTPProtocol:nil logWithFormat:@"decline request %@ (no scheme)", url];
         }
     }
     
@@ -171,9 +159,9 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
         shouldAccept = [scheme isEqual:@"http"] || [scheme isEqual:@"https"];
         
         if ( ! shouldAccept ) {
-            [self customHTTPProtocol:nil logWithFormat:@"decline request %@ (scheme mismatch)", url];
+            [self HTTPProtocol:nil logWithFormat:@"decline request %@ (scheme mismatch)", url];
         } else {
-            [self customHTTPProtocol:nil logWithFormat:@"accept request %@", url];
+            [self HTTPProtocol:nil logWithFormat:@"accept request %@", url];
         }
     }
     
@@ -190,7 +178,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     
     NSMutableURLRequest* canonicalRequest = CanonicalRequestForRequest(request);
     
-    [PXPURLProtocol setProperty:@(YES) forKey:kPXPCanonicalPropertyKey inRequest:canonicalRequest];
+    [PXPHTTPProtocol setProperty:@(YES) forKey:kPXPCanonicalPropertyKey inRequest:canonicalRequest];
     
     return canonicalRequest;
 }
@@ -204,10 +192,10 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     // can be called on any thread
     if (self != nil) {
 
-        [[self class] customHTTPProtocol:self logWithFormat:@"init for %@ from <%@ %p>", [request URL], [client class], client];
-        BOOL isCanonical = ([PXPURLProtocol propertyForKey:kPXPCanonicalPropertyKey inRequest:request] != nil);
+        [[self class] HTTPProtocol:self logWithFormat:@"init for %@ from <%@ %p>", [request URL], [client class], client];
+        BOOL isCanonical = ([PXPHTTPProtocol propertyForKey:kPXPCanonicalPropertyKey inRequest:request] != nil);
         if (!isCanonical) {
-            request = [PXPURLProtocol canonicalRequestForRequest:request];
+            request = [PXPHTTPProtocol canonicalRequestForRequest:request];
         }
         assert(request != nil);
     }
@@ -216,14 +204,14 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 
 - (void)dealloc
 {
-    if (floorf([UIDevice floatOSVersion]) != 8) {
-        // NSURLProtocol leaks, if redirection happens, so we make sure here, that we already released everything
+    // NSURLProtocol leaks, if redirection happens, so we make sure here, that we already released everything
+    if (PXPisOS8()) {
+        [self->_task cancel];
+        self->_task = nil;
+    } else {
         assert(self->_task == nil);                     // we should have cleared it by now
         assert(self->_pendingChallenge == nil);         // we should have cancelled it by now
         assert(self->_pendingChallengeCompletionHandler == nil);    // we should have cancelled it by now
-    } else {
-        [self->_task cancel];
-        self->_task = nil;
     }
 }
 
@@ -277,9 +265,9 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     
     self.startTime = [NSDate timeIntervalSinceReferenceDate];
     if (currentMode == nil) {
-        [[self class] customHTTPProtocol:self logWithFormat:@"start %@", [recursiveRequest URL]];
+        [[self class] HTTPProtocol:self logWithFormat:@"start %@", [recursiveRequest URL]];
     } else {
-        [[self class] customHTTPProtocol:self logWithFormat:@"start %@ (mode %@)", [recursiveRequest URL], currentMode];
+        [[self class] HTTPProtocol:self logWithFormat:@"start %@ (mode %@)", [recursiveRequest URL], currentMode];
     }
 
     // Latch the thread we were called on, primarily for debugging purposes.
@@ -311,7 +299,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 {
     // The implementation just cancels the current load (if it's still running).
     
-    [[self class] customHTTPProtocol:self logWithFormat:@"stop (elapsed %.1f)", [NSDate timeIntervalSinceReferenceDate] - self.startTime];
+    [[self class] HTTPProtocol:self logWithFormat:@"stop (elapsed %.1f)", [NSDate timeIntervalSinceReferenceDate] - self.startTime];
     
     assert(self.clientThread != nil);
     _flags.didStopLoading = 1;
@@ -319,7 +307,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     if (_flags.didFinishLoading)
     {
         [self cancelPendingChallenge];
-        if (floorf([UIDevice floatOSVersion]) != 8) {
+        if (!PXPisOS8()) {
             [self.task cancel];
             self.task = nil;
         }
@@ -396,7 +384,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 /*! The main thread side of authentication challenge processing.
  *  \details If there's already a pending challenge, something has gone wrong and
  *  the routine simply cancels the new challenge.  If our delegate doesn't implement
- *  the -customHTTPProtocol:canAuthenticateAgainstProtectionSpace: delegate callback,
+ *  the -HTTPProtocol:canAuthenticateAgainstProtectionSpace: delegate callback,
  *  we also cancel the challenge.  OTOH, if all goes well we simply call our delegate
  *  with the challenge.
  *  \param challenge The authentication challenge to process; must not be nil.
@@ -419,21 +407,21 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
         // Note that we have to cancel the challenge on the thread on which we received it,
         // namely, the client thread.
         
-        [[self class] customHTTPProtocol:self logWithFormat:@"challenge %@ cancelled; other challenge pending", [[challenge protectionSpace] authenticationMethod]];
+        [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancelled; other challenge pending", [[challenge protectionSpace] authenticationMethod]];
         assert(NO);
         [self clientThreadCancelAuthenticationChallenge:challenge completionHandler:completionHandler];
     } else {
-        id<PXPURLProtocolDelegate>  strongDelegate;
+        id<PXPHTTPProtocolAuthDelegate>  strongDelegate;
         
-        strongDelegate = [[self class] delegate];
+        strongDelegate = [[self class] authDelegate];
         
         // Tell the delegate about it.  It would be weird if the delegate didn't support this
-        // selector (it did return YES from -customHTTPProtocol:canAuthenticateAgainstProtectionSpace:
+        // selector (it did return YES from -HTTPProtocol:canAuthenticateAgainstProtectionSpace:
         // after all), but if it doesn't then we just cancel the challenge ourselves (or the client
         // thread, of course).
         
-        if ( ! [strongDelegate respondsToSelector:@selector(customHTTPProtocol:canAuthenticateAgainstProtectionSpace:)] ) {
-            [[self class] customHTTPProtocol:self logWithFormat:@"challenge %@ cancelled; no delegate method", [[challenge protectionSpace] authenticationMethod]];
+        if ( ! [strongDelegate respondsToSelector:@selector(HTTPProtocol:canAuthenticateAgainstProtectionSpace:)] ) {
+            [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancelled; no delegate method", [[challenge protectionSpace] authenticationMethod]];
             assert(NO);
             [self clientThreadCancelAuthenticationChallenge:challenge completionHandler:completionHandler];
         } else {
@@ -445,8 +433,8 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
             
             // Pass the challenge to the delegate.
             
-            [[self class] customHTTPProtocol:self logWithFormat:@"challenge %@ passed to delegate", [[challenge protectionSpace] authenticationMethod]];
-            [strongDelegate customHTTPProtocol:self didReceiveAuthenticationChallenge:self.pendingChallenge];
+            [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ passed to delegate", [[challenge protectionSpace] authenticationMethod]];
+            [strongDelegate HTTPProtocol:self didReceiveAuthenticationChallenge:self.pendingChallenge];
         }
     }
 }
@@ -495,22 +483,22 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
             // there's no challenge outstanding, but the synchronisation issues are tricky.  Rather than solve
             // those, I'm just not going to log in this case.
             //
-            // [[self class] customHTTPProtocol:self logWithFormat:@"challenge not cancelled; no challenge pending"];
+            // [[self class] HTTPProtocol:self logWithFormat:@"challenge not cancelled; no challenge pending"];
         } else {
-            id<PXPURLProtocolDelegate>  strongeDelegate;
+            id<PXPHTTPProtocolAuthDelegate>  strongeDelegate;
             NSURLAuthenticationChallenge *  challenge;
             
-            strongeDelegate = [[self class] delegate];
+            strongeDelegate = [[self class] authDelegate];
             
             challenge = self.pendingChallenge;
             self.pendingChallenge = nil;
             self.pendingChallengeCompletionHandler = nil;
             
-            if ([strongeDelegate respondsToSelector:@selector(customHTTPProtocol:didCancelAuthenticationChallenge:)]) {
-                [[self class] customHTTPProtocol:self logWithFormat:@"challenge %@ cancellation passed to delegate", [[challenge protectionSpace] authenticationMethod]];
-                [strongeDelegate customHTTPProtocol:self didCancelAuthenticationChallenge:challenge];
+            if ([strongeDelegate respondsToSelector:@selector(HTTPProtocol:didCancelAuthenticationChallenge:)]) {
+                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancellation passed to delegate", [[challenge protectionSpace] authenticationMethod]];
+                [strongeDelegate HTTPProtocol:self didCancelAuthenticationChallenge:challenge];
             } else {
-                [[self class] customHTTPProtocol:self logWithFormat:@"challenge %@ cancellation failed; no delegate method", [[challenge protectionSpace] authenticationMethod]];
+                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancellation failed; no delegate method", [[challenge protectionSpace] authenticationMethod]];
                 // If we managed to send a challenge to the client but can't cancel it, that's bad.
                 // There's nothing we can do at this point except log the problem.
                 assert(NO);
@@ -527,7 +515,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     assert(self.clientThread != nil);
 
     if (challenge != self.pendingChallenge) {
-        [[self class] customHTTPProtocol:self logWithFormat:@"challenge resolution mismatch (%@ / %@)", challenge, self.pendingChallenge];
+        [[self class] HTTPProtocol:self logWithFormat:@"challenge resolution mismatch (%@ / %@)", challenge, self.pendingChallenge];
         // This should never happen, and we want to know if it does, at least in the debug build.
         assert(NO);
     } else {
@@ -543,10 +531,10 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 
         [self performOnThread:self.clientThread modes:self.modes block:^{
             if (credential == nil) {
-                [[self class] customHTTPProtocol:self logWithFormat:@"challenge %@ resolved without credential", [[challenge protectionSpace] authenticationMethod]];
+                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ resolved without credential", [[challenge protectionSpace] authenticationMethod]];
                 completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
             } else {
-                [[self class] customHTTPProtocol:self logWithFormat:@"challenge %@ resolved with <%@ %p>", [[challenge protectionSpace] authenticationMethod], [credential class], credential];
+                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ resolved with <%@ %p>", [[challenge protectionSpace] authenticationMethod], [credential class], credential];
                 completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
             }
         }];
@@ -568,12 +556,12 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     assert(completionHandler != nil);
     assert([NSThread currentThread] == self.clientThread);
     
-    [[self class] customHTTPProtocol:self logWithFormat:@"will redirect from %@ to %@", [response URL], [newRequest URL]];
+    [[self class] HTTPProtocol:self logWithFormat:@"will redirect from %@ to %@", [response URL], [newRequest URL]];
     
-    id<PXPURLProtocolDelegate> dlg = [[self class] delegate];
-    if ([dlg respondsToSelector:@selector(customHTTPProtocol:receivedResponseAfter:isRedirect:)]) {
+    id<PXPHTTPProtocolDataDelegate> dlg = [[self class] dataDelegate];
+    if ([dlg respondsToSelector:@selector(HTTPProtocol:receivedResponseAfter:isRedirect:)]) {
         NSTimeInterval interval = [NSDate timeIntervalSinceReferenceDate] - self.startTime;
-        [dlg customHTTPProtocol:self receivedResponseAfter:interval isRedirect:YES];
+        [dlg HTTPProtocol:self receivedResponseAfter:interval isRedirect:YES];
     }
 
     // The new request was copied from our old request, so it has our magic property.  We actually
@@ -608,7 +596,6 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *))completionHandler
 {
     BOOL result;
-    id<PXPURLProtocolDelegate> strongeDelegate;
 
 #pragma unused(session)
 #pragma unused(task)
@@ -621,21 +608,21 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     // to avoid the overload of bouncing to the main thread for challenges that aren't going to be customised
     // anyway.
     
-    strongeDelegate = [[self class] delegate];
+    id<PXPHTTPProtocolAuthDelegate> strongeDelegate = [[self class] authDelegate];
 
     result = NO;
-    if ([strongeDelegate respondsToSelector:@selector(customHTTPProtocol:canAuthenticateAgainstProtectionSpace:)]) {
-        result = [strongeDelegate customHTTPProtocol:self canAuthenticateAgainstProtectionSpace:[challenge protectionSpace]];
+    if ([strongeDelegate respondsToSelector:@selector(HTTPProtocol:canAuthenticateAgainstProtectionSpace:)]) {
+        result = [strongeDelegate HTTPProtocol:self canAuthenticateAgainstProtectionSpace:[challenge protectionSpace]];
     }
 
     // If the client wants the challenge, kick off that process.  If not, resolve it by doing the default thing.
 
     if (result) {
-        [[self class] customHTTPProtocol:self logWithFormat:@"can authenticate %@", [[challenge protectionSpace] authenticationMethod]];
+        [[self class] HTTPProtocol:self logWithFormat:@"can authenticate %@", [[challenge protectionSpace] authenticationMethod]];
         
         [self didReceiveAuthenticationChallenge:challenge completionHandler:completionHandler];
     } else {
-        [[self class] customHTTPProtocol:self logWithFormat:@"cannot authenticate %@", [[challenge protectionSpace] authenticationMethod]];
+        [[self class] HTTPProtocol:self logWithFormat:@"cannot authenticate %@", [[challenge protectionSpace] authenticationMethod]];
         
         completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
     }
@@ -653,10 +640,10 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     assert(completionHandler != nil);
     assert([NSThread currentThread] == self.clientThread);
     
-    id<PXPURLProtocolDelegate> dlg = [[self class] delegate];
-    if ([dlg respondsToSelector:@selector(customHTTPProtocol:receivedResponseAfter:isRedirect:)]) {
+    id<PXPHTTPProtocolDataDelegate> dlg = [[self class] dataDelegate];
+    if ([dlg respondsToSelector:@selector(HTTPProtocol:receivedResponseAfter:isRedirect:)]) {
         NSTimeInterval interval = [NSDate timeIntervalSinceReferenceDate] - self.startTime;
-        [dlg customHTTPProtocol:self receivedResponseAfter:interval isRedirect:NO];
+        [dlg HTTPProtocol:self receivedResponseAfter:interval isRedirect:NO];
     }
 
     // Pass the call on to our client.  The only tricky thing is that we have to decide on a
@@ -673,7 +660,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
         statusCode = 42;
     }
     
-    [[self class] customHTTPProtocol:self logWithFormat:@"received response %zd / %@ with cache storage policy %zu", (ssize_t) statusCode, [response URL], (size_t) cacheStoragePolicy];
+    [[self class] HTTPProtocol:self logWithFormat:@"received response %zd / %@ with cache storage policy %zu", (ssize_t) statusCode, [response URL], (size_t) cacheStoragePolicy];
 
     [self handleResponse:response task:dataTask cachePolicy:cacheStoragePolicy];
     
@@ -690,10 +677,10 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     assert(data != nil);
     assert([NSThread currentThread] == self.clientThread);
     
-    id<PXPURLProtocolDelegate> dlg = [[self class] delegate];
-    if ([dlg respondsToSelector:@selector(customHTTPProtocol:receivedBlockSize:)] &&
+    id<PXPHTTPProtocolDataDelegate> dlg = [[self class] dataDelegate];
+    if ([dlg respondsToSelector:@selector(HTTPProtocol:receivedBlockSize:)] &&
         !_flags.isCached) {
-            [dlg customHTTPProtocol:self receivedBlockSize:data.length];
+            [dlg HTTPProtocol:self receivedBlockSize:data.length];
     }
 
     // Just pass the call on to our client.
@@ -716,7 +703,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
     
     // We implement this delegate callback purely for the purposes of logging.
     
-    [[self class] customHTTPProtocol:self logWithFormat:@"will cache response"];
+    [[self class] HTTPProtocol:self logWithFormat:@"will cache response"];
     
     completionHandler(proposedResponse);
 }
@@ -744,7 +731,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
         // o if the request is cancelled by a call to -stopLoading, in which case the client doesn't
         //   want to know about the failure
         _flags.didFinishLoading = YES;
-        [[self class] customHTTPProtocol:self logWithFormat:@"error %@ / %d", [error domain], (int) [error code]];
+        [[self class] HTTPProtocol:self logWithFormat:@"error %@ / %d", [error domain], (int) [error code]];
         
         [[self client] URLProtocol:self didFailWithError:error];
     }
@@ -790,7 +777,7 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 
 - (void)checkCache:(NSURLResponse *)response task:(NSURLSessionDataTask *)dataTask {
     if (dataTask == nil) return;
-    NSURLCache* cache = [PXPURLProtocol defaultURLCache];
+    NSURLCache* cache = [PXPHTTPProtocol defaultURLCache];
     NSCachedURLResponse *cachedResponse = [cache cachedResponseForRequest:dataTask.currentRequest];
     if (cachedResponse == nil) {
         cache = [NSURLCache sharedURLCache];

@@ -30,7 +30,6 @@ extern NSString * const PXPStateChangeNotification;
 + (void)cleanUp;
 
 @property (nonatomic, readonly, assign) PXPState state;
-@property (nonatomic, readonly, strong, nullable) PXPSDKRequestWrapper *wrapper;
 
 @end
 
