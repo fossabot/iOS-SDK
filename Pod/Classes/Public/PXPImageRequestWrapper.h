@@ -10,6 +10,7 @@
 
 @class AFHTTPSessionManager;
 @class AFHTTPSessionOperation;
+@class PXPImageCache;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +22,7 @@ typedef void (^PXPImageFailureBlock)(NSURLSessionTask* task, NSError* error);
 @property (nonatomic, strong, readonly) AFHTTPSessionManager* sessionManager;
 
 - (instancetype)init;
-- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)config NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)config cache:(PXPImageCache*)cache NS_DESIGNATED_INITIALIZER;
 
 - (AFHTTPSessionOperation *)imageDownloadTaskForUrl:(NSString *)urlString
                                      uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress

@@ -16,22 +16,24 @@
 #import "PXPSDKRequestWrapper.h"
 #import "PXP.h"
 #import "PXP_Internal.h"
+#import "PXPImageCache.h"
 
 @interface PXPImageRequestWrapper ()
 
 @property (nonatomic, weak) NSOperationQueue* queue;
 @property (nonatomic, strong) PXPSDKRequestWrapper* sdkRequestWrapper;
+@property (nonatomic, strong) PXPImageCache* cache;
 
 @end
 
 @implementation PXPImageRequestWrapper
 
 - (instancetype)init {
-    self = [self initWithSessionConfiguration:[PXPImageRequestWrapper defaultImageSessionConfiguration]];
+    self = [self initWithSessionConfiguration:[PXPImageRequestWrapper defaultImageSessionConfiguration] cache:[PXPImageCache new]];
     return self;
 }
 
-- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)config {
+- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)config cache:(PXPImageCache*)cache {
     self = [super init];
     if (self != nil) {
         _sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
@@ -39,6 +41,7 @@
         AFImageResponseSerializer *serializer = [PXPWebPImageResponseSerializer serializer];
         _sessionManager.responseSerializer = serializer;
         _queue = [PXPQueueManager networkQueue];
+        _cache = cache;
     }
     return self;
 }
@@ -64,8 +67,17 @@
                                                 success:(PXPImageSuccessBlock)successBlock
                                                failture:(PXPImageFailureBlock)failtureBlock  {
 
-    AFHTTPSessionOperation* task = [AFHTTPSessionOperation operationWithManager:self.sessionManager request:request uploadProgress:uploadProgress downloadProgress:downloadProgress success:successBlock failure:failtureBlock];
-    [self.queue addOperation:task];
+    AFHTTPSessionOperation* task = nil;
+    UIImage* image = [self.cache cachedImageForRequest:request];
+    if (image == nil) {
+        task = [AFHTTPSessionOperation operationWithManager:self.sessionManager request:request uploadProgress:uploadProgress downloadProgress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable object) {
+            [self.cache cacheImage:object forRequest:request];
+            successBlock(task, image);
+        } failure:failtureBlock];
+        [self.queue addOperation:task];
+    } else {
+        successBlock(nil, image);
+    }
     return task;
 }
 
@@ -75,8 +87,6 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.HTTPShouldSetCookies = YES;
     configuration.HTTPShouldUsePipelining = YES;
-
-    configuration.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
     configuration.allowsCellularAccess = YES;
     configuration.timeoutIntervalForRequest = 15.0;
     configuration.HTTPMaximumConnectionsPerHost = 3;
