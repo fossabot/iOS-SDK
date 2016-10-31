@@ -110,7 +110,7 @@ static NSString* const kPXPWebPFormat = @"webp";
 }
 
 + (NSString * _Nullable)cdnUrl {
-    NSString* result =  [[PXP sharedSDK].accountInfo.cdnUrl mutableCopy];
+    NSString* result =  [[PXP sharedSDK].accountInfo.cdnUrl copy];
     return result;
 }
 

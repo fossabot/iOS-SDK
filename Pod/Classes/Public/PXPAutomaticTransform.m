@@ -37,7 +37,7 @@
 }
 
 - (NSNumber*)width {
-    NSNumber* width = [super width];
+    NSNumber* width = super.width;
     if (width == nil) {
         CGSize size = [self smallestSize];
         if (!CGSizeEqualToSize(size, CGSizeZero)) {
@@ -48,7 +48,7 @@
 }
 
 - (NSNumber*)height {
-    NSNumber* height = [super height];
+    NSNumber* height = super.height;
     if (height == nil) {
         CGSize size = [self smallestSize];
         if (!CGSizeEqualToSize(size, CGSizeZero)) {
@@ -59,7 +59,7 @@
 }
 
 - (NSNumber*)quality {
-    NSNumber* quality = [super quality];
+    NSNumber* quality = super.quality;
     if (quality == nil) {
         PXPDataMonitor* monitor = [PXPDataMonitor sharedMonitor];
         quality = [PXPAutomaticTransform qualityDictionary][@(monitor.speedType)];

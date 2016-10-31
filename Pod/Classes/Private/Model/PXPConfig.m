@@ -45,7 +45,7 @@ static NSInteger const kPXPSDKTypeiOS = 1;
         _clientSdkType = @(kPXPSDKTypeiOS);
         _deviceId = [UIDevice currentDevice].identifierForVendor.UUIDString;
         _deviceDescription = [PXPConfig hardwareString];
-        _sdkVersion = [NSString stringWithUTF8String:PIXPIE_VERSION];
+        _sdkVersion = @PIXPIE_VERSION;
     }
     return self;
 }
@@ -53,7 +53,7 @@ static NSInteger const kPXPSDKTypeiOS = 1;
 - (NSString *)backend {
     NSString* result = _config[kPXPBackendUrlKey];
     if (result.length == 0) {
-        result =  [NSString stringWithUTF8String:PIXPIE_URL];
+        result =  @PIXPIE_URL;
     }
     return result;
 }
@@ -61,7 +61,7 @@ static NSInteger const kPXPSDKTypeiOS = 1;
 - (NSString *)requestSalt {
     NSString* result = _config[kPXPRequestSaltKey];
     if (result.length == 0) {
-        result =  [NSString stringWithUTF8String:PIXPIE_MAGIC_KEY];
+        result =  @PIXPIE_MAGIC_KEY;
     }
     return result;
 }
@@ -90,7 +90,7 @@ static NSInteger const kPXPSDKTypeiOS = 1;
     char *hw_machine = malloc(size);
 
     sysctl(name, 2, hw_machine, &size, NULL, 0);
-    NSString *hardware = [NSString stringWithUTF8String:hw_machine];
+    NSString *hardware = @(hw_machine);
     free(hw_machine);
     return hardware;
 }

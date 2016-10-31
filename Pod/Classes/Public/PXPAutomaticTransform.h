@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PXPAutomaticTransform : PXPTransform
 
-- (instancetype)initWithImageView:(UIImageView* _Nullable)contextView originUrl:(NSString* _Nullable)url;
+- (instancetype)initWithImageView:(UIImageView* _Nullable)contextView originUrl:(NSString* _Nullable)url NS_DESIGNATED_INITIALIZER;
 @property (nonatomic, weak, nullable) UIImageView* contextView;
 
 @end

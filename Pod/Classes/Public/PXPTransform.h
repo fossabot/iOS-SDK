@@ -9,15 +9,15 @@
 #import <Foundation/Foundation.h>
 @import UIKit;
 
-typedef enum : NSInteger {
+typedef NS_ENUM(NSInteger, PXPTransformFormat) {
     PXPTransformFormatDefault = 0,
     PXPTransformFormatWebP
-} PXPTransformFormat;
+};
 
-typedef enum {
+typedef NS_ENUM(unsigned int, PXPTransformMode) {
     PXPTransformModeFill,
     PXPTransformModeFit
-} PXPTransformMode;
+};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithOriginUrl:(NSString*)url;
-- (NSString * _Nullable)contentUrl;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString * _Nullable contentUrl;
 
 @end
 

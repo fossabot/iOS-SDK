@@ -42,7 +42,7 @@
                   failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     assert(self.sessionManager != nil);
-    NSString *uuid = [[NSUUID UUID] UUIDString];
+    NSString *uuid = [NSUUID UUID].UUIDString;
     PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPQueueManager networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         return (error.code == NSURLErrorTimedOut && [error.domain isEqualToString:NSURLErrorDomain]);
     } success:successBlock failure:failtureBlock];

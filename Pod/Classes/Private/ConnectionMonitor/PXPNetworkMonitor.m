@@ -66,14 +66,14 @@ NSString* const kPXPNetworkChangedNotification = @"kPXPNetworkChangedNotificatio
     }];
     [self.cellMonitor setNetworkChangeBlock:^(PXPNetInfo *netInfo) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if ([strongSelf.reachabilityManager isReachableViaWWAN])
+        if ((strongSelf.reachabilityManager).reachableViaWWAN)
         {
             strongSelf.currentNetworkTechnology = netInfo;
         }
     }];
     [self.wifiMonitor setNetworkChangeBlock:^(PXPNetInfo *netInfo) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if ([strongSelf.reachabilityManager isReachableViaWiFi])
+        if ((strongSelf.reachabilityManager).reachableViaWiFi)
         {
             strongSelf.currentNetworkTechnology = netInfo;
         }

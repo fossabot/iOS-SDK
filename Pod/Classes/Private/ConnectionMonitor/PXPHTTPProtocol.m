@@ -85,19 +85,58 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
 
 @implementation PXPHTTPProtocol
 
+#pragma mark - Object Lifecycle
 
+- (id)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id <NSURLProtocolClient>)client
+{
+    self = [super initWithRequest:request
+                   cachedResponse:cachedResponse
+                           client:client];
+    assert(client != nil);
+    // can be called on any thread
+    if (self != nil) {
+
+        [[self class] HTTPProtocol:self logWithFormat:@"init for %@ from <%@ %p>", request.URL, [client class], client];
+        BOOL isCanonical = ([PXPHTTPProtocol propertyForKey:kPXPCanonicalPropertyKey inRequest:request] != nil);
+        if (!isCanonical) {
+            request = [PXPHTTPProtocol canonicalRequestForRequest:request];
+        }
+        assert(request != nil);
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    // NSURLProtocol leaks, if redirection happens, so we make sure here, that we already released everything
+    if (PXPisOS8()) {
+        [self->_task cancel];
+        self->_task = nil;
+    } else {
+        assert(self->_task == nil);                     // we should have cleared it by now
+        assert(self->_pendingChallenge == nil);         // we should have cancelled it by now
+        assert(self->_pendingChallengeCompletionHandler == nil);    // we should have cancelled it by now
+    }
+}
+
+#pragma mark - Class Methods
 
 + (PXPURLSessionDemux *)sharedDemux
 {
     static dispatch_once_t      sOnceToken;
     static PXPURLSessionDemux * sDemux;
     dispatch_once(&sOnceToken, ^{
-        NSURLSessionConfiguration *     config;
-        config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSessionConfiguration* configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.allowsCellularAccess = YES;
+        configuration.HTTPShouldUsePipelining = YES;
+        configuration.timeoutIntervalForRequest = 15;
+        configuration.HTTPMaximumConnectionsPerHost = 6;
+        configuration.URLCache = nil;
         // You have to explicitly configure the session to use your own protocol subclass here
         // otherwise you don't see redirects <rdar://problem/17384498>.
-        config.protocolClasses = @[ self ];
-        sDemux = [[PXPURLSessionDemux alloc] initWithConfiguration:config];
+        configuration.protocolClasses = @[ self ];
+        sDemux = [[PXPURLSessionDemux alloc] initWithConfiguration:configuration];
     });
     return sDemux;
 }
@@ -106,11 +145,12 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
 {
     va_list arguments;
     va_start(arguments, format);
-    NSLog(format, arguments);
+#warning NSLog
+    NSLogv(format, arguments);
     va_end(arguments);
 }
 
-#pragma mark - NSURLProtocol overrides
+#pragma mark - NSURLProtocol class methods overrides
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
@@ -123,7 +163,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     
     shouldAccept = (request != nil);
     if (shouldAccept) {
-        url = [request URL];
+        url = request.URL;
         shouldAccept = (url != nil);
     }
     if ( ! shouldAccept ) {
@@ -142,7 +182,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     // Get the scheme.
     
     if (shouldAccept) {
-        scheme = [[url scheme] lowercaseString];
+        scheme = url.scheme.lowercaseString;
         shouldAccept = (scheme != nil);
         
         if ( ! shouldAccept ) {
@@ -168,6 +208,16 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     return shouldAccept;
 }
 
++ (BOOL)requestIsCacheEquivalent:(NSURLRequest *)a toRequest:(NSURLRequest *)b {
+
+    BOOL result = [super requestIsCacheEquivalent:a toRequest:b];
+    NSURL* urlA = a.URL;
+    NSURL* urlB = b.URL;
+
+
+    return result;
+}
+
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request
 {
     assert(request != nil);
@@ -183,37 +233,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     return canonicalRequest;
 }
 
-- (id)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)cachedResponse client:(id <NSURLProtocolClient>)client
-{
-    self = [super initWithRequest:request
-                   cachedResponse:cachedResponse
-                           client:client];
-    assert(client != nil);
-    // can be called on any thread
-    if (self != nil) {
-
-        [[self class] HTTPProtocol:self logWithFormat:@"init for %@ from <%@ %p>", [request URL], [client class], client];
-        BOOL isCanonical = ([PXPHTTPProtocol propertyForKey:kPXPCanonicalPropertyKey inRequest:request] != nil);
-        if (!isCanonical) {
-            request = [PXPHTTPProtocol canonicalRequestForRequest:request];
-        }
-        assert(request != nil);
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    // NSURLProtocol leaks, if redirection happens, so we make sure here, that we already released everything
-    if (PXPisOS8()) {
-        [self->_task cancel];
-        self->_task = nil;
-    } else {
-        assert(self->_task == nil);                     // we should have cleared it by now
-        assert(self->_pendingChallenge == nil);         // we should have cancelled it by now
-        assert(self->_pendingChallengeCompletionHandler == nil);    // we should have cancelled it by now
-    }
-}
+#pragma mark - NSURLProtocol overrides
 
 - (void)startLoading
 {
@@ -248,7 +268,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     assert(self.modes == nil);
     calculatedModes = [NSMutableArray array];
     [calculatedModes addObject:NSDefaultRunLoopMode];
-    currentMode = [[NSRunLoop currentRunLoop] currentMode];
+    currentMode = [NSRunLoop currentRunLoop].currentMode;
     if ( (currentMode != nil) && ! [currentMode isEqual:NSDefaultRunLoopMode] ) {
         [calculatedModes addObject:currentMode];
     }
@@ -258,16 +278,16 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     // Create new request that's a clone of the request we were initialised with,
     // except that it has our 'recursive request flag' property set on it.
 
-    recursiveRequest = [[self request] mutableCopy];
+    recursiveRequest = [self.request mutableCopy];
     assert(recursiveRequest != nil);
 
     [[self class] setProperty:@YES forKey:kPXPRecursivePropertyKey inRequest:recursiveRequest];
     
     self.startTime = [NSDate timeIntervalSinceReferenceDate];
     if (currentMode == nil) {
-        [[self class] HTTPProtocol:self logWithFormat:@"start %@", [recursiveRequest URL]];
+        [[self class] HTTPProtocol:self logWithFormat:@"start %@", recursiveRequest.URL];
     } else {
-        [[self class] HTTPProtocol:self logWithFormat:@"start %@ (mode %@)", [recursiveRequest URL], currentMode];
+        [[self class] HTTPProtocol:self logWithFormat:@"start %@ (mode %@)", recursiveRequest.URL, currentMode];
     }
 
     // Latch the thread we were called on, primarily for debugging purposes.
@@ -315,7 +335,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     // Don't nil out self.modes; see property declaration comments for a a discussion of this.
 }
 
-#pragma mark * Authentication challenge handling
+#pragma mark - Authentication challenge handling
 
 /*! Performs the block on the specified thread in one of specified modes.
  *  \param thread The thread to target; nil implies the main thread.
@@ -332,7 +352,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     if (thread == nil) {
         thread = [NSThread mainThread];
     }
-    if ([modes count] == 0) {
+    if (modes.count == 0) {
         modes = @[ NSDefaultRunLoopMode ];
     }
     [self performSelector:@selector(onThreadPerformBlock:) onThread:thread withObject:[block copy] waitUntilDone:NO modes:modes];
@@ -407,7 +427,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
         // Note that we have to cancel the challenge on the thread on which we received it,
         // namely, the client thread.
         
-        [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancelled; other challenge pending", [[challenge protectionSpace] authenticationMethod]];
+        [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancelled; other challenge pending", challenge.protectionSpace.authenticationMethod];
         assert(NO);
         [self clientThreadCancelAuthenticationChallenge:challenge completionHandler:completionHandler];
     } else {
@@ -421,7 +441,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
         // thread, of course).
         
         if ( ! [strongDelegate respondsToSelector:@selector(HTTPProtocol:canAuthenticateAgainstProtectionSpace:)] ) {
-            [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancelled; no delegate method", [[challenge protectionSpace] authenticationMethod]];
+            [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancelled; no delegate method", challenge.protectionSpace.authenticationMethod];
             assert(NO);
             [self clientThreadCancelAuthenticationChallenge:challenge completionHandler:completionHandler];
         } else {
@@ -433,7 +453,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
             
             // Pass the challenge to the delegate.
             
-            [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ passed to delegate", [[challenge protectionSpace] authenticationMethod]];
+            [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ passed to delegate", challenge.protectionSpace.authenticationMethod];
             [strongDelegate HTTPProtocol:self didReceiveAuthenticationChallenge:self.pendingChallenge];
         }
     }
@@ -495,10 +515,10 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
             self.pendingChallengeCompletionHandler = nil;
             
             if ([strongeDelegate respondsToSelector:@selector(HTTPProtocol:didCancelAuthenticationChallenge:)]) {
-                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancellation passed to delegate", [[challenge protectionSpace] authenticationMethod]];
+                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancellation passed to delegate", challenge.protectionSpace.authenticationMethod];
                 [strongeDelegate HTTPProtocol:self didCancelAuthenticationChallenge:challenge];
             } else {
-                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancellation failed; no delegate method", [[challenge protectionSpace] authenticationMethod]];
+                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ cancellation failed; no delegate method", challenge.protectionSpace.authenticationMethod];
                 // If we managed to send a challenge to the client but can't cancel it, that's bad.
                 // There's nothing we can do at this point except log the problem.
                 assert(NO);
@@ -531,17 +551,17 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
 
         [self performOnThread:self.clientThread modes:self.modes block:^{
             if (credential == nil) {
-                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ resolved without credential", [[challenge protectionSpace] authenticationMethod]];
+                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ resolved without credential", challenge.protectionSpace.authenticationMethod];
                 completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
             } else {
-                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ resolved with <%@ %p>", [[challenge protectionSpace] authenticationMethod], [credential class], credential];
+                [[self class] HTTPProtocol:self logWithFormat:@"challenge %@ resolved with <%@ %p>", challenge.protectionSpace.authenticationMethod, [credential class], credential];
                 completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
             }
         }];
     }
 }
 
-#pragma mark * NSURLSession delegate callbacks
+#pragma mark - NSURLSession delegate callbacks
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)newRequest completionHandler:(void (^)(NSURLRequest *))completionHandler
 {
@@ -556,7 +576,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     assert(completionHandler != nil);
     assert([NSThread currentThread] == self.clientThread);
     
-    [[self class] HTTPProtocol:self logWithFormat:@"will redirect from %@ to %@", [response URL], [newRequest URL]];
+    [[self class] HTTPProtocol:self logWithFormat:@"will redirect from %@ to %@", response.URL, newRequest.URL];
     
     id<PXPHTTPProtocolDataDelegate> dlg = [[self class] dataDelegate];
     if ([dlg respondsToSelector:@selector(HTTPProtocol:receivedResponseAfter:isRedirect:)]) {
@@ -579,7 +599,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
 
     // Tell the client about the redirect.
 
-    [[self client] URLProtocol:self wasRedirectedToRequest:redirectRequest redirectResponse:response];
+    [self.client URLProtocol:self wasRedirectedToRequest:redirectRequest redirectResponse:response];
 
     // Stop our load.  The CFNetwork infrastructure will create a new NSURLProtocol instance to run
     // the load of the redirect.
@@ -612,17 +632,17 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
 
     result = NO;
     if ([strongeDelegate respondsToSelector:@selector(HTTPProtocol:canAuthenticateAgainstProtectionSpace:)]) {
-        result = [strongeDelegate HTTPProtocol:self canAuthenticateAgainstProtectionSpace:[challenge protectionSpace]];
+        result = [strongeDelegate HTTPProtocol:self canAuthenticateAgainstProtectionSpace:challenge.protectionSpace];
     }
 
     // If the client wants the challenge, kick off that process.  If not, resolve it by doing the default thing.
 
     if (result) {
-        [[self class] HTTPProtocol:self logWithFormat:@"can authenticate %@", [[challenge protectionSpace] authenticationMethod]];
+        [[self class] HTTPProtocol:self logWithFormat:@"can authenticate %@", challenge.protectionSpace.authenticationMethod];
         
         [self didReceiveAuthenticationChallenge:challenge completionHandler:completionHandler];
     } else {
-        [[self class] HTTPProtocol:self logWithFormat:@"cannot authenticate %@", [[challenge protectionSpace] authenticationMethod]];
+        [[self class] HTTPProtocol:self logWithFormat:@"cannot authenticate %@", challenge.protectionSpace.authenticationMethod];
         
         completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
     }
@@ -660,7 +680,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
         statusCode = 42;
     }
     
-    [[self class] HTTPProtocol:self logWithFormat:@"received response %zd / %@ with cache storage policy %zu", (ssize_t) statusCode, [response URL], (size_t) cacheStoragePolicy];
+    [[self class] HTTPProtocol:self logWithFormat:@"received response %zd / %@ with cache storage policy %zu", (ssize_t) statusCode, response.URL, (size_t) cacheStoragePolicy];
 
     [self handleResponse:response task:dataTask cachePolicy:cacheStoragePolicy];
     
@@ -704,8 +724,9 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     // We implement this delegate callback purely for the purposes of logging.
     
     [[self class] HTTPProtocol:self logWithFormat:@"will cache response"];
-    
-    completionHandler(proposedResponse);
+    NSURLCache* cache = [PXPHTTPProtocol defaultURLCache];
+    [cache storeCachedResponse:proposedResponse forRequest:dataTask.originalRequest];
+    completionHandler(nil);
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
@@ -722,7 +743,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     {
         [self handleFinishLoading];
     }
-    else if ([[error domain] isEqual:NSURLErrorDomain] && ([error code] == NSURLErrorCancelled)) {
+    else if ([error.domain isEqual:NSURLErrorDomain] && (error.code == NSURLErrorCancelled)) {
         // Do nothing.  This happens in two cases:
         //
         // o during a redirect, in which case the redirect code has already told the client about
@@ -731,9 +752,9 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
         // o if the request is cancelled by a call to -stopLoading, in which case the client doesn't
         //   want to know about the failure
         _flags.didFinishLoading = YES;
-        [[self class] HTTPProtocol:self logWithFormat:@"error %@ / %d", [error domain], (int) [error code]];
+        [[self class] HTTPProtocol:self logWithFormat:@"error %@ / %d", error.domain, (int) error.code];
         
-        [[self client] URLProtocol:self didFailWithError:error];
+        [self.client URLProtocol:self didFailWithError:error];
     }
     else
     {
@@ -792,8 +813,8 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sCache = [[NSURLCache alloc] initWithMemoryCapacity: 20 * 1024 * 1024
-                                               diskCapacity: 150 * 1024 * 1024
-                                                   diskPath: @"co.pixpie.imagecache"];
+                                                diskCapacity: 150 * 1024 * 1024
+                                                    diskPath: @"co.pixpie.imagecache"];
     });
     return sCache;
 }

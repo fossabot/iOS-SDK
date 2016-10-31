@@ -20,11 +20,11 @@
 
     // `WebPGetInfo` weill return image width and height
     int width = 0, height = 0;
-    if(!WebPGetInfo([imgData bytes], [imgData length], &width, &height)) {
+    if(!WebPGetInfo(imgData.bytes, imgData.length, &width, &height)) {
         NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
         [errorDetail setValue:@"Header formatting error." forKey:NSLocalizedDescriptionKey];
         if(error != NULL) {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@.errorDomain",  [[NSBundle mainBundle] bundleIdentifier]] code:-101 userInfo:errorDetail];
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@.errorDomain",  [NSBundle mainBundle].bundleIdentifier] code:-101 userInfo:errorDetail];
         }
     } else {
         const struct { int width, height; } targetContextSize = { width, height};

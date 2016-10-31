@@ -58,7 +58,7 @@ extern NSURLCacheStoragePolicy CacheStoragePolicyForRequestAndResponse(NSURLRequ
 
     // First determine if the request is cacheable based on its status code.
     
-    switch ([response statusCode]) {
+    switch (response.statusCode) {
         case 200:
         case 203:
         case 206:
@@ -82,7 +82,7 @@ extern NSURLCacheStoragePolicy CacheStoragePolicyForRequestAndResponse(NSURLRequ
     if (cacheable) {
         NSString *  responseHeader;
         
-        responseHeader = [[response allHeaderFields][@"Cache-Control"] lowercaseString];
+        responseHeader = [response.allHeaderFields[@"Cache-Control"] lowercaseString];
         if ( (responseHeader != nil) && [responseHeader rangeOfString:@"no-store"].location != NSNotFound) {
             cacheable = NO;
         }
@@ -94,7 +94,7 @@ extern NSURLCacheStoragePolicy CacheStoragePolicyForRequestAndResponse(NSURLRequ
     if (cacheable) {
         NSString *  requestHeader;
 
-        requestHeader = [[request allHTTPHeaderFields][@"Cache-Control"] lowercaseString];
+        requestHeader = (request.allHTTPHeaderFields[@"Cache-Control"]).lowercaseString;
         if ( (requestHeader != nil) 
           && ([requestHeader rangeOfString:@"no-store"].location != NSNotFound)
           && ([requestHeader rangeOfString:@"no-cache"].location != NSNotFound) ) {
@@ -111,7 +111,7 @@ extern NSURLCacheStoragePolicy CacheStoragePolicyForRequestAndResponse(NSURLRequ
         // happy to cache HTTPS on disk.  I've not made the correspondencing change because 
         // it's nice to see all three cache policies in action.
     
-        if ([[[[request URL] scheme] lowercaseString] isEqual:@"https"]) {
+        if ([request.URL.scheme.lowercaseString isEqual:@"https"]) {
             result = NSURLCacheStorageAllowedInMemoryOnly;
         } else {
             // result = NSURLCacheStorageAllowed;

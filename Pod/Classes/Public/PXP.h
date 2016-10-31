@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum : NSInteger {
+typedef NS_ENUM(NSInteger, PXPState) {
     PXPStateNotInitialized,
     PXPStateReady,
     PXPStateFailed
-} PXPState;
+};
 
 NS_ASSUME_NONNULL_BEGIN
 

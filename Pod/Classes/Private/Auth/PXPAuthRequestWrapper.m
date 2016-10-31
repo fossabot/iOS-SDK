@@ -51,7 +51,7 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/client_sdk";
                 failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     NSString* salt = PXPConfig.defaultConfig.requestSalt;
-    long timestamp = (long)[[NSDate date] timeIntervalSince1970];
+    long timestamp = (long)[NSDate date].timeIntervalSince1970;
     NSString *stringTimestamp = [NSString stringWithFormat:@"%ld", timestamp];
     NSString *toHash = [NSString stringWithFormat:@"%@%@%@", apiKey, salt, stringTimestamp];
     NSString *hash = [toHash sha256];
@@ -77,7 +77,7 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/client_sdk";
                   failtureBlock:(PXPRequestFailureBlock)failtureBlock {
 
     assert(self.sessionManager != nil);
-    NSString *uuid = [[NSUUID UUID] UUIDString];
+    NSString *uuid = [NSUUID UUID].UUIDString;
     PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPQueueManager networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
         return (response == nil);

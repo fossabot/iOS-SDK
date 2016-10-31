@@ -93,8 +93,8 @@ static CFIndex FixPostSchemeSeparator(NSURL *url, NSMutableData *urlData, CFInde
         assert(range.location >= 0);
         assert(range.length >= 0);
         
-        urlDataBytes  = [urlData mutableBytes];
-        urlDataLength = [urlData length];
+        urlDataBytes  = urlData.mutableBytes;
+        urlDataLength = urlData.length;
         
         separatorLength = 0;
         cursor = (NSUInteger) range.location + (NSUInteger) bytesInserted + (NSUInteger) range.length;
@@ -144,7 +144,7 @@ static CFIndex LowercaseScheme(NSURL *url, NSMutableData *urlData, CFIndex bytes
         assert(range.location >= 0);
         assert(range.length >= 0);
 
-        urlDataBytes = [urlData mutableBytes];
+        urlDataBytes = urlData.mutableBytes;
         for (i = range.location + bytesInserted; i < (range.location + bytesInserted + range.length); i++) {
             urlDataBytes[i] = (uint8_t) tolower_l(urlDataBytes[i], NULL);
         }
@@ -175,7 +175,7 @@ static CFIndex LowercaseHost(NSURL *url, NSMutableData *urlData, CFIndex bytesIn
         assert(range.location >= 0);
         assert(range.length >= 0);
 
-        urlDataBytes = [urlData mutableBytes];
+        urlDataBytes = urlData.mutableBytes;
         for (i = range.location + bytesInserted; i < (range.location + bytesInserted + range.length); i++) {
             urlDataBytes[i] = (uint8_t) tolower_l(urlDataBytes[i], NULL);
         }
@@ -273,7 +273,7 @@ __attribute__((unused)) static CFIndex DeleteDefaultPort(NSURL *url, NSMutableDa
     assert(urlData != nil);
     assert(bytesInserted >= 0);
 
-    scheme = [[url scheme] lowercaseString];
+    scheme = url.scheme.lowercaseString;
     assert(scheme != nil);
     
     isHTTP  = [scheme isEqual:@"http" ];
@@ -284,11 +284,11 @@ __attribute__((unused)) static CFIndex DeleteDefaultPort(NSURL *url, NSMutableDa
         assert(range.location >= 0);
         assert(range.length >= 0);
 
-        urlDataBytes = [urlData mutableBytes];
+        urlDataBytes = urlData.mutableBytes;
         
         portNumberStr = [[NSString alloc] initWithBytes:&urlDataBytes[range.location + bytesInserted] length:(NSUInteger) range.length encoding:NSUTF8StringEncoding];
         if (portNumberStr != nil) {
-            portNumber = [portNumberStr intValue];
+            portNumber = portNumberStr.intValue;
             if ( (isHTTP && (portNumber == 80)) || (isHTTPS && (portNumber == 443)) ) {
                 // -1 and +1 to account for the leading ":"
                 [urlData replaceBytesInRange:NSMakeRange((NSUInteger) range.location + (NSUInteger) bytesInserted - 1, (NSUInteger) range.length + 1) withBytes:NULL length:0];
@@ -311,8 +311,8 @@ static void CanonicaliseHeaders(NSMutableURLRequest * request)
     // content type of "application/x-www-form-urlencoded".
     
     if ( ([request valueForHTTPHeaderField:@"Content-Type"] == nil) 
-      && ([[request HTTPMethod] caseInsensitiveCompare:@"POST"] == NSOrderedSame) 
-      && (([request HTTPBody] != nil) || ([request HTTPBodyStream] != nil)) ) {
+      && ([request.HTTPMethod caseInsensitiveCompare:@"POST"] == NSOrderedSame) 
+      && ((request.HTTPBody != nil) || (request.HTTPBodyStream != nil)) ) {
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     }
     
@@ -357,7 +357,7 @@ extern NSMutableURLRequest * CanonicalRequestForRequest(NSURLRequest *request)
     // First up check that we're dealing with HTTP or HTTPS.  If not, do nothing (why were we 
     // we even called?).
     
-    scheme = [[[request URL] scheme] lowercaseString];
+    scheme = request.URL.scheme.lowercaseString;
     assert(scheme != nil);
     
     if ( ! [scheme isEqual:@"http" ] && ! [scheme isEqual:@"https"]) {
@@ -381,7 +381,7 @@ extern NSMutableURLRequest * CanonicalRequestForRequest(NSURLRequest *request)
         
         bytesInserted = kCFNotFound;
         urlData = nil;
-        requestURL = [request URL];
+        requestURL = request.URL;
         assert(requestURL != nil);
 
         stepCount = sizeof(kStepFunctions) / sizeof(*kStepFunctions);
@@ -414,14 +414,14 @@ extern NSMutableURLRequest * CanonicalRequestForRequest(NSURLRequest *request)
             // the URL outside of the loop), recreate the URL from the URL data.
             
             if ( (bytesInserted == kCFNotFound) || ((stepIndex + 1) == stepCount) ) {
-                requestURL = CFBridgingRelease( CFURLCreateWithBytes(NULL, [urlData bytes], (CFIndex) [urlData length], kCFStringEncodingUTF8, NULL) );
+                requestURL = CFBridgingRelease( CFURLCreateWithBytes(NULL, urlData.bytes, (CFIndex) urlData.length, kCFStringEncodingUTF8, NULL) );
                 assert(requestURL != nil);
                 
                 urlData = nil;
             }
         }
 
-        [result setURL:requestURL];
+        result.URL = requestURL;
         
         // Canonicalise the headers.
         

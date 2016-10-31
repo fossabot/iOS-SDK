@@ -147,7 +147,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
 
     assert(self.sessionManager != nil);
     __weak typeof(self)weakSelf = self;
-    NSString *uuid = [[NSUUID UUID] UUIDString];
+    NSString *uuid = [NSUUID UUID].UUIDString;
     PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPQueueManager networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
