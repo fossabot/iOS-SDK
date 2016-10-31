@@ -9,6 +9,11 @@
 #ifndef PXPDefines_h
 #define PXPDefines_h
 
+#define PXP_CONCAT(x,y,z) x y z
+#define PXP_IDENTIFY(name) PXP_CONCAT(PIXPIE_IDENTIFIER, ".", name)
+#define PXP_IDENTIFY_IN_RUNTIME(name) ([NSString stringWithFormat:@"%@.%@", @PIXPIE_IDENTIFIER, name])
+#define PXP_IDENTIFY_CLASS(class) (PXP_IDENTIFY_IN_RUNTIME(NSStringFromClass(class)))
+
 #define CONDITIONAL_SET_OBJECT(dictionary, key, value, condition) if (condition)[dictionary setObject:value forKey:key]
 #define SAFE_ADD_OBJECT(mutableArray, value) if (nil != value) [mutableArray addObject:value]
 #define SAFE_SET_OBJECT(dictionary, key, value) if (nil != value)[dictionary setObject:value forKey:key]

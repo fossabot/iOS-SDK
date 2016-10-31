@@ -7,6 +7,7 @@
 //
 
 #import "PXPTrafficMonitor.h"
+#import "PXPDefines.h"
 
 @interface PXPTrafficMonitor()
 
@@ -38,7 +39,8 @@
 {
     self = [super init];
     if (self) {
-        self.monitorQueue =  dispatch_queue_create("co.pixpie.trafficmonitor", DISPATCH_QUEUE_CONCURRENT);
+        const char * identifier = PXP_IDENTIFY_CLASS(self.class).UTF8String;
+        self.monitorQueue =  dispatch_queue_create(identifier, DISPATCH_QUEUE_CONCURRENT);
 
         self.totalBytes = 0;
         self.currentFrameBytes = 0;

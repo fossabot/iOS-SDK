@@ -208,16 +208,6 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     return shouldAccept;
 }
 
-+ (BOOL)requestIsCacheEquivalent:(NSURLRequest *)a toRequest:(NSURLRequest *)b {
-
-    BOOL result = [super requestIsCacheEquivalent:a toRequest:b];
-    NSURL* urlA = a.URL;
-    NSURL* urlB = b.URL;
-
-
-    return result;
-}
-
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request
 {
     assert(request != nil);
@@ -812,9 +802,10 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     static NSURLCache* sCache = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        NSString* identifier = PXP_IDENTIFY_CLASS(self.class);
         sCache = [[NSURLCache alloc] initWithMemoryCapacity: 20 * 1024 * 1024
-                                                diskCapacity: 150 * 1024 * 1024
-                                                    diskPath: @"co.pixpie.imagecache"];
+                                               diskCapacity: 150 * 1024 * 1024
+                                                   diskPath: identifier];
     });
     return sCache;
 }

@@ -17,8 +17,9 @@
 #import "PXPTrafficMonitor.h"
 #import "PXPHTTPProtocol.h"
 #import "PXPURLSessionDemux.h"
+#import "PXPDefines.h"
 
-NSString* const PXPStateChangeNotification = @"co.pixpie.notification.PXPStateChange";
+NSString* const PXPStateChangeNotification = @PXP_IDENTIFY("notification.PXPStateChange");
 
 @interface PXP ()
 

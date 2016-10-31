@@ -7,6 +7,7 @@
 //
 
 #import "PXPURLSessionDemux.h"
+#import "PXPDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -86,17 +87,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithConfiguration:(NSURLSessionConfiguration *)configuration
 {
-    // configuration may be nil
     self = [super init];
     if (self != nil) {
         self->_configuration = [configuration copy];
         self->_taskInfoByTaskID = [[NSMutableDictionary alloc] init];
         self->_sessionDelegateQueue = [[NSOperationQueue alloc] init];
         self->_sessionDelegateQueue.maxConcurrentOperationCount = 1;
-        self->_sessionDelegateQueue.name = @"PXPSURLSessionDemux";
-
+        self->_sessionDelegateQueue.name = PXP_IDENTIFY_CLASS(self.class);
+        assert(self->_sessionDelegateQueue.name.length > 0);
         self->_session = [NSURLSession sessionWithConfiguration:self->_configuration delegate:self delegateQueue:self->_sessionDelegateQueue];
-        self->_session.sessionDescription = @"PXPSURLSessionDemux";
+        self->_session.sessionDescription = self->_sessionDelegateQueue.name;
     }
     return self;
 }
