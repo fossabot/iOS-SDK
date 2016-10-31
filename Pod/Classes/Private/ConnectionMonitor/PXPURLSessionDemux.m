@@ -9,8 +9,6 @@
 #import "PXPURLSessionDemux.h"
 #import "PXPDefines.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface PXPSURLSessionDemuxTaskInfo : NSObject
 
 - (instancetype)initWithTask:(NSURLSessionDataTask *)task delegate:(id<NSURLSessionDataDelegate>)delegate modes:(NSArray *)modes;
@@ -73,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PXPURLSessionDemux () <NSURLSessionDataDelegate>
 
-@property (atomic, strong, readonly ) NSMutableDictionary * taskInfoByTaskID;       // keys NSURLSessionTask taskIdentifier, values are SessionManager
+@property (atomic, strong, readonly ) NSMutableDictionary<NSNumber*, PXPSURLSessionDemuxTaskInfo*> * taskInfoByTaskID;       // keys NSURLSessionTask taskIdentifier, values are SessionManager
 @property (atomic, strong, readonly ) NSOperationQueue *    sessionDelegateQueue;
 
 @end
@@ -141,9 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)newRequest completionHandler:(void (^)(NSURLRequest *))completionHandler
 {
-    PXPSURLSessionDemuxTaskInfo *    taskInfo;
-
-    taskInfo = [self taskInfoForTask:task];
+    PXPSURLSessionDemuxTaskInfo * taskInfo = [self taskInfoForTask:task];
     if ([taskInfo.delegate respondsToSelector:@selector(URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:)]) {
         [taskInfo performBlock:^{
             [taskInfo.delegate URLSession:session task:task willPerformHTTPRedirection:response newRequest:newRequest completionHandler:completionHandler];
@@ -157,9 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
 didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
  completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler
 {
-    PXPSURLSessionDemuxTaskInfo *    taskInfo;
-
-    taskInfo = [self taskInfoForTask:task];
+    PXPSURLSessionDemuxTaskInfo *taskInfo = [self taskInfoForTask:task];
     if ([taskInfo.delegate respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]) {
         [taskInfo performBlock:^{
             [taskInfo.delegate URLSession:session task:task didReceiveChallenge:challenge completionHandler:completionHandler];
@@ -171,9 +165,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task needNewBodyStream:(void (^)(NSInputStream * _Nullable bodyStream))completionHandler
 {
-    PXPSURLSessionDemuxTaskInfo *    taskInfo;
-
-    taskInfo = [self taskInfoForTask:task];
+    PXPSURLSessionDemuxTaskInfo * taskInfo = [self taskInfoForTask:task];
     if ([taskInfo.delegate respondsToSelector:@selector(URLSession:task:needNewBodyStream:)]) {
         [taskInfo performBlock:^{
             [taskInfo.delegate URLSession:session task:task needNewBodyStream:completionHandler];
@@ -185,9 +177,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
-    PXPSURLSessionDemuxTaskInfo *    taskInfo;
-
-    taskInfo = [self taskInfoForTask:task];
+    PXPSURLSessionDemuxTaskInfo * taskInfo = [self taskInfoForTask:task];
     if ([taskInfo.delegate respondsToSelector:@selector(URLSession:task:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:)]) {
         [taskInfo performBlock:^{
             [taskInfo.delegate URLSession:session task:task didSendBodyData:bytesSent totalBytesSent:totalBytesSent totalBytesExpectedToSend:totalBytesExpectedToSend];
@@ -197,9 +187,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
 {
-    PXPSURLSessionDemuxTaskInfo *    taskInfo;
-
-    taskInfo = [self taskInfoForTask:task];
+    PXPSURLSessionDemuxTaskInfo * taskInfo = [self taskInfoForTask:task];
 
     // This is our last delegate callback so we remove our task info record.
 
@@ -274,5 +262,3 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 }
 
 @end
-
-NS_ASSUME_NONNULL_END

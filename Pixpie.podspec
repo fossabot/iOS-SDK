@@ -26,7 +26,7 @@ pch_PXP = <<-EOS
   #define PIXPIE_VERSION "#{s.version.to_s}"
 #endif
 #ifndef PIXPIE_URL
-  #define PIXPIE_URL "http://api.pixpie.co:9000"
+  #define PIXPIE_URL "https://api.pixpie.co:9443"
 #endif
 #ifndef PIXPIE_MAGIC_KEY
     #define PIXPIE_MAGIC_KEY "yuuRiesahs3niet7thac"

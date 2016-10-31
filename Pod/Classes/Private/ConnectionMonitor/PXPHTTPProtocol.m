@@ -603,12 +603,9 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     [self handleError:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:nil]];
 }
 
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *))completionHandler
+- (void)URLSession:(NSURLSession * __unused)session task:(NSURLSessionTask * __unused)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *))completionHandler
 {
     BOOL result;
-
-#pragma unused(session)
-#pragma unused(task)
     assert(task == self.task);
     assert(challenge != nil);
     assert(completionHandler != nil);
@@ -628,12 +625,15 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     // If the client wants the challenge, kick off that process.  If not, resolve it by doing the default thing.
 
     if (result) {
-        [[self class] HTTPProtocol:self logWithFormat:@"can authenticate %@", challenge.protectionSpace.authenticationMethod];
         
         [self didReceiveAuthenticationChallenge:challenge completionHandler:completionHandler];
-    } else {
-        [[self class] HTTPProtocol:self logWithFormat:@"cannot authenticate %@", challenge.protectionSpace.authenticationMethod];
+    } else if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
         
+        NSURLCredential * credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+        completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
+    } else {
+
+        [[self class] HTTPProtocol:self logWithFormat:@"cannot authenticate %@", challenge.protectionSpace.authenticationMethod];
         completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
     }
 }
