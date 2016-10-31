@@ -11,8 +11,16 @@
 
 @implementation PXPAutomaticTransform
 
+- (instancetype)init {
+    self = [super init];
+    if (self != nil) {
+        _contextView = nil;
+    }
+    return self;
+}
+
 - (instancetype)initWithImageView:(UIImageView*)contextView originUrl:(NSString*)url; {
-    self = [super initWithOriginUrl:url];
+    self = [self initWithOriginUrl:url];
     if (self != nil) {
         _contextView = contextView;
     }

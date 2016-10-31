@@ -14,11 +14,12 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.public_header_files = 'Pod/Classes/Public/**/*.h'
+  s.public_header_files = 'Pod/Classes/Public/**/*.{h,modulemap}'
   s.dependency 'AFNetworking', '~> 3.0'
   s.dependency 'WebP', '~> 0.5.0'
   s.xcconfig = { :'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES'}
   s.module_map = 'Pod/Classes/Public/Pixpie.modulemap'
+#  s.resources = 'Pod/Assets/**/*'
 
 pch_PXP = <<-EOS
 #ifndef PIXPIE_VERSION
@@ -29,6 +30,9 @@ pch_PXP = <<-EOS
 #endif
 #ifndef PIXPIE_MAGIC_KEY
     #define PIXPIE_MAGIC_KEY "yuuRiesahs3niet7thac"
+#endif
+#ifndef PIXPIE_IDENTIFIER
+    #define PIXPIE_IDENTIFIER "co.pixpie"
 #endif
 EOS
 

@@ -102,9 +102,9 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
     func configStatusView() {
         self.statusView.backgroundColor = UIColor.clearColor()
         switch PXP.sharedSDK().state {
-        case PXPStateReady:
+        case .Ready:
             self.statusView.state = .Green
-        case PXPStateFailed:
+        case .Failed:
             self.statusView.state = .Red
         default:
             self.statusView.state = .Yellow

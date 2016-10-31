@@ -52,7 +52,7 @@ class SplashViewController: UIViewController {
 
         if (object as! PXP == PXP.sharedSDK()) {
             timer?.invalidate()
-            if (PXP.sharedSDK().state != PXPStateNotInitialized) {
+            if (PXP.sharedSDK().state != .NotInitialized) {
                 timer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(SplashViewController.splashCompleteAction(_:)), userInfo: nil, repeats: false)
             }
         }
