@@ -8,6 +8,7 @@
 
 #import "UIImage+PXP_WebP.h"
 #import <WebP/decode.h>
+#import "PXPDefines.h"
 
 @implementation UIImage (PXP_WebP)
 
@@ -43,7 +44,7 @@
         CGColorSpaceRelease(colorSpace);
 
         if (WebPDecodeBGRAInto(imgData.bytes, imgData.length, targetMemory, targetBytesPerRow * targetContextSize.height, (int)targetBytesPerRow) == NULL) {
-            NSLog(@"error decoding webp");
+            PXPLog(@"error decoding webp");
         }
 
         for (int y = 0; y < targetContextSize.height; y++) {

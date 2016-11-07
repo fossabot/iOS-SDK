@@ -44,7 +44,7 @@
 + (void)setDataDelegate:(id<PXPHTTPProtocolDataDelegate>)dataDelegate;
 + (id<PXPHTTPProtocolDataDelegate>)dataDelegate;
 
-+ (void)setAuthDelegate:(id<PXPHTTPProtocolDataDelegate>)authDelegate;
++ (void)setAuthDelegate:(id<PXPHTTPProtocolAuthDelegate>)authDelegate;
 + (id<PXPHTTPProtocolAuthDelegate>)authDelegate;
 
 

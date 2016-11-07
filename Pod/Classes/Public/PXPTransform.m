@@ -95,7 +95,7 @@ static NSString* const kPXPWebPFormat = @"webp";
         [components addObject:self.originUrl];
         result = [components componentsJoinedByString:@"/"];
     } while (NO);
-    NSLog(@"URL: %@", result);
+    PXPLog(@"URL: %@", result);
     return result;
 }
 

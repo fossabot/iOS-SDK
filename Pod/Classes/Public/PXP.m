@@ -18,8 +18,16 @@
 #import "PXPHTTPProtocol.h"
 #import "PXPURLSessionDemux.h"
 #import "PXPDefines.h"
+#import "PXPAuthChallengeManager.h"
+#import "PXPImageRequestWrapper.h"
 
 NSString* const PXPStateChangeNotification = @PXP_IDENTIFY("notification.PXPStateChange");
+
+@interface UIImageView (PXPExtensions_Private)
+
++ (PXPImageRequestWrapper*)pxp_sharedImageDownloader;
+
+@end
 
 @interface PXP ()
 
@@ -40,6 +48,8 @@ NSString* const PXPStateChangeNotification = @PXP_IDENTIFY("notification.PXPStat
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedPXP = [PXP new];
+        [[PXPHTTPProtocol class] setAuthDelegate:[PXPAuthChallengeManager new]];
+
     });
 
     return _sharedPXP;
@@ -122,6 +132,7 @@ NSString* const PXPStateChangeNotification = @PXP_IDENTIFY("notification.PXPStat
 + (void)cleanUp {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     [PXPHTTPProtocol.defaultURLCache removeAllCachedResponses];
+    [[UIImageView pxp_sharedImageDownloader] cleanUp];
 }
 
 #pragma mark - Object Lifecycle

@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^PXPImageSuccessBlock)(NSURLSessionTask* task, id _Nullable responseObject);
+typedef void (^PXPImageSuccessBlock)(NSURLSessionTask* _Nullable task, id _Nullable responseObject);
 typedef void (^PXPImageFailureBlock)(NSURLSessionTask* task, NSError* error);
 
 @interface PXPImageRequestWrapper : NSObject
@@ -36,7 +36,7 @@ typedef void (^PXPImageFailureBlock)(NSURLSessionTask* task, NSError* error);
                                                 success:(PXPImageSuccessBlock)successBlock
                                                failture:(PXPImageFailureBlock)failtureBlock;
 
-
+- (void)cleanUp;
 
 @end
 

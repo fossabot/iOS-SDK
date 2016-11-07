@@ -11,6 +11,7 @@
 #import "CacheStoragePolicy.h"
 #import "PXPURLSessionDemux.h"
 #import "PXPDefines.h"
+#import "PXPAuthChallengeManager.h"
 
 static NSString* const kPXPCanonicalPropertyKey = @"x-pixpie-is-canonical-request";
 static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-request";
@@ -127,7 +128,6 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     static PXPURLSessionDemux * sDemux;
     dispatch_once(&sOnceToken, ^{
         NSURLSessionConfiguration* configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         configuration.allowsCellularAccess = YES;
         configuration.HTTPShouldUsePipelining = YES;
         configuration.timeoutIntervalForRequest = 15;
@@ -143,11 +143,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
 
 + (void)HTTPProtocol:(PXPHTTPProtocol *)protocol logWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(2, 3)
 {
-    va_list arguments;
-    va_start(arguments, format);
-#warning NSLog
-    NSLogv(format, arguments);
-    va_end(arguments);
+
 }
 
 #pragma mark - NSURLProtocol class methods overrides
@@ -627,10 +623,6 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     if (result) {
         
         [self didReceiveAuthenticationChallenge:challenge completionHandler:completionHandler];
-    } else if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        
-        NSURLCredential * credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-        completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
     } else {
 
         [[self class] HTTPProtocol:self logWithFormat:@"cannot authenticate %@", challenge.protectionSpace.authenticationMethod];

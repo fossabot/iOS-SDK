@@ -17,6 +17,7 @@
 #import "PXP.h"
 #import "PXP_Internal.h"
 #import "PXPImageCache.h"
+#import "PXPAuthChallengeManager.h"
 
 @interface PXPImageRequestWrapper ()
 
@@ -46,6 +47,10 @@
     return self;
 }
 
+- (void)cleanUp {
+    [self.cache removeAllObjects];
+}
+
 - (AFHTTPSessionOperation *)imageDownloadTaskForUrl:(NSString *)urlString
                                      uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
                                    downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
@@ -72,7 +77,7 @@
     if (image == nil) {
         task = [AFHTTPSessionOperation operationWithManager:self.sessionManager request:request uploadProgress:uploadProgress downloadProgress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable object) {
             [self.cache cacheImage:object forRequest:request];
-            successBlock(task, image);
+            successBlock(task, object);
         } failure:failtureBlock];
         [self.queue addOperation:task];
     } else {
@@ -89,7 +94,6 @@
     configuration.HTTPShouldUsePipelining = YES;
     configuration.allowsCellularAccess = YES;
     configuration.timeoutIntervalForRequest = 15.0;
-    configuration.HTTPMaximumConnectionsPerHost = 3;
     configuration.URLCache = nil;
     configuration.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
     configuration.protocolClasses = @[[PXPHTTPProtocol class]];

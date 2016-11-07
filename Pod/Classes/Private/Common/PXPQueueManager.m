@@ -59,16 +59,16 @@
             queue.maxConcurrentOperationCount = 4;
             break;
         case PXPDataSpeedHigh:
-            queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+            queue.maxConcurrentOperationCount = 6;
             break;
         case PXPDataSpeedExtraHigh:
-            queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+            queue.maxConcurrentOperationCount = 6;
             break;
         case PXPDataSpeedNone:
             queue.maxConcurrentOperationCount = 0;
             break;
         default:
-            queue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+            queue.maxConcurrentOperationCount = 6;
             break;
     }
 }

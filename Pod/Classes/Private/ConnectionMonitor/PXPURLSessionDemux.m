@@ -137,6 +137,8 @@
     return result;
 }
 
+#pragma mark - NSURLSessionTaskDelegate
+
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)newRequest completionHandler:(void (^)(NSURLRequest *))completionHandler
 {
     PXPSURLSessionDemuxTaskInfo * taskInfo = [self taskInfoForTask:task];
@@ -163,6 +165,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
     }
 }
 
+/*
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task needNewBodyStream:(void (^)(NSInputStream * _Nullable bodyStream))completionHandler
 {
     PXPSURLSessionDemuxTaskInfo * taskInfo = [self taskInfoForTask:task];
@@ -174,6 +177,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
         completionHandler(nil);
     }
 }
+ */
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
@@ -208,6 +212,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
         [taskInfo invalidate];
     }
 }
+
+#pragma mark - NSURLSessionDataTaskDelegate
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
