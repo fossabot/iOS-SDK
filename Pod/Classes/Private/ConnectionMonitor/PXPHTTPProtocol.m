@@ -255,7 +255,7 @@ static id<PXPHTTPProtocolAuthDelegate> sAuthDelegate;
     calculatedModes = [NSMutableArray array];
     [calculatedModes addObject:NSDefaultRunLoopMode];
     currentMode = [NSRunLoop currentRunLoop].currentMode;
-    if ( (currentMode != nil) && ! [currentMode isEqual:NSDefaultRunLoopMode] ) {
+    if ( (currentMode != nil) && ! [currentMode isEqual:NSDefaultRunLoopMode] && ! [currentMode isEqual:UITrackingRunLoopMode] ) {
         [calculatedModes addObject:currentMode];
     }
     self.modes = calculatedModes;
