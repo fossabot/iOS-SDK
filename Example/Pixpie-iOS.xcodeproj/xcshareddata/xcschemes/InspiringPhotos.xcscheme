@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "Pixpie-iOS_Tests.xctest"
-               BlueprintName = "Pixpie-iOS_Tests"
+               BlueprintIdentifier = "0A1545171DDA0ADA0048E6CD"
+               BuildableName = "InspiringPhotosTests.xctest"
+               BlueprintName = "InspiringPhotosTests"
                ReferencedContainer = "container:Pixpie-iOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
