@@ -72,7 +72,7 @@ Use created in Pixpie cloud application Bundle ID (reverse url id) that matches 
 If authentication or connection status is changed, PXP instance sends notification PXPStateChangeNotification.
 PXP instance has property status (KVO), that can have a few values: NotInitialized, Ready, Failed.
 
-### Get remote (third party) and local (uploaded) images ###
+### Get remote (third party) and local (uploaded) images at Pixpie cloud ###
 
 ### Integration with UIImageView
 
@@ -104,6 +104,138 @@ Method is able to work with:
 ```
 
 pxp_cancelLoad method is used to cancel image loading process.
+
+### Image upload 
+
+PXPImageRequestWrapper class is responsible for image uploading to mobile device.
+
+```objective-c
+
+  - (instancetype)init;
+
+```
+
+Creates wrapper with default configuration of NSURLSession.
+
+```objective-c
+
+  - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)config;
+
+```
+
+Creates wrapper with custom NSURLSession.
+
+```objective-c
+
+  - (AFHTTPSessionOperation *)imageDownloadTaskForUrl:(NSString *)urlString
+                                     uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
+                                   downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
+                                            success:(PXPImageSuccessBlock)successBlock
+                                           failure:(PXPImageFailureBlock)failureBlock;
+
+```
+
+Returns subclass with NSOperation with NSURLSessionDataTask inside. It is automatically added to Pixpie image downloading queue. Recieves image url as parameter.
+
+```objective-c
+
+  - (AFHTTPSessionOperation *)imageDownloadTaskForRequest:(NSURLRequest *)request
+                                         uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
+                                       downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
+                                                success:(PXPImageSuccessBlock)successBlock
+                                               failure:(PXPImageFailureBlock)failureBlock;
+
+```
+
+Returns subclass with NSOperation with NSURLSessionDataTask inside. It is automatically added to Pixpie image downloading queue. Recieves request as parameter.
+
+### Image transformation
+
+PXPTransform class is responsible for image transformation and URL generation that are mapped to Pixpie cloud.
+
+```objective-c
+
+  - (instancetype)init;
+  - (instancetype)initWithOriginUrl:(NSString*)url;
+
+```
+
+Initializers. The second one receives the link to original image as parameter.
+
+```objective-c
+
+  @property (nonatomic, strong) NSString* originUrl;
+
+```
+
+Link to original image.
+
+```objective-c
+
+  @property (nonatomic, strong) NSNumber* imageQuality;
+
+```  
+
+Image quality. Can be 'Automatic', then the quality is taken according to network quality and 'Default'(80% of original image quality).
+
+
+```objective-c
+
+  @property (nonatomic, assign) PXPTransformFormat imageFormat;
+  
+```  
+
+Image format:
+- PXPTransformFormatDefault (default)
+- PXPTransformFormatWebP (recommended)
+
+```objective-c
+
+  @property (nonatomic, strong, nullable) NSNumber* width;
+  @property (nonatomic, strong, nullable) NSNumber* height;
+
+```
+
+Desirable width and height.
+
+```objective-c
+
+  - (NSString * _Nullable)contentUrl;
+  
+```  
+
+Method returns link to image. Can be NULL only if originUrl value is not set.
+
+#### Automatic image transformation ####
+
+PXPAutomaticTransform is the subclass of PXPTransform, it automatically set the size(width, height), quality and format of image.
+
+```objective-c
+
+  - (instancetype)initWithImageView:(UIImageView* _Nullable)contextView originUrl:(NSString* _Nullable)url;
+  
+```  
+
+Can be initialized with UIImageView, where the image should be located (it's needed to automatically set the image format) and with the link to original image.
+
+```objective-c
+
+  @property (nonatomic, weak, nullable) UIImageView* contextView;
+
+```
+
+UIImageView where the image will be shown.
+
+```objective-c
+
+  @property (nonatomic, strong) NSNumber* imageQuality;
+  @property (nonatomic, assign) PXPTransformFormat imageFormat;
+  @property (nonatomic, strong, nullable) NSNumber* width;
+  @property (nonatomic, strong, nullable) NSNumber* height;
+  
+```
+
+If the parameter is NULL(not set), then the instance will automatically define appropriate image format, width, height and quality.
 
 
 ## License
