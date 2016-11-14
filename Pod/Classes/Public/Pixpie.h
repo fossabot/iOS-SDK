@@ -16,6 +16,7 @@
 #import "PXPTransform.h"
 #import "PXPImageRequestWrapper.h"
 #import "PXPAutomaticTransform.h"
+#import "PXPImageCache.h"
 #import "UIImageView+PXPExtensions.h"
 
 FOUNDATION_EXPORT double PixpieVersionNumber;
