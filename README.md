@@ -1,6 +1,6 @@
 # Pixpie iOS SDK
 
-[![CI Status](http://img.shields.io/travis/PixpieCo/iOS-SDK.svg?style=flat)](https://travis-ci.org/Dmitry Osipa/Pixpie-iOS)
+[![CI Status](http://img.shields.io/travis/PixpieCo/iOS-SDK.svg?style=flat)](https://travis-ci.org/PixpieCo/iOS-SDK)
 [![Version](https://img.shields.io/badge/pod-0.3.6-blue.svg)](http://cocoapods.org/pods/Pixpie-iOS)
 [![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](http://cocoapods.org/pods/Pixpie-iOS)
 
@@ -181,8 +181,7 @@ Returns subclass with `NSOperation` with `NSURLSessionDataTask` inside. It is au
 
 #### Image transformation
 
-`PXPTransform` class is responsible for image transformation and URL generation that are mapped to Pixpie cloud.
-Can be intialized with
+`PXPTransform` class is responsible for Pixpie URL generation from `originUrl`. 
 
 ```objective-c
 
