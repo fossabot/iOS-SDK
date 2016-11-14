@@ -6,7 +6,6 @@ target 'InspiringPhotos' do
   pod 'Pixpie', :path => "../"
   pod 'PXStatusView'
   pod 'InAppSettingsKit'
-  pod 'HockeySDK'
 end
 
 target 'Pixpie-iOS_Tests' do
