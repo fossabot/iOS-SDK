@@ -1,11 +1,10 @@
 # Pixpie iOS SDK
 
-[![CI Status](http://img.shields.io/travis/Dmitry Osipa/Pixpie-iOS.svg?style=flat)](https://travis-ci.org/Dmitry Osipa/Pixpie-iOS)
-[![Version](https://img.shields.io/cocoapods/v/Pixpie-iOS.svg?style=flat)](http://cocoapods.org/pods/Pixpie-iOS)
-[![License](https://img.shields.io/cocoapods/l/Pixpie-iOS.svg?style=flat)](http://cocoapods.org/pods/Pixpie-iOS)
-[![Platform](https://img.shields.io/cocoapods/p/Pixpie-iOS.svg?style=flat)](http://cocoapods.org/pods/Pixpie-iOS)
+[![CI Status](http://img.shields.io/travis/PixpieCo/iOS-SDK.svg?style=flat)](https://travis-ci.org/Dmitry Osipa/Pixpie-iOS)
+[![Version](https://img.shields.io/badge/pod-0.3.6-blue.svg)](http://cocoapods.org/pods/Pixpie-iOS)
+[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](http://cocoapods.org/pods/Pixpie-iOS)
 
-## What is it for? ##
+## What is it for?
 
 Pixpie is a Platform as a Service for image optimization and manipulation.
 
@@ -14,79 +13,109 @@ iOS SDK provides API methods implementation to access Pixpie REST API with addit
 - measuring of network quality
 - usage of built-in cache
 
-## Usage ##
+## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
 
-iOS 8+
+* iOS 8+
+* Xcode 7+
 
-## How to start? ##
+## How to start?
 
 Check [Getting started](https://pixpie.atlassian.net/wiki/display/DOC/Getting+started) guide and [register](https://cloud.pixpie.co/registration) your account
 
 ## Installation
 
 Pixpie is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+it, simply add the following lines to your Podfile:
 
 ```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/PixpieCo/PixpieCocoapods.git'
+
 pod "Pixpie"
 ```
 
-### Authentication ###
+## Architecture
+##### Authentication
+- `PXP`
+
+##### Pixpie Cloud API
+- `PXPAPIManager`
+- `PXPAPITask`
+
+##### Image Manipulation
+- `PXPTransform`
+- `PXPAutomaticTransform`
+
+##### Image Downloading
+- `PXPImageRequestWrapper`
+- `PXPImageCache`
+
+##### Monitoring
+- `PXPTrafficMonitor`
+
+##### UIKit Extensions
+- `UIImageView+PXPExtensions`
+
+## Usage
+
+#### Authentication
 
 After [creation of new application](https://pixpie.atlassian.net/wiki/display/DOC/Create+application),
 use Secret key ("YOUR_APPLICATION_SECRET_KEY") in auth method.
 
-Use created in Pixpie cloud application Bundle ID (reverse url id) that matches application Bundle ID in Xcode.
+Use created in [Pixpie cloud](https://cloud.pixpie.co) application Bundle ID (`com.example.AppName`) that matches application's Bundle ID in Xcode.
 
-##### Obj-C, AppDelegate.m #####
+##### Obj-C, AppDelegate.m
 
 ```objective-c
+  @import Pixpie;
 
   - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
   {
-  …
+  ...
     [[PXP sharedSDK] authWithApiKey:@"YOUR_APPLICATION_SECRET_KEY"]
   ...
   }
 
 ```
 
-##### Swift, AppDelegate.swift #####
+##### Swift, AppDelegate.swift
 
-```objective-c
-
+```swift
+  import Pixpie
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
   ...
     PXP.sharedSDK.auth("YOUR_APPLICATION_SECRET_KEY")
-  …
+  ...
   }
 
 ```
 
-### SDK status ###
+#### SDK status
 
-If authentication or connection status is changed, PXP instance sends notification PXPStateChangeNotification.
-PXP instance has property status (KVO), that can have a few values: NotInitialized, Ready, Failed.
+If authentication or connection status is changed, `PXP` instance sends notification `PXPStateChangeNotification`.
+PXP instance has property status (KVO), that can have a few values: `NotInitialized`, `Ready`, `Failed`.
 
-### Get remote (third party) and local (uploaded) images at Pixpie cloud ###
+#### Get remote (third party) and local (uploaded) images at Pixpie Cloud
 
-### Integration with UIImageView
+##### With UIImageView
+Pixpie SDK provides UIImageView expension to easily download images.
 
-UIImageView + PXPExtensions category
-
+##### Requesting Image
 ```objective-c
 
   - (void)pxp_requestImage:(NSString*)url;
   
 ```
 Method processes in 2 modes:
-- if passed url is a valid HTTP(s) link, it requests the image by URL, that is located on remote (third party) server
-- if passed url is not absolute URL to remote server, method will try to get image at Pixpie cloud by relative path
+- if `url` is a valid HTTP(s) link, it requests the image by URL, that is located on remote (third party) server
+- if `url` is not absolute URL to remote server, method will try to get image at Pixpie cloud by relative path
 
+##### UIImageView+PXPExtensions.h
 ```objective-c
 
   - (void)pxp_requestImage:(NSString*)url headers:(NSDictionary * _Nullable )headers completion:(PXPImageRequestCompletionBlock _Nullable)completion;
@@ -97,17 +126,18 @@ Method is able to work with:
 - additional request headers (the priority of passed headers is higher than of standart)
 - callback that fires when loading process finish
 
+##### UIImageView+PXPExtensions.h
 ```objective-c
 
   - (void)pxp_cancelLoad;
 
 ```
 
-pxp_cancelLoad method is used to cancel image loading process.
+`pxp_cancelLoad` method is used to cancel image loading process.
 
-### Image upload 
+#### Image Download via PXPImageDownloader
 
-PXPImageRequestWrapper class is responsible for image uploading to mobile device.
+`PXPImageDownloader` class is responsible for image uploading to mobile device.
 
 ```objective-c
 
@@ -115,7 +145,7 @@ PXPImageRequestWrapper class is responsible for image uploading to mobile device
 
 ```
 
-Creates wrapper with default configuration of NSURLSession.
+Creates Image Downloader with `NSURLSession` with `defaultConfiguration`.
 
 ```objective-c
 
@@ -123,7 +153,7 @@ Creates wrapper with default configuration of NSURLSession.
 
 ```
 
-Creates wrapper with custom NSURLSession.
+Creates wrapper with custom `NSURLSession`.
 
 ```objective-c
 
@@ -135,7 +165,7 @@ Creates wrapper with custom NSURLSession.
 
 ```
 
-Returns subclass with NSOperation with NSURLSessionDataTask inside. It is automatically added to Pixpie image downloading queue. Recieves image url as parameter.
+Returns subclass with `NSOperation` with `NSURLSessionDataTask` inside. It is automatically added to Pixpie image downloading queue. Recieves `urlString` to image as parameter.
 
 ```objective-c
 
@@ -147,20 +177,20 @@ Returns subclass with NSOperation with NSURLSessionDataTask inside. It is automa
 
 ```
 
-Returns subclass with NSOperation with NSURLSessionDataTask inside. It is automatically added to Pixpie image downloading queue. Recieves request as parameter.
+Returns subclass with `NSOperation` with `NSURLSessionDataTask` inside. It is automatically added to Pixpie image downloading queue. Recieves request as parameter.
 
-### Image transformation
+#### Image transformation
 
-PXPTransform class is responsible for image transformation and URL generation that are mapped to Pixpie cloud.
+`PXPTransform` class is responsible for image transformation and URL generation that are mapped to Pixpie cloud.
+Can be intialized with
 
 ```objective-c
 
   - (instancetype)init;
-  - (instancetype)initWithOriginUrl:(NSString*)url;
+  - (instancetype)initWithOriginUrl:(NSString*)originUrl;
 
 ```
 
-Initializers. The second one receives the link to original image as parameter.
 
 ```objective-c
 
@@ -174,20 +204,20 @@ Link to original image.
 
   @property (nonatomic, strong) NSNumber* imageQuality;
 
-```  
+```
 
-Image quality. Can be 'Automatic', then the quality is taken according to network quality and 'Default'(80% of original image quality).
+Image quality. Can be `Automatic`, then the quality is taken according to network quality and `Default`(80% of original image quality).
 
 
 ```objective-c
 
   @property (nonatomic, assign) PXPTransformFormat imageFormat;
   
-```  
+```
 
 Image format:
-- PXPTransformFormatDefault (default)
-- PXPTransformFormatWebP (recommended)
+- `PXPTransformFormatDefault` (default)
+- `PXPTransformFormatWebP` (recommended)
 
 ```objective-c
 
@@ -202,21 +232,21 @@ Desirable width and height.
 
   - (NSString * _Nullable)contentUrl;
   
-```  
+```
 
-Method returns link to image. Can be NULL only if originUrl value is not set.
+Method returns link to image. Can be `NULL` only if originUrl value is not set.
 
-#### Automatic image transformation ####
+#### Automatic image transformation
 
-PXPAutomaticTransform is the subclass of PXPTransform, it automatically set the size(width, height), quality and format of image.
+`PXPAutomaticTransform` is the subclass of `PXPTransform`, it automatically set the `size(width, height)`, quality and format of image.
 
 ```objective-c
 
   - (instancetype)initWithImageView:(UIImageView* _Nullable)contextView originUrl:(NSString* _Nullable)url;
   
-```  
+```
 
-Can be initialized with UIImageView, where the image should be located (it's needed to automatically set the image format) and with the link to original image.
+Can be initialized with `UIImageView`, where the image should be located (it's needed to automatically set the image format) and with the link to original image.
 
 ```objective-c
 
@@ -224,7 +254,7 @@ Can be initialized with UIImageView, where the image should be located (it's nee
 
 ```
 
-UIImageView where the image will be shown.
+`UIImageView` where the image will be shown.
 
 ```objective-c
 
@@ -235,7 +265,7 @@ UIImageView where the image will be shown.
   
 ```
 
-If the parameter is NULL(not set), then the instance will automatically define appropriate image format, width, height and quality.
+If the parameter is `NULL`(not set), then the instance will automatically define appropriate image format, width, height and quality.
 
 
 ## License
