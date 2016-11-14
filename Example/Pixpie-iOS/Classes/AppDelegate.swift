@@ -14,23 +14,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         let defaultLicense = "41bc38fde0dfed6917b6f54fdc32761ac2d9e7eb6cd66b8591e586e6fc6b9063"
-        NSUserDefaults.standardUserDefaults().registerDefaults(["pxp_license" : defaultLicense])
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.splashCompleted(_:)), name: kSplashCompleteNotification, object: nil)
+        UserDefaults.standard.register(defaults: ["pxp_license" : defaultLicense])
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.splashCompleted(_:)), name: NSNotification.Name(rawValue: kSplashCompleteNotification), object: nil)
         PixpieManager.cleanUp();
         PixpieManager.authorize();
-        self.window?.tintColor = UIColor.whiteColor()
+        self.window?.tintColor = UIColor.white
         return true
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: kSplashCompleteNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kSplashCompleteNotification), object: nil)
     }
 
-    func splashCompleted(note: NSNotification) {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+    func splashCompleted(_ note: Notification) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         self.window?.rootViewController = storyboard.instantiateInitialViewController()
     }
 }

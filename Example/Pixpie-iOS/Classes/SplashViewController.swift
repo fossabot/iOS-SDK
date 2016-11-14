@@ -15,9 +15,9 @@ class SplashViewController: UIViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var logoView: UIImageView!
-    var timer: NSTimer?
+    var timer: Timer?
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         commonInit()
     }
@@ -32,7 +32,7 @@ class SplashViewController: UIViewController {
     }
 
     func commonInit() {
-        let options = NSKeyValueObservingOptions([.New, .Initial])
+        let options = NSKeyValueObservingOptions([.new, .initial])
         PXP.sharedSDK().addObserver(self, forKeyPath: "state", options: options, context: nil);
     }
 
@@ -40,25 +40,25 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         activityIndicator.startAnimating();
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         activityIndicator.stopAnimating()
     }
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 
         if (object as! PXP == PXP.sharedSDK()) {
             timer?.invalidate()
-            if (PXP.sharedSDK().state != .NotInitialized) {
-                timer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(SplashViewController.splashCompleteAction(_:)), userInfo: nil, repeats: false)
+            if (PXP.sharedSDK().state != .notInitialized) {
+                timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(SplashViewController.splashCompleteAction(_:)), userInfo: nil, repeats: false)
             }
         }
     }
 
-    func splashCompleteAction(note: NSNotification) {
-        NSNotificationCenter.defaultCenter().postNotificationName(kSplashCompleteNotification, object: self)
+    func splashCompleteAction(_ note: Notification) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kSplashCompleteNotification), object: self)
     }
 }

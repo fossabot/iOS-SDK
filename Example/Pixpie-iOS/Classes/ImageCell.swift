@@ -25,8 +25,8 @@ class ImageCell: UICollectionViewCell {
     func commonInit() {
         let cellImageView = UIImageView(frame: bounds)
         cellImageView.frame = self.contentView.bounds
-        cellImageView.contentMode = .ScaleAspectFit
-        cellImageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        cellImageView.contentMode = .scaleAspectFit
+        cellImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.addSubview(cellImageView)
         imageView = cellImageView
     }
