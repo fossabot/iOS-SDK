@@ -8,7 +8,7 @@ target 'InspiringPhotos' do
   pod 'InAppSettingsKit'
 end
 
-target 'Pixpie-iOS_Tests' do
+target 'InspiringPhotosTests' do
   pod 'Pixpie', :path => "../"
   pod 'Specta'
   pod 'Expecta'

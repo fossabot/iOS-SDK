@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1545251DDA12610048E6CD /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		0A1CEA6E1C83B5F50035D679 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */; };
 		0A1CEA721C83B6980035D679 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A1CEA711C83B6980035D679 /* Splash.storyboard */; };
 		0A56CFB31C84650B001C919C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A56CFB21C84650B001C919C /* Settings.bundle */; };
@@ -26,9 +27,21 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		D15A52FBB7482430B10B563D /* Pods_InspiringPhotosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75CE86FC9EC93DFF48125BE /* Pods_InspiringPhotosTests.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0A15451D1DDA0ADA0048E6CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6003F589195388D20070C39A;
+			remoteInfo = InspiringPhotos;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0A1545181DDA0ADA0048E6CD /* InspiringPhotosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspiringPhotosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A1CEA6D1C83B5F50035D679 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		0A1CEA711C83B6980035D679 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		0A4556481CB6962D00B7DAB1 /* Pixpie.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Pixpie.podspec; path = ../Pixpie.podspec; sourceTree = "<group>"; };
@@ -43,6 +56,7 @@
 		0AC43CBE1C6E04A300337844 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		0AC43CC01C6E083700337844 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C438C694483E34A3EEC148E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		311701ACDA0418EB287A7FED /* Pods-InspiringPhotosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InspiringPhotosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InspiringPhotosTests/Pods-InspiringPhotosTests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* InspiringPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InspiringPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,12 +74,19 @@
 		95684700631B01CC4301AB75 /* Pods-InspiringPhotos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InspiringPhotos.release.xcconfig"; path = "Pods/Target Support Files/Pods-InspiringPhotos/Pods-InspiringPhotos.release.xcconfig"; sourceTree = "<group>"; };
 		A7485A8B376141B9DD5FE11F /* Pods-InspiringPhotos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InspiringPhotos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InspiringPhotos/Pods-InspiringPhotos.debug.xcconfig"; sourceTree = "<group>"; };
 		AED00E1C25E30DA17A463779 /* Pods_InspiringPhotos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InspiringPhotos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDC73075D64D1A1A52F58600 /* Pods-Pixpie-iOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		DA67EE19ADFEE5FD1B351107 /* Pods_Pixpie_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixpie_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E69CF568E39FFDE81F4C4853 /* Pods-Pixpie-iOS_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixpie-iOS_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixpie-iOS_Tests/Pods-Pixpie-iOS_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		B75CE86FC9EC93DFF48125BE /* Pods_InspiringPhotosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InspiringPhotosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D458921FD32C5AF02518695E /* Pods-InspiringPhotosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InspiringPhotosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InspiringPhotosTests/Pods-InspiringPhotosTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0A1545151DDA0ADA0048E6CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D15A52FBB7482430B10B563D /* Pods_InspiringPhotosTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F587195388D20070C39A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -120,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				6003F58A195388D20070C39A /* InspiringPhotos.app */,
+				0A1545181DDA0ADA0048E6CD /* InspiringPhotosTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,7 +154,7 @@
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
 				AED00E1C25E30DA17A463779 /* Pods_InspiringPhotos.framework */,
-				DA67EE19ADFEE5FD1B351107 /* Pods_Pixpie_iOS_Tests.framework */,
+				B75CE86FC9EC93DFF48125BE /* Pods_InspiringPhotosTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -196,8 +218,8 @@
 			children = (
 				A7485A8B376141B9DD5FE11F /* Pods-InspiringPhotos.debug.xcconfig */,
 				95684700631B01CC4301AB75 /* Pods-InspiringPhotos.release.xcconfig */,
-				BDC73075D64D1A1A52F58600 /* Pods-Pixpie-iOS_Tests.debug.xcconfig */,
-				E69CF568E39FFDE81F4C4853 /* Pods-Pixpie-iOS_Tests.release.xcconfig */,
+				D458921FD32C5AF02518695E /* Pods-InspiringPhotosTests.debug.xcconfig */,
+				311701ACDA0418EB287A7FED /* Pods-InspiringPhotosTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -205,6 +227,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0A1545171DDA0ADA0048E6CD /* InspiringPhotosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A1545211DDA0ADA0048E6CD /* Build configuration list for PBXNativeTarget "InspiringPhotosTests" */;
+			buildPhases = (
+				6D74D2E179F52FF11C24F8CB /* [CP] Check Pods Manifest.lock */,
+				0A1545141DDA0ADA0048E6CD /* Sources */,
+				0A1545151DDA0ADA0048E6CD /* Frameworks */,
+				0A1545161DDA0ADA0048E6CD /* Resources */,
+				4244EC150F26CD75AD84E825 /* [CP] Embed Pods Frameworks */,
+				A0684FB02D400B3D9204774D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A15451E1DDA0ADA0048E6CD /* PBXTargetDependency */,
+			);
+			name = InspiringPhotosTests;
+			productName = InspiringPhotosTests;
+			productReference = 0A1545181DDA0ADA0048E6CD /* InspiringPhotosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6003F589195388D20070C39A /* InspiringPhotos */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "InspiringPhotos" */;
@@ -238,6 +281,12 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Pixpie;
 				TargetAttributes = {
+					0A1545171DDA0ADA0048E6CD = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 2VQ32E4N43;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6003F589195388D20070C39A;
+					};
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = 2VQ32E4N43;
 						LastSwiftMigration = 0820;
@@ -258,11 +307,19 @@
 			projectRoot = "";
 			targets = (
 				6003F589195388D20070C39A /* InspiringPhotos */,
+				0A1545171DDA0ADA0048E6CD /* InspiringPhotosTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0A1545161DDA0ADA0048E6CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F588195388D20070C39A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -308,6 +365,21 @@
 			shellPath = /bin/sh;
 			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Build Phases Tab\n# 3. Select: Add Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
+		4244EC150F26CD75AD84E825 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InspiringPhotosTests/Pods-InspiringPhotosTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		56602052188D5F1CC072E2E9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,6 +393,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InspiringPhotos/Pods-InspiringPhotos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D74D2E179F52FF11C24F8CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A0684FB02D400B3D9204774D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InspiringPhotosTests/Pods-InspiringPhotosTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D03755184DF7774F2CC51380 /* [CP] Check Pods Manifest.lock */ = {
@@ -356,6 +458,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0A1545141DDA0ADA0048E6CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A1545251DDA12610048E6CD /* Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F586195388D20070C39A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,6 +482,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0A15451E1DDA0ADA0048E6CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6003F589195388D20070C39A /* InspiringPhotos */;
+			targetProxy = 0A15451D1DDA0ADA0048E6CD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6003F596195388D20070C39A /* InfoPlist.strings */ = {
@@ -393,6 +511,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0A15451F1DDA0ADA0048E6CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D458921FD32C5AF02518695E /* Pods-InspiringPhotosTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2VQ32E4N43;
+				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = co.Pixpie.InspiringPhotosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InspiringPhotos.app/InspiringPhotos";
+			};
+			name = Debug;
+		};
+		0A1545201DDA0ADA0048E6CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 311701ACDA0418EB287A7FED /* Pods-InspiringPhotosTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2VQ32E4N43;
+				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = co.Pixpie.InspiringPhotosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InspiringPhotos.app/InspiringPhotos";
+			};
+			name = Release;
+		};
 		6003F5BD195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -529,6 +692,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A1545211DDA0ADA0048E6CD /* Build configuration list for PBXNativeTarget "InspiringPhotosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A15451F1DDA0ADA0048E6CD /* Debug */,
+				0A1545201DDA0ADA0048E6CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6003F585195388D10070C39A /* Build configuration list for PBXProject "Pixpie-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

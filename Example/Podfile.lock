@@ -17,7 +17,7 @@ PODS:
   - Expecta (1.0.5)
   - InAppSettingsKit (2.8)
   - JBChartView (3.0.12)
-  - Pixpie (0.3.6):
+  - Pixpie (0.3.5):
     - AFNetworking (~> 3.0)
     - WebP (~> 0.5.0)
   - PXStatusView (0.1.5):
@@ -41,11 +41,11 @@ SPEC CHECKSUMS:
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   InAppSettingsKit: fe3e73f8f9530cdd6270065cd7df7b3773f557e6
   JBChartView: 08877554448ccf99c12625ad0ebce70588ff8318
-  Pixpie: 5f2f95169fbd50a31291a92a4e3c30be88ad962b
+  Pixpie: 76775d3c0233f6267064cd24a66bcdd2b6428a44
   PXStatusView: 50db7b1c93bc55ee2e1122bd09d990d2d83434b6
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
   WebP: e2e30d70bfc7a6f6567861225e8f189abd55ccd0
 
-PODFILE CHECKSUM: c94800c61c2866bf0b4fe02e714993e884205eba
+PODFILE CHECKSUM: 879aad858d3c01fc079cfa3ea835cb91636ca28e
 
 COCOAPODS: 1.2.0.beta.1
