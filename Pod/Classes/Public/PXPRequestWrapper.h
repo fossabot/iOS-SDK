@@ -18,6 +18,6 @@
 
 - (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
                    successBlock:(PXPRequestSuccessBlock)successBlock
-                  failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+                  failureBlock:(PXPRequestFailureBlock)failureBlock;
 
 @end

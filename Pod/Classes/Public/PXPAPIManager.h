@@ -17,24 +17,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithAccountInfo:(PXPAccountInfo *)info NS_DESIGNATED_INITIALIZER;
-- (PXPAPITask *)updateImageWithWidth:(NSString*)width
-                             quality:(NSString*)quality
-                                path:(NSString*)path
-                        successBlock:(PXPRequestSuccessBlock)successBlock
-                       failtureBlock:(PXPRequestFailureBlock)failtureBlock;
-- (NSURLSessionDataTask *)uploadImageTaskForImage:(UIImage *)image
-                                           toPath:(NSString *)path
-                                     successBlock:(PXPRequestSuccessBlock)successBlock
-                                    failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+
+- (NSURLSessionDataTask *)imagesAtPath:(NSString *)path
+                successBlock:(PXPRequestSuccessBlock)successBlock
+               failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+
+- (NSURLSessionDataTask *)uploadTaskForImage:(UIImage *)image
+                                      toPath:(NSString *)path
+                                successBlock:(PXPRequestSuccessBlock)successBlock
+                               failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+
 - (NSURLSessionDataTask *)uploadImageTaskForStream:(NSInputStream *)stream
                                           mimeType:(NSString *)mimeType
                                             length:(int64_t)length
                                             toPath:(NSString *)path
                                       successBlock:(PXPRequestSuccessBlock)successBlock
                                      failtureBlock:(PXPRequestFailureBlock)failtureBlock;
-- (PXPAPITask *)imagesAtPath:(NSString *)path
-                successBlock:(PXPRequestSuccessBlock)successBlock
-               failtureBlock:(PXPRequestFailureBlock)failtureBlock;
 
 @end
 
