@@ -11,7 +11,7 @@
 #import "PXPAuthPrincipal.h"
 #import "PXPAccountInfo.h"
 #import "PXP_Internal.h"
-#import "PXPSDKRequestWrapper.h"
+#import "PXPAPIManager.h"
 #import "PXPNetworkMonitor.h"
 #import "PXPDataMonitor.h"
 #import "PXPTrafficMonitor.h"
@@ -25,7 +25,7 @@ NSString* const PXPStateChangeNotification = @PXP_IDENTIFY("notification.PXPStat
 
 @interface UIImageView (PXPExtensions_Private)
 
-+ (PXPImageRequestWrapper*)pxp_sharedImageDownloader;
++ (PXPImageDownloader*)pxp_sharedImageDownloader;
 
 @end
 
@@ -34,8 +34,8 @@ NSString* const PXPStateChangeNotification = @PXP_IDENTIFY("notification.PXPStat
 @property (nonatomic, readwrite, assign) PXPState state;
 @property (nonatomic, readwrite, strong) PXPImageTaskManager* imageTaskManager;
 @property (nonatomic, readwrite, strong) PXPAccountInfo *accountInfo;
-@property (nonatomic, readwrite, strong) PXPSDKRequestWrapper *wrapper;
 @property (nonatomic, readwrite, strong) NSTimer *authTimer;
+@property (nonatomic, readwrite, strong) PXPAPIManager *wrapper;
 
 @end
 
@@ -73,7 +73,7 @@ NSString* const PXPStateChangeNotification = @PXP_IDENTIFY("notification.PXPStat
         PXPAuthManager* authManager = [[PXPAuthManager alloc] initWithPrincipal:principal];
         self.accountInfo = [[PXPAccountInfo alloc] initWithPrincipal:principal authManager:authManager];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authUpdate:) name:kPXPModelUpdatedNotification object:self.accountInfo];
-        self.wrapper = [[PXPSDKRequestWrapper alloc] initWithAccountInfo:self.accountInfo];
+        self.wrapper = [[PXPAPIManager alloc] initWithAccountInfo:self.accountInfo];
         [self.accountInfo update];
     }
 }

@@ -8,7 +8,7 @@
 
 #import "PXPAPITask.h"
 #import "PXP.h"
-#import "PXPSDKRequestWrapper.h"
+#import "PXPAPIManager.h"
 #import "NSOperationQueue+PXPExtensions.h"
 #import <AFNetworking/AFNetworking.h>
 #import "PXPDefines.h"

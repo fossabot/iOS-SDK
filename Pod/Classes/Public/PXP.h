@@ -19,17 +19,18 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString * const PXPStateChangeNotification;
 
 @class PXPAccountInfo;
-@class PXPSDKRequestWrapper;
+@class PXPAPIManager;
 
 @interface PXP : NSObject
 
 + (instancetype)sharedSDK;
++ (void)cleanUp;
 
 - (void)authWithApiKey:(NSString*)apiKey;
 - (void)authWithApiKey:(NSString*)apiKey userId:(NSString* _Nullable)userId;
-+ (void)cleanUp;
 
 @property (nonatomic, readonly, assign) PXPState state;
+@property (nonatomic, readonly, strong, nullable) PXPAPIManager *apiManager;
 
 @end
 

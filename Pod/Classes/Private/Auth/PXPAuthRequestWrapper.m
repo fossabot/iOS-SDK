@@ -48,7 +48,7 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/client_sdk";
             deviceDescription:(NSString*)deviceDescription
                    sdkVersion:(NSString*)sdkVersion
                  successBlock:(PXPRequestSuccessBlock)successBlock
-                failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+                failureBlock:(PXPRequestFailureBlock)failureBlock {
 
     NSString* salt = PXPConfig.defaultConfig.requestSalt;
     long timestamp = (long)[NSDate date].timeIntervalSince1970;
@@ -68,20 +68,20 @@ static NSString* const kPXPAuthMethod = @"/authentication/token/client_sdk";
     NSError* error = nil;
     NSURLRequest* request = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:url parameters:params error:&error];
     NSAssert(error == nil, @"Auth Request error is not nil");
-    PXPAPITask* task = [self taskWithRequest:request successBlock:successBlock failtureBlock:failtureBlock];
+    PXPAPITask* task = [self taskWithRequest:request successBlock:successBlock failureBlock:failureBlock];
     return task;
 }
 
 - (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
                    successBlock:(PXPRequestSuccessBlock)successBlock
-                  failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+                  failureBlock:(PXPRequestFailureBlock)failureBlock {
 
     assert(self.sessionManager != nil);
     NSString *uuid = [NSUUID UUID].UUIDString;
     PXPAPITask *task = [[PXPAPITask alloc] initWithRequest:request queue:[PXPQueueManager networkQueue] identifier:uuid sessionManager:self.sessionManager evaluationBlock:^BOOL(NSURLSessionTask *task, NSError *error) {
         NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
         return (response == nil);
-    } success:successBlock failure:failtureBlock];
+    } success:successBlock failure:failureBlock];
     [task start];
     return task;
 }

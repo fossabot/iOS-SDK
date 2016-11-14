@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
             deviceDescription:(NSString*)deviceDescription
                    sdkVersion:(NSString*)sdkVersion
                  successBlock:(PXPRequestSuccessBlock)successBlock
-                failtureBlock:(PXPRequestFailureBlock)failtureBlock;
+                failureBlock:(PXPRequestFailureBlock)failureBlock;
 
 @end
 

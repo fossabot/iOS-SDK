@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly, ) PXPImageTaskManager* imageTaskManager;
 @property (nonatomic, strong, readonly) PXPAccountInfo *accountInfo;
-@property (nonatomic, readonly, strong, nullable) PXPSDKRequestWrapper *wrapper;
 
 @end
 

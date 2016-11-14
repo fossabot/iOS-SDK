@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, PXPTransformFormat) {
 };
 
 typedef NS_ENUM(unsigned int, PXPTransformMode) {
-    PXPTransformModeFill,
+    PXPTransformModeFill = 0,
     PXPTransformModeFit
 };
 

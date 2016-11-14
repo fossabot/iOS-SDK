@@ -42,7 +42,7 @@
                                    sdkVersion:[PXPConfig defaultConfig].sdkVersion
                                  successBlock:^(NSURLSessionTask* task, id responseObject) {
                                      block(responseObject, nil);
-                                 } failtureBlock:^(NSURLSessionTask* task, NSError *error) {
+                                 } failureBlock:^(NSURLSessionTask* task, NSError *error) {
                                      block(nil, error);
                                  }];
 }

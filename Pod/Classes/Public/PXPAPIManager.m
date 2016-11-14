@@ -16,6 +16,7 @@
 
 static NSString* const kPXPUploadImageRequestPath = @"/async/images/upload/%@/%@";
 static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
+static NSString* const kPXPDeleteItemAtPath = @"/storage/delete/batch/%@";
 
 @interface PXPAPIManager ()
 
@@ -57,7 +58,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
 - (NSURLSessionDataTask *)uploadTaskForImage:(UIImage *)image
                                       toPath:(NSString *)path
                                 successBlock:(PXPRequestSuccessBlock)successBlock
-                               failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+                               failureBlock:(PXPRequestFailureBlock)failureBlock {
     assert(path != nil);
     assert(image != nil);
     NSString* apiPath = [NSString stringWithFormat:kPXPUploadImageRequestPath, self.appId, path];
@@ -65,7 +66,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
     NSURLSessionDataTask *task = [self.sessionManager POST:requestUrl
                                                 parameters:nil
                                  constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-                                     NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
+                                     NSData *imageData = UIImageJPEGRepresentation(image, [UIScreen mainScreen].scale);
                                      [formData appendPartWithFileData:imageData name:@"image" fileName:path.lastPathComponent mimeType:@"image/jpeg"];
                                  }
                                                   progress:nil
@@ -75,8 +76,8 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
                                                        }
                                                    }
                                                    failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                                       if (failtureBlock) {
-                                                           failtureBlock(task, error);
+                                                       if (failureBlock) {
+                                                           failureBlock(task, error);
                                                        }
                                                    }];
     return task;
@@ -88,7 +89,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
                                             length:(int64_t)length
                                             toPath:(NSString *)path
                                       successBlock:(PXPRequestSuccessBlock)successBlock
-                                     failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+                                     failureBlock:(PXPRequestFailureBlock)failureBlock {
 
     assert(path != nil);
     NSString* apiPath = [NSString stringWithFormat:kPXPUploadImageRequestPath, self.appId, path];
@@ -102,25 +103,42 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
                                                    success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                                        successBlock(task, responseObject);
                                                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                                       failtureBlock(task, error);
+                                                       failureBlock(task, error);
                                                    }];
     return task;
 }
 
 - (NSURLSessionDataTask *)imagesAtPath:(NSString *)path
                           successBlock:(PXPRequestSuccessBlock)successBlock
-                         failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+                         failureBlock:(PXPRequestFailureBlock)failureBlock {
 
     assert(path != nil);
     NSString* apiPath = [NSString stringWithFormat:kPXPItemsInFolderRequestPath, self.appId, path];
     NSString* requestUrl = [self.backendUrl stringByAppendingString:apiPath];
-    NSURLSessionDataTask *task = [self.sessionManager GET:requestUrl parameters:nil progress:nil success:successBlock failure:failtureBlock];
+    NSURLSessionDataTask *task = [self.sessionManager GET:requestUrl parameters:nil progress:nil success:successBlock failure:failureBlock];
+    return task;
+}
+
+- (NSURLSessionDataTask * _Nullable)deleteImages:(NSArray<NSString*> * _Nonnull )images
+                                            dirs:(NSArray<NSString*> * _Nonnull )dirs
+                                    successBlock:(PXPRequestSuccessBlock)successBlock
+                                   failureBlock:(PXPRequestFailureBlock)failureBlock {
+
+    NSString* apiPath = [NSString stringWithFormat:kPXPDeleteItemAtPath, self.appId];
+    NSMutableDictionary* params = [NSMutableDictionary new];
+    SAFE_SET_OBJECT(params, @"images", images);
+    SAFE_SET_OBJECT(params, @"folders", dirs);
+    if ([params count] == 0) return nil;
+    NSURLSessionDataTask* task = [self.sessionManager DELETE:apiPath
+                                                  parameters:params
+                                                     success:successBlock
+                                                     failure:failureBlock];
     return task;
 }
 
 - (PXPAPITask *)taskWithRequest:(NSURLRequest *)request
                    successBlock:(PXPRequestSuccessBlock)successBlock
-                  failtureBlock:(PXPRequestFailureBlock)failtureBlock {
+                  failureBlock:(PXPRequestFailureBlock)failureBlock {
 
     assert(self.sessionManager != nil);
     __weak typeof(self)weakSelf = self;
@@ -135,7 +153,7 @@ static NSString* const kPXPItemsInFolderRequestPath = @"/storage/list/%@/%@";
             return (error.code == NSURLErrorTimedOut && [error.domain isEqualToString:NSURLErrorDomain]);
         }
     } success:successBlock failure:^(NSURLSessionTask* task, NSError *error) {
-        BLOCK_SAFE_RUN(failtureBlock, task, error);
+        BLOCK_SAFE_RUN(failureBlock, task, error);
     }];
     [task start];
     return task;

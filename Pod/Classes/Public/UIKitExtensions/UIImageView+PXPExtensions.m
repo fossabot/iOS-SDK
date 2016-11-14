@@ -59,7 +59,7 @@ static NSString* const kPXPDownloadTaskKey = @"pxp_downloadTaskKey";
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(task, responseObject, nil);
         });
-    } failture:^(NSURLSessionTask * _Nonnull task, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionTask * _Nonnull task, NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(task, nil, error);
         });
@@ -99,11 +99,11 @@ static NSString* const kPXPDownloadTaskKey = @"pxp_downloadTaskKey";
 
 #pragma mark - Class Methods
 
-+ (PXPImageRequestWrapper*)pxp_sharedImageDownloader {
-    static PXPImageRequestWrapper* sWrapper = nil;
++ (PXPImageDownloader*)pxp_sharedImageDownloader {
+    static PXPImageDownloader* sWrapper = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sWrapper = [PXPImageRequestWrapper new];
+        sWrapper = [PXPImageDownloader new];
     });
     return sWrapper;
 }

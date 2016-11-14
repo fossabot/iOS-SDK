@@ -13,24 +13,24 @@
 #import "AFHTTPSessionOperation.h"
 #import "PXPHTTPProtocol.h"
 #import "PXPQueueManager.h"
-#import "PXPSDKRequestWrapper.h"
+#import "PXPAPIManager.h"
 #import "PXP.h"
 #import "PXP_Internal.h"
 #import "PXPImageCache.h"
 #import "PXPAuthChallengeManager.h"
 
-@interface PXPImageRequestWrapper ()
+@interface PXPImageDownloader ()
 
 @property (nonatomic, weak) NSOperationQueue* queue;
-@property (nonatomic, strong) PXPSDKRequestWrapper* sdkRequestWrapper;
+@property (nonatomic, strong) PXPAPIManager* sdkRequestWrapper;
 @property (nonatomic, strong) PXPImageCache* cache;
 
 @end
 
-@implementation PXPImageRequestWrapper
+@implementation PXPImageDownloader
 
 - (instancetype)init {
-    self = [self initWithSessionConfiguration:[PXPImageRequestWrapper defaultImageSessionConfiguration] cache:[PXPImageCache new]];
+    self = [self initWithSessionConfiguration:[PXPImageDownloader defaultImageSessionConfiguration] cache:[PXPImageCache new]];
     return self;
 }
 
@@ -55,7 +55,7 @@
                                      uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
                                    downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
                                             success:(PXPImageSuccessBlock)successBlock
-                                           failture:(PXPImageFailureBlock)failtureBlock {
+                                           failure:(PXPImageFailureBlock)failureBlock {
 
     NSError *error = nil;
     NSMutableURLRequest *request = [self.sessionManager.requestSerializer requestWithMethod:@"GET" URLString:urlString parameters:nil error:&error];
@@ -63,14 +63,14 @@
                               uploadProgress:uploadProgress
                             downloadProgress:downloadProgress
                                      success:successBlock
-                                    failture:failtureBlock];
+                                    failure:failureBlock];
 }
 
 - (AFHTTPSessionOperation *)imageDownloadTaskForRequest:(NSURLRequest *)request
                                          uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
                                        downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
                                                 success:(PXPImageSuccessBlock)successBlock
-                                               failture:(PXPImageFailureBlock)failtureBlock  {
+                                               failure:(PXPImageFailureBlock)failureBlock  {
 
     AFHTTPSessionOperation* task = nil;
     UIImage* image = [self.cache cachedImageForRequest:request];
@@ -78,7 +78,7 @@
         task = [AFHTTPSessionOperation operationWithManager:self.sessionManager request:request uploadProgress:uploadProgress downloadProgress:downloadProgress success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable object) {
             [self.cache cacheImage:object forRequest:request];
             successBlock(task, object);
-        } failure:failtureBlock];
+        } failure:failureBlock];
         [self.queue addOperation:task];
     } else {
         successBlock(nil, image);
