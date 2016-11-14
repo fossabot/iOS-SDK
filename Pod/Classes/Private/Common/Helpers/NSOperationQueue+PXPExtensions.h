@@ -1,6 +1,6 @@
 //
 //  NSOperationQueue+PXPExtensions.h
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 4/15/16.
 //

@@ -1,6 +1,6 @@
 //
-//  PXPSDKRequestWrapper.h
-//  Pods
+//  PXPAPIManager.h
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 12/24/15.
 //

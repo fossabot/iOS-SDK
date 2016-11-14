@@ -1,6 +1,6 @@
 //
 //  PXPAuthPrincipal.m
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 10/26/15.
 //

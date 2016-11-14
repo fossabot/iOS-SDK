@@ -1,6 +1,6 @@
 //
 //  PXPModelProtocol.h
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 2/17/16.
 //

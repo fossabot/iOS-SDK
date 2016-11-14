@@ -1,6 +1,6 @@
 //
 //  PXPConfig.m
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 4/3/16.
 //

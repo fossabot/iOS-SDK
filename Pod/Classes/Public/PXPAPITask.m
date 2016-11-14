@@ -1,6 +1,6 @@
 //
 //  PXPAPITask.m
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 4/25/16.
 //

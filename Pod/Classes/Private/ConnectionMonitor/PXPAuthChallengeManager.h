@@ -1,6 +1,6 @@
 //
 //  PXPAuthChallengeManager.h
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 11/1/16.
 //

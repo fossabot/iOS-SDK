@@ -1,6 +1,6 @@
 //
 //  PXPQueueManager.m
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 9/14/16.
 //

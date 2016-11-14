@@ -1,6 +1,6 @@
 //
 //  PXPAuthRequestWrapper.m
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 12/24/15.
 //

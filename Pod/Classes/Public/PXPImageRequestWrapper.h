@@ -1,6 +1,6 @@
 //
-//  PXPImageRequestWrapper.h
-//  Pods
+//  PXPImageDownloader.h
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 12/13/15.
 //

@@ -1,6 +1,6 @@
 //
 //  PXPAutomaticTransform.m
-//  Pods
+//  Pixpie
 //
 //  Created by Dmitry Osipa on 9/12/16.
 //
