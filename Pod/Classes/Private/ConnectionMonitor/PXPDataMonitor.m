@@ -25,7 +25,8 @@ static NSInteger const kPXPUndefined = -1;
  */
 
 static NSUInteger const kPXPNormalizingCoeficient = 1;
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-const-variable"
 static NSUInteger const kPXP2GGSMSpeed = 14400 / (8 * kPXPNormalizingCoeficient);
 static NSUInteger const kPXP2GGPRSSpeed = 57600 / (8 * kPXPNormalizingCoeficient);
 static NSUInteger const kPXP2GEdgeSpeed = 238800 / (8 * kPXPNormalizingCoeficient);
@@ -34,6 +35,7 @@ static NSUInteger const kPXP3GHSPASpeed = 13980000 / (8 * kPXPNormalizingCoefici
 static NSUInteger const kPXP3GHSPAPSpeed = 4.2e+7 / (8 * kPXPNormalizingCoeficient);
 static NSUInteger const kPXP4GLTESpeed = 1.73e+8 / (8 * kPXPNormalizingCoeficient);
 static NSUInteger const kPXPWifiSpeed = 1e+7 / 8;
+#pragma GCC diagnostic pop
 
 
 @interface PXPDataMonitor() <PXPHTTPProtocolDataDelegate>
