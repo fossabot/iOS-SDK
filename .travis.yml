@@ -7,7 +7,7 @@ cache:
   - bundler
   - cocoapods
 
- before_install:
+before_install:
  - gem install cocoapods # Since Travis is not always on latest version
  - pod install --project-directory=Example
 
