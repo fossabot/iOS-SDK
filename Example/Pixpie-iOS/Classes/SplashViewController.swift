@@ -53,12 +53,13 @@ class SplashViewController: UIViewController {
         if (object as! PXP == PXP.sharedSDK()) {
             timer?.invalidate()
             if (PXP.sharedSDK().state != .notInitialized) {
-                timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(SplashViewController.splashCompleteAction(_:)), userInfo: nil, repeats: false)
+
+                timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(SplashViewController.splashCompleteAction), userInfo: nil, repeats: false)
             }
         }
     }
 
-    func splashCompleteAction(_ note: Notification) {
+    func splashCompleteAction() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: kSplashCompleteNotification), object: self)
     }
 }
