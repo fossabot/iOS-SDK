@@ -51,7 +51,7 @@ static NSString* const kPXPDownloadTaskKey = @"pxp_downloadTaskKey";
                  headers:(NSDictionary * _Nullable )headers
               completion:(PXPImageRequestCompletionBlock _Nullable)completion {
 
-    [self cancelLoad];
+    [self pxp_cancelLoad];
     self.image = nil;
     self.pxp_transform.originUrl = url;
     NSString* finalUrl = self.pxp_transform.contentUrl;
@@ -66,7 +66,7 @@ static NSString* const kPXPDownloadTaskKey = @"pxp_downloadTaskKey";
     }];
 }
 
-- (void)cancelLoad {
+- (void)pxp_cancelLoad {
     [self.pxp_downloadTask cancel];
     self.pxp_downloadTask = nil;
 }

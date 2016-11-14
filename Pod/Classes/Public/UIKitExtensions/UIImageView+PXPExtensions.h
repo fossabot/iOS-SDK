@@ -24,7 +24,7 @@ typedef void (^PXPImageRequestCompletionBlock)(NSURLSessionTask* task, id _Nulla
 
 - (void)pxp_requestImage:(NSString*)url;
 - (void)pxp_requestImage:(NSString*)url headers:(NSDictionary * _Nullable )headers completion:(PXPImageRequestCompletionBlock _Nullable)completion;
-- (void)cancelLoad;
+- (void)pxp_cancelLoad;
 
 @end
 

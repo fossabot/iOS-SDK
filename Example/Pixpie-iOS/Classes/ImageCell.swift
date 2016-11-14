@@ -33,7 +33,7 @@ class ImageCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse();
-        imageView?.cancelLoad();
+        imageView?.pxp_cancelLoad();
         imageView?.image = nil
     }
 }

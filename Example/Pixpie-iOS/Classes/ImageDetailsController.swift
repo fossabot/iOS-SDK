@@ -32,6 +32,6 @@ class ImageDetailsController: UIViewController {
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        imageView.cancelLoad()
+        imageView.pxp_cancelLoad()
     }
 }
