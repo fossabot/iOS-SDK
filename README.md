@@ -28,6 +28,8 @@ Check [Getting started](https://pixpie.atlassian.net/wiki/display/DOC/Getting+st
 
 ## Installation
 
+#### Cocoapods
+
 Pixpie is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following lines to your Podfile:
 
@@ -37,6 +39,18 @@ source 'https://github.com/PixpieCo/PixpieCocoapods.git'
 
 pod "Pixpie"
 ```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
+
+#### Download Framework
+
+- Download latest [Pixpie.framework.zip](https://github.com/PixpieCo/iOS-SDK/files/592058/Pixpie.framework.zip)
+- Unarchive zip
+- Add `Pixpie.framework` to the Xcode project
 
 ## Architecture
 ##### Authentication
