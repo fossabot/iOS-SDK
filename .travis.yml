@@ -7,7 +7,7 @@ cache:
  - bundler
  - cocoapods
 
-osx_image: xcode8.1sneakpeek
+osx_image: xcode8
 
 before_install:
  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet # Since Travis is not always on latest version
