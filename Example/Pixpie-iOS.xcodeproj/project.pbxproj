@@ -257,7 +257,6 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				0AAF56431DA2814D00744329 /* Bump Build Number */,
 				6003F588195388D20070C39A /* Resources */,
-				0A5A24591CD0D79200247D88 /* Hockey App */,
 				56602052188D5F1CC072E2E9 /* [CP] Embed Pods Frameworks */,
 				F0566C66DEB88E6BA84C6E1B /* [CP] Copy Pods Resources */,
 			);
@@ -337,20 +336,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A5A24591CD0D79200247D88 /* Hockey App */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Hockey App";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
-		};
 		0AAF56431DA2814D00744329 /* Bump Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
