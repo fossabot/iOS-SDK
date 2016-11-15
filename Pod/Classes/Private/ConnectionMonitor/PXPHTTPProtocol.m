@@ -18,6 +18,10 @@ static NSString* const kPXPRecursivePropertyKey = @"x-pixpie-is-recursive-reques
 
 typedef void (^ChallengeCompletionHandler)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * credential);
 
+#ifndef NSFoundationVersionNumber_iOS_8_x_Max
+    #define NSFoundationVersionNumber_iOS_8_x_Max 1199
+#endif
+
 BOOL PXPisOS8() {
     return (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1 &&
             NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_8_x_Max);
