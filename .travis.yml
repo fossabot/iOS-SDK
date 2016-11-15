@@ -10,12 +10,11 @@ cache:
 osx_image: xcode8
 
 before_install:
- - gem install cocoapods --pre # Since Travis is not always on latest version
+ - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet # Since Travis is not always on latest version
  - pod install --project-directory=Example
 
 install:
  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
- - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
 
 script:
  - set -o pipefail && xcodebuild test -workspace Example/Pixpie-iOS.xcworkspace -scheme InspiringPhotos -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' ONLY_ACTIVE_ARCH=NO | xcpretty -c
