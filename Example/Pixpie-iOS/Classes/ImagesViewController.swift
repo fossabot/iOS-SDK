@@ -66,10 +66,10 @@ class ImagesViewController: UICollectionViewController, IASKSettingsDelegate {
     }
 
     func updateGraph() {
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-//            self.graphView?.addPoint(PXPTrafficMonitor.shared().lastSample)
-//            self.updateGraph()
-//        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+            self.graphView?.addPoint(PXPTrafficMonitor.shared().lastSample)
+            self.updateGraph()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
