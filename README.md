@@ -1,8 +1,9 @@
 # Pixpie iOS SDK
 
 [![CI Status](http://img.shields.io/travis/PixpieCo/iOS-SDK.svg?style=flat)](https://travis-ci.org/PixpieCo/iOS-SDK)
-[![Version](https://img.shields.io/badge/pod-0.3.6-blue.svg)](http://cocoapods.org/pods/Pixpie-iOS)
-[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](http://cocoapods.org/pods/Pixpie-iOS)
+[![Version](https://img.shields.io/badge/pod-0.3.6-blue.svg)](https://github.com/PixpieCo/iOS-SDK)
+[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](https://github.com/PixpieCo/iOS-SDK)
+[![Analytics](https://ga-beacon.appspot.com/UA-88187046-1/pixpie-github/ios-sdk?pixel)](https://github.com/PixpieCo/iOS-SDK)
 
 ## What is it for?
 
