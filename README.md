@@ -4,6 +4,7 @@
 [![Version](https://img.shields.io/badge/pod-0.3.6-blue.svg)](https://github.com/PixpieCo/iOS-SDK)
 [![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](https://github.com/PixpieCo/iOS-SDK)
 [![Analytics](https://ga-beacon.appspot.com/UA-88187046-1/pixpie-github/ios-sdk?pixel)](https://github.com/PixpieCo/iOS-SDK)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FPixpieCo%2FiOS-SDK.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FPixpieCo%2FiOS-SDK?ref=badge_shield)
 
 ## What is it for?
 
@@ -299,3 +300,6 @@ Pixpie iOS SDK is available under the Apache 2.0 license.
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FPixpieCo%2FiOS-SDK.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FPixpieCo%2FiOS-SDK?ref=badge_large)
